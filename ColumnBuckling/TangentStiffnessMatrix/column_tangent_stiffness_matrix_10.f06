@@ -8964,8 +8964,8 @@
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.06 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.00 SECONDS                                                        LOAD FACTOR   0.1000000
+     STIFFNESS UPDATE TIME          0.05 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   0.1000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
