@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/scratch/column_tangent_stiffness_matrix_6.T7516_21'
-DBS='c:/scratch/column_tangent_stiffness_matrix_6.T7516_21'
+SDIR='c:/scratch/column_tangent_stiffness_matrix_6.T18600_9'
+DBS='c:/scratch/column_tangent_stiffness_matrix_6.T18600_9'
 SCR='yes'
 SMEM=100
 BPOOL=1998.1MB
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    15985 MB
- Physical memory available:           5808 MB
- Paging file size:                   21022 MB
- Paging file size available:          6723 MB
+ Physical memory available:           5285 MB
+ Paging file size:                   21315 MB
+ Paging file size available:          6422 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213511 MB
 ----------------------------------------------------------------- 
@@ -61,21 +61,21 @@ System configuration:
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-10850H CP
- Clock freq.:      3033 MHz
+ Clock freq.:      3043 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
  Physical memory:  15985 MB
- Virtual memory:   21022 MB
+ Virtual memory:   21315 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Tue Feb 15 14:17:22 WEST 2022 
- 14:17:22  Beginning Analysis
+MSC Nastran started  Tue Feb 15 18:52:09 WEST 2022 
+ 18:52:10  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,9 +83,9 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 14:17:24  MSC Authorization Information - System Attributes (1004, 0)
- 14:17:24  -----------------------------------------------------------
-  Date:          Tue Feb 15 14:17:24 2022
+ 18:52:12  MSC Authorization Information - System Attributes (1004, 0)
+ 18:52:12  -----------------------------------------------------------
+  Date:          Tue Feb 15 18:52:11 2022
   MSC Id:        747827403986 (ethernet) (Intel)
   Hostname:      fmamitrotta-latitude5411 (user qa21944, display fmamitrotta-latitude5411)
   License files: 27500@ze-ls0.fen.bris.ac.uk
@@ -105,45 +105,45 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 14:17:27  MSC Authorization Information - Checkout Successful (1016, 0)
- 14:17:27  -------------------------------------------------------------
- 14:17:27  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 18:52:14  MSC Authorization Information - Checkout Successful (1016, 0)
+ 18:52:14  -------------------------------------------------------------
+ 18:52:14  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 14:17:27  MSC Authorization Information - Checkout Successful (1016, 0)
- 14:17:27  -------------------------------------------------------------
- 14:17:27  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 18:52:15  MSC Authorization Information - Checkout Successful (1016, 0)
+ 18:52:15  -------------------------------------------------------------
+ 18:52:15  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 14:17:28  MSC Authorization Information - Checkout Successful (1016, 0)
- 14:17:28  -------------------------------------------------------------
- 14:17:28  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
+ 18:52:16  MSC Authorization Information - Checkout Successful (1016, 0)
+ 18:52:16  -------------------------------------------------------------
+ 18:52:16  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 14:17:28  900 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/tangentstiffnessmatrix/column_tangent_stiffness_matrix_6.bdf"
+ 18:52:16  900 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/tangentstiffnessmatrix/column_tangent_stiffness_matrix_6.bdf"
 
 Processing of bulk data entries is complete.
 
- 14:17:28  Finite element model generation started.
- 14:17:28  Finite element model generated 2526 degrees of freedom.
- 14:17:28  Finite element model generation successfully completed.
- 14:17:28  Application of Loads and Boundary Conditions to the finite element model started.
- 14:17:28  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 18:52:16  Finite element model generation started.
+ 18:52:16  Finite element model generated 2526 degrees of freedom.
+ 18:52:16  Finite element model generation successfully completed.
+ 18:52:16  Application of Loads and Boundary Conditions to the finite element model started.
+ 18:52:16  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
        USER WARNING MESSAGE     6450.0          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 14:17:30  37 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/tangentstiffnessmatrix/column_tangent_stiffness_matrix_6.bdf"
- 14:17:30  NSEXIT: EXIT(0)
- 14:17:30  Analysis complete  0
-Real:        7.296 seconds ( 0:00:07.296)
-User:        0.718 seconds ( 0:00:00.718)
-Sys:         0.546 seconds ( 0:00:00.546)
+ 18:52:17  37 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/tangentstiffnessmatrix/column_tangent_stiffness_matrix_6.bdf"
+ 18:52:17  NSEXIT: EXIT(0)
+ 18:52:17  Analysis complete  0
+Real:        7.383 seconds ( 0:00:07.383)
+User:        0.687 seconds ( 0:00:00.687)
+Sys:         0.406 seconds ( 0:00:00.406)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -165,4 +165,4 @@ Sys:         0.546 seconds ( 0:00:00.546)
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Tue Feb 15 14:17:30 WEST 2022 
+MSC Nastran finished Tue Feb 15 18:52:18 WEST 2022 
