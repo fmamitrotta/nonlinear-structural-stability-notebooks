@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/scratch/column_pitchfork_bifurcation_alternative_subcases.T5828_30'
-DBS='c:/scratch/column_pitchfork_bifurcation_alternative_subcases.T5828_30'
+SDIR='c:/scratch/column_pitchfork_bifurcation_alternative_subcases.T11068_39'
+DBS='c:/scratch/column_pitchfork_bifurcation_alternative_subcases.T11068_39'
 SCR='yes'
 SMEM=100
 BPOOL=1998.1MB
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    15985 MB
- Physical memory available:           6475 MB
+ Physical memory available:           6315 MB
  Paging file size:                   29809 MB
- Paging file size available:         16562 MB
+ Paging file size available:         13635 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213511 MB
 ----------------------------------------------------------------- 
@@ -61,7 +61,7 @@ System configuration:
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-10850H CP
- Clock freq.:      3824 MHz
+ Clock freq.:      2250 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
@@ -74,8 +74,8 @@ System configuration:
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Sun Feb 27 15:47:30 WEST 2022 
- 15:47:32  Beginning Analysis
+MSC Nastran started  Mon Feb 28 22:23:39 WEST 2022 
+ 22:23:40  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,9 +83,9 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 15:47:33  MSC Authorization Information - System Attributes (1004, 0)
- 15:47:33  -----------------------------------------------------------
-  Date:          Sun Feb 27 15:47:33 2022
+ 22:23:41  MSC Authorization Information - System Attributes (1004, 0)
+ 22:23:41  -----------------------------------------------------------
+  Date:          Mon Feb 28 22:23:41 2022
   MSC Id:        747827403986 (ethernet) (Intel)
   Hostname:      fmamitrotta-latitude5411 (user qa21944, display fmamitrotta-latitude5411)
   License files: 27500@ze-ls0.fen.bris.ac.uk
@@ -105,42 +105,40 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 15:47:36  MSC Authorization Information - Checkout Successful (1016, 0)
- 15:47:36  -------------------------------------------------------------
- 15:47:36  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 22:23:44  MSC Authorization Information - Checkout Successful (1016, 0)
+ 22:23:44  -------------------------------------------------------------
+ 22:23:44  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 15:47:37  MSC Authorization Information - Checkout Successful (1016, 0)
- 15:47:37  -------------------------------------------------------------
- 15:47:37  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 22:23:45  MSC Authorization Information - Checkout Successful (1016, 0)
+ 22:23:45  -------------------------------------------------------------
+ 22:23:45  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 15:47:37  904 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/pitchforkbifurcationarclength/column_pitchfork_bifurcation_alternative_subcases.bdf"
+ 22:23:45  904 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/pitchforkbifurcationarclength/column_pitchfork_bifurcation_alternative_subcases.bdf"
 
 Processing of bulk data entries is complete.
 
- 15:47:37  Finite element model generation started.
- 15:47:37  Finite element model generated 2526 degrees of freedom.
- 15:47:37  Finite element model generation successfully completed.
- 15:47:37  Application of Loads and Boundary Conditions to the finite element model started.
- 15:47:37  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 22:23:45  Finite element model generation started.
+ 22:23:45  Finite element model generated 2526 degrees of freedom.
+ 22:23:45  Finite element model generation successfully completed.
+ 22:23:45  Application of Loads and Boundary Conditions to the finite element model started.
+ 22:23:45  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
-       USER WARNING MESSAGE     4642.0          1 
-       USER WARNING MESSAGE     4642.0          1 
          USER FATAL MESSAGE     6190.0          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 15:51:09  29 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/pitchforkbifurcationarclength/column_pitchfork_bifurcation_alternative_subcases.bdf"
- 15:51:09  NSEXIT: EXIT(0)
- 15:51:09  Analysis complete  0
-Real:      217.273 seconds ( 0:03:37.273)
-User:      138.171 seconds ( 0:02:18.171)
-Sys:        22.281 seconds ( 0:00:22.281)
+ 22:27:50  29 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/pitchforkbifurcationarclength/column_pitchfork_bifurcation_alternative_subcases.bdf"
+ 22:27:50  NSEXIT: EXIT(0)
+ 22:27:50  Analysis complete  0
+Real:      250.320 seconds ( 0:04:10.320)
+User:      164.093 seconds ( 0:02:44.093)
+Sys:        25.343 seconds ( 0:00:25.343)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -157,14 +155,14 @@ Sys:        22.281 seconds ( 0:00:22.281)
  Ram:                          15985 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation        37.1         45 
- Miscellaneous              122.3        167 
+ Stiffness Generation        42.1         33 
+ Miscellaneous              146.2        212 
  -------------------------------------------
- Total:                     159.4        212 
+ Total:                     188.4        245 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Sun Feb 27 15:51:10 WEST 2022 
+MSC Nastran finished Mon Feb 28 22:27:51 WEST 2022 
