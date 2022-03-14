@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/scratch/column_tangent_stiffness_matrix_7.T17520_19'
-DBS='c:/scratch/column_tangent_stiffness_matrix_7.T17520_19'
+SDIR='c:/scratch/column_tangent_stiffness_matrix_7.T18316_5'
+DBS='c:/scratch/column_tangent_stiffness_matrix_7.T18316_5'
 SCR='yes'
 SMEM=100
 BPOOL=1998.1MB
@@ -37,7 +37,7 @@ MSGDEST='f06'
 ----------------------------------------------------------------- 
 MSC_ISHELLPATH=C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\actran\win64\Actran_2022.0.2\bin;C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\nast; 
 MSC_JIDPATH= 
-PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;C:\Users\qa21944\Anaconda3\envs\pynastran;C:\Users\qa21944\Anaconda3\envs\pynastran\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\pynastran\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\pynastran\Library\bin;C:\Users\qa21944\Anaconda3\envs\pynastran\Scripts;C:\Users\qa21944\Anaconda3\envs\pynastran\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\SIMULIA\Commands;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build4;C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\bin;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;.;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
+PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;C:\Users\qa21944\Anaconda3\envs\pynastran;C:\Users\qa21944\Anaconda3\envs\pynastran\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\pynastran\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\pynastran\Library\bin;C:\Users\qa21944\Anaconda3\envs\pynastran\Scripts;C:\Users\qa21944\Anaconda3\envs\pynastran\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\SIMULIA\Commands;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build4;C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2017.8.275\windows\bin;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;C:\Users\qa21944\AppData\Local\Programs\MiKTeX\miktex\bin\x64;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
 SCA_SERVICE_CATALOG=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res\SCAServiceCatalog.xml 
 SCA_RESOURCE_DIR=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res 
 Cmd Line:    C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\win64i8\nastran.exe C:\Users\qa21944\Git\phd-jupyter-notebooks\ColumnBuckling\TangentStiffnessMatrix\column_tangent_stiffness_matrix_7.bdf scr=yes bat=no old=no news=no notify=no 
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    15985 MB
- Physical memory available:           5265 MB
- Paging file size:                   21315 MB
- Paging file size available:          6403 MB
+ Physical memory available:           5569 MB
+ Paging file size:                   29809 MB
+ Paging file size available:         11463 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213511 MB
 ----------------------------------------------------------------- 
@@ -61,21 +61,21 @@ System configuration:
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-10850H CP
- Clock freq.:      2950 MHz
+ Clock freq.:      3813 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
  Physical memory:  15985 MB
- Virtual memory:   21315 MB
+ Virtual memory:   29809 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Tue Feb 15 18:52:19 WEST 2022 
- 18:52:20  Beginning Analysis
+MSC Nastran started  Mon Mar 14 11:56:06 WEST 2022 
+ 11:56:06  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,15 +83,15 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 18:52:21  MSC Authorization Information - System Attributes (1004, 0)
- 18:52:21  -----------------------------------------------------------
-  Date:          Tue Feb 15 18:52:21 2022
+ 11:56:07  MSC Authorization Information - System Attributes (1004, 0)
+ 11:56:07  -----------------------------------------------------------
+  Date:          Mon Mar 14 11:56:07 2022
   MSC Id:        747827403986 (ethernet) (Intel)
   Hostname:      fmamitrotta-latitude5411 (user qa21944, display fmamitrotta-latitude5411)
   License files: 27500@ze-ls0.fen.bris.ac.uk
                  27500@ze-ls1.fen.bris.ac.uk
                  27500@ze-ls2.fen.bris.ac.uk
-  CEID:          52D366F0-6B2484EC
+  CEID:          52D366F0-6B3845BF
   User:          qa21944
   Display:       fmamitrotta-latitude5411
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
@@ -100,50 +100,50 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6B2484EC        * *
+  * *        52D366F0-6B3845BF        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 18:52:24  MSC Authorization Information - Checkout Successful (1016, 0)
- 18:52:24  -------------------------------------------------------------
- 18:52:24  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 11:56:10  MSC Authorization Information - Checkout Successful (1016, 0)
+ 11:56:10  -------------------------------------------------------------
+ 11:56:10  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 18:52:25  MSC Authorization Information - Checkout Successful (1016, 0)
- 18:52:25  -------------------------------------------------------------
- 18:52:25  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 11:56:11  MSC Authorization Information - Checkout Successful (1016, 0)
+ 11:56:11  -------------------------------------------------------------
+ 11:56:11  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 18:52:26  MSC Authorization Information - Checkout Successful (1016, 0)
- 18:52:26  -------------------------------------------------------------
- 18:52:26  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
+ 11:56:12  MSC Authorization Information - Checkout Successful (1016, 0)
+ 11:56:12  -------------------------------------------------------------
+ 11:56:12  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 18:52:26  900 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/tangentstiffnessmatrix/column_tangent_stiffness_matrix_7.bdf"
+ 11:56:12  902 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/tangentstiffnessmatrix/column_tangent_stiffness_matrix_7.bdf"
 
 Processing of bulk data entries is complete.
 
- 18:52:26  Finite element model generation started.
- 18:52:26  Finite element model generated 2526 degrees of freedom.
- 18:52:26  Finite element model generation successfully completed.
- 18:52:26  Application of Loads and Boundary Conditions to the finite element model started.
- 18:52:26  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 11:56:12  Finite element model generation started.
+ 11:56:12  Finite element model generated 2526 degrees of freedom.
+ 11:56:12  Finite element model generation successfully completed.
+ 11:56:12  Application of Loads and Boundary Conditions to the finite element model started.
+ 11:56:12  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
        USER WARNING MESSAGE     6450.0          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 18:52:27  37 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/tangentstiffnessmatrix/column_tangent_stiffness_matrix_7.bdf"
- 18:52:27  NSEXIT: EXIT(0)
- 18:52:27  Analysis complete  0
-Real:        7.355 seconds ( 0:00:07.355)
-User:        0.625 seconds ( 0:00:00.625)
-Sys:         0.640 seconds ( 0:00:00.640)
+ 11:56:14  37 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/tangentstiffnessmatrix/column_tangent_stiffness_matrix_7.bdf"
+ 11:56:14  NSEXIT: EXIT(0)
+ 11:56:14  Analysis complete  0
+Real:        8.354 seconds ( 0:00:08.354)
+User:        1.406 seconds ( 0:00:01.406)
+Sys:         1.140 seconds ( 0:00:01.140)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -165,4 +165,4 @@ Sys:         0.640 seconds ( 0:00:00.640)
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Tue Feb 15 18:52:27 WEST 2022 
+MSC Nastran finished Mon Mar 14 11:56:15 WEST 2022 

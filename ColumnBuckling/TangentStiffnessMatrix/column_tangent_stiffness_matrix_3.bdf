@@ -890,10 +890,12 @@ $MATERIALS
 MAT1           1 207000.              .3  .00078
 $LOADS
 LOAD           5      1.      1.       4
-FORCE          4     421          30000.     -1.      0.      0.
+FORCE          4     421          90200.     -1.      0.      0.
 $DYNAMIC
-NLPARM         1                    ITER       1                     YES
-NLPCI          1    RIKS     .25      4.      0.              12      20
+NLPARM         1     100            ITER       1              PV     YES
+                    .001
+              10
+NLPCI          1    CRIS     .01     1.1      0.               5    2000
 $SPCs
 SPCADD         3       1       2
 SPC1           1      12       1
