@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/scratch/column_pitchfork_bifurcation_exploration.T18396_58'
-DBS='c:/scratch/column_pitchfork_bifurcation_exploration.T18396_58'
+SDIR='c:/scratch/column_pitchfork_bifurcation_exploration.T13084_35'
+DBS='c:/scratch/column_pitchfork_bifurcation_exploration.T13084_35'
 SCR='yes'
 SMEM=100
 BPOOL=1998.1MB
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    15985 MB
- Physical memory available:           6332 MB
+ Physical memory available:           5276 MB
  Paging file size:                   29809 MB
- Paging file size available:         13631 MB
+ Paging file size available:         11164 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213511 MB
 ----------------------------------------------------------------- 
@@ -61,7 +61,7 @@ System configuration:
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-10850H CP
- Clock freq.:      3033 MHz
+ Clock freq.:      3813 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
@@ -74,8 +74,8 @@ System configuration:
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Mon Feb 28 22:22:58 WEST 2022 
- 22:22:59  Beginning Analysis
+MSC Nastran started  Mon Mar 14 12:00:36 WEST 2022 
+ 12:00:36  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,15 +83,15 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 22:23:00  MSC Authorization Information - System Attributes (1004, 0)
- 22:23:00  -----------------------------------------------------------
-  Date:          Mon Feb 28 22:23:00 2022
+ 12:00:38  MSC Authorization Information - System Attributes (1004, 0)
+ 12:00:38  -----------------------------------------------------------
+  Date:          Mon Mar 14 12:00:38 2022
   MSC Id:        747827403986 (ethernet) (Intel)
   Hostname:      fmamitrotta-latitude5411 (user qa21944, display fmamitrotta-latitude5411)
   License files: 27500@ze-ls0.fen.bris.ac.uk
                  27500@ze-ls1.fen.bris.ac.uk
                  27500@ze-ls2.fen.bris.ac.uk
-  CEID:          52D366F0-6B2484EC
+  CEID:          52D366F0-6B3845BF
   User:          qa21944
   Display:       fmamitrotta-latitude5411
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
@@ -100,46 +100,46 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6B2484EC        * *
+  * *        52D366F0-6B3845BF        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 22:23:03  MSC Authorization Information - Checkout Successful (1016, 0)
- 22:23:03  -------------------------------------------------------------
- 22:23:03  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 12:00:40  MSC Authorization Information - Checkout Successful (1016, 0)
+ 12:00:40  -------------------------------------------------------------
+ 12:00:40  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 22:23:04  MSC Authorization Information - Checkout Successful (1016, 0)
- 22:23:04  -------------------------------------------------------------
- 22:23:04  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 12:00:41  MSC Authorization Information - Checkout Successful (1016, 0)
+ 12:00:41  -------------------------------------------------------------
+ 12:00:41  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 22:23:04  900 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/pitchforkbifurcationarclength/column_pitchfork_bifurcation_exploration.bdf"
+ 12:00:41  893 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/pitchforkbifurcationarclength/column_pitchfork_bifurcation_exploration.bdf"
 
 Processing of bulk data entries is complete.
 
- 22:23:04  Finite element model generation started.
- 22:23:05  Finite element model generated 2526 degrees of freedom.
- 22:23:05  Finite element model generation successfully completed.
- 22:23:05  Application of Loads and Boundary Conditions to the finite element model started.
- 22:23:05  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 12:00:41  Finite element model generation started.
+ 12:00:41  Finite element model generated 2526 degrees of freedom.
+ 12:00:41  Finite element model generation successfully completed.
+ 12:00:41  Application of Loads and Boundary Conditions to the finite element model started.
+ 12:00:41  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
        USER WARNING MESSAGE     4698.0          1 
-       USER WARNING MESSAGE     4698.0        976 
+       USER WARNING MESSAGE     4698.0       1789 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 22:23:37  26 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/pitchforkbifurcationarclength/column_pitchfork_bifurcation_exploration.bdf"
- 22:23:37  NSEXIT: EXIT(0)
- 22:23:37  Analysis complete  0
-Real:       38.388 seconds ( 0:00:38.388)
-User:       28.390 seconds ( 0:00:28.390)
-Sys:         4.140 seconds ( 0:00:04.140)
+ 12:01:27  24 records read from JID file "c:/users/qa21944/git/phd-jupyter-notebooks/columnbuckling/pitchforkbifurcationarclength/column_pitchfork_bifurcation_exploration.bdf"
+ 12:01:27  NSEXIT: EXIT(0)
+ 12:01:27  Analysis complete  0
+Real:       50.448 seconds ( 0:00:50.448)
+User:       41.843 seconds ( 0:00:41.843)
+Sys:         3.531 seconds ( 0:00:03.531)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -156,14 +156,14 @@ Sys:         4.140 seconds ( 0:00:04.140)
  Ram:                          15985 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation         8.2          6 
- Miscellaneous               23.6         28 
+ Stiffness Generation        13.3          9 
+ Miscellaneous               31.5         38 
  -------------------------------------------
- Total:                      31.8         34 
+ Total:                      44.8         47 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Mon Feb 28 22:23:37 WEST 2022 
+MSC Nastran finished Mon Mar 14 12:01:27 WEST 2022 
