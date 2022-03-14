@@ -882,8 +882,10 @@ FORCE          4     421        90576.69     -1.      0.      0.
 FORCE          6     421        90577.69     -1.      0.      0.
 $DYNAMIC
 EIGB           8     INV  -1.-10   1.+10       1
-NLPARM         1                    ITER       1                     YES
-NLPCI          1    RIKS     .25      4.      0.              12      20
+NLPARM         1     100            ITER       1              PV     YES
+                    .001
+              10
+NLPCI          1    CRIS     .01     1.1      0.               5    2000
 $SPCs
 SPCADD         3       1       2
 SPC1           1      12       1

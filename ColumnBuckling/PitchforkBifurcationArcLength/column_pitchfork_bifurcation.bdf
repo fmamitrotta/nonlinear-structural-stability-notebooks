@@ -19,13 +19,13 @@ SUBCASE 2
     LOAD = 7
     SUBTITLE = Add transverse load
 SUBCASE 3
-    LOAD = 8
+    LOAD = 6
     SUBTITLE = Remove transverse load
 SUBCASE 4
-    LOAD = 9
+    LOAD = 8
     SUBTITLE = Remove compression load
 SUBCASE 5
-    LOAD = 10
+    LOAD = 7
     SUBTITLE = Apply compression and transverse load
 BEGIN BULK
 $PARAMS
@@ -884,16 +884,14 @@ MAT1           1 207000.              .3  .00078
 $LOADS
 LOAD           6      1.      1.       4
 LOAD           7      1.      1.       4      1.       5
-LOAD           8      1.      1.       4
-LOAD           9      1.      0.       4
-LOAD          10      1.      1.       4      1.       5
-FORCE          4     421        181924.6     -1.      0.      0.
+LOAD           8      1.      0.       4
+FORCE          4     421        100058.5     -1.      0.      0.
 FORCE          5     211        909.6229      0.      1.      0.
 $DYNAMIC
-NLPARM         1     100            ITER       1      50             YES
-                    .001.0000001
+NLPARM         1     100            ITER       1              PV     YES
+                    .001
               10
-NLPCI          1    CRIS     .01      4.      0.               5    5000
+NLPCI          1    CRIS     .01     1.1      0.               5    2000
 $SPCs
 SPCADD         3       1       2
 SPC1           1      12       1
