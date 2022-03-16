@@ -885,7 +885,7 @@ $LOADS
 LOAD           6      1.      1.       4
 LOAD           7      1.      1.       4      1.       5
 LOAD           8      1.      0.       4
-FORCE          4     421        100058.5     -1.      0.      0.
+FORCE          4     421        181924.6     -1.      0.      0.
 FORCE          5     211        909.6229      0.      1.      0.
 $DYNAMIC
 NLPARM         1     100            ITER       1              PV     YES
