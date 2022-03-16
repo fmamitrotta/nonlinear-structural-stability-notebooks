@@ -1,3 +1,5 @@
 /.idea
 /ColumnBuckling/.idea
 /ColumnBuckling/.ipynb_checkpoints/
+*.f04
+*.f06
