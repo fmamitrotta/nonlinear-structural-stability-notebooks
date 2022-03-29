@@ -1,6 +1,12 @@
 /.idea
 /ColumnBuckling/.idea
 /ColumnBuckling/.ipynb_checkpoints/
+*.bak
+*.db
 *.f04
 *.f06
 *.log
+*.jar
+*.jou
+*.rej
+*.h5
