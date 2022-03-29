@@ -16,16 +16,9 @@ SUBCASE 1
     LOAD = 7
     SUBTITLE = Apply compression and transverse load
 SUBCASE 2
-    LOAD = 6
+    LOAD = 9
     NLPARM = 2
-    SUBTITLE = Remove transverse load
-SUBCASE 3
-    LOAD = 8
-    NLPARM = 2
-    SUBTITLE = Remove compression load
-SUBCASE 4
-    LOAD = 6
-    SUBTITLE = Applly compression load
+    SUBTITLE = Apply transverse load in opposite direction
 BEGIN BULK
 $PARAMS
 PARAM     LGDISP       1
@@ -884,7 +877,8 @@ $LOADS
 LOAD           6      1.      1.       4
 LOAD           7      1.      1.       4      1.       5
 LOAD           8      1.      0.       4
-FORCE          4     421        100058.5     -1.      0.      0.
+LOAD           9      1.      1.       4 -10000.       5
+FORCE          4     421        181924.6     -1.      0.      0.
 FORCE          5     211        909.6229      0.      1.      0.
 $DYNAMIC
 NLPARM         1     100            ITER       1              PV     YES
