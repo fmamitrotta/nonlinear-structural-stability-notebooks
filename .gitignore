@@ -8,5 +8,6 @@
 *.log
 *.jar
 *.jou
+*.ini
 *.rej
 *.h5
