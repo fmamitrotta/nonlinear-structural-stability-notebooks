@@ -13,7 +13,7 @@ NLPARM = 1
 OLOAD(PLOT) = ALL
 SPC = 3
 SUBCASE 1
-    LOAD = 6
+    LOAD = 4
     SUBTITLE = Apply compression load
 SUBCASE 2
     LOAD = 7
