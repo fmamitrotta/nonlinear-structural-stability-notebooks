@@ -3,26 +3,21 @@ $pyNastran: punch=False
 $pyNastran: encoding=utf-8
 $pyNastran: nnodes=421
 $pyNastran: nelements=420
-ASSIGN OUTPUT4 = 'kllrh.op4',UNIT=31,FORM=FORMATTED,delete
+ASSIGN OUTPUT4 = 'kllrh.op4',UNIT=32,FORM=FORMATTED,delete
 $EXECUTIVE CONTROL DECK
 SOL 106
 compile nlstatic $
-alter 'CALL.*XADD5.*KLLT0,BKAA,KDLL.*KLLRH'
-message //'' $
-message //'Matrix  kllt0  (linear stiffness) follows'
-matprn kllt0// $
-message //'' $
-message //'' $
-message //'Matrix  kdll (differential stiffness)  follows'
-matprn kdll// $
+alter 'paraml *casesx2.*cmethod'(,1)  $
+message //'singl ='/singl $
+message //'conv  ='/conv  $
+message //'poutf ='/poutf $
+message //'nskip ='/nskip $
 message //'' $
 message //'' $
 message //'Matrix  kllrh  (tangent stiffness) follows'
 matprn kllrh// $
 OUTPUT4 KLLRH//-1/32/2
-message //'' $
-ALTER 'END $ NLSTATIC'(1,-3) $
-OUTPUT4 KLLRH//-1/31/2 $
+exit $
 CEND
 $CASE CONTROL DECK
 DISPLACEMENT(PLOT) = ALL
@@ -30,12 +25,14 @@ ECHO = NONE
 NLPARM = 1
 OLOAD(PLOT) = ALL
 SPC = 3
-TITLE = Tangent stiffness matrix analysis of a column
+TITLE = Nonlinear buckling analysis of a column
 SUBCASE 1
     LOAD = 5
+    METHOD = 6
     SUBTITLE = Application of compression load
 BEGIN BULK
 $PARAMS
+PARAM     BUCKLE       2
 PARAM     LGDISP       1
 PARAM       POST       1
 PARAM   PRTMAXIM     YES
@@ -890,8 +887,9 @@ $MATERIALS
 MAT1           1 207000.              .3  .00078
 $LOADS
 LOAD           5      1.      1.       4
-FORCE          4     421          91578.     -1.      0.      0.
+FORCE          4     421          90678.     -1.      0.      0.
 $DYNAMIC
+EIGB           6     INV  -1.-10   1.+10       1
 NLPARM         1     100            ITER       1              PV     YES
                     .001
               10
