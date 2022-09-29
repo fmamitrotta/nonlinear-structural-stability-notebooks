@@ -1,6 +1,4 @@
 /.idea
-/ColumnBuckling/.idea
-/ColumnBuckling/.ipynb_checkpoints/
 *.bak
 *.db
 *.f04
@@ -11,3 +9,4 @@
 *.ini
 *.rej
 *.h5
+*.op2
