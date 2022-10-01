@@ -6,7 +6,6 @@ from pyNastran.op2.op2 import OP2
 import numpy as np
 import re
 from typing import List
-import parse
 
 
 def wait_nastran(directory_path: str):
@@ -46,7 +45,6 @@ def run_analysis(directory_path: str, bdf_object: BDF, bdf_filename: str, run_fl
         wait_nastran(directory_path)
 
 
-# Function to define a subcase associated to a certain load set
 def create_static_load_subcase(bdf_object: BDF, subcase_id: int, load_set_id: int):
     """
     Define a subcase in the input BDF object for the application of a static load.
