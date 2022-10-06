@@ -886,11 +886,11 @@ LOAD           8      1.      1.       4   -100.       5
 FORCE          4     421         135867.     -1.      0.      0.
 FORCE          5     211          905.78      0.      1.      0.
 $DYNAMIC
-NLPARM         1     100            ITER       1              PV     YES
+NLPARM         1     100            ITER       1             PUV     YES
             .001    .001
               10
-NLPARM         2     100            ITER       1              PV     YES
-                    .001
+NLPARM         2     100            ITER       1             PUV     YES
+            .001    .001
               10
 NLPCI          1    CRIS     .01     1.1      0.               5    2000
 $SPCs
