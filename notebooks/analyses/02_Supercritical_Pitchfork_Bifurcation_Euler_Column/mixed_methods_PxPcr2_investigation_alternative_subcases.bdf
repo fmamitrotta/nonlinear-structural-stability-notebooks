@@ -16,6 +16,7 @@ SUBCASE 1
     LOAD = 6
 SUBCASE 2
     LOAD = 8
+    NLPARM = 2
 BEGIN BULK
 $PARAMS
 PARAM     LGDISP       1
@@ -872,8 +873,8 @@ MAT1           1 207000.              .3  .00078
 $LOADS
 LOAD           6      1.      1.       4      1.       5
 LOAD           7      1.      0.       4
-LOAD           8      1.      1.       4   -500.       5
-FORCE          4     421        153982.6     -1.      0.      0.
+LOAD           8      1.      1.       4 -10000.       5
+FORCE          4     421         181156.     -1.      0.      0.
 FORCE          5     211          905.78      0.      1.      0.
 $DYNAMIC
 NLPARM         1     100            ITER       1             PUV     YES
