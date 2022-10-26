@@ -167,12 +167,14 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> List[float]:
     return lowest_eigenvalues
 
 
-def plot_buckling_shape(op2_object: OP2):
+def plot_buckling_shape(op2_object: OP2, subcase: [int, tuple]):
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
             Parameters:
                     op2_object (OP2): OP2 object created reading an op2 file with the load_geometry option set to True
+                    subcase (int, tuple): key of the eigenvectors dictionary in the OP2 object corresponding to the
+                    selected subcase
     """
     # Create figure and axes
     fig = plt.figure()
@@ -188,10 +190,10 @@ def plot_buckling_shape(op2_object: OP2):
         node_ids = np.array(element.node_ids)
         # Take the average displacement magnitude over the nodes of each element
         displacements[count] = np.mean(np.apply_along_axis(
-            np.linalg.norm, 1, [*op2_object.eigenvectors.values()][0].data[0, node_ids - 1, 0:3]))
+            np.linalg.norm, 1, op2_object.eigenvectors[subcase].data[0, node_ids - 1, 0:3]))
         # Store the coordinates of the nodes of the deformed elements
         vertices[count] = np.vstack(
-            [op2_object.nodes[index].xyz + [*op2_object.eigenvectors.values()][0].data[0, index - 1, 0:3] *
+            [op2_object.nodes[index].xyz + op2_object.eigenvectors[subcase].data[0, index - 1, 0:3] *
              displacement_scale_factor for index in node_ids])
     # Create 3D polygons to represent the elements
     pc = Poly3DCollection(vertices, linewidths=.1)
@@ -219,11 +221,71 @@ def plot_buckling_shape(op2_object: OP2):
     ax.set_zlim(min(z_coordinates), max(z_coordinates))
     # Set aspect ratio of the axes
     ax.set_box_aspect([ub - lb for lb, ub in (getattr(ax, f'get_{a}lim')() for a in 'xyz')])
-    # Adjust number of ticks and distance from axes
-    # plt.locator_params(axis='x', nbins=4)
-    # plt.locator_params(axis='z', nbins=2)
-    # ax.tick_params(axis='y', which='major', pad=15)
     # Add colorbar
     cb = fig.colorbar(mappable=m, label='Nondimensional displacement magnitude', pad=0.15)
+    # Show plot
+    plt.show()
+    # Return axes object
+    return ax
+
+
+def plot_displacements(op2_object: OP2, subcase: [int, tuple] = 1):
+    """
+    Plot the buckling shape using the eigenvectors of the input OP2 object.
+
+            Parameters:
+                    op2_object (OP2): OP2 object created reading an op2 file with the load_geometry option set to True
+                    subcase (int, tuple): key of the displacements dictionary in the OP2 object corresponding to the
+                    selected subcase
+    """
+    # Create figure and axes
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    # Initialize list of displacement magnitude and vertices
+    displacements = [None]*len(op2_object.elements)
+    vertices = [None]*len(op2_object.elements)
+    # Iterate through the elements of the BDF object
+    for count, element in enumerate(op2_object.elements.values()):
+        # Store ids of the nodes as an array
+        node_ids = np.array(element.node_ids)
+        # Take the average displacement magnitude of each element
+        displacements[count] = np.mean(np.apply_along_axis(np.linalg.norm, 1, op2_object.displacements[subcase].data[
+                                                                              -1, node_ids - 1, 0:3]))
+        # Store the coordinates of the nodes of the deformed elements
+        vertices[count] = np.vstack([op2_object.nodes[index].xyz + op2_object.displacements[subcase].data[
+                                                                   -1, index - 1, 0:3] for index in node_ids])
+    # Create 3D polygons to represent the elements
+    pc = Poly3DCollection(vertices, linewidths=.1)
+    # Create colormap for the displacement magnitude and normalize values
+    m = mpl.cm.ScalarMappable(cmap=mpl.cm.jet)
+    m.set_array(displacements)
+    m.set_clim(vmin=0, vmax=max(displacements))
+    rgba_array = m.to_rgba(displacements)
+    # Color the elements' face by the average displacement magnitude
+    pc.set_facecolor([(rgb[0], rgb[1], rgb[2]) for rgb in rgba_array])
+    # Set the edge color black
+    pc.set_edgecolor('k')
+    # Add polygons to the plot
+    ax.add_collection3d(pc)
+    # Set axes label
+    ax.set_xlabel('x [mm]')
+    ax.set_ylabel('y [mm]', labelpad=50)
+    ax.set_zlabel('z [mm]', labelpad=10)
+    # Set axes limits
+    x_coordinates = [func(points[:, 0]) for points in vertices for func in (np.min, np.max)]
+    y_coordinates = [func(points[:, 1]) for points in vertices for func in (np.min, np.max)]
+    z_coordinates = [func(points[:, 2]) for points in vertices for func in (np.min, np.max)]
+    ax.set_xlim(min(x_coordinates), max(x_coordinates))
+    ax.set_ylim(min(y_coordinates), max(y_coordinates))
+    ax.set_zlim(min(z_coordinates), max(z_coordinates))
+    # Set aspect ratio of the axes
+    ax.set_box_aspect([ub - lb for lb, ub in (getattr(ax, f'get_{a}lim')() for a in 'xyz')])
+    # Adjust number of ticks and distance from axes
+    plt.locator_params(axis='x', nbins=4)
+    plt.locator_params(axis='z', nbins=2)
+    ax.tick_params(axis='y', which='major', pad=15)
+    ax.tick_params(axis='z', which='major', pad=5)
+    # Add colorbar
+    fig.colorbar(m, label='Displacement magnitude [mm]')
     # Show plot
     plt.show()

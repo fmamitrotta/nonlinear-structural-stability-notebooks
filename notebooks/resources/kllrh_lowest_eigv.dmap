@@ -18,10 +18,4 @@ message //'NLOOP ='/nloop $
 if (cbuckle<1) nloop=nloop+1 $
 message //'kllrh lowest eigenvalue = '/leigvmc $
 endif $
-alter 'paraml *casesx2.*cmethod'  $
-if (cbuckle=2) then $
-cbuckle=-1 $
-lbuckle=false $
-JUMP LENDDO $
-endif $
 ECHOON $
