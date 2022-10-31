@@ -122,7 +122,7 @@ def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) ->
     # Initialize final load of previous subcase
     final_load_previous_subcase = 0
     # Initialize list of nonlinear buckling loads
-    nonlinear_buckling_loads = [None] * len(alphas)
+    nonlinear_buckling_loads = np.empty(len(alphas))
     # Iterate through the valid subcases
     for i, subcase_id in enumerate(valid_subcase_ids):
         # Find final applied load of current subcase
