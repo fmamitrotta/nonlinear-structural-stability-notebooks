@@ -304,11 +304,12 @@ def calculate_linear_buckling_load(bdf_object: BDF, static_load_set_id: int, ana
     # Plot buckling shape if requested
     if plot_shape:
         print(f'Buckling shape:')
-        ax = pynastran_utils.plot_buckling_shape(op2_object=op2_output, subcase=eigenvalue_calculation_subcase_id)
+        fig, ax = pynastran_utils.plot_buckling_mode(op2_object=op2_output, subcase_id=eigenvalue_calculation_subcase_id)
         # Adjust number of ticks and distance from axes
         ax.locator_params(axis='x', nbins=4)
         ax.locator_params(axis='z', nbins=2)
         ax.tick_params(axis='y', which='major', pad=15)
-        plt.show()
+        fig.canvas.draw()
+        fig.canvas.flush_events()
     # Return buckling load
     return buckling_load
