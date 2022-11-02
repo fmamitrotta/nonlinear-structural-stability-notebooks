@@ -38,8 +38,9 @@ def mesh_box(width: float, height: float, span: float, edge_length: float) -> (n
                              (0., span, -height / 2)])  # 7
     # Define faces by sequence of vertices
     faces = [[0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]]
-    # Define number of nodes along the span of the box
-    no_nodes_span = int(np.rint((np.linalg.norm(vertices_xyz[4] - vertices_xyz[0]) / edge_length)))
+    # Define number of nodes along the span of the box making sure that there is an odd number of nodes to better
+    # approximate the buckling shape
+    no_nodes_span = np.ceil(np.linalg.norm(vertices_xyz[4] - vertices_xyz[0]) / edge_length / 2).astype('int') * 2 + 1
     # Initialize array with nodes' coordinates
     nodes_xyz_array = np.empty((no_nodes_span, 0, 3))
     # Initialize array with nodes' scalar indices
@@ -48,8 +49,10 @@ def mesh_box(width: float, height: float, span: float, edge_length: float) -> (n
     last_node_index = 0
     # Define nodes of the mesh for each face of the box
     for face in faces:
-        # Define number of nodes along the width or height of the box
-        no_nodes = int(np.rint((np.linalg.norm(vertices_xyz[face[1]] - vertices_xyz[face[0]]) / edge_length)))
+        # Define number of nodes along the width or height of the box making sure that there is an odd number of nodes
+        # to better approximate the buckling shape
+        no_nodes = np.ceil(np.linalg.norm(vertices_xyz[face[1]] - vertices_xyz[face[0]]) / edge_length / 2).astype(
+            'int') * 2 + 1
         # Find coordinates of nodes along the root and the tip of the current face
         root_nodes_xyz = np.linspace(vertices_xyz[face[0]], vertices_xyz[face[1]], no_nodes)
         tip_nodes_xyz = np.linspace(vertices_xyz[face[3]], vertices_xyz[face[2]], no_nodes)
