@@ -5,18 +5,22 @@ from pyNastran.utils.nastran_utils import run_nastran
 from pyNastran.op2.op2 import OP2
 import numpy as np
 import re
-from typing import List
+from typing import Tuple, Dict, Any
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import matplotlib as mpl
+from numpy import ndarray
+from mpl_toolkits.mplot3d.axes3d import Axes3D
 
 
 def wait_nastran(directory_path: str):
     """
     Suspends execution of current thread from the start to the end of a Nastran run.
 
-            Parameters:
-                    directory_path (str): string with path to the directory where input file is run
+    Parameters
+    ----------
+    directory_path : str
+        string with path to the directory where input file is run
     """
     # Wait for the analysis to start (when bat file appears)
     while not any([file.endswith('.bat') for file in os.listdir(directory_path)]):
@@ -30,11 +34,16 @@ def run_analysis(directory_path: str, bdf_object: BDF, bdf_filename: str, run_fl
     """
     Write .bdf input file from BDF object and execute Nastran analysis.
 
-            Parameters:
-                    directory_path (str): string with path to the directory where input file is run
-                    bdf_object (BDF): BDF object representing .bdf input file
-                    bdf_filename (str): name of the .bdf input file
-                    run_flag (bool): flag to enable or disable actual execution of Nastran
+    Parameters
+    ----------
+    directory_path : str
+        string with path to the directory where input file is run
+    bdf_object: BDF
+        pyNastran object representing the bdf input file
+    bdf_filename: str
+        name of the bdf input file
+    run_flag: bool
+        flag to enable or disable the actual execution of Nastran
     """
     # Create analysis directory
     os.makedirs(directory_path, exist_ok=True)
@@ -44,6 +53,7 @@ def run_analysis(directory_path: str, bdf_object: BDF, bdf_filename: str, run_fl
     # Run Nastran
     nastran_path = 'C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastranw.exe'
     run_nastran(bdf_filename=bdf_filepath, nastran_cmd=nastran_path, run_in_bdf_dir=True, run=run_flag)
+    # If Nastran is actually executed wait until analysis is done
     if run_flag:
         wait_nastran(directory_path)
 
@@ -52,28 +62,41 @@ def create_static_load_subcase(bdf_object: BDF, subcase_id: int, load_set_id: in
     """
     Define a subcase in the input BDF object for the application of a static load.
 
-            Parameters:
-                    bdf_object (BDF): BDF object representing Nastran input file
-                    subcase_id (int): id of the subcase
-                    load_set_id (int): id of the load set assigned to the subcase
+    Parameters
+    ----------
+    bdf_object : BDF
+        pyNastran object representing Nastran input file
+    subcase_id: int
+        id of the subcase
+    load_set_id: int
+        id of the load set assigned to the subcase
     """
+    # Create subcase
     bdf_object.create_subcases(subcase_id)
+    # Add load set id to case control statement of created subcase
     bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('LOAD', load_set_id)
 
 
-def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_id: int = 1) -> (dict, dict, dict):
+def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_id: int = 1) -> \
+        Tuple[Dict[Any, Any], Dict[Any, Any], Dict[Any, Any]]:
     """
-    Read history of total applied load and displacements at the node of interest from a OP2 object.
+    Read history of total applied load and displacements at the indicated node from a OP2 object.
 
-            Parameters:
-                    op2_object (OP2): OP2 object containing the results of a nonlinear analysis
-                    displacement_node_id (int): id of the node of interest for the displacements
+    Parameters
+    ----------
+    op2_object : OP2
+        pyNastran object including the results of a nonlinear analysis (SOL 106)
+    displacement_node_id: int
+        id of the node where the displacements are read
 
-            Returns:
-                    load_steps (dict): dictionary with a vector of the load steps for each subcase
-                    displacements (dict): dictionary with an array of the displacements at the node of interest for each
-                     subcase
-                    loads (dict): dictionary with an array of the applied loads for each subcase
+    Returns
+    -------
+    load_steps: dict
+        dictionary with a vector of the load steps for each subcase
+    displacements: dict
+        dictionary with subcase ids as keys and arrays of the xyz displacements at the indicated node as values
+    loads: dict
+        dictionary with subcase ids as keys and arrays of the applied loads as values
     """
     # Initialize dictionaries where the quantities of interest will be saved
     load_steps = {}
@@ -93,21 +116,24 @@ def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_i
     return load_steps, loads, displacements
 
 
-def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) -> (List[float], List[float]):
+def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) -> Tuple[ndarray, ndarray]:
     """
     Return nonlinear buckling loads and critical buckling factors by reading the .f06 and .op2 files including the
     results of the analyis with the nonlinear buckling method.
 
-            Parameters:
-                    f06_filepath (str): string with path to .f06 file
-                    op2_object (OP2): OP2 object containing the results of the analysis run with the Nastran's nonlinear
-                     buckling mehtod
+    Parameters
+    ----------
+    f06_filepath: str
+        string with path to .f06 file
+    op2_object: OP2
+        pyNastran object including the results of a nonlinear analysis (SOL 106) with nonlinear buckling method
 
-            Returns:
-                    nonlinear_buckling_load (List[float]): list of nonlinear buckling loads calculated as
-                     P * Delta P * alpha
-                    alphas (List[float]): list of critical buckling factors, used to verify that absolute value is not
-                     greater than unity
+    Returns
+    -------
+    nonlinear_buckling_load: ndarray
+        array of nonlinear buckling loads calculated as  P + Delta P * alpha
+    alphas: ndarray
+        array of critical buckling factors, used to verify that absolute value is not greater than unity
     """
     # Read critical buckling factor ALPHA for each subcase
     alphas = []  # empty list of critical buckling factors
@@ -139,19 +165,23 @@ def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) ->
         # Update final load of previous subcase
         final_load_previous_subcase = final_load
     # Return lists of nonlinear buckling loads and critical buckling factors
-    return nonlinear_buckling_loads, alphas
+    return nonlinear_buckling_loads, np.array(alphas)
 
 
-def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> List[float]:
+def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     """
     Return a list with the lowest eigenvalue of the matrix KLLRH (tangent stiffness matrix) for each load increment
     reading a f06 file resulting from a nonlinear analysis run with a proper DMAP.
 
-            Parameters:
-                    f06_filepath (str): string with path to .f06 file
+    Parameters
+    ----------
+        f06_filepath: str
+            string with path to .f06 file
 
-            Returns:
-                    lowest_eigenvalues (List[float]): list of the lowest eigenvalue of KLLRH matrices
+    Returns
+    -------
+        lowest_eigenvalues: ndarray
+            array with the lowest eigenvalue of the KLLRH matrices
     """
     # Initialize list of the lowest eigenvalues
     lowest_eigenvalues = []
@@ -164,24 +194,31 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> List[float]:
             if 'KLLRH LOWEST EIGENVALUE' in line:
                 lowest_eigenvalues.append(float(re.findall(regexp, line)[0]))
     # Return list of the lowest eigenvalues
-    return lowest_eigenvalues
+    return np.array(lowest_eigenvalues)
 
 
-def plot_buckling_shape(op2_object: OP2, subcase: [int, tuple]):
+def plot_displacements(op2_object: OP2, displacement_data: ndarray):
     """
-    Plot the buckling shape using the eigenvectors of the input OP2 object.
+    Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
 
-            Parameters:
-                    op2_object (OP2): OP2 object created reading an op2 file with the load_geometry option set to True
-                    subcase (int, tuple): key of the eigenvectors dictionary in the OP2 object corresponding to the
-                    selected subcase
+    Parameters
+    ----------
+    op2_object: OP2
+        pyNastran object created reading an op2 file with the load_geometry option set to True
+    displacement_data: ndarray
+        array with displacement data to plot
+
+    Returns
+    -------
+        ax: Axes3D
+            object of the plot's axes
     """
     # Create figure and axes
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     # Initialize list of displacement magnitude and vertices
-    displacements = [None]*len(op2_object.elements)
-    vertices = [None]*len(op2_object.elements)
+    displacements = np.empty(len(op2_object.elements))
+    vertices = np.empty((len(op2_object.elements), 4, 3))
     # Define factor to scale displacements
     displacement_scale_factor = 200
     # Iterate through the elements of the structure
@@ -190,10 +227,10 @@ def plot_buckling_shape(op2_object: OP2, subcase: [int, tuple]):
         node_ids = np.array(element.node_ids)
         # Take the average displacement magnitude over the nodes of each element
         displacements[count] = np.mean(np.apply_along_axis(
-            np.linalg.norm, 1, op2_object.eigenvectors[subcase].data[0, node_ids - 1, 0:3]))
+            np.linalg.norm, 1, displacement_data[-1, node_ids - 1, 0:3]))
         # Store the coordinates of the nodes of the deformed elements
         vertices[count] = np.vstack(
-            [op2_object.nodes[index].xyz + op2_object.eigenvectors[subcase].data[0, index - 1, 0:3] *
+            [op2_object.nodes[index].xyz + displacement_data[-1, index - 1, 0:3] *
              displacement_scale_factor for index in node_ids])
     # Create 3D polygons to represent the elements
     pc = Poly3DCollection(vertices, linewidths=.1)
@@ -212,7 +249,7 @@ def plot_buckling_shape(op2_object: OP2, subcase: [int, tuple]):
     ax.set_xlabel('x [mm]')
     ax.set_ylabel('y [mm]')
     ax.set_zlabel('z [mm]')
-    # Set axes limmits
+    # Set axes limits
     x_coordinates = [func(points[:, 0]) for points in vertices for func in (np.min, np.max)]
     y_coordinates = [func(points[:, 1]) for points in vertices for func in (np.min, np.max)]
     z_coordinates = [func(points[:, 2]) for points in vertices for func in (np.min, np.max)]
@@ -226,66 +263,52 @@ def plot_buckling_shape(op2_object: OP2, subcase: [int, tuple]):
     # Show plot
     plt.show()
     # Return axes object
-    return ax
+    return fig, ax
 
 
-def plot_displacements(op2_object: OP2, subcase: [int, tuple] = 1):
+def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple]):
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
-            Parameters:
-                    op2_object (OP2): OP2 object created reading an op2 file with the load_geometry option set to True
-                    subcase (int, tuple): key of the displacements dictionary in the OP2 object corresponding to the
-                    selected subcase
+    Parameters
+    ----------
+        op2_object: OP2
+            pyNastran object created reading an op2 file with the load_geometry option set to True
+        subcase_id: int, tuple
+            key of the eigenvectors' dictionary in the OP2 object corresponding to the selected subcase
+
+    Returns
+    -------
+        ax: Axes3D
+            object of the plot's axes
     """
-    # Create figure and axes
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    # Initialize list of displacement magnitude and vertices
-    displacements = [None]*len(op2_object.elements)
-    vertices = [None]*len(op2_object.elements)
-    # Iterate through the elements of the BDF object
-    for count, element in enumerate(op2_object.elements.values()):
-        # Store ids of the nodes as an array
-        node_ids = np.array(element.node_ids)
-        # Take the average displacement magnitude of each element
-        displacements[count] = np.mean(np.apply_along_axis(np.linalg.norm, 1, op2_object.displacements[subcase].data[
-                                                                              -1, node_ids - 1, 0:3]))
-        # Store the coordinates of the nodes of the deformed elements
-        vertices[count] = np.vstack([op2_object.nodes[index].xyz + op2_object.displacements[subcase].data[
-                                                                   -1, index - 1, 0:3] for index in node_ids])
-    # Create 3D polygons to represent the elements
-    pc = Poly3DCollection(vertices, linewidths=.1)
-    # Create colormap for the displacement magnitude and normalize values
-    m = mpl.cm.ScalarMappable(cmap=mpl.cm.jet)
-    m.set_array(displacements)
-    m.set_clim(vmin=0, vmax=max(displacements))
-    rgba_array = m.to_rgba(displacements)
-    # Color the elements' face by the average displacement magnitude
-    pc.set_facecolor([(rgb[0], rgb[1], rgb[2]) for rgb in rgba_array])
-    # Set the edge color black
-    pc.set_edgecolor('k')
-    # Add polygons to the plot
-    ax.add_collection3d(pc)
-    # Set axes label
-    ax.set_xlabel('x [mm]')
-    ax.set_ylabel('y [mm]', labelpad=50)
-    ax.set_zlabel('z [mm]', labelpad=10)
-    # Set axes limits
-    x_coordinates = [func(points[:, 0]) for points in vertices for func in (np.min, np.max)]
-    y_coordinates = [func(points[:, 1]) for points in vertices for func in (np.min, np.max)]
-    z_coordinates = [func(points[:, 2]) for points in vertices for func in (np.min, np.max)]
-    ax.set_xlim(min(x_coordinates), max(x_coordinates))
-    ax.set_ylim(min(y_coordinates), max(y_coordinates))
-    ax.set_zlim(min(z_coordinates), max(z_coordinates))
-    # Set aspect ratio of the axes
-    ax.set_box_aspect([ub - lb for lb, ub in (getattr(ax, f'get_{a}lim')() for a in 'xyz')])
-    # Adjust number of ticks and distance from axes
-    plt.locator_params(axis='x', nbins=4)
-    plt.locator_params(axis='z', nbins=2)
-    ax.tick_params(axis='y', which='major', pad=15)
-    ax.tick_params(axis='z', which='major', pad=5)
-    # Add colorbar
-    fig.colorbar(m, label='Displacement magnitude [mm]')
-    # Show plot
-    plt.show()
+    # Choose eigenvectors as displacement data
+    displacement_data = op2_object.eigenvectors[subcase_id].data
+    # Call plotting function
+    fig, ax = plot_displacements(op2_object, displacement_data)
+    # Return axes object
+    return fig, ax
+
+
+def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1):
+    """
+    Plot the buckling shape using the eigenvectors of the input OP2 object.
+
+    Parameters
+    ----------
+        op2_object: OP2
+            pyNastran object created reading an op2 file with the load_geometry option set to True
+        subcase_id: int, tuple
+            key of the displacements' dictionary in the OP2 object corresponding to the selected subcase
+
+    Returns
+    -------
+        ax: Axes3D
+            object of the plot's axes
+    """
+    # Choose static displacements as displacement data
+    displacement_data = op2_object.displacements[subcase_id].data
+    # Call plotting function
+    fig, ax = plot_displacements(op2_object, displacement_data)
+    # Return axes object
+    return fig, ax
