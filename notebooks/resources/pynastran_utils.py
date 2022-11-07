@@ -11,6 +11,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import matplotlib as mpl
 from numpy import ndarray
 from mpl_toolkits.mplot3d.axes3d import Axes3D
+from matplotlib.pyplot import Figure
 
 
 def wait_nastran(directory_path: str):
@@ -197,7 +198,7 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     return np.array(lowest_eigenvalues)
 
 
-def plot_displacements(op2_object: OP2, displacement_data: ndarray):
+def plot_displacements(op2_object: OP2, displacement_data: ndarray) -> Tuple[Figure, Axes3D]:
     """
     Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
 
@@ -210,6 +211,8 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray):
 
     Returns
     -------
+        fig: Figure
+            object of the plotted figure
         ax: Axes3D
             object of the plot's axes
     """
@@ -233,7 +236,7 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray):
             [op2_object.nodes[index].xyz + displacement_data[-1, index - 1, 0:3] *
              displacement_scale_factor for index in node_ids])
     # Create 3D polygons to represent the elements
-    pc = Poly3DCollection(vertices, linewidths=.1)
+    pc = Poly3DCollection(vertices, linewidths=.05)
     # Create colormap for the displacement magnitude and normalize values
     m = mpl.cm.ScalarMappable(cmap=mpl.cm.jet)
     m.set_array(displacements)
@@ -260,13 +263,11 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray):
     ax.set_box_aspect([ub - lb for lb, ub in (getattr(ax, f'get_{a}lim')() for a in 'xyz')])
     # Add colorbar
     cb = fig.colorbar(mappable=m, label='Nondimensional displacement magnitude', pad=0.15)
-    # Show plot
-    plt.show()
     # Return axes object
     return fig, ax
 
 
-def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple]):
+def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple]) -> Tuple[Figure, Axes3D]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -279,6 +280,8 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple]):
 
     Returns
     -------
+        fig: Figure
+            object of the plotted figure
         ax: Axes3D
             object of the plot's axes
     """
@@ -290,7 +293,7 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple]):
     return fig, ax
 
 
-def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1):
+def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1) -> Tuple[Figure, Axes3D]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -303,6 +306,8 @@ def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1):
 
     Returns
     -------
+        fig: Figure
+            object of the plotted figure
         ax: Axes3D
             object of the plot's axes
     """
