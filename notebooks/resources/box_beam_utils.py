@@ -5,8 +5,8 @@ import numpy as np
 from notebooks.resources import pynastran_utils
 import os
 from pyNastran.op2.op2 import read_op2
-import matplotlib.pyplot as plt
 from pyvista import PolyData
+import matplotlib.pyplot as plt
 
 
 def mesh_box(width: float, height: float, span: float, edge_length: float) -> (ndarray, ndarray):
@@ -68,8 +68,10 @@ def mesh_box(width: float, height: float, span: float, edge_length: float) -> (n
         last_node_index = nodes_index_array[-1, -1]+1
     # Concatenate array of nodes' coordinates and scalar indices with coordinates and scalar indices of first set of
     # spanwise nodes. This is needed for the generation of the connectivity matrix
-    nodes_xyz_array = np.concatenate((nodes_xyz_array, np.reshape(nodes_xyz_array[:, 0, :], (no_nodes_span, 1, 3))), axis=1)
-    nodes_index_array = np.concatenate((nodes_index_array, np.reshape(nodes_index_array[:, 0], (no_nodes_span, 1))), axis=1)
+    nodes_xyz_array = np.concatenate((nodes_xyz_array, np.reshape(nodes_xyz_array[:, 0, :], (no_nodes_span, 1, 3))),
+                                     axis=1)
+    nodes_index_array = np.concatenate((nodes_index_array, np.reshape(nodes_index_array[:, 0], (no_nodes_span, 1))),
+                                       axis=1)
     # Initialize list with nodes connectivity information
     nodes_connectivity_list = []
     # Iterate through the rows and columns of the array of nodes' scalar indices
@@ -239,6 +241,9 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
         'PLOT'])  # store single point constraint forces data in the op2 file
     bdf_input.case_control_deck.subcases[0].add_result_type('OLOAD', 'ALL',
                                                             ['PLOT'])  # store form and type of applied load vector
+    # Cross-reference BDF object
+    bdf_input._xref = True
+    bdf_input.cross_reference()
     # Return BDF object
     return bdf_input
 
@@ -301,15 +306,19 @@ def calculate_linear_buckling_load(bdf_object: BDF, static_load_set_id: int, ana
     # Find buckling load and print it
     buckling_load = op2_output.eigenvectors[eigenvalue_calculation_subcase_id].eigr
     print(f'Buckling load: {buckling_load:.0f} N')
-    # Plot buckling shape if requested
+    # If flagged plot bukling mode
     if plot_shape:
-        print(f'Buckling shape:')
+        print(f'Buckling mode:')
         fig, ax = pynastran_utils.plot_buckling_mode(op2_object=op2_output, subcase_id=eigenvalue_calculation_subcase_id)
-        # Adjust number of ticks and distance from axes
+        # Adjust number of ticks of x and z axes
         ax.locator_params(axis='x', nbins=4)
-        ax.locator_params(axis='z', nbins=2)
+        ax.locator_params(axis='z', nbins=4)
+        # Adjust axis label y and z axes
+        ax.yaxis.labelpad = 50
+        ax.zaxis.labelpad = 10
+        # Adjust ticks label of y-axis
         ax.tick_params(axis='y', which='major', pad=15)
-        fig.canvas.draw()
-        fig.canvas.flush_events()
+        # Display updated figure
+        plt.show()
     # Return buckling load
     return buckling_load
