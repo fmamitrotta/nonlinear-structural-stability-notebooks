@@ -12,6 +12,7 @@ import matplotlib as mpl
 from numpy import ndarray
 from mpl_toolkits.mplot3d.axes3d import Axes3D
 from matplotlib.pyplot import Figure
+from matplotlib.cm import ScalarMappable
 
 
 def wait_nastran(directory_path: str):
@@ -198,7 +199,8 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     return np.array(lowest_eigenvalues)
 
 
-def plot_displacements(op2_object: OP2, displacement_data: ndarray) -> Tuple[Figure, Axes3D]:
+def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement_scale_factor: float = 1.) ->\
+        Tuple[Figure, Axes3D, ScalarMappable]:
     """
     Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
 
@@ -208,13 +210,18 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray) -> Tuple[Fig
         pyNastran object created reading an op2 file with the load_geometry option set to True
     displacement_data: ndarray
         array with displacement data to plot
+    displacement_scale_factor: float
+        scale factor for displacements (used to plot buckling modes)
 
     Returns
     -------
-        fig: Figure
-            object of the plotted figure
-        ax: Axes3D
-            object of the plot's axes
+    fig: Figure
+        object of the plotted figure
+    ax: Axes3D
+        object of the plot's axes
+    m: ScalarMappable
+        mappable object for the colorbar
+
     """
     # Create figure and axes
     fig = plt.figure()
@@ -222,8 +229,6 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray) -> Tuple[Fig
     # Initialize list of displacement magnitude and vertices
     displacements = np.empty(len(op2_object.elements))
     vertices = np.empty((len(op2_object.elements), 4, 3))
-    # Define factor to scale displacements
-    displacement_scale_factor = 200
     # Iterate through the elements of the structure
     for count, element in enumerate(op2_object.elements.values()):
         # Store ids of the nodes as an array
@@ -237,10 +242,11 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray) -> Tuple[Fig
              displacement_scale_factor for index in node_ids])
     # Create 3D polygons to represent the elements
     pc = Poly3DCollection(vertices, linewidths=.05)
-    # Create colormap for the displacement magnitude and normalize values
+    # Create colormap for the displacement magnitude
     m = mpl.cm.ScalarMappable(cmap=mpl.cm.jet)
     m.set_array(displacements)
-    m.set_clim(vmin=0, vmax=1)
+    # Set colormap min and max values and displacement values to colors
+    m.set_clim(vmin=0, vmax=np.amax(displacement_data[-1, :, :]))
     rgba_array = m.to_rgba(displacements)
     # Color the elements' face by the average displacement magnitude
     pc.set_facecolor([(rgb[0], rgb[1], rgb[2]) for rgb in rgba_array])
@@ -261,10 +267,8 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray) -> Tuple[Fig
     ax.set_zlim(min(z_coordinates), max(z_coordinates))
     # Set aspect ratio of the axes
     ax.set_box_aspect([ub - lb for lb, ub in (getattr(ax, f'get_{a}lim')() for a in 'xyz')])
-    # Add colorbar
-    cb = fig.colorbar(mappable=m, label='Nondimensional displacement magnitude', pad=0.15)
     # Return axes object
-    return fig, ax
+    return fig, ax, m
 
 
 def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple]) -> Tuple[Figure, Axes3D]:
@@ -288,7 +292,10 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple]) -> Tuple[Figur
     # Choose eigenvectors as displacement data
     displacement_data = op2_object.eigenvectors[subcase_id].data
     # Call plotting function
-    fig, ax = plot_displacements(op2_object, displacement_data)
+    displacement_scale_factor = 200
+    fig, ax, m = plot_displacements(op2_object, displacement_data, displacement_scale_factor)
+    # Add colorbar
+    fig.colorbar(mappable=m, label='Nondimensional displacement magnitude', pad=0.15)
     # Return axes object
     return fig, ax
 
@@ -314,6 +321,54 @@ def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1) -> Tu
     # Choose static displacements as displacement data
     displacement_data = op2_object.displacements[subcase_id].data
     # Call plotting function
-    fig, ax = plot_displacements(op2_object, displacement_data)
+    fig, ax, m = plot_displacements(op2_object, displacement_data)
+    # Add colorbar
+    fig.colorbar(mappable=m, label='Displacement magnitude [mm]', pad=0.15)
     # Return axes object
     return fig, ax
+
+
+def add_unitary_force(bdf_object: BDF, nodes_ids: [list, ndarray], set_id: int, direction_vector: [list, ndarray]):
+    """
+    Apply a uniform force over the indicated nodes such that the total magnitude is 1 N.
+
+    Parameters
+    ----------
+        bdf_object: BDF
+            pyNastran object representing a bdf input file
+        nodes_ids: [list, ndarray]
+            array with ids of the nodes where the force is applied
+        set_id: int
+            set id of the force card
+        direction_vector: [list, ndarray]
+            vector with the force components along the x, y and z axes
+
+    """
+    # Define force magnitude so that the total magnitude is 1 N
+    force_magnitude = 1 / len(nodes_ids)
+    # Add a force card for each input node id
+    for node_id in nodes_ids:
+        bdf_object.add_force(sid=set_id, node=node_id, mag=force_magnitude, xyz=direction_vector)
+
+
+def set_up_nonlinear_analysis(bdf_object, ninc=None, max_iter=25, conv='PW', eps_u=0.01, eps_p=0.01, eps_w=0.01,
+                              max_bisect=5):
+    # Assign SOL 106 as solution sequence
+    bdf_object.sol = 106
+    # Add parameter for large displacement effects
+    bdf_object.add_param('LGDISP', [1])
+    # Define parameters for the nonlinear iteration strategy with full Newton method
+    nlparm_id = 1
+    bdf_object.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=1, max_iter=max_iter, conv=conv,
+                          int_out='YES', eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect)
+    # Add NLPARM id to the control case commands
+    bdf_object.case_control_deck.subcases[0].add_integer_type('NLPARM', nlparm_id)
+
+
+def set_up_arc_length_method(bdf_object, ninc=None, max_iter=25, conv='PW', eps_u=0.01, eps_p=0.01, eps_w=0.01,
+                             max_bisect=5, minalr=0.25, maxalr=4., desiter=12, maxinc=20):
+    # Set up basic nonlinear analysis
+    set_up_nonlinear_analysis(bdf_object=bdf_object, ninc=ninc, max_iter=max_iter, conv=conv, eps_u=eps_u, eps_p=eps_p,
+                              eps_w=eps_w, max_bisect=max_bisect)
+    # Define parameters for the arc-length method
+    bdf_object.add_nlpci(nlpci_id=1, Type='CRIS', minalr=minalr, maxalr=maxalr, desiter=desiter, mxinc=maxinc)
