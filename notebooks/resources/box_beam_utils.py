@@ -90,22 +90,22 @@ def mesh_box(width: float, height: float, span: float, edge_length: float) -> (n
     return nodes_xyz_array, nodes_connectivity_matrix
 
 
-def mesh_box_pyvista(y0: float, width: float, span: float, height: float, edge_length: float) -> PolyData:
+def mesh_box_pyvista(width: float, span: float, height: float, edge_length: float, y0: float = 0.) -> PolyData:
     """
     Discretizes a box with the input dimensions into quadrilateral shell elements using the pyvista package. Returns a
     PolyData object including the xyz coordinates of the nodes and their connectivity information.
 
             Parameters:
-                    y0 (float): y-coordinate of the box root
-                    width (float): box width
-                    height (float): box height
-                    span (float): box span
-                    edge_length (float): prescribed length of the edges of the shell elements used to discretize the
-                     geometry
+                width (float): box width
+                height (float): box height
+                span (float): box span
+                edge_length (float): prescribed length of the edges of the shell elements used to discretize the
+                 geometry
+                y0 (float): y-coordinate of the box root
 
             Returns:
-                    cleaned_mesh (PolyData): PolyData object including the xyz coordinates of the nodes and their
-                     connectivity information
+                cleaned_mesh (PolyData): PolyData object including the xyz coordinates of the nodes and their
+                 connectivity information
     """
     # Find number of elements along each side of the box based on the prescribed edge length. We make sure that there is
     # an even number of elements over each dimension to better approximate the buckling shape
@@ -177,7 +177,7 @@ def mesh_box_beam_pyvista(ribs_y_coordinates: ndarray, width: float, height: flo
     # Iterate through the y-coordinates of the rib, except last one
     for count, y in enumerate(ribs_y_coordinates[:-1]):
         # Discretize box segment between current and next rib and add PolyData object to the list
-        box_meshes.append(mesh_box_pyvista(y, width, ribs_y_coordinates[count+1]-y, height, edge_length))
+        box_meshes.append(mesh_box_pyvista(width, ribs_y_coordinates[count+1]-y, height, edge_length, y))
         # Discretize current rib and add PolyData object to the list
         rib_meshes.append(mesh_rib_pyvista(y, width, height, edge_length))
     # Discretize last rib and add PolyData object to the list
@@ -309,15 +309,17 @@ def calculate_linear_buckling_load(bdf_object: BDF, static_load_set_id: int, ana
     # If flagged plot bukling mode
     if plot_shape:
         print(f'Buckling mode:')
-        fig, ax = pynastran_utils.plot_buckling_mode(op2_object=op2_output, subcase_id=eigenvalue_calculation_subcase_id)
+        fig, ax = pynastran_utils.plot_buckling_mode(op2_object=op2_output,
+                                                     subcase_id=eigenvalue_calculation_subcase_id)
         # Adjust number of ticks of x and z axes
-        ax.locator_params(axis='x', nbins=4)
-        ax.locator_params(axis='z', nbins=4)
+        ax.locator_params(axis='x', nbins=3)
+        ax.locator_params(axis='z', nbins=2)
+        # Adjust ticks label of y and z axes
+        ax.tick_params(axis='y', which='major', pad=20)
+        ax.tick_params(axis='z', which='major', pad=5)
         # Adjust axis label y and z axes
         ax.yaxis.labelpad = 50
         ax.zaxis.labelpad = 10
-        # Adjust ticks label of y-axis
-        ax.tick_params(axis='y', which='major', pad=15)
         # Display updated figure
         plt.show()
     # Return buckling load
