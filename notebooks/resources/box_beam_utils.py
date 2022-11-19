@@ -269,7 +269,8 @@ def set_up_sol_106(bdf_object: BDF):
 
 
 def calculate_linear_buckling_load(bdf_object: BDF, static_load_set_id: int, analysis_directory_path: str,
-                                   input_name: str, run_flag: bool = True, plot_shape: bool = False) -> float:
+                                   input_name: str, run_flag: bool = True, plot_shape: bool = False,
+                                   displacement_component: str = 'magnitude') -> float:
     """
     Calculates the linear buckling load for the input BDF object using SOL 105.
 
@@ -280,6 +281,8 @@ def calculate_linear_buckling_load(bdf_object: BDF, static_load_set_id: int, ana
                     input_name (str): string with the name that will be given to the input file
                     run_flag (bool): boolean indicating whether Nastran analysis is actually run
                     plot_shape (bool): boolean indicating whether buckling shape is plotted
+                    displacement_component (str): string with the name of the displacement component used for the
+                     colormap
 
             Returns:
                     buckling_load (flaot): buckling load calculated by Nastran
@@ -310,7 +313,8 @@ def calculate_linear_buckling_load(bdf_object: BDF, static_load_set_id: int, ana
     if plot_shape:
         print(f'Buckling mode:')
         fig, ax = pynastran_utils.plot_buckling_mode(op2_object=op2_output,
-                                                     subcase_id=eigenvalue_calculation_subcase_id)
+                                                     subcase_id=eigenvalue_calculation_subcase_id,
+                                                     displacement_component=displacement_component)
         # Adjust number of ticks of x and z axes
         ax.locator_params(axis='x', nbins=3)
         ax.locator_params(axis='z', nbins=2)
