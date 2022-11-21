@@ -32,7 +32,7 @@ def wait_nastran(directory_path: str):
         time.sleep(0.1)
 
 
-def run_analysis(directory_path: str, bdf_object: BDF, bdf_filename: str, run_flag: bool = True):
+def run_analysis(directory_path: str, bdf_object: BDF, input_filename: str, run_flag: bool = True):
     """
     Write .bdf input file from BDF object and execute Nastran analysis.
 
@@ -42,15 +42,16 @@ def run_analysis(directory_path: str, bdf_object: BDF, bdf_filename: str, run_fl
         string with path to the directory where input file is run
     bdf_object: BDF
         pyNastran object representing the bdf input file
-    bdf_filename: str
-        name of the bdf input file
+    input_filename: str
+        name of the input file
     run_flag: bool
         flag to enable or disable the actual execution of Nastran
     """
     # Create analysis directory
     os.makedirs(directory_path, exist_ok=True)
     # Write bdf file
-    bdf_filepath = os.path.join(directory_path, bdf_filename + '.bdf')
+    bdf_filename = input_filename + '.bdf'
+    bdf_filepath = os.path.join(directory_path, bdf_filename)
     bdf_object.write_bdf(bdf_filepath)
     # Run Nastran
     nastran_path = 'C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastranw.exe'
@@ -58,6 +59,15 @@ def run_analysis(directory_path: str, bdf_object: BDF, bdf_filename: str, run_fl
     # If Nastran is actually executed wait until analysis is done
     if run_flag:
         wait_nastran(directory_path)
+    # Read and print wall time of simulation
+    log_filepath = os.path.join(directory_path, input_filename + '.log')
+    regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')  # compiled regular expression pattern
+    with open(log_filepath) as log_file:
+        for line in log_file:
+            if 'Total' in line:
+                wall_time = float(re.findall(regexp, line)[1])
+                print(f'Nastran job {bdf_filename} completed\nWall time: {wall_time:.1f} s')
+                break
 
 
 def create_static_load_subcase(bdf_object: BDF, subcase_id: int, load_set_id: int):
