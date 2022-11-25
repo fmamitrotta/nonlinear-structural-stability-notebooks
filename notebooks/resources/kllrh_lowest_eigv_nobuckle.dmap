@@ -3,7 +3,7 @@ compile nlstatic $
 alter 2 $
 type parm,,i,y,bmodes=1 $
 alter 'ENDIF.*BUCKLE.-1 AND CONV.-1'  $
-if (conv>0) then $
+if (conv>0 and (newp=-1 or cbuckle>0)) then $
 PARAML KLLRH//'TRAILER'/1/S,N,NC//         $
 MATGEN ,/IM/1/NC $
 READ KLLRH,IM,,,,,,,,,,,,/                                                     
