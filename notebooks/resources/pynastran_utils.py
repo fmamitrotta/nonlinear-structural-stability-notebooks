@@ -304,19 +304,19 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
 
     Parameters
     ----------
-        op2_object: OP2
-            pyNastran object created reading an op2 file with the load_geometry option set to True
-        subcase_id: int, tuple
-            key of the eigenvectors' dictionary in the OP2 object corresponding to the selected subcase
-        displacement_component: str
-            string with the name of the displacement component used for the colormap
+    op2_object: OP2
+        pyNastran object created reading an op2 file with the load_geometry option set to True
+    subcase_id: int, tuple
+        key of the eigenvectors' dictionary in the OP2 object corresponding to the selected subcase
+    displacement_component: str
+        string with the name of the displacement component used for the colormap
 
     Returns
     -------
-        fig: Figure
-            object of the plotted figure
-        ax: Axes3D
-            object of the plot's axes
+    fig: Figure
+        object of the plotted figure
+    ax: Axes3D
+        object of the plot's axes
     """
     # Choose eigenvectors as displacement data
     displacement_data = op2_object.eigenvectors[subcase_id].data
