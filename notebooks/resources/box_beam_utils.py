@@ -330,7 +330,7 @@ def calculate_linear_buckling_load(bdf_object: BDF, static_load_set_id: int, ana
                                  run_flag=run_flag)
     # Read op2 file
     op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
-    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=False)
+    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
     # Find buckling load and print it
     buckling_load = op2_output.eigenvectors[eigenvalue_calculation_subcase_id].eigr
     print(f'Buckling load: {buckling_load:.0f} N')
