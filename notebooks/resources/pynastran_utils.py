@@ -32,7 +32,7 @@ def wait_nastran(directory_path: str):
         time.sleep(0.1)
 
 
-def run_analysis(directory_path: str, bdf_object: BDF, input_filename: str, run_flag: bool = True):
+def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: bool = True):
     """
     Write .bdf input file from BDF object and execute Nastran analysis.
 
@@ -42,7 +42,7 @@ def run_analysis(directory_path: str, bdf_object: BDF, input_filename: str, run_
         string with path to the directory where input file is run
     bdf_object: BDF
         pyNastran object representing the bdf input file
-    input_filename: str
+    filename: str
         name of the input file
     run_flag: bool
         flag to enable or disable the actual execution of Nastran
@@ -50,7 +50,7 @@ def run_analysis(directory_path: str, bdf_object: BDF, input_filename: str, run_
     # Create analysis directory
     os.makedirs(directory_path, exist_ok=True)
     # Write bdf file
-    bdf_filename = input_filename + '.bdf'
+    bdf_filename = filename + '.bdf'
     bdf_filepath = os.path.join(directory_path, bdf_filename)
     bdf_object.write_bdf(bdf_filepath)
     # Run Nastran
@@ -60,7 +60,7 @@ def run_analysis(directory_path: str, bdf_object: BDF, input_filename: str, run_
     if run_flag:
         wait_nastran(directory_path)
     # Read and print wall time of simulation
-    log_filepath = os.path.join(directory_path, input_filename + '.log')
+    log_filepath = os.path.join(directory_path, filename + '.log')
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')  # compiled regular expression pattern
     with open(log_filepath) as log_file:
         for line in log_file:
@@ -304,19 +304,19 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
 
     Parameters
     ----------
-        op2_object: OP2
-            pyNastran object created reading an op2 file with the load_geometry option set to True
-        subcase_id: int, tuple
-            key of the eigenvectors' dictionary in the OP2 object corresponding to the selected subcase
-        displacement_component: str
-            string with the name of the displacement component used for the colormap
+    op2_object: OP2
+        pyNastran object created reading an op2 file with the load_geometry option set to True
+    subcase_id: int, tuple
+        key of the eigenvectors' dictionary in the OP2 object corresponding to the selected subcase
+    displacement_component: str
+        string with the name of the displacement component used for the colormap
 
     Returns
     -------
-        fig: Figure
-            object of the plotted figure
-        ax: Axes3D
-            object of the plot's axes
+    fig: Figure
+        object of the plotted figure
+    ax: Axes3D
+        object of the plot's axes
     """
     # Choose eigenvectors as displacement data
     displacement_data = op2_object.eigenvectors[subcase_id].data
@@ -336,8 +336,8 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
     return fig, ax
 
 
-def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displacement_component: str = 'magnitude') ->\
-        Tuple[Figure, Axes3D]:
+def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displacement_component: str = 'magnitude')\
+        -> Tuple[Figure, Axes3D]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
