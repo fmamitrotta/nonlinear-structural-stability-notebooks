@@ -10,16 +10,25 @@ def create_base_bdf(young_modulus: float, poisson_ratio: float, density: float, 
     Returns a BDF object with material properties, nodes, elements, boundary conditions and applied forces of Euler's
      column.
 
-            Parameters:
-                    young_modulus (float): Young's modulus of the column
-                    poisson_ratio (float): Poisson's ratio of the column
-                    density (float): density of the column
-                    diameter (float): diameter of the column
-                    length (float): length of the column
-                    no_elements (int): number of beam elements for the discretization of the column
+    Parameters
+    ----------
+    young_modulus: float
+        Young's modulus of the column
+    poisson_ratio: float
+        Poisson's ratio of the column
+    density: float
+        density of the column
+    diameter: float
+        diameter of the column
+    length: float
+        length of the column
+    no_elements: int
+        number of beam elements for the discretization of the column
 
-            Returns:
-                    bdf_input (BDF): BDF object of Euler's column model
+    Returns
+    -------
+    bdf_input: BDF
+        object representing the Nastran input of Euler's column
     """
     # Create an instance of the BDF class without info/warning/error messages
     bdf_input = BDF(debug=False)
@@ -67,25 +76,25 @@ def create_base_bdf(young_modulus: float, poisson_ratio: float, density: float, 
     return bdf_input
 
 
-def plot_buckling_shape(bdf_object: BDF, op2_object: OP2):
+def plot_buckling_mode(op2_object: OP2):
     """
     Plot first buckling mode of the column.
 
-            Parameters:
-                    bdf_object (BDF): NDF object representing Nastran input file
-                    op2_object (OP2): op2 object representing Nastran output file
+    Parameters
+    ----------
+    op2_object: OP2
+        object representing Nastran output created reading an op2 file with the load_geometry option set to True
     """
     # Create new figure
     fig, ax = plt.subplots()
     # Calculate coordinates of nodes in the buckling shape
-    nodes_xy_coordinates = np.vstack([bdf_object.nodes[index].xyz[0:2] for index in bdf_object.nodes.keys()]) + \
-                           np.squeeze([*op2_object.eigenvectors.values()][0].data[0, :, 0:2]) * 100
+    nodes_xy_coordinates = np.vstack([op2_object.nodes[index].xyz[0:2] for index in op2_object.nodes.keys()]) + \
+                           np.squeeze([*op2_object.eigenvectors.values()][0].data[0, :, 0:2])
     # Plot nodes
     ax.plot(nodes_xy_coordinates[:, 0], nodes_xy_coordinates[:, 1], '.-')
-    # Set aspect ratio, labels and grid
-    ax.set_aspect('equal', 'box')
-    plt.xlabel('x [mm]')
-    plt.ylabel('y [mm] (not to scale)')
+    # Set axes labels and grid
+    plt.xlabel('$x$ [mm]')
+    plt.ylabel('Nondimensional displacement along $y$')
     plt.grid()
     # Show plot
     plt.show()

@@ -96,7 +96,8 @@ def mesh_box(width: float, height: float, span: float, edge_length: float) -> tu
     return nodes_xyz_array, nodes_connectivity_matrix
 
 
-def mesh_box_pyvista(width: float, span: float, height: float, edge_length: float, y0: float = 0.) -> PolyData:
+def mesh_box_pyvista(width: float, span: float, height: float, edge_length: float, root_y_coordinate: float = 0.) ->\
+        PolyData:
     """
     Discretizes a box with the input dimensions into quadrilateral shell elements using the pyvista package. Returns a
     PolyData object including the xyz coordinates of the nodes and their connectivity information.
@@ -112,6 +113,8 @@ def mesh_box_pyvista(width: float, span: float, height: float, edge_length: floa
     edge_length: float
         prescribed length of the edges of the shell elements used to discretize the geometry y0 (float): y-coordinate of
          the box root
+    root_y_coordinate: float
+        position of the box root
 
      Returns
      -------
@@ -122,17 +125,18 @@ def mesh_box_pyvista(width: float, span: float, height: float, edge_length: floa
     # an even number of elements over each dimension to better approximate the buckling shape
     no_elements = [np.ceil(side/edge_length/2).astype('int')*2 for side in [width, span, height]]
     # Discretize top skin of the box
-    top_skin_mesh = pyvista.Plane(center=[width/2, y0+span/2, height/2], direction=[0, 0, 1], i_size=width, j_size=span,
-                                  i_resolution=no_elements[0], j_resolution=no_elements[1])
+    top_skin_mesh = pyvista.Plane(center=[width/2, root_y_coordinate+span/2, height/2], direction=[0, 0, 1],
+                                  i_size=width, j_size=span, i_resolution=no_elements[0], j_resolution=no_elements[1])
     # Discretize bottom skin of the box
-    bottom_skin_mesh = pyvista.Plane(center=[width/2, y0+span/2, -height/2], direction=[0, 0, -1], i_size=width,
-                                     j_size=span, i_resolution=no_elements[0], j_resolution=no_elements[1])
+    bottom_skin_mesh = pyvista.Plane(center=[width/2, root_y_coordinate+span/2, -height/2], direction=[0, 0, -1],
+                                     i_size=width, j_size=span, i_resolution=no_elements[0],
+                                     j_resolution=no_elements[1])
     # Discretize front spar of the box
-    front_spar_mesh = pyvista.Plane(center=[0, y0+span/2, 0], direction=[-1, 0, 0], i_size=height, j_size=span,
-                                    i_resolution=no_elements[2], j_resolution=no_elements[1])
+    front_spar_mesh = pyvista.Plane(center=[0, root_y_coordinate+span/2, 0], direction=[-1, 0, 0], i_size=height,
+                                    j_size=span, i_resolution=no_elements[2], j_resolution=no_elements[1])
     # Discretize rear spar of the box
-    rear_spar_mesh = pyvista.Plane(center=[width, y0+span/2, 0], direction=[1, 0, 0], i_size=height, j_size=span,
-                                   i_resolution=no_elements[2], j_resolution=no_elements[1])
+    rear_spar_mesh = pyvista.Plane(center=[width, root_y_coordinate+span/2, 0], direction=[1, 0, 0], i_size=height,
+                                   j_size=span, i_resolution=no_elements[2], j_resolution=no_elements[1])
     # Merge different components together
     merged_mesh = top_skin_mesh.merge([bottom_skin_mesh, front_spar_mesh, rear_spar_mesh])
     # Clean obtained mesh merging points closer than indicated tolerance
@@ -141,7 +145,7 @@ def mesh_box_pyvista(width: float, span: float, height: float, edge_length: floa
     return cleaned_mesh
 
 
-def mesh_rib_pyvista(y_coordinate: float, width: float, height: float, edge_length: float) -> PolyData:
+def mesh_rib_pyvista(y_coordinate: float, width: float, height: float, edge_length: float, x_0: float = 0.) -> PolyData:
     """
     Discretizes a rib with the input dimensions into quadrilateral shell elements using the pyvista package. Returns a
     PolyData object including the xyz coordinates of the nodes and their connectivity information.
@@ -156,6 +160,8 @@ def mesh_rib_pyvista(y_coordinate: float, width: float, height: float, edge_leng
         rib height
     edge_length: float
         prescribed length of the edges of the shell elements used to discretize the geometry
+    x_0: float
+        x-coordinate of front rib edge
 
     Returns
     -------
@@ -165,8 +171,8 @@ def mesh_rib_pyvista(y_coordinate: float, width: float, height: float, edge_leng
     # Find number of elements along each side of the rib
     no_elements = [np.ceil(side/edge_length/2).astype('int')*2 for side in [width, height]]
     # Discretize rib
-    rib_mesh = pyvista.Plane(center=[width/2, y_coordinate, 0], direction=[0, 1, 0], i_size=width, j_size=height,
-                             i_resolution=no_elements[0], j_resolution=no_elements[1])
+    rib_mesh = pyvista.Plane(center=[x_0 + width/2, y_coordinate, 0], direction=[0, 1, 0], i_size=width,
+                             j_size=height, i_resolution=no_elements[0], j_resolution=no_elements[1])
     # Return discretized geometry
     return rib_mesh
 
@@ -320,11 +326,11 @@ def calculate_linear_buckling_load(bdf_object: BDF, static_load_set_id: int, ana
     bdf_object.create_subcases(eigenvalue_calculation_subcase_id)
     bdf_object.case_control_deck.subcases[eigenvalue_calculation_subcase_id].add_integer_type('METHOD', eigrl_set_id)
     # Run analysis
-    pynastran_utils.run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, bdf_filename=input_name,
+    pynastran_utils.run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name,
                                  run_flag=run_flag)
     # Read op2 file
     op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
-    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=False)
+    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
     # Find buckling load and print it
     buckling_load = op2_output.eigenvectors[eigenvalue_calculation_subcase_id].eigr
     print(f'Buckling load: {buckling_load:.0f} N')
