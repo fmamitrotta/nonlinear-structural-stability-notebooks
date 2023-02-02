@@ -873,7 +873,7 @@ MAT1           1 207000.              .3  .00078
 $LOADS
 FORCE          4     421          91000.     -1.      0.      0.
 $DYNAMIC
-EIGB           5     INV  -5.+16   5.+16       2       1       1
+EIGB           5     INV     -1.   1.+10       1
 NLPARM         1     100            ITER       1             PUV     YES
             .001    .001
               10
