@@ -1,18 +1,19 @@
-import os
-import time
-from pyNastran.bdf.bdf import BDF
-from pyNastran.utils.nastran_utils import run_nastran
-from pyNastran.op2.op2 import OP2
-import numpy as np
-import re
-from typing import Tuple, Dict, Any
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import matplotlib as mpl
-from numpy import ndarray
-from mpl_toolkits.mplot3d.axes3d import Axes3D
-from matplotlib.pyplot import Figure
+import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
+from matplotlib.pyplot import Figure
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+from mpl_toolkits.mplot3d.axes3d import Axes3D
+import numpy as np
+from numpy import ndarray
+import os
+from pyNastran.bdf.bdf import BDF
+from pyNastran.op2.op2 import OP2
+from pyNastran.op2.op2 import read_op2
+from pyNastran.utils.nastran_utils import run_nastran
+import re
+import time
+from typing import Tuple, Dict, Any
 
 
 def wait_nastran(directory_path: str):
@@ -269,7 +270,7 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
     # Create 3D polygons to represent the elements
     pc = Poly3DCollection(vertices, linewidths=.05)
     # Create colormap for the displacement magnitude
-    m = mpl.cm.ScalarMappable(cmap=mpl.cm.jet)
+    m = ScalarMappable(cmap=mpl.cm.jet)
     m.set_array(elements_mean_displacement)
     # Set colormap min and max values and displacement values to colors
     m.set_clim(vmin=np.amin(nodes_displacement), vmax=np.amax(nodes_displacement))
@@ -396,8 +397,8 @@ def add_unitary_force(bdf_object: BDF, nodes_ids: [list, ndarray], set_id: int, 
         bdf_object.add_force(sid=set_id, node=node_id, mag=force_magnitude, xyz=direction_vector)
 
 
-def set_up_newton_method(bdf_object: BDF, ninc: int = None, max_iter: int = 25, conv: str = 'PW', eps_u: float = 0.01,
-                         eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5):
+def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, max_iter: int = 25, conv: str = 'PW', eps_u: float = 0.01,
+                         eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5, subcase_id: int = 0):
     """
     Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM to set up
     the full Newton method.
@@ -406,6 +407,8 @@ def set_up_newton_method(bdf_object: BDF, ninc: int = None, max_iter: int = 25, 
     ----------
     bdf_object: BDF
         pyNastran object representing a bdf input file
+    nlparm_id: int
+        identification number of NLPARM card
     ninc: int
         number of increments
     max_iter: int
@@ -420,22 +423,24 @@ def set_up_newton_method(bdf_object: BDF, ninc: int = None, max_iter: int = 25, 
         error tolerance for work criterion
     max_bisect: int
         maximum number of bisections allowed for each load increment
+    subcase_id: int
+        identification number of the subcase where the NLPARM card is applied
     """
     # Assign SOL 106 as solution sequence
     bdf_object.sol = 106
     # Add parameter for large displacement effects
     bdf_object.add_param('LGDISP', [1])
     # Define parameters for the nonlinear iteration strategy with full Newton method
-    nlparm_id = 1
     bdf_object.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=1, max_iter=max_iter, conv=conv,
                           int_out='YES', eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect)
     # Add NLPARM id to the control case commands
-    bdf_object.case_control_deck.subcases[0].add_integer_type('NLPARM', nlparm_id)
+    bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)
 
 
-def set_up_arc_length_method(bdf_object: BDF, ninc: int = None, max_iter: int = 25, conv: str = 'PW',
-                             eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5,
-                             minalr: float = 0.25, maxalr: float = 4., desiter: int = 12, maxinc: int = 20):
+def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, max_iter: int = 25,
+                             conv: str = 'PW', eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01,
+                             max_bisect: int = 5, subcase_id: int = 0, minalr: float = 0.25, maxalr: float = 4.,
+                             desiter: int = 12, maxinc: int = 20):
     """
     Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM and NLPCI
     to set up the arc-length method.
@@ -444,6 +449,8 @@ def set_up_arc_length_method(bdf_object: BDF, ninc: int = None, max_iter: int = 
     ----------
     bdf_object: BDF
         pyNastran object representing a bdf input file
+    nlparm_id: int
+        identification number of NLPARM card
     ninc: int
         number of increments
     max_iter: int
@@ -458,6 +465,8 @@ def set_up_arc_length_method(bdf_object: BDF, ninc: int = None, max_iter: int = 
         error tolerance for work criterion
     max_bisect: int
         maximum number of bisections allowed for each load increment
+    subcase_id: int
+        identification number of the subcase where the NLPARM card is applied
     minalr: float
         minimum allowable arc-length adjustment ratio
     maxalr: float
@@ -468,7 +477,94 @@ def set_up_arc_length_method(bdf_object: BDF, ninc: int = None, max_iter: int = 
         maximum number of controlled increment steps allowed within a subcase
     """
     # Set up basic nonlinear analysis
-    set_up_newton_method(bdf_object=bdf_object, ninc=ninc, max_iter=max_iter, conv=conv, eps_u=eps_u, eps_p=eps_p,
-                         eps_w=eps_w, max_bisect=max_bisect)
+    set_up_newton_method(bdf_object=bdf_object, nlparm_id=nlparm_id, ninc=ninc, max_iter=max_iter, conv=conv,
+                         eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect, subcase_id=subcase_id)
     # Define parameters for the arc-length method
-    bdf_object.add_nlpci(nlpci_id=1, Type='CRIS', minalr=minalr, maxalr=maxalr, desiter=desiter, mxinc=maxinc)
+    bdf_object.add_nlpci(nlpci_id=nlparm_id, Type='CRIS', minalr=minalr, maxalr=maxalr, desiter=desiter, mxinc=maxinc)
+
+
+def run_sol_105_buckling_analysis(bdf_object: BDF, static_load_set_id: int, analysis_directory_path: str,
+                                  input_name: str, run_flag: bool = True) -> OP2:
+    """
+    Returns the OP2 object representing the results of SOL 105 analysis. The function defines subcase 1 to apply the
+    load set associated to the input set idenfitication number and a second subcase to calculate the critical eigenvalue
+    using the EIGRL card.
+
+    Parameters
+    ----------
+    bdf_object: BDF
+        pyNastran object representing the bdf input of the box beam model
+    static_load_set_id: int
+        set id of the static load applied in the first subcase
+    analysis_directory_path: str
+        string with the path to the directory where the analysis is run
+    input_name: str
+        string with the name that will be given to the input file
+    run_flag: bool
+        boolean indicating whether Nastran analysis is actually run
+
+    Returns
+    -------
+    op2_output: OP2
+        object representing the op2 file produced by SOL 105
+    """
+    # Set SOL 105 as solution sequence (linear buckling analysis)
+    bdf_object.sol = 105
+    # Create first subcase for the application of the static load
+    load_application_subcase_id = 1
+    create_static_load_subcase(bdf_object=bdf_object, subcase_id=load_application_subcase_id,
+                               load_set_id=static_load_set_id)
+    # Add EIGRL card to define the parameters for the eigenvalues calculation
+    eigrl_set_id = static_load_set_id + 1
+    bdf_object.add_eigrl(sid=eigrl_set_id, v1=0., nd=1)  # calculate only the first positive eigenvalue
+    # Create second subcase for the calculation of the eigenvalues
+    eigenvalue_calculation_subcase_id = 2
+    bdf_object.create_subcases(eigenvalue_calculation_subcase_id)
+    bdf_object.case_control_deck.subcases[eigenvalue_calculation_subcase_id].add_integer_type('METHOD', eigrl_set_id)
+    # Run analysis
+    run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
+    # Read op2 file
+    op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
+    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
+    # Return OP2 object
+    return op2_output
+
+
+def run_sol_106_buckling_analysis(bdf_object: BDF, method_set_id: int, analysis_directory_path: str, input_name: str,
+                                  run_flag: bool = True) -> OP2:
+    """
+    Returns the OP2 object representing the results of SOL 106 analysis employing the nonlinear buckling method. The
+    function requires the subcases with the associated load sets to be already defined. It applies the nonlinear
+    buckling method to all subcases using the PARAM,BUCKLE,2 command and the EIGRL card.
+
+    Parameters
+    ----------
+    bdf_object: BDF
+        pyNastran object representing the bdf input of the box beam model
+    method_set_id: int
+        identification number of the EIGRL card that is defined for the eigenvalue calculation
+    analysis_directory_path: str
+        string with the path to the directory where the analysis is run
+    input_name: str
+        string with the name that will be given to the input file
+    run_flag: bool
+        boolean indicating whether Nastran analysis is actually run
+
+    Returns
+    -------
+    op2_output: OP2
+        object representing the op2 file produced by SOL 106
+    """
+    # Set SOL SOL6 as solution sequence (nonlinear analysis)
+    bdf_object.sol = 106
+    # Define parameters for nonlinear buckling method
+    bdf_object.add_param('BUCKLE', [2])
+    bdf_object.add_eigrl(sid=method_set_id, nd=1)  # calculate lowest eigenvalue, either positive or negative
+    bdf_object.case_control_deck.subcases[0].add_integer_type('METHOD', method_set_id)
+    # Run analysis
+    run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
+    # Read op2 file
+    op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
+    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
+    # Return OP2 object
+    return op2_output
