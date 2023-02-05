@@ -211,7 +211,8 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
 
 
 def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement_component: str = 'magnitude',
-                       displacement_scale_factor: float = 1.) -> Tuple[Figure, Axes3D, ScalarMappable]:
+                       displacement_scale_factor: float = 1., colormap: str = 'jet') -> \
+        Tuple[Figure, Axes3D, ScalarMappable]:
     """
     Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
 
@@ -222,9 +223,11 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
     displacement_data: ndarray
         array with displacement data to plot
     displacement_component: str
-        string with the name of the displacement component used for the colormap
+        name of the displacement component used for the colorbar
     displacement_scale_factor: float
         scale factor for displacements (used to plot buckling modes)
+    colormap: str
+        name of the colormap used for the displacement colorbar
 
     Returns
     -------
@@ -270,7 +273,7 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
     # Create 3D polygons to represent the elements
     pc = Poly3DCollection(vertices, linewidths=.05)
     # Create colormap for the displacement magnitude
-    m = ScalarMappable(cmap=mpl.cm.jet)
+    m = ScalarMappable(cmap=colormap)
     m.set_array(elements_mean_displacement)
     # Set colormap min and max values and displacement values to colors
     m.set_clim(vmin=np.amin(nodes_displacement), vmax=np.amax(nodes_displacement))
@@ -298,8 +301,8 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
     return fig, ax, m
 
 
-def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_component: str = 'magnitude') ->\
-        Tuple[Figure, Axes3D]:
+def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_component: str = 'magnitude',
+                       colormap: str = 'jet') -> Tuple[Figure, Axes3D]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -310,7 +313,9 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
     subcase_id: int, tuple
         key of the eigenvectors' dictionary in the OP2 object corresponding to the selected subcase
     displacement_component: str
-        string with the name of the displacement component used for the colormap
+        name of the displacement component used for the colorbar
+    colormap: str
+        name of the colormap used for the displacement colorbar
 
     Returns
     -------
@@ -323,7 +328,8 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
     displacement_data = op2_object.eigenvectors[subcase_id].data
     # Call plotting function
     displacement_scale_factor = 200
-    fig, ax, m = plot_displacements(op2_object, displacement_data, displacement_component, displacement_scale_factor)
+    fig, ax, m = plot_displacements(op2_object, displacement_data, displacement_component, displacement_scale_factor,
+                                    colormap)
     # Add colorbar
     label_dict = {'tx': 'Nondimensional displacement along $x$',
                   'ty': 'Nondimensional displacement along $y$',
@@ -337,8 +343,8 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
     return fig, ax
 
 
-def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displacement_component: str = 'magnitude')\
-        -> Tuple[Figure, Axes3D]:
+def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displacement_component: str = 'magnitude',
+                            colormap: str = 'jet') -> Tuple[Figure, Axes3D]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -349,7 +355,9 @@ def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displ
     subcase_id: int, tuple
         key of the displacements' dictionary in the OP2 object corresponding to the selected subcase
     displacement_component: str
-        string with the name of the displacement component used for the colormap
+        name of the displacement component used for the colorbar
+    colormap: str
+        name of the colormap used for the displacement colorbar
 
     Returns
     -------
@@ -361,7 +369,7 @@ def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displ
     # Choose static displacements as displacement data
     displacement_data = op2_object.displacements[subcase_id].data
     # Call plotting function
-    fig, ax, m = plot_displacements(op2_object, displacement_data, displacement_component)
+    fig, ax, m = plot_displacements(op2_object, displacement_data, displacement_component, colormap=colormap)
     # Add colorbar
     label_dict = {'tx': 'Displacement along $x$ [mm]',
                   'ty': 'Displacement along $y$ [mm]',
@@ -397,8 +405,9 @@ def add_unitary_force(bdf_object: BDF, nodes_ids: [list, ndarray], set_id: int, 
         bdf_object.add_force(sid=set_id, node=node_id, mag=force_magnitude, xyz=direction_vector)
 
 
-def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, max_iter: int = 25, conv: str = 'PW', eps_u: float = 0.01,
-                         eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5, subcase_id: int = 0):
+def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, max_iter: int = 25, conv: str = 'PW',
+                         eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5,
+                         subcase_id: int = 0):
     """
     Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM to set up
     the full Newton method.
@@ -487,7 +496,7 @@ def run_sol_105_buckling_analysis(bdf_object: BDF, static_load_set_id: int, anal
                                   input_name: str, run_flag: bool = True) -> OP2:
     """
     Returns the OP2 object representing the results of SOL 105 analysis. The function defines subcase 1 to apply the
-    load set associated to the input set idenfitication number and a second subcase to calculate the critical eigenvalue
+    load set associated to the input set idenfitication number and subcase 2 to calculate the critical eigenvalue
     using the EIGRL card.
 
     Parameters
