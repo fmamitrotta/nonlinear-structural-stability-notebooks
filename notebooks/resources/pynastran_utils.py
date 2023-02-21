@@ -197,21 +197,31 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
             array with the lowest eigenvalue of the KLLRH matrices
     """
     # Initialize list of the lowest eigenvalues
-    lowest_eigenvalues = []
+    indices = []
+    eigenvalues = []
     # Compile a regular expression pattern to read eigenvalue in f06 file
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')
     # Open file and look for matching pattern line by line
     with open(f06_filepath) as f06_file:
         for line in f06_file:
             # When matching pattern is found, read lowest eigenvalue
-            if 'KLLRH LOWEST EIGENVALUE' in line:
-                lowest_eigenvalues.append(float(re.findall(regexp, line)[0]))
-    # Return list of the lowest eigenvalues
-    return np.array(lowest_eigenvalues)
+            if 'KLLRH EIGENVALUE' in line:
+                raw_results = re.findall(regexp, line)
+                indices.append(int(raw_results[0]))
+                eigenvalues.append(float(raw_results[1]))
+    #
+    no_eigenvalues = max(indices)
+    if no_eigenvalues > 1:
+        eigenvalues = [[i for i, j in zip(eigenvalues, indices) if j == count]
+                       for count in range(1, no_eigenvalues + 1)]
+    else:
+        eigenvalues = [eigenvalues]
+    # Return array of eigenvalues
+    return np.array(eigenvalues)
 
 
 def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement_component: str = 'magnitude',
-                       displacement_scale_factor: float = 1., colormap: str = 'jet') -> \
+                       displacement_scale_factor: float = 1., colormap: str = 'jet') ->\
         Tuple[Figure, Axes3D, ScalarMappable]:
     """
     Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
@@ -260,11 +270,11 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
         # Store ids of the nodes as an array
         node_ids = np.array(element.node_ids)
         # Store indicated displacement component for the current nodes
-        nodes_displacement[count] = displacement_data[-1, node_ids - 1, component_dict[displacement_component]]
+        nodes_displacement[count] = displacement_data[node_ids - 1, component_dict[displacement_component]]
         # Store the coordinates of the nodes of the deformed elements
         vertices[count] = np.vstack(
-            [op2_object.nodes[index].xyz + displacement_data[-1, index - 1, 0:3] *
-             displacement_scale_factor for index in node_ids])
+            [op2_object.nodes[index].xyz + displacement_data[index - 1, 0:3] * displacement_scale_factor
+             for index in node_ids])
     # Calculate displacement magnitude if requested
     if displacement_component == 'magnitude':
         nodes_displacement = np.apply_along_axis(np.linalg.norm, 1, nodes_displacement)
@@ -325,11 +335,12 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
         object of the plot's axes
     """
     # Choose eigenvectors as displacement data
-    displacement_data = op2_object.eigenvectors[subcase_id].data
+    displacement_data = op2_object.eigenvectors[subcase_id].data[0, :, :]
     # Call plotting function
     displacement_scale_factor = 200
-    fig, ax, m = plot_displacements(op2_object, displacement_data, displacement_component, displacement_scale_factor,
-                                    colormap)
+    fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
+                                    displacement_component=displacement_component,
+                                    displacement_scale_factor=displacement_scale_factor, colormap=colormap)
     # Add colorbar
     label_dict = {'tx': 'Nondimensional displacement along $x$',
                   'ty': 'Nondimensional displacement along $y$',
@@ -343,8 +354,8 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
     return fig, ax
 
 
-def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displacement_component: str = 'magnitude',
-                            colormap: str = 'jet') -> Tuple[Figure, Axes3D]:
+def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, load_step: int = 0,
+                            displacement_component: str = 'magnitude', colormap: str = 'jet') -> Tuple[Figure, Axes3D]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -354,6 +365,9 @@ def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displ
         pyNastran object created reading an op2 file with the load_geometry option set to True
     subcase_id: int, tuple
         key of the displacements' dictionary in the OP2 object corresponding to the selected subcase
+    load_step: int
+        integer representing the load step of a nonlinear or a time-dependent analysis, default is 0 so that last step
+        is chosen
     displacement_component: str
         name of the displacement component used for the colorbar
     colormap: str
@@ -367,9 +381,10 @@ def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displ
         object of the plot's axes
     """
     # Choose static displacements as displacement data
-    displacement_data = op2_object.displacements[subcase_id].data
+    displacement_data = op2_object.displacements[subcase_id].data[load_step - 1, :, :]
     # Call plotting function
-    fig, ax, m = plot_displacements(op2_object, displacement_data, displacement_component, colormap=colormap)
+    fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
+                                    displacement_component=displacement_component, colormap=colormap)
     # Add colorbar
     label_dict = {'tx': 'Displacement along $x$ [mm]',
                   'ty': 'Displacement along $y$ [mm]',
@@ -539,8 +554,9 @@ def run_sol_105_buckling_analysis(bdf_object: BDF, static_load_set_id: int, anal
     return op2_output
 
 
-def run_sol_106_buckling_analysis(bdf_object: BDF, method_set_id: int, analysis_directory_path: str, input_name: str,
-                                  run_flag: bool = True) -> OP2:
+def run_nonlinear_buckling_method(bdf_object: BDF, method_set_id: int, analysis_directory_path: str, input_name: str,
+                                  calculate_tangent_stiffness_matrix_eigenvalues: bool = False,
+                                  no_eigenvalues: int = 1, run_flag: bool = True) -> OP2:
     """
     Returns the OP2 object representing the results of SOL 106 analysis employing the nonlinear buckling method. The
     function requires the subcases with the associated load sets to be already defined. It applies the nonlinear
@@ -556,6 +572,10 @@ def run_sol_106_buckling_analysis(bdf_object: BDF, method_set_id: int, analysis_
         string with the path to the directory where the analysis is run
     input_name: str
         string with the name that will be given to the input file
+    calculate_tangent_stiffness_matrix_eigenvalues: bool
+        boolean indicating whether lowest eigenvalues of tangent stiffness matrix will be calculated
+    no_eigenvalues: int
+        number of eigenvalues of the tangent stiffness matrix that will be calculated
     run_flag: bool
         boolean indicating whether Nastran analysis is actually run
 
@@ -564,12 +584,63 @@ def run_sol_106_buckling_analysis(bdf_object: BDF, method_set_id: int, analysis_
     op2_output: OP2
         object representing the op2 file produced by SOL 106
     """
-    # Set SOL SOL6 as solution sequence (nonlinear analysis)
+    # Set SOL 106 as solution sequence (nonlinear analysis)
     bdf_object.sol = 106
     # Define parameters for nonlinear buckling method
     bdf_object.add_param('BUCKLE', [2])
-    bdf_object.add_eigrl(sid=method_set_id, nd=1)  # calculate lowest eigenvalue, either positive or negative
-    bdf_object.case_control_deck.subcases[0].add_integer_type('METHOD', method_set_id)
+    bdf_object.add_eigrl(sid=method_set_id, nd=no_eigenvalues)  # calculate lowest eigenvalues in magnitude
+    bdf_object.case_control_deck.subcases[0].add_integer_type('METHOD', method_set_id)  # add EIGRL id to case control
+    # Define parameters to calculate lowest eigenvalues of tangent stiffness matrix if requested
+    if calculate_tangent_stiffness_matrix_eigenvalues:
+        bdf_object.executive_control_lines[1:1] = [
+            'include \'' + os.path.join(os.pardir, os.pardir, 'resources', 'kllrh_lowest_eigenvalues.dmap') + '\'']
+        bdf_object.add_param('BMODES', [no_eigenvalues])
+    # Run analysis
+    run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
+    # Read op2 file
+    op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
+    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
+    # Return OP2 object
+    return op2_output
+
+
+def run_tangent_stiffness_matrix_eigenvalue_calculation(bdf_object: BDF, method_set_id: int,
+                                                        analysis_directory_path: str, input_name: str,
+                                                        no_eigenvalues: int = 1, run_flag: bool = True) -> OP2:
+    """
+    Returns the OP2 object representing the results of SOL 106 analysis employing the nonlinear buckling method. The
+    function requires the subcases with the associated load sets to be already defined. It applies the nonlinear
+    buckling method to all subcases using the PARAM,BUCKLE,2 command and the EIGRL card.
+
+    Parameters
+    ----------
+    bdf_object: BDF
+        pyNastran object representing the bdf input of the box beam model
+    method_set_id: int
+        identification number of the EIGRL card that is defined for the eigenvalue calculation
+    analysis_directory_path: str
+        string with the path to the directory where the analysis is run
+    input_name: str
+        string with the name that will be given to the input file
+    no_eigenvalues: int
+        number of eigenvalues of the tangent stiffness matrix that will be calculated
+    run_flag: bool
+        boolean indicating whether Nastran analysis is actually run
+
+    Returns
+    -------
+    op2_output: OP2
+        object representing the op2 file produced by SOL 106
+    """
+    # Set SOL 106 as solution sequence (nonlinear analysis)
+    bdf_object.sol = 106
+    # Define parameters to calculate lowest eigenvalues of tangent stiffness matrix
+    bdf_object.add_param('BUCKLE', [2])
+    bdf_object.add_eigrl(sid=method_set_id, nd=no_eigenvalues)  # calculate lowest eigenvalues in magnitude
+    bdf_object.case_control_deck.subcases[0].add_integer_type('METHOD', method_set_id)  # add EIGRL id to case control
+    bdf_object.executive_control_lines[1:1] = [
+        'include \'' + os.path.join(os.pardir, os.pardir, 'resources', 'kllrh_lowest_eigenvalues_nobuckle.dmap') + '\'']
+    bdf_object.add_param('BMODES', [no_eigenvalues])
     # Run analysis
     run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
     # Read op2 file
