@@ -244,8 +244,8 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
     bdf_input: BDF
         pyNastran object representing the bdf input of the box beam model
     """
-    # Create BDF object
-    bdf_input = BDF(debug=False)
+    # Create an instance of the BDF class without debug or info messages
+    bdf_input = BDF(debug=None)
     # Add material card
     material_id = 1
     bdf_input.add_mat1(mid=material_id, E=young_modulus, G='', nu=poisson_ratio, rho=density)
