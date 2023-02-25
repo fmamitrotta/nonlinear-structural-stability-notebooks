@@ -1,4 +1,3 @@
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
 from matplotlib.pyplot import Figure
@@ -12,25 +11,7 @@ from pyNastran.op2.op2 import OP2
 from pyNastran.op2.op2 import read_op2
 from pyNastran.utils.nastran_utils import run_nastran
 import re
-import time
 from typing import Tuple, Dict, Any
-
-
-def wait_nastran(directory_path: str):
-    """
-    Suspends execution of current thread from the start to the end of a Nastran run.
-
-    Parameters
-    ----------
-    directory_path : str
-        string with path to the directory where input file is run
-    """
-    # Wait for the analysis to start (when bat file appears)
-    while not any([file.endswith('.bat') for file in os.listdir(directory_path)]):
-        time.sleep(0.1)
-    # Wait for the analysis to finish (when bat file disappears)
-    while any([file.endswith('.bat') for file in os.listdir(directory_path)]):
-        time.sleep(0.1)
 
 
 def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: bool = True):
@@ -55,11 +36,8 @@ def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: 
     bdf_filepath = os.path.join(directory_path, bdf_filename)
     bdf_object.write_bdf(bdf_filepath)
     # Run Nastran
-    nastran_path = 'C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastranw.exe'
+    nastran_path = 'C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastran.exe'
     run_nastran(bdf_filename=bdf_filepath, nastran_cmd=nastran_path, run_in_bdf_dir=True, run=run_flag)
-    # If Nastran is actually executed wait until analysis is done
-    if run_flag:
-        wait_nastran(directory_path)
     # Read and print wall time of simulation
     log_filepath = os.path.join(directory_path, filename + '.log')
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')  # compiled regular expression pattern
@@ -549,7 +527,7 @@ def run_sol_105_buckling_analysis(bdf_object: BDF, static_load_set_id: int, anal
     run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
     # Read op2 file
     op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
-    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
+    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=False, debug=True)
     # Return OP2 object
     return op2_output
 
