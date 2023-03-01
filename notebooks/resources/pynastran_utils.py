@@ -198,9 +198,9 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     return np.array(eigenvalues)
 
 
-def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement_component: str = 'magnitude',
-                       displacement_scale_factor: float = 1., colormap: str = 'jet') ->\
-        Tuple[Figure, Axes3D, ScalarMappable]:
+def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: ndarray,
+                       displacement_component: str = 'magnitude', displacement_scale_factor: float = 1.,
+                       colormap: str = 'jet') -> Tuple[Figure, Axes3D, ScalarMappable]:
     """
     Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
 
@@ -210,6 +210,8 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
         pyNastran object created reading an op2 file with the load_geometry option set to True
     displacement_data: ndarray
         array with displacement data to plot
+    node_ids: ndarray
+        array with nodes' identification numbers
     displacement_component: str
         name of the displacement component used for the colorbar
     displacement_scale_factor: float
@@ -246,13 +248,15 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
     # Iterate through the elements of the structure
     for count, element in enumerate(op2_object.elements.values()):
         # Store ids of the nodes as an array
-        node_ids = np.array(element.node_ids)
+        element_node_ids = np.array(element.node_ids)
+        # Find indexes of the element node ids into the global node ids array
+        node_indexes = np.nonzero(np.in1d(node_ids, element_node_ids))[0]
         # Store indicated displacement component for the current nodes
-        nodes_displacement[count] = displacement_data[node_ids - 1, component_dict[displacement_component]]
+        nodes_displacement[count] = displacement_data[node_indexes, component_dict[displacement_component]]
         # Store the coordinates of the nodes of the deformed elements
         vertices[count] = np.vstack(
-            [op2_object.nodes[index].xyz + displacement_data[index - 1, 0:3] * displacement_scale_factor
-             for index in node_ids])
+            [op2_object.nodes[node_id].xyz + displacement_data[np.where(node_ids == node_id)[0], 0:3] *
+             displacement_scale_factor for node_id in element_node_ids])
     # Calculate displacement magnitude if requested
     if displacement_component == 'magnitude':
         nodes_displacement = np.apply_along_axis(np.linalg.norm, 1, nodes_displacement)
@@ -317,6 +321,7 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
     # Call plotting function
     displacement_scale_factor = 200
     fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
+                                    node_ids=op2_object.eigenvectors[subcase_id].node_gridtype[:, 0],
                                     displacement_component=displacement_component,
                                     displacement_scale_factor=displacement_scale_factor, colormap=colormap)
     # Add colorbar
@@ -362,6 +367,7 @@ def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, load_
     displacement_data = op2_object.displacements[subcase_id].data[load_step - 1, :, :]
     # Call plotting function
     fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
+                                    node_ids=op2_object.displacements[subcase_id].node_gridtype[:, 0],
                                     displacement_component=displacement_component, colormap=colormap)
     # Add colorbar
     label_dict = {'tx': 'Displacement along $x$ [mm]',
@@ -527,7 +533,7 @@ def run_sol_105_buckling_analysis(bdf_object: BDF, static_load_set_id: int, anal
     run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
     # Read op2 file
     op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
-    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=False, debug=True)
+    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
     # Return OP2 object
     return op2_output
 
