@@ -96,8 +96,8 @@ def mesh_box(width: float, height: float, span: float, edge_length: float) -> tu
     return nodes_xyz_array, nodes_connectivity_matrix
 
 
-def mesh_box_pyvista(width: float, span: float, height: float, edge_length: float, root_y_coordinate: float = 0.) ->\
-        PolyData:
+def mesh_box_with_pyvista(width: float, span: float, height: float, edge_length: float, root_y_coordinate: float = 0.)\
+        -> PolyData:
     """
     Discretizes a box with the input dimensions into quadrilateral shell elements using the pyvista package. Returns a
     PolyData object including the xyz coordinates of the nodes and their connectivity information.
@@ -145,7 +145,7 @@ def mesh_box_pyvista(width: float, span: float, height: float, edge_length: floa
     return cleaned_mesh
 
 
-def mesh_rib_pyvista(y_coordinate: float, width: float, height: float, edge_length: float, x_0: float = 0.) -> PolyData:
+def mesh_rib_with_pyvista(y_coordinate: float, width: float, height: float, edge_length: float, x_0: float = 0.) -> PolyData:
     """
     Discretizes a rib with the input dimensions into quadrilateral shell elements using the pyvista package. Returns a
     PolyData object including the xyz coordinates of the nodes and their connectivity information.
@@ -177,7 +177,7 @@ def mesh_rib_pyvista(y_coordinate: float, width: float, height: float, edge_leng
     return rib_mesh
 
 
-def mesh_box_beam_pyvista(ribs_y_coordinates: ndarray, width: float, height: float, edge_length: float) -> PolyData:
+def mesh_box_beam_with_pyvista(ribs_y_coordinates: ndarray, width: float, height: float, edge_length: float) -> PolyData:
     """
     Discretizes a box beam reinforced with ribs into quadrilateral shell elements using the pyvista package. Returns a
     PolyData object including the xyz coordinates of the nodes and their connectivity information.
@@ -204,11 +204,11 @@ def mesh_box_beam_pyvista(ribs_y_coordinates: ndarray, width: float, height: flo
     # Iterate through the y-coordinates of the rib, except last one
     for count, y in enumerate(ribs_y_coordinates[:-1]):
         # Discretize box segment between current and next rib and add PolyData object to the list
-        box_meshes.append(mesh_box_pyvista(width, ribs_y_coordinates[count+1]-y, height, edge_length, y))
+        box_meshes.append(mesh_box_with_pyvista(width, ribs_y_coordinates[count+1]-y, height, edge_length, y))
         # Discretize current rib and add PolyData object to the list
-        rib_meshes.append(mesh_rib_pyvista(y, width, height, edge_length))
+        rib_meshes.append(mesh_rib_with_pyvista(y, width, height, edge_length))
     # Discretize last rib and add PolyData object to the list
-    rib_meshes.append(mesh_rib_pyvista(ribs_y_coordinates[-1], width, height, edge_length))
+    rib_meshes.append(mesh_rib_with_pyvista(ribs_y_coordinates[-1], width, height, edge_length))
     # Merge all box segments and ribs together
     merged_box_beam_mesh = box_meshes[0].merge(box_meshes[1:] + rib_meshes)
     # Clean obtained mesh merging points closer than indicated tolerance
