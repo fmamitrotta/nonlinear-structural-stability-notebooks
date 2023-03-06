@@ -2,7 +2,6 @@ import pyvista
 from pyNastran.bdf.bdf import BDF
 from numpy import ndarray
 import numpy as np
-from notebooks.resources import pynastran_utils
 import os
 from pyNastran.op2.op2 import read_op2
 from pyvista import PolyData
