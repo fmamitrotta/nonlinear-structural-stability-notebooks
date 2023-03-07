@@ -70,7 +70,7 @@ def create_static_load_subcase(bdf_object: BDF, subcase_id: int, load_set_id: in
     bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('LOAD', load_set_id)
     # If provided, add NLPARM id to case control statement of created subcase
     if nlparm_id:
-        bdf_object.case_control_deck.subcases[subcase_id].add_integr_type('NLPARM', nlparm_id)
+        bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)
 
 
 def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_id: int = 1) -> \
