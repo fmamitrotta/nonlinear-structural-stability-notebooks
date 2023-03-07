@@ -11,7 +11,7 @@ from pyNastran.op2.op2 import OP2
 from pyNastran.op2.op2 import read_op2
 from pyNastran.utils.nastran_utils import run_nastran
 import re
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict, Any, Union
 
 
 def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: bool = True):
@@ -49,7 +49,7 @@ def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: 
                 break
 
 
-def create_static_load_subcase(bdf_object: BDF, subcase_id: int, load_set_id: int):
+def create_static_load_subcase(bdf_object: BDF, subcase_id: int, load_set_id: int, nlparm_id: int = None):
     """
     Define a subcase in the input BDF object for the application of a static load.
 
@@ -61,11 +61,16 @@ def create_static_load_subcase(bdf_object: BDF, subcase_id: int, load_set_id: in
         id of the subcase
     load_set_id: int
         id of the load set assigned to the subcase
+    nlparm_id: int
+        id of the NLPARM card assigned to the subcase
     """
     # Create subcase
     bdf_object.create_subcases(subcase_id)
     # Add load set id to case control statement of created subcase
     bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('LOAD', load_set_id)
+    # If provided, add NLPARM id to case control statement of created subcase
+    if nlparm_id:
+        bdf_object.case_control_deck.subcases[subcase_id].add_integr_type('NLPARM', nlparm_id)
 
 
 def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_id: int = 1) -> \
@@ -295,7 +300,7 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     return fig, ax, m
 
 
-def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_component: str = 'magnitude',
+def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacement_component: str = 'magnitude',
                        colormap: str = 'jet', displacement_unit: str = 'mm') -> Tuple[Figure, Axes3D]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
@@ -342,7 +347,7 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
     return fig, ax
 
 
-def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, load_step: int = 0,
+def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, load_step: int = 0,
                             displacement_component: str = 'magnitude', colormap: str = 'jet',
                             displacement_unit: str = 'mm') -> Tuple[Figure, Axes3D]:
     """
@@ -391,7 +396,7 @@ def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, load_
     return fig, ax
 
 
-def add_unitary_force(bdf_object: BDF, nodes_ids: [list, ndarray], set_id: int, direction_vector: [list, ndarray]):
+def add_unitary_force(bdf_object: BDF, nodes_ids: Union[list, ndarray], set_id: int, direction_vector: Union[list, ndarray]):
     """
     Apply a uniform force over the indicated nodes such that the total magnitude is 1 N.
 
