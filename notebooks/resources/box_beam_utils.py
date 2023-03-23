@@ -1,11 +1,9 @@
-import pyvista
 from pyNastran.bdf.bdf import BDF
 from numpy import ndarray
 import numpy as np
-import os
 from pyNastran.op2.op2 import read_op2
+import pyvista
 from pyvista import PolyData
-import matplotlib.pyplot as plt
 
 
 def mesh_box(width: float, height: float, span: float, edge_length: float) -> tuple[ndarray, ndarray]:
@@ -270,12 +268,8 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
     # Set defaults for output files
     bdf_input.add_param('POST', [1])  # add PARAM card to store results in a op2 file
     bdf_input.case_control_deck.subcases[0].add('ECHO', 'NONE', [], 'STRING-type')  # request no Bulk Data to be printed
-    bdf_input.case_control_deck.subcases[0].add_result_type('DISPLACEMENT', 'ALL', [
-        'PLOT'])  # store displacement data of all nodes in the op2 file
-    bdf_input.case_control_deck.subcases[0].add_result_type('SPCFORCES', 'ALL', [
-        'PLOT'])  # store single point constraint forces data in the op2 file
-    bdf_input.case_control_deck.subcases[0].add_result_type('OLOAD', 'ALL',
-                                                            ['PLOT'])  # store form and type of applied load vector
+    bdf_input.case_control_deck.subcases[0].add_result_type('DISPLACEMENT', 'ALL', ['PLOT'])  # store displacement data of all nodes in the op2 file
+    bdf_input.case_control_deck.subcases[0].add_result_type('OLOAD', 'ALL', ['PLOT'])  # store form and type of applied load vector
     # Cross-reference BDF object
     bdf_input._xref = True
     bdf_input.cross_reference()
