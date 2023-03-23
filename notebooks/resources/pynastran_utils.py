@@ -179,28 +179,27 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
         lowest_eigenvalues: ndarray
             array with the lowest eigenvalue of the KLLRH matrices
     """
-    # Initialize list of the lowest eigenvalues
-    indices = []
-    eigenvalues = []
+    # Initialize the list of the lowest eigenvalues
+    eigenvalue_list = []
     # Compile a regular expression pattern to read eigenvalue in f06 file
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')
-    # Open file and look for matching pattern line by line
+    # Open file iterate line by line
     with open(f06_filepath) as f06_file:
         for line in f06_file:
-            # When matching pattern is found, read lowest eigenvalue
+            # When NLOOP is found append an empty list inside the eigenvalues list
+            if 'NLOOP =' in line:
+                eigenvalue_list.append([])
+            # When KLLRH EIGENVALUE is found append the eigenvalue to the last list of the eigenvalues list
             if 'KLLRH EIGENVALUE' in line:
                 raw_results = re.findall(regexp, line)
-                indices.append(int(raw_results[0]))
-                eigenvalues.append(float(raw_results[1]))
-    #
-    no_eigenvalues = max(indices)
-    if no_eigenvalues > 1:
-        eigenvalues = [[i for i, j in zip(eigenvalues, indices) if j == count]
-                       for count in range(1, no_eigenvalues + 1)]
-    else:
-        eigenvalues = [eigenvalues]
-    # Return array of eigenvalues
-    return np.array(eigenvalues)
+                eigenvalue_list[-1].append(float(raw_results[1]))
+    # Convert list of lists to array padded with nan (we put nan for the iterations where we miss one or more eigenvalues)
+    lengths = np.array([len(item) for item in eigenvalue_list])
+    mask = lengths[:, None] > np.arange(lengths.max())
+    eigenvalue_array = np.full(mask.shape, np.nan)
+    eigenvalue_array[mask] = np.concatenate(eigenvalue_list)
+    # Return array of eigenvalues in the form: number of eigenvalues x number of iterations
+    return eigenvalue_array.T
 
 
 def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: ndarray,
@@ -300,8 +299,8 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     return fig, ax, m
 
 
-def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacement_component: str = 'magnitude',
-                       colormap: str = 'jet', displacement_unit: str = 'mm') -> Tuple[Figure, Axes3D]:
+def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacement_component: str = 'magnitude', colormap: str = 'jet',
+                        displacement_unit: str = 'mm', displacement_scale_factor: float = 200) -> Tuple[Figure, Axes3D]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -317,6 +316,8 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
         name of the colormap used for the displacement colorbar
     displacement_unit: str
         measurement unit of coordinates and displacements, used in the label of axes and colormap
+    displacement_scale_factor: float
+        scale factor applied to the displacements
 
     Returns
     -------
@@ -328,7 +329,6 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
     # Choose eigenvectors as displacement data
     displacement_data = op2_object.eigenvectors[subcase_id].data[0, :, :]
     # Call plotting function
-    displacement_scale_factor = 200
     fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
                                     node_ids=op2_object.eigenvectors[subcase_id].node_gridtype[:, 0],
                                     displacement_component=displacement_component,
