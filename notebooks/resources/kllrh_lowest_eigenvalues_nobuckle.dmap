@@ -9,7 +9,7 @@ PARAML KLLRH//'TRAILER'/1/S,N,NC//         $
 MATGEN ,/IM/1/NC $
 READ KLLRH,IM,,,,,,,,,,,,/                                                     
      LAMA0,PH0,M0X,OEIGS0,LAMMAT0,/                                           
-     'MODES'/S,N,NEIGV////-1/'LAN'////bmodes/0////                                
+     'MODES'/S,N,NEIGV////-1/'LAN'/-1.e32///bmodes/0////                                
      FALSE/1.e7     $    
 message //'' $
 if (cbuckle<1) nloop=nloop-1 $
