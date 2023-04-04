@@ -4,7 +4,6 @@
 *.db
 *.f04
 *.f06
-*.log
 *.jar
 *.jou
 *.ini
