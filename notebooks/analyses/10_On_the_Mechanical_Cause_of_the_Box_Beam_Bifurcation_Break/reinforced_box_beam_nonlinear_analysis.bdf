@@ -15,8 +15,6 @@ SPC = 1
 STRESS(PLOT) = ALL
 SUBCASE 1
     LOAD = 12
-SUBCASE 2
-    METHOD = 12
 BEGIN BULK
 $PARAMS
 PARAM     LGDISP       1
@@ -14577,7 +14575,6 @@ $LOADS
 LOAD          12      1.6187.048      11
 FORCE         11    7155              1.      0.      0.      1.
 $DYNAMIC
-EIGRL         12      0.               1
 NLPARM         1     100            ITER       1                     YES
                     .001.0000001
 NLPCI          1    CRIS     .25     1.1      0.               5     100
