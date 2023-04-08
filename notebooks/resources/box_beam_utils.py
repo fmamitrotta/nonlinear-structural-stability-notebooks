@@ -214,6 +214,133 @@ def mesh_box_beam_with_pyvista(ribs_y_coordinates: ndarray, width: float, height
     return cleaned_box_beam_mesh
 
 
+def mesh_stiffened_box_with_pyvista(width: float, span: float, height: float, stiffeners_x_coordinates: ndarray, stiffeners_height: float,
+ edge_length: float, root_y_coordinate: float = 0.) -> PolyData:
+    """
+    Discretizes a box reinforced with stiffeners with the input dimensions into quadrilateral shell elements using the pyvista package.
+    Returns a PolyData object including the xyz coordinates of the nodes and their connectivity information.
+
+    Parameters
+    ----------
+    width: float
+        box width
+    height: float
+        box height
+    span: float
+        box span
+    stiffeners_x_coordinates: ndarray
+        array with the x-coordinates of the stiffeners
+    stiffeners_height: float
+        height of the stiffeners
+    edge_length: float
+        prescribed length of the edges of the shell elements used to discretize the geometry y0 (float): y-coordinate of
+         the box root
+    root_y_coordinate: float
+        position of the box root
+
+     Returns
+     -------
+     cleaned_mesh: PolyData
+        pyvista object including the xyz coordinates of the nodes and their connectivity information
+    """
+    # Find number of elements along each side of the box based on the prescribed edge length. We make sure that there is an even number of elements over each dimension to better approximate the buckling shape
+    no_elements = [np.ceil(side/edge_length/2).astype('int')*2 for side in [height, span]]
+    # Discretize front spar of the stiffened box
+    front_spar_mesh = pyvista.Plane(center=[0, root_y_coordinate + span/2, 0], direction=[-1, 0, 0], i_size=height,
+                                    j_size=span, i_resolution=no_elements[0], j_resolution=no_elements[1])
+    # Discretize rear spar of the box
+    rear_spar_mesh = pyvista.Plane(center=[width, root_y_coordinate + span/2, 0], direction=[1, 0, 0], i_size=height,
+                                   j_size=span, i_resolution=no_elements[0], j_resolution=no_elements[1])
+    # Initialize lists of the PolyData objects corresponding to the box segments and to the ribs
+    top_skin_meshes = []
+    top_stiffeners_meshes = []
+    bottom_skin_meshes = []
+    bottom_stiffeners_meshes = []
+    no_stiffener_elements = np.ceil(stiffeners_height/edge_length/2).astype('int')*2
+    x_0 = 0
+    # Iterate through the x-coordinates of the stiffeners, except last one
+    for count, x in enumerate(stiffeners_x_coordinates):
+        # Find number of elements along the width
+        no_width_elements = np.ceil((x - x_0)/edge_length/2).astype('int')*2
+        # Discretize top skin segment
+        top_skin_meshes.append(pyvista.Plane(center=[(x_0 + x)/2, root_y_coordinate + span/2, height/2], direction=[0, 0, 1], i_size=x - x_0,
+         j_size=span, i_resolution=no_width_elements, j_resolution=no_elements[1]))
+        # Discretize top stiffener
+        top_stiffeners_meshes.append(pyvista.Plane(center=[x, root_y_coordinate + span/2, height/2 - stiffeners_height/2], direction=[1, 0, 0],
+         i_size=stiffeners_height, j_size=span, i_resolution=no_stiffener_elements, j_resolution=no_elements[1]))
+        # Discretize bottom skin segment
+        bottom_skin_meshes.append(pyvista.Plane(center=[(x_0 + x)/2, root_y_coordinate + span/2, -height/2], direction=[0, 0, -1],
+         i_size=x - x_0, j_size=span, i_resolution=no_width_elements, j_resolution=no_elements[1]))
+        # Discretize bottom stiffener
+        bottom_stiffeners_meshes.append(pyvista.Plane(center=[x, root_y_coordinate + span/2, -height/2 + stiffeners_height/2],
+         direction=[1, 0, 0], i_size=stiffeners_height, j_size=span, i_resolution=no_stiffener_elements, j_resolution=no_elements[1]))
+        # Update x_0
+        x_0 = x
+    # Discretize last rib-stiffener bay of the skins
+    no_width_elements = np.ceil((width - x_0)/edge_length/2).astype('int')*2
+    top_skin_meshes.append(pyvista.Plane(center=[(x_0 + width)/2, root_y_coordinate + span/2, height/2], direction=[0, 0, 1], i_size=width - x_0,
+     j_size=span, i_resolution=no_width_elements, j_resolution=no_elements[1]))
+    bottom_skin_meshes.append(pyvista.Plane(center=[(x_0 + width)/2, root_y_coordinate + span/2, -height/2], direction=[0, 0, -1], i_size=width - x_0,
+     j_size=span, i_resolution=no_width_elements, j_resolution=no_elements[1]))
+    # Merge all box segments and ribs together
+    merged_mesh = front_spar_mesh.merge([rear_spar_mesh] + top_skin_meshes + top_stiffeners_meshes + bottom_skin_meshes +
+     bottom_stiffeners_meshes)
+    # Clean obtained mesh merging points closer than indicated tolerance
+    cleaned_mesh = merged_mesh.clean(tolerance=edge_length/100)
+    # Return cleaned mesh
+    return cleaned_mesh
+
+
+def mesh_stiffened_box_beam_with_pyvista(width: float, height: float, ribs_y_coordinates: ndarray, stiffeners_x_coordinates: ndarray,
+    stiffeners_height: float, edge_length: float) -> PolyData:
+    """
+    Discretizes a box beam reinforced with ribs and stiffeners into quadrilateral shell elements using the pyvista package. Returns a
+    PolyData object including the xyz coordinates of the nodes and their connectivity information.
+
+    Parameters
+    ----------
+    width: float
+        box beam width
+    height: float
+        box beam height
+    ribs_y_coordinates: ndarray
+        array of the y-coordinates of the ribs
+    stiffeners_x_coordinates: ndarray
+        array of the x-coordinates of the stiffeners
+    stiffeners_height: float
+        height of the stiffeners
+    edge_length: float
+        prescribed length of the edges of the shell elements used to discretize the geometry
+
+    Returns
+    -------
+    cleaned_box_beam_mesh: PolyData
+        pyvista object including the xyz coordinates of the nodes and their connectivity information
+    """
+    # Initialize lists of the PolyData objects corresponding to the box segments and to the ribs
+    stiffened_box_meshes = []
+    rib_meshes = []
+    rib_segments_x_coordinates = np.concatenate(([0.], stiffeners_x_coordinates, [width]))  # create array of the x-coordiantes defining the rib segments
+    rib_segments_widths = np.ediff1d(rib_segments_x_coordinates)  # calculate the width of each rib segment
+    # Iterate through the y-coordinates of the rib, except last one
+    for count, y in enumerate(ribs_y_coordinates[:-1]):
+        # Discretize stiffened box segment between current and next rib and add PolyData object to the list
+        stiffened_box_meshes.append(mesh_stiffened_box_with_pyvista(width, ribs_y_coordinates[count+1] - y, height,
+         stiffeners_x_coordinates, stiffeners_height, edge_length, y))
+        # Discretize current rib and add PolyData object to the list
+        rib_meshes = rib_meshes + [mesh_rib_with_pyvista(y, rib_segments_widths[i], height, edge_length,
+         rib_segments_x_coordinates[i]) for i in range(len(rib_segments_widths))]
+    # Discretize last rib and add PolyData object to the list
+    rib_meshes = rib_meshes + [mesh_rib_with_pyvista(ribs_y_coordinates[-1], rib_segments_widths[i], height, edge_length,
+     rib_segments_x_coordinates[i]) for i in range(len(rib_segments_widths))]
+    # Merge all stiffene box segments and ribs together
+    merged_box_beam_mesh = stiffened_box_meshes[0].merge(stiffened_box_meshes[1:] + rib_meshes)
+    # Clean obtained mesh merging points closer than indicated tolerance
+    cleaned_box_beam_mesh = merged_box_beam_mesh.clean(tolerance=edge_length/100)
+    # Return cleaned mesh
+    return cleaned_box_beam_mesh
+
+
 def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: float, shell_thickness: float,
                           nodes_xyz_array: ndarray, nodes_connectivity_matrix: ndarray) -> BDF:
     """
