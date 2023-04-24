@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/path_existence_verification_2psol105_epsp1e-3_10eigenvalues_newton.T21976_36'
-DBS='c:/temp/scratch/path_existence_verification_2psol105_epsp1e-3_10eigenvalues_newton.T21976_36'
+SDIR='c:/temp/scratch/path_existence_verification_2psol105_epsp1e-3_10eigenvalues_newton.T6436_46'
+DBS='c:/temp/scratch/path_existence_verification_2psol105_epsp1e-3_10eigenvalues_newton.T6436_46'
 SCR='yes'
 SMEM=100
 BPOOL=2022.5MB
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    16180 MB
- Physical memory available:           5493 MB
- Paging file size:                   28980 MB
- Paging file size available:          9866 MB
+ Physical memory available:           4779 MB
+ Paging file size:                   35857 MB
+ Paging file size available:          7216 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
@@ -61,21 +61,21 @@ System configuration:
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3200 MHz
+ Clock freq.:      3740 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
  Physical memory:  16180 MB
- Virtual memory:   28980 MB
+ Virtual memory:   35857 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Sun Apr 23 17:18:36 GST 2023 
- 17:18:37  Beginning Analysis
+MSC Nastran started  Mon Apr 24 16:53:46 GST 2023 
+ 16:53:48  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,9 +83,9 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 17:18:38  MSC Authorization Information - System Attributes (1004, 0)
- 17:18:38  -----------------------------------------------------------
-  Date:          Sun Apr 23 17:18:38 2023
+ 16:53:49  MSC Authorization Information - System Attributes (1004, 0)
+ 16:53:49  -----------------------------------------------------------
+  Date:          Mon Apr 24 16:53:48 2023
   MSC Id:        00ff6ae1f952 (ethernet) (Intel)
   Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
@@ -103,52 +103,52 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 17:18:38  MSC Authorization Information - Checkout Successful (1016, 0)
- 17:18:38  -------------------------------------------------------------
- 17:18:38  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 16:53:49  MSC Authorization Information - Checkout Successful (1016, 0)
+ 16:53:49  -------------------------------------------------------------
+ 16:53:49  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
- 17:18:38  Reading INCLUDE file "../../resources/kllrh_lowest_eigenvalues_nobuckle.dmap"
- 17:18:38  32 records read from INCLUDE file "../../resources/kllrh_lowest_eigenvalues_nobuckle.dmap"
+ 16:53:49  Reading INCLUDE file "../../resources/kllrh_lowest_eigenvalues_nobuckle.dmap"
+ 16:53:49  32 records read from INCLUDE file "../../resources/kllrh_lowest_eigenvalues_nobuckle.dmap"
 
- 17:18:38  MSC Authorization Information - Checkout Successful (1016, 0)
- 17:18:38  -------------------------------------------------------------
- 17:18:38  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 16:53:49  MSC Authorization Information - Checkout Successful (1016, 0)
+ 16:53:49  -------------------------------------------------------------
+ 16:53:49  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 17:18:38  MSC Authorization Information - Checkout Successful (1016, 0)
- 17:18:38  -------------------------------------------------------------
- 17:18:38  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
+ 16:53:49  MSC Authorization Information - Checkout Successful (1016, 0)
+ 16:53:49  -------------------------------------------------------------
+ 16:53:49  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 17:18:38  Reading INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues_nobuckle.dmap"
- 17:18:38  32 records read from INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues_nobuckle.dmap"
- 17:18:38  3545 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/14_investigation_of_the_equilibrium_paths_of_the_unreinforced_box_beam/path_existence_verification_2psol105_epsp1e-3_10eigenvalues_newton.bdf"
- 17:18:38  A total of 3577 records were read from 2 files.
+ 16:53:49  Reading INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues_nobuckle.dmap"
+ 16:53:49  32 records read from INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues_nobuckle.dmap"
+ 16:53:49  3545 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/14_investigation_of_the_equilibrium_paths_of_the_unreinforced_box_beam/path_existence_verification_2psol105_epsp1e-3_10eigenvalues_newton.bdf"
+ 16:53:49  A total of 3577 records were read from 2 files.
 
 Processing of bulk data entries is complete.
 
- 17:18:38  Finite element model generation started.
- 17:18:38  Finite element model generated 10566 degrees of freedom.
- 17:18:38  Finite element model generation successfully completed.
- 17:18:38  Application of Loads and Boundary Conditions to the finite element model started.
- 17:18:38  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 16:53:49  Finite element model generation started.
+ 16:53:49  Finite element model generated 10566 degrees of freedom.
+ 16:53:49  Finite element model generation successfully completed.
+ 16:53:49  Application of Loads and Boundary Conditions to the finite element model started.
+ 16:53:49  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
        USER WARNING MESSAGE     4698.0          1 
-       USER WARNING MESSAGE     4698.0        218 
+       USER WARNING MESSAGE     4698.0         61 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 17:21:19  22 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/14_investigation_of_the_equilibrium_paths_of_the_unreinforced_box_beam/path_existence_verification_2psol105_epsp1e-3_10eigenvalues_newton.bdf"
- 17:21:19  A total of 54 records were read from 2 files.
- 17:21:19  NSEXIT: EXIT(0)
- 17:21:19  Analysis complete  0
-Real:      161.634 seconds ( 0:02:41.634)
-User:      157.875 seconds ( 0:02:37.875)
-Sys:         3.203 seconds ( 0:00:03.203)
+ 16:55:53  22 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/14_investigation_of_the_equilibrium_paths_of_the_unreinforced_box_beam/path_existence_verification_2psol105_epsp1e-3_10eigenvalues_newton.bdf"
+ 16:55:53  A total of 54 records were read from 2 files.
+ 16:55:53  NSEXIT: EXIT(0)
+ 16:55:53  Analysis complete  0
+Real:      125.261 seconds ( 0:02:05.261)
+User:      120.812 seconds ( 0:02:00.812)
+Sys:         3.093 seconds ( 0:00:03.093)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -165,15 +165,15 @@ Sys:         3.203 seconds ( 0:00:03.203)
  Ram:                          16180 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation        17.8         22 
- Eigenvalue                   9.0          3 
- Miscellaneous              133.5        135 
+ Stiffness Generation         8.6          6 
+ Eigenvalue                  27.7         17 
+ Miscellaneous               86.5        100 
  -------------------------------------------
- Total:                     160.3        160 
+ Total:                     122.9        123 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Sun Apr 23 17:21:19 GST 2023 
+MSC Nastran finished Mon Apr 24 16:55:54 GST 2023 
