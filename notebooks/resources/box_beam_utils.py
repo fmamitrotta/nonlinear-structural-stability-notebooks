@@ -370,26 +370,26 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
     """
     # Create an instance of the BDF class without debug or info messages
     bdf_input = BDF(debug=None)
-    # Add material card
+    # Add MAT1 card (isotropic material)
     material_id = 1
     bdf_input.add_mat1(mid=material_id, E=young_modulus, G='', nu=poisson_ratio, rho=density)
-    # Add element property card
+    # Add PSHELL card (properties of thin shell elements)
     property_id = 1
     bdf_input.add_pshell(pid=property_id, mid1=material_id, t=shell_thickness, mid2=material_id, mid3=material_id)
-    # Define nodes' id based on the input array of nodes coordinates
+    # Add GRID cards (nodes) based on input coordinates
     nodes_id_array = np.arange(1, np.size(nodes_xyz_array, 0) + 1)
     for count, node_xyz in enumerate(nodes_xyz_array):
         bdf_input.add_grid(nid=nodes_id_array[count], xyz=node_xyz)
-    # Define shell elements based on the input nodes connectivity matrix
-    # elements_ids = np.arange(1, np.size(nodes_connectivity_matrix, 0) + 1)
+    # Add CQUAD4 cards (shell elements) based on input connectivity matrix
     for count, nodes_indices in enumerate(nodes_connectivity_matrix):
         bdf_input.add_cquad4(eid=count+1, pid=property_id,
                              nids=[nodes_id_array[nodes_indices[0]], nodes_id_array[nodes_indices[1]],
                                    nodes_id_array[nodes_indices[2]], nodes_id_array[nodes_indices[3]]])
-    # Define boundary conditions constraining the nodes at the root
+    # Add SPC1 card (single-point constraint) defining fixed boundary conditions at the root nodes
     root_nodes_ids = nodes_id_array[np.abs(nodes_xyz_array[:, 1]) < shell_thickness / 100]
     constraint_set_id = 1
     bdf_input.add_spc1(constraint_set_id, '123456', root_nodes_ids)
+    # Add SCP1 card to case control deck
     bdf_input.create_subcases(0)
     bdf_input.case_control_deck.subcases[0].add_integer_type('SPC', constraint_set_id)
     # Set defaults for output files
