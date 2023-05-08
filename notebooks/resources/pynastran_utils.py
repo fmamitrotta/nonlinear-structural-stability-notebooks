@@ -202,9 +202,9 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     return eigenvalue_array.T
 
 
-def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: ndarray,
-                       displacement_component: str = 'magnitude', displacement_scale_factor: float = 1.,
-                       colormap: str = 'jet', displacement_unit: str = 'mm') -> Tuple[Figure, Axes3D, ScalarMappable]:
+def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: ndarray, displacement_component: str = 'magnitude',
+                       displacement_unit_scale_factor: float = 1., coordinate_unit_scale_factor:float =1.,
+                       displacement_amplification_factor: float = 1., colormap: str = 'jet', length_unit: str = 'mm') -> Tuple[Figure, Axes3D, ScalarMappable]:
     """
     Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
 
@@ -218,12 +218,16 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
         array with nodes' identification numbers
     displacement_component: str
         name of the displacement component used for the colorbar
-    displacement_scale_factor: float
-        scale factor for displacements (used to plot buckling modes)
+    displacement_unit_scale_factor: float
+        unit scale factor for displacements
+    coordinate_unit_scale_factor: float
+        unit scale factor for nodes coordinates
+    displacement_amplification_factor: float
+        amplification factor for displacements
     colormap: str
         name of the colormap used for the displacement colorbar
-    displacement_unit: str
-        measurement unit of coordinates, used in the label of axes
+    length_unit: str
+        measurement unit of coordinates and displacements, used in the label of the axes
 
     Returns
     -------
@@ -258,11 +262,11 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
         # Find indexes of the element node ids into the global node ids array
         node_indexes = np.nonzero(np.in1d(node_ids, element_node_ids))[0]
         # Store indicated displacement component for the current nodes
-        nodes_displacement[count] = displacement_data[node_indexes, component_dict[displacement_component]]
+        nodes_displacement[count] = displacement_data[node_indexes, component_dict[displacement_component]]*displacement_unit_scale_factor
         # Store the coordinates of the nodes of the deformed elements
-        vertices[count] = np.vstack(
-            [op2_object.nodes[node_id].xyz + displacement_data[np.where(node_ids == node_id)[0], 0:3] *
-             displacement_scale_factor for node_id in element_node_ids])
+        vertices[count] = np.vstack([op2_object.nodes[node_id].xyz*coordinate_unit_scale_factor +
+        displacement_data[np.where(node_ids == node_id)[0], 0:3]*displacement_unit_scale_factor*displacement_amplification_factor
+        for node_id in element_node_ids])
     # Calculate displacement magnitude if requested
     if displacement_component == 'magnitude':
         nodes_displacement = np.apply_along_axis(np.linalg.norm, 1, nodes_displacement)
@@ -283,9 +287,9 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     # Add polygons to the plot
     ax.add_collection3d(pc)
     # Set axes label
-    ax.set_xlabel(f'x [{displacement_unit}]')
-    ax.set_ylabel(f'y [{displacement_unit}]')
-    ax.set_zlabel(f'z [{displacement_unit}]')
+    ax.set_xlabel(f'x [{length_unit}]')
+    ax.set_ylabel(f'y [{length_unit}]')
+    ax.set_zlabel(f'z [{length_unit}]')
     # Set axes limits
     x_coordinates = [func(points[:, 0]) for points in vertices for func in (np.min, np.max)]
     y_coordinates = [func(points[:, 1]) for points in vertices for func in (np.min, np.max)]
@@ -299,8 +303,9 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     return fig, ax, m
 
 
-def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacement_component: str = 'magnitude', colormap: str = 'jet',
-                        displacement_unit: str = 'mm', displacement_scale_factor: float = 200) -> Tuple[Figure, Axes3D]:
+def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacement_component: str = 'magnitude',
+                       unit_scale_factor: float = 1., displacement_amplification_factor: float = 200., colormap: str = 'jet',
+                       length_unit: str = 'mm', ) -> Tuple[Figure, Axes3D]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -312,12 +317,14 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
         key of the eigenvectors' dictionary in the OP2 object corresponding to the selected subcase
     displacement_component: str
         name of the displacement component used for the colorbar
+    unit_scale_factor: float
+        scale factor for unit conversion
+    displacement_amplification_factor: float
+        scale factor applied to the displacements
     colormap: str
         name of the colormap used for the displacement colorbar
-    displacement_unit: str
+    length_unit: str
         measurement unit of coordinates and displacements, used in the label of axes and colormap
-    displacement_scale_factor: float
-        scale factor applied to the displacements
 
     Returns
     -------
@@ -331,9 +338,10 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
     # Call plotting function
     fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
                                     node_ids=op2_object.eigenvectors[subcase_id].node_gridtype[:, 0],
-                                    displacement_component=displacement_component,
-                                    displacement_scale_factor=displacement_scale_factor, colormap=colormap,
-                                    displacement_unit=displacement_unit)
+                                    displacement_component=displacement_component, displacement_unit_scale_factor=1.,
+                                    coordinate_unit_scale_factor=unit_scale_factor,
+                                    displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
+                                    length_unit=length_unit)
     # Add colorbar
     label_dict = {'tx': 'Nondimensional displacement along $x$',
                   'ty': 'Nondimensional displacement along $y$',
@@ -348,8 +356,9 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
 
 
 def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, load_step: int = 0,
-                            displacement_component: str = 'magnitude', colormap: str = 'jet',
-                            displacement_unit: str = 'mm') -> Tuple[Figure, Axes3D]:
+                            displacement_component: str = 'magnitude', unit_scale_factor: float = 1.,
+                            displacement_amplification_factor:float = 1., colormap: str = 'jet',
+                            length_unit: str = 'mm') -> Tuple[Figure, Axes3D]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -364,11 +373,15 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
         is chosen
     displacement_component: str
         name of the displacement component used for the colorbar
+    unit_scale_factor: float
+        scale factor for unit conversion
+    displacement_amplification_factor: float
+        scale factor applied to the displacements
     colormap: str
         name of the colormap used for the displacement colorbar
-    displacement_unit: str
+    length_unit: str
         measurement unit of coordinates and displacements, used in the label of axes and colormap
-
+    
     Returns
     -------
     fig: Figure
@@ -381,16 +394,18 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
     # Call plotting function
     fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
                                     node_ids=op2_object.displacements[subcase_id].node_gridtype[:, 0],
-                                    displacement_component=displacement_component, colormap=colormap,
-                                    displacement_unit=displacement_unit)
+                                    displacement_component=displacement_component, displacement_unit_scale_factor=unit_scale_factor,
+                                    coordinate_unit_scale_factor=unit_scale_factor,
+                                    displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
+                                    length_unit=length_unit)
     # Add colorbar
-    label_dict = {'tx': f'Displacement along $x$ [{displacement_unit}]',
-                  'ty': f'Displacement along $y$ [{displacement_unit}]',
-                  'tz': f'Displacement along $z$ [{displacement_unit}]',
+    label_dict = {'tx': f'Displacement along $x$ [{length_unit}]',
+                  'ty': f'Displacement along $y$ [{length_unit}]',
+                  'tz': f'Displacement along $z$ [{length_unit}]',
                   'rx': f'Rotation about $x$ [rad]',
                   'ry': f'Rotation about $y$ [rad]',
                   'rz': f'Rotation about $z$ [rad]',
-                  'magnitude': f'Displacement magnitude [{displacement_unit}]'}
+                  'magnitude': f'Displacement magnitude [{length_unit}]'}
     fig.colorbar(mappable=m, label=label_dict[displacement_component], pad=0.15)
     # Return axes object
     return fig, ax
