@@ -350,7 +350,7 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
                   'ry': 'Nondimensional rotation about $y$',
                   'rz': 'Nondimensional rotation about $z$',
                   'magnitude': 'Nondimensional displacement magnitude'}
-    fig.colorbar(mappable=m, label=label_dict[displacement_component], pad=0.15)
+    fig.colorbar(mappable=m, label=label_dict[displacement_component], pad=.05, shrink=.7)
     # Return axes object
     return fig, ax
 
