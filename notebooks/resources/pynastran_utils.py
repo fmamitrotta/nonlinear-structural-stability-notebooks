@@ -287,9 +287,9 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     # Add polygons to the plot
     ax.add_collection3d(pc)
     # Set axes label
-    ax.set_xlabel(f'x [{length_unit}]')
-    ax.set_ylabel(f'y [{length_unit}]')
-    ax.set_zlabel(f'z [{length_unit}]')
+    ax.set_xlabel(f'$x$, {length_unit}')
+    ax.set_ylabel(f'$y$, {length_unit}')
+    ax.set_zlabel(f'$z$, {length_unit}')
     # Set axes limits
     x_coordinates = [func(points[:, 0]) for points in vertices for func in (np.min, np.max)]
     y_coordinates = [func(points[:, 1]) for points in vertices for func in (np.min, np.max)]
@@ -343,9 +343,9 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
                                     length_unit=length_unit)
     # Add colorbar
-    label_dict = {'tx': 'Nondimensional displacement along $x$',
-                  'ty': 'Nondimensional displacement along $y$',
-                  'tz': 'Nondimensional displacement along $z$',
+    label_dict = {'tx': 'Nondimensional $u_x$',
+                  'ty': 'Nondimensional $u_y$',
+                  'tz': 'Nondimensional $u_z$',
                   'rx': 'Nondimensional rotation about $x$',
                   'ry': 'Nondimensional rotation about $y$',
                   'rz': 'Nondimensional rotation about $z$',
@@ -399,14 +399,14 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
                                     length_unit=length_unit)
     # Add colorbar
-    label_dict = {'tx': f'Displacement along $x$ [{length_unit}]',
-                  'ty': f'Displacement along $y$ [{length_unit}]',
-                  'tz': f'Displacement along $z$ [{length_unit}]',
-                  'rx': f'Rotation about $x$ [rad]',
-                  'ry': f'Rotation about $y$ [rad]',
-                  'rz': f'Rotation about $z$ [rad]',
+    label_dict = {'tx': f'$u_x$, {length_unit}',
+                  'ty': f'$u_y$, {length_unit}',
+                  'tz': f'$u_z$, {length_unit}',
+                  'rx': f'Rotation about $x$, rad',
+                  'ry': f'Rotation about $y$, rad',
+                  'rz': f'Rotation about $z$, rad',
                   'magnitude': f'Displacement magnitude [{length_unit}]'}
-    fig.colorbar(mappable=m, label=label_dict[displacement_component], pad=0.15)
+    fig.colorbar(mappable=m, label=label_dict[displacement_component], pad=.05, shrink=.7)
     # Return axes object
     return fig, ax
 
