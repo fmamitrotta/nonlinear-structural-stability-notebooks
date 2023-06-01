@@ -93,8 +93,8 @@ def plot_buckling_mode(op2_object: OP2):
     # Plot nodes
     ax.plot(nodes_xy_coordinates[:, 0], nodes_xy_coordinates[:, 1], '.-')
     # Set axes labels and grid
-    plt.xlabel('$x$ [mm]')
-    plt.ylabel('Nondimensional displacement along $y$')
+    plt.xlabel('$x$, mm')
+    plt.ylabel('Nondimensional $u_y$')
     plt.grid()
     # Show plot
     plt.show()
