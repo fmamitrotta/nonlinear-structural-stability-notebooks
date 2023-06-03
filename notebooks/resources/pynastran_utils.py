@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
+from matplotlib.colorbar import Colorbar
 from matplotlib.pyplot import Figure
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 from mpl_toolkits.mplot3d.axes3d import Axes3D
@@ -305,7 +306,7 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
 
 def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacement_component: str = 'magnitude',
                        unit_scale_factor: float = 1., displacement_amplification_factor: float = 200., colormap: str = 'jet',
-                       length_unit: str = 'mm', ) -> Tuple[Figure, Axes3D]:
+                       length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -329,9 +330,11 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
     Returns
     -------
     fig: Figure
-        object of the plotted figure
+        figure object
     ax: Axes3D
-        object of the plot's axes
+        axes object
+    cbar: Colorbar
+        colorbar object
     """
     # Choose eigenvectors as displacement data
     displacement_data = op2_object.eigenvectors[subcase_id].data[0, :, :]
@@ -350,15 +353,17 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
                   'ry': 'Nondimensional rotation about $y$',
                   'rz': 'Nondimensional rotation about $z$',
                   'magnitude': 'Nondimensional displacement magnitude'}
-    fig.colorbar(mappable=m, label=label_dict[displacement_component], pad=.05, shrink=.7)
+    cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component])
+    # Set whitespace to 0
+    fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
     # Return axes object
-    return fig, ax
+    return fig, ax, cbar
 
 
 def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, load_step: int = 0,
                             displacement_component: str = 'magnitude', unit_scale_factor: float = 1.,
                             displacement_amplification_factor:float = 1., colormap: str = 'jet',
-                            length_unit: str = 'mm') -> Tuple[Figure, Axes3D]:
+                            length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -385,9 +390,11 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
     Returns
     -------
     fig: Figure
-        object of the plotted figure
+        figure object
     ax: Axes3D
-        object of the plot's axes
+        axes object
+    cbar: Colorbar
+        colorbar object
     """
     # Choose static displacements as displacement data
     displacement_data = op2_object.displacements[subcase_id].data[load_step - 1, :, :]
@@ -406,9 +413,11 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
                   'ry': f'Rotation about $y$, rad',
                   'rz': f'Rotation about $z$, rad',
                   'magnitude': f'Displacement magnitude [{length_unit}]'}
-    fig.colorbar(mappable=m, label=label_dict[displacement_component], pad=.05, shrink=.7)
+    cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component], pad=.05, shrink=.7)
+    # Set whitespace to 0
+    fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
     # Return axes object
-    return fig, ax
+    return fig, ax, cbar
 
 
 def add_unitary_force(bdf_object: BDF, nodes_ids: Union[list, ndarray], set_id: int, direction_vector: Union[list, ndarray]):
