@@ -412,7 +412,7 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
                   'rx': f'Rotation about $x$, rad',
                   'ry': f'Rotation about $y$, rad',
                   'rz': f'Rotation about $z$, rad',
-                  'magnitude': f'Displacement magnitude [{length_unit}]'}
+                  'magnitude': f'Displacement magnitude, {length_unit}'}
     cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component])
     # Set whitespace to 0
     fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
