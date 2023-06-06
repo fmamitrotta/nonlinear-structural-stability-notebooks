@@ -91,8 +91,7 @@ def mesh_box(height: float, length: float, width: float, element_length: float) 
     return nodes_xyz_array, nodes_connectivity_matrix
 
 
-def mesh_box_with_pyvista(height: float, length: float, width: float, element_length: float, root_y_coordinate: float = 0.)\
-        -> PolyData:
+def mesh_box_with_pyvista(height: float, length: float, width: float, element_length: float, y_0: float = 0.) -> PolyData:
     """
     Discretizes a box with the input dimensions into quadrilateral shell elements using the pyvista package. Returns a
     PolyData object including the xyz coordinates of the nodes and their connectivity information.
@@ -107,7 +106,7 @@ def mesh_box_with_pyvista(height: float, length: float, width: float, element_le
         box width
     element_length: float
         target length of the shell elements used to discretize the geometry
-    root_y_coordinate: float
+    y_0: float
         y-coordinate of the root of the box
 
      Returns
@@ -119,17 +118,17 @@ def mesh_box_with_pyvista(height: float, length: float, width: float, element_le
     # an even number of elements over each dimension to better approximate the buckling shape
     no_elements = [np.ceil(side/element_length/2).astype('int')*2 for side in [width, length, height]]
     # Discretize top skin of the box
-    top_skin_mesh = pyvista.Plane(center=[width/2, root_y_coordinate+length/2, height/2], direction=[0, 0, 1],
+    top_skin_mesh = pyvista.Plane(center=[width/2, y_0 + length/2, height/2], direction=[0, 0, 1],
                                   i_size=width, j_size=length, i_resolution=no_elements[0], j_resolution=no_elements[1])
     # Discretize bottom skin of the box
-    bottom_skin_mesh = pyvista.Plane(center=[width/2, root_y_coordinate+length/2, -height/2], direction=[0, 0, -1],
+    bottom_skin_mesh = pyvista.Plane(center=[width/2, y_0 + length/2, -height/2], direction=[0, 0, -1],
                                      i_size=width, j_size=length, i_resolution=no_elements[0],
                                      j_resolution=no_elements[1])
     # Discretize front spar of the box
-    front_spar_mesh = pyvista.Plane(center=[0, root_y_coordinate+length/2, 0], direction=[-1, 0, 0], i_size=height,
+    front_spar_mesh = pyvista.Plane(center=[0, y_0 + length/2, 0], direction=[-1, 0, 0], i_size=height,
                                     j_size=length, i_resolution=no_elements[2], j_resolution=no_elements[1])
     # Discretize rear spar of the box
-    rear_spar_mesh = pyvista.Plane(center=[width, root_y_coordinate+length/2, 0], direction=[1, 0, 0], i_size=height,
+    rear_spar_mesh = pyvista.Plane(center=[width, y_0 + length/2, 0], direction=[1, 0, 0], i_size=height,
                                    j_size=length, i_resolution=no_elements[2], j_resolution=no_elements[1])
     # Merge different components together
     merged_mesh = top_skin_mesh.merge([bottom_skin_mesh, front_spar_mesh, rear_spar_mesh])
@@ -198,11 +197,13 @@ def mesh_box_beam_with_pyvista(height: float, ribs_y_coordinates: ndarray, width
     # Iterate through the y-coordinates of the rib, except last one
     for count, y in enumerate(ribs_y_coordinates[:-1]):
         # Discretize box segment between current and next rib and add PolyData object to the list
-        box_meshes.append(mesh_box_with_pyvista(width, ribs_y_coordinates[count+1]-y, height, element_length, y))
+        box_meshes.append(mesh_box_with_pyvista(length=ribs_y_coordinates[count+1]-y, height=height, width=width,
+                                                element_length=element_length, y_0=y))
         # Discretize current rib and add PolyData object to the list
-        rib_meshes.append(mesh_rib_with_pyvista(y, width, height, element_length))
+        rib_meshes.append(mesh_rib_with_pyvista(y_coordinate=y, width=width, height=height, element_length=element_length))
     # Discretize last rib and add PolyData object to the list
-    rib_meshes.append(mesh_rib_with_pyvista(ribs_y_coordinates[-1], width, height, element_length))
+    rib_meshes.append(mesh_rib_with_pyvista(y_coordinate=ribs_y_coordinates[-1], width=width, height=height,
+                                            element_length=element_length))
     # Merge all box segments and ribs together
     merged_box_beam_mesh = box_meshes[0].merge(box_meshes[1:] + rib_meshes)
     # Clean obtained mesh merging points closer than indicated tolerance
@@ -212,7 +213,7 @@ def mesh_box_beam_with_pyvista(height: float, ribs_y_coordinates: ndarray, width
 
 
 def mesh_stiffened_box_with_pyvista(height: float, length: float, width: float, stiffeners_x_coordinates: ndarray,
-                                    stiffeners_height: float, element_length: float, root_y_coordinate: float = 0.) -> PolyData:
+                                    stiffeners_height: float, element_length: float, y_0: float = 0.) -> PolyData:
     """
     Discretizes a box reinforced with stiffeners with the input dimensions into quadrilateral shell elements using the pyvista package.
     Returns a PolyData object including the xyz coordinates of the nodes and their connectivity information.
@@ -231,7 +232,7 @@ def mesh_stiffened_box_with_pyvista(height: float, length: float, width: float, 
         height of the stiffeners
     element_length: float
         target length of the shell elements used to discretize the geometry
-    root_y_coordinate: float
+    y_0: float
         position of the box root
 
      Returns
@@ -242,10 +243,10 @@ def mesh_stiffened_box_with_pyvista(height: float, length: float, width: float, 
     # Find number of elements along each side of the box based on the prescribed edge length. We make sure that there is an even number of elements over each dimension to better approximate the buckling shape
     no_elements = [np.ceil(side/element_length/2).astype('int')*2 for side in [height, length]]
     # Discretize front spar of the stiffened box
-    front_spar_mesh = pyvista.Plane(center=[0, root_y_coordinate + length/2, 0], direction=[-1, 0, 0], i_size=height,
+    front_spar_mesh = pyvista.Plane(center=[0, y_0 + length/2, 0], direction=[-1, 0, 0], i_size=height,
                                     j_size=length, i_resolution=no_elements[0], j_resolution=no_elements[1])
     # Discretize rear spar of the box
-    rear_spar_mesh = pyvista.Plane(center=[width, root_y_coordinate + length/2, 0], direction=[1, 0, 0], i_size=height,
+    rear_spar_mesh = pyvista.Plane(center=[width, y_0 + length/2, 0], direction=[1, 0, 0], i_size=height,
                                    j_size=length, i_resolution=no_elements[0], j_resolution=no_elements[1])
     # Initialize lists of the PolyData objects corresponding to the box segments and to the ribs
     top_skin_meshes = []
@@ -259,25 +260,25 @@ def mesh_stiffened_box_with_pyvista(height: float, length: float, width: float, 
         # Find number of elements along the width
         no_width_elements = np.ceil((x - x_0)/element_length/2).astype('int')*2
         # Discretize top skin segment
-        top_skin_meshes.append(pyvista.Plane(center=[(x_0 + x)/2, root_y_coordinate + length/2, height/2], direction=[0, 0, 1],
+        top_skin_meshes.append(pyvista.Plane(center=[(x_0 + x)/2, y_0 + length/2, height/2], direction=[0, 0, 1],
                                              i_size=x - x_0, j_size=length, i_resolution=no_width_elements, j_resolution=no_elements[1]))
         # Discretize top stiffener
-        top_stiffeners_meshes.append(pyvista.Plane(center=[x, root_y_coordinate + length/2, height/2 - stiffeners_height/2],
+        top_stiffeners_meshes.append(pyvista.Plane(center=[x, y_0 + length/2, height/2 - stiffeners_height/2],
                                                    direction=[1, 0, 0], i_size=stiffeners_height, j_size=length,
                                                    i_resolution=no_stiffener_elements, j_resolution=no_elements[1]))
         # Discretize bottom skin segment
-        bottom_skin_meshes.append(pyvista.Plane(center=[(x_0 + x)/2, root_y_coordinate + length/2, -height/2], direction=[0, 0, -1],
+        bottom_skin_meshes.append(pyvista.Plane(center=[(x_0 + x)/2, y_0 + length/2, -height/2], direction=[0, 0, -1],
          i_size=x - x_0, j_size=length, i_resolution=no_width_elements, j_resolution=no_elements[1]))
         # Discretize bottom stiffener
-        bottom_stiffeners_meshes.append(pyvista.Plane(center=[x, root_y_coordinate + length/2, -height/2 + stiffeners_height/2],
+        bottom_stiffeners_meshes.append(pyvista.Plane(center=[x, y_0 + length/2, -height/2 + stiffeners_height/2],
          direction=[1, 0, 0], i_size=stiffeners_height, j_size=length, i_resolution=no_stiffener_elements, j_resolution=no_elements[1]))
         # Update x_0
         x_0 = x
     # Discretize last rib-stiffener bay of the skins
     no_width_elements = np.ceil((width - x_0)/element_length/2).astype('int')*2
-    top_skin_meshes.append(pyvista.Plane(center=[(x_0 + width)/2, root_y_coordinate + length/2, height/2], direction=[0, 0, 1],
-                                         i_size=width - x_0, j_size=length, i_resolution=no_width_elements, j_resolution=no_elements[1]))
-    bottom_skin_meshes.append(pyvista.Plane(center=[(x_0 + width)/2, root_y_coordinate + length/2, -height/2], direction=[0, 0, -1],
+    top_skin_meshes.append(pyvista.Plane(center=[(x_0 + width)/2, y_0 + length/2, height/2], direction=[0, 0, 1], i_size=width - x_0,
+                                         j_size=length, i_resolution=no_width_elements, j_resolution=no_elements[1]))
+    bottom_skin_meshes.append(pyvista.Plane(center=[(x_0 + width)/2, y_0 + length/2, -height/2], direction=[0, 0, -1],
                                             i_size=width - x_0, j_size=length, i_resolution=no_width_elements, j_resolution=no_elements[1]))
     # Merge all box segments and ribs together
     merged_mesh = front_spar_mesh.merge([rear_spar_mesh] + top_skin_meshes + top_stiffeners_meshes + bottom_skin_meshes +
@@ -322,14 +323,18 @@ def mesh_stiffened_box_beam_with_pyvista(height: float, width: float, ribs_y_coo
     # Iterate through the y-coordinates of the rib, except last one
     for count, y in enumerate(ribs_y_coordinates[:-1]):
         # Discretize stiffened box segment between current and next rib and add PolyData object to the list
-        stiffened_box_meshes.append(mesh_stiffened_box_with_pyvista(width, ribs_y_coordinates[count+1] - y, height,
-         stiffeners_x_coordinates, stiffeners_height, element_length, y))
+        stiffened_box_meshes.append(mesh_stiffened_box_with_pyvista(width=width, length=ribs_y_coordinates[count+1] - y, height=height,
+                                                                    stiffeners_x_coordinates=stiffeners_x_coordinates,
+                                                                    stiffeners_height=stiffeners_height, y_0=y,
+                                                                    element_length=element_length))
         # Discretize current rib and add PolyData object to the list
-        rib_meshes = rib_meshes + [mesh_rib_with_pyvista(y, rib_segments_widths[i], height, element_length,
-         rib_segments_x_coordinates[i]) for i in range(len(rib_segments_widths))]
+        rib_meshes = rib_meshes + [mesh_rib_with_pyvista(y_coordinate=y, width=rib_segments_widths[i], height=height,
+                                                         element_length=element_length, x_0=rib_segments_x_coordinates[i])
+                                                         for i in range(len(rib_segments_widths))]
     # Discretize last rib and add PolyData object to the list
-    rib_meshes = rib_meshes + [mesh_rib_with_pyvista(ribs_y_coordinates[-1], rib_segments_widths[i], height, element_length,
-     rib_segments_x_coordinates[i]) for i in range(len(rib_segments_widths))]
+    rib_meshes = rib_meshes + [mesh_rib_with_pyvista(y_coordiante=ribs_y_coordinates[-1], width=rib_segments_widths[i], height=height,
+                                                     element_length=element_length, x_0=rib_segments_x_coordinates[i])
+                                                     for i in range(len(rib_segments_widths))]
     # Merge all stiffene box segments and ribs together
     merged_box_beam_mesh = stiffened_box_meshes[0].merge(stiffened_box_meshes[1:] + rib_meshes)
     # Clean obtained mesh merging points closer than indicated tolerance
