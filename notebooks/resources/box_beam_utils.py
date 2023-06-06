@@ -332,7 +332,7 @@ def mesh_stiffened_box_beam_with_pyvista(height: float, width: float, ribs_y_coo
                                                          element_length=element_length, x_0=rib_segments_x_coordinates[i])
                                                          for i in range(len(rib_segments_widths))]
     # Discretize last rib and add PolyData object to the list
-    rib_meshes = rib_meshes + [mesh_rib_with_pyvista(y_coordiante=ribs_y_coordinates[-1], width=rib_segments_widths[i], height=height,
+    rib_meshes = rib_meshes + [mesh_rib_with_pyvista(y_coordinate=ribs_y_coordinates[-1], width=rib_segments_widths[i], height=height,
                                                      element_length=element_length, x_0=rib_segments_x_coordinates[i])
                                                      for i in range(len(rib_segments_widths))]
     # Merge all stiffene box segments and ribs together
