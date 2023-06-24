@@ -108,7 +108,8 @@ def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_i
         # Save loads summation of current subcase
         loads[subcase_id] = np.apply_along_axis(np.sum, 1, op2_object.load_vectors[subcase_id].data[:, :, 0:3])
         # Save displacements of indicated node id and current subcase
-        displacements[subcase_id] = op2_object.displacements[subcase_id].data[:, displacement_node_id - 1, :]
+        node_index = np.where(op2_object.displacements[subcase_id].node_gridtype[:, 0] == displacement_node_id)[0][0]
+        displacements[subcase_id] = op2_object.displacements[subcase_id].data[:, node_index, :]
     # Return output data
     return load_steps, loads, displacements
 
@@ -148,9 +149,8 @@ def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) ->
     nonlinear_buckling_loads = np.empty(len(alphas))
     # Iterate through the valid subcases
     for i, subcase_id in enumerate(valid_subcase_ids):
-        # Find final applied load of current subcase
-        final_load = np.linalg.norm(
-            np.apply_along_axis(np.sum, 0, op2_object.load_vectors[subcase_id].data[-1, :, 0:3]))
+        # Calculate the magnitude of the total applied laod at end of current subcase
+        final_load = np.linalg.norm(np.apply_along_axis(np.sum, 0, op2_object.load_vectors[subcase_id].data[-1, :, 0:3]))
         # Find incremental load applied in current subcase with respect to previous subcase
         applied_load = final_load - final_load_previous_subcase
         # Store load steps of current subcase
@@ -205,7 +205,8 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
 
 def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: ndarray, displacement_component: str = 'magnitude',
                        displacement_unit_scale_factor: float = 1., coordinate_unit_scale_factor:float =1.,
-                       displacement_amplification_factor: float = 1., colormap: str = 'jet', length_unit: str = 'mm') -> Tuple[Figure, Axes3D, ScalarMappable]:
+                       displacement_amplification_factor: float = 1., colormap: str = 'jet', clim: Union[list, ndarray] = None,
+                       length_unit: str = 'mm') -> Tuple[Figure, Axes3D, ScalarMappable]:
     """
     Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
 
@@ -227,6 +228,8 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
         amplification factor for displacements
     colormap: str
         name of the colormap used for the displacement colorbar
+    clim: Union[list, ndarray]:
+        colorbar values limits
     length_unit: str
         measurement unit of coordinates and displacements, used in the label of the axes
 
@@ -279,7 +282,10 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     m = ScalarMappable(cmap=colormap)
     m.set_array(elements_mean_displacement)
     # Set colormap min and max values and displacement values to colors
-    m.set_clim(vmin=np.amin(nodes_displacement), vmax=np.amax(nodes_displacement))
+    if clim is None:
+        m.set_clim(vmin=np.amin(nodes_displacement), vmax=np.amax(nodes_displacement))
+    else:
+        m.set_clim(vmin=clim[0], vmax=clim[1])
     rgba_array = m.to_rgba(elements_mean_displacement)
     # Color the elements' face by the average displacement magnitude
     pc.set_facecolor([(rgb[0], rgb[1], rgb[2]) for rgb in rgba_array])
@@ -304,7 +310,7 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     return fig, ax, m
 
 
-def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacement_component: str = 'magnitude',
+def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_number: int = 1, displacement_component: str = 'magnitude',
                        unit_scale_factor: float = 1., displacement_amplification_factor: float = 200., colormap: str = 'jet',
                        length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
     """
@@ -316,6 +322,8 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
         pyNastran object created reading an op2 file with the load_geometry option set to True
     subcase_id: int, tuple
         key of the eigenvectors' dictionary in the OP2 object corresponding to the selected subcase
+    mode_number: int
+        number of the buckling mode to be plotted
     displacement_component: str
         name of the displacement component used for the colorbar
     unit_scale_factor: float
@@ -337,7 +345,7 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
         colorbar object
     """
     # Choose eigenvectors as displacement data
-    displacement_data = op2_object.eigenvectors[subcase_id].data[0, :, :]
+    displacement_data = op2_object.eigenvectors[subcase_id].data[mode_number - 1, :, :]
     # Call plotting function
     fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
                                     node_ids=op2_object.eigenvectors[subcase_id].node_gridtype[:, 0],
@@ -362,7 +370,7 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], displacem
 
 def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, load_step: int = 0,
                             displacement_component: str = 'magnitude', unit_scale_factor: float = 1.,
-                            displacement_amplification_factor:float = 1., colormap: str = 'jet',
+                            displacement_amplification_factor:float = 1., colormap: str = 'jet', clim: Union[list, ndarray] = None,
                             length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
@@ -384,6 +392,8 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
         scale factor applied to the displacements
     colormap: str
         name of the colormap used for the displacement colorbar
+    clim: Union[list, ndarray]:
+        colorbar values limits
     length_unit: str
         measurement unit of coordinates and displacements, used in the label of axes and colormap
     
@@ -404,14 +414,14 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
                                     displacement_component=displacement_component, displacement_unit_scale_factor=unit_scale_factor,
                                     coordinate_unit_scale_factor=unit_scale_factor,
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
-                                    length_unit=length_unit)
+                                    clim=clim, length_unit=length_unit)
     # Add colorbar
     label_dict = {'tx': f'$u_x$, {length_unit}',
                   'ty': f'$u_y$, {length_unit}',
                   'tz': f'$u_z$, {length_unit}',
-                  'rx': f'Rotation about $x$, rad',
-                  'ry': f'Rotation about $y$, rad',
-                  'rz': f'Rotation about $z$, rad',
+                  'rx': '$\\theta_x$, rad',
+                  'ry': '$\\theta_y$, rad',
+                  'rz': '$\\theta_z$, rad',
                   'magnitude': f'Displacement magnitude, {length_unit}'}
     cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component])
     # Set whitespace to 0
@@ -530,7 +540,7 @@ def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = No
 
 
 def run_sol_105_buckling_analysis(bdf_object: BDF, static_load_set_id: int, analysis_directory_path: str,
-                                  input_name: str, run_flag: bool = True) -> OP2:
+                                  input_name: str, no_eigenvalues:int = 1, run_flag: bool = True) -> OP2:
     """
     Returns the OP2 object representing the results of SOL 105 analysis. The function defines subcase 1 to apply the
     load set associated to the input set idenfitication number and subcase 2 to calculate the critical eigenvalue
@@ -546,6 +556,8 @@ def run_sol_105_buckling_analysis(bdf_object: BDF, static_load_set_id: int, anal
         string with the path to the directory where the analysis is run
     input_name: str
         string with the name that will be given to the input file
+    no_eigenvalues: int
+        number of calculated buckling loads
     run_flag: bool
         boolean indicating whether Nastran analysis is actually run
 
@@ -562,7 +574,7 @@ def run_sol_105_buckling_analysis(bdf_object: BDF, static_load_set_id: int, anal
                                load_set_id=static_load_set_id)
     # Add EIGRL card to define the parameters for the eigenvalues calculation
     eigrl_set_id = static_load_set_id + 1
-    bdf_object.add_eigrl(sid=eigrl_set_id, v1=0., nd=1)  # calculate only the first positive eigenvalue
+    bdf_object.add_eigrl(sid=eigrl_set_id, v1=0., nd=no_eigenvalues)  # calculate the first nd positive eigenvalues
     # Create second subcase for the calculation of the eigenvalues
     eigenvalue_calculation_subcase_id = 2
     bdf_object.create_subcases(eigenvalue_calculation_subcase_id)
