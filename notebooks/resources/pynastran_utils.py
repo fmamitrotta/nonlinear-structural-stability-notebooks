@@ -1,35 +1,18 @@
-import os
-import time
-from pyNastran.bdf.bdf import BDF
-from pyNastran.utils.nastran_utils import run_nastran
-from pyNastran.op2.op2 import OP2
-import numpy as np
-import re
-from typing import Tuple, Dict, Any
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-import matplotlib as mpl
-from numpy import ndarray
-from mpl_toolkits.mplot3d.axes3d import Axes3D
-from matplotlib.pyplot import Figure
 from matplotlib.cm import ScalarMappable
-
-
-def wait_nastran(directory_path: str):
-    """
-    Suspends execution of current thread from the start to the end of a Nastran run.
-
-    Parameters
-    ----------
-    directory_path : str
-        string with path to the directory where input file is run
-    """
-    # Wait for the analysis to start (when bat file appears)
-    while not any([file.endswith('.bat') for file in os.listdir(directory_path)]):
-        time.sleep(0.1)
-    # Wait for the analysis to finish (when bat file disappears)
-    while any([file.endswith('.bat') for file in os.listdir(directory_path)]):
-        time.sleep(0.1)
+from matplotlib.colorbar import Colorbar
+from matplotlib.pyplot import Figure
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+from mpl_toolkits.mplot3d.axes3d import Axes3D
+import numpy as np
+from numpy import ndarray
+import os
+from pyNastran.bdf.bdf import BDF
+from pyNastran.op2.op2 import OP2
+from pyNastran.op2.op2 import read_op2
+from pyNastran.utils.nastran_utils import run_nastran
+import re
+from typing import Tuple, Dict, Any, Union
 
 
 def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: bool = True):
@@ -54,11 +37,8 @@ def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: 
     bdf_filepath = os.path.join(directory_path, bdf_filename)
     bdf_object.write_bdf(bdf_filepath)
     # Run Nastran
-    nastran_path = 'C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastranw.exe'
+    nastran_path = 'C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastran.exe'
     run_nastran(bdf_filename=bdf_filepath, nastran_cmd=nastran_path, run_in_bdf_dir=True, run=run_flag)
-    # If Nastran is actually executed wait until analysis is done
-    if run_flag:
-        wait_nastran(directory_path)
     # Read and print wall time of simulation
     log_filepath = os.path.join(directory_path, filename + '.log')
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')  # compiled regular expression pattern
@@ -70,7 +50,7 @@ def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: 
                 break
 
 
-def create_static_load_subcase(bdf_object: BDF, subcase_id: int, load_set_id: int):
+def create_static_load_subcase(bdf_object: BDF, subcase_id: int, load_set_id: int, nlparm_id: int = None):
     """
     Define a subcase in the input BDF object for the application of a static load.
 
@@ -82,11 +62,16 @@ def create_static_load_subcase(bdf_object: BDF, subcase_id: int, load_set_id: in
         id of the subcase
     load_set_id: int
         id of the load set assigned to the subcase
+    nlparm_id: int
+        id of the NLPARM card assigned to the subcase
     """
     # Create subcase
     bdf_object.create_subcases(subcase_id)
     # Add load set id to case control statement of created subcase
     bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('LOAD', load_set_id)
+    # If provided, add NLPARM id to case control statement of created subcase
+    if nlparm_id:
+        bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)
 
 
 def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_id: int = 1) -> \
@@ -123,7 +108,8 @@ def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_i
         # Save loads summation of current subcase
         loads[subcase_id] = np.apply_along_axis(np.sum, 1, op2_object.load_vectors[subcase_id].data[:, :, 0:3])
         # Save displacements of indicated node id and current subcase
-        displacements[subcase_id] = op2_object.displacements[subcase_id].data[:, displacement_node_id - 1, :]
+        node_index = np.where(op2_object.displacements[subcase_id].node_gridtype[:, 0] == displacement_node_id)[0][0]
+        displacements[subcase_id] = op2_object.displacements[subcase_id].data[:, node_index, :]
     # Return output data
     return load_steps, loads, displacements
 
@@ -163,9 +149,8 @@ def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) ->
     nonlinear_buckling_loads = np.empty(len(alphas))
     # Iterate through the valid subcases
     for i, subcase_id in enumerate(valid_subcase_ids):
-        # Find final applied load of current subcase
-        final_load = np.linalg.norm(
-            np.apply_along_axis(np.sum, 0, op2_object.load_vectors[subcase_id].data[-1, :, 0:3]))
+        # Calculate the magnitude of the total applied laod at end of current subcase
+        final_load = np.linalg.norm(np.apply_along_axis(np.sum, 0, op2_object.load_vectors[subcase_id].data[-1, :, 0:3]))
         # Find incremental load applied in current subcase with respect to previous subcase
         applied_load = final_load - final_load_previous_subcase
         # Store load steps of current subcase
@@ -195,22 +180,33 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
         lowest_eigenvalues: ndarray
             array with the lowest eigenvalue of the KLLRH matrices
     """
-    # Initialize list of the lowest eigenvalues
-    lowest_eigenvalues = []
+    # Initialize the list of the lowest eigenvalues
+    eigenvalue_list = []
     # Compile a regular expression pattern to read eigenvalue in f06 file
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')
-    # Open file and look for matching pattern line by line
+    # Open file iterate line by line
     with open(f06_filepath) as f06_file:
         for line in f06_file:
-            # When matching pattern is found, read lowest eigenvalue
-            if 'KLLRH LOWEST EIGENVALUE' in line:
-                lowest_eigenvalues.append(float(re.findall(regexp, line)[0]))
-    # Return list of the lowest eigenvalues
-    return np.array(lowest_eigenvalues)
+            # When NLOOP is found append an empty list inside the eigenvalues list
+            if 'NLOOP =' in line:
+                eigenvalue_list.append([])
+            # When KLLRH EIGENVALUE is found append the eigenvalue to the last list of the eigenvalues list
+            if 'KLLRH EIGENVALUE' in line:
+                raw_results = re.findall(regexp, line)
+                eigenvalue_list[-1].append(float(raw_results[1]))
+    # Convert list of lists to array padded with nan (we put nan for the iterations where we miss one or more eigenvalues)
+    lengths = np.array([len(item) for item in eigenvalue_list])
+    mask = lengths[:, None] > np.arange(lengths.max())
+    eigenvalue_array = np.full(mask.shape, np.nan)
+    eigenvalue_array[mask] = np.concatenate(eigenvalue_list)
+    # Return array of eigenvalues in the form: number of eigenvalues x number of iterations
+    return eigenvalue_array.T
 
 
-def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement_component: str = 'magnitude',
-                       displacement_scale_factor: float = 1.) -> Tuple[Figure, Axes3D, ScalarMappable]:
+def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: ndarray, displacement_component: str = 'magnitude',
+                       displacement_unit_scale_factor: float = 1., coordinate_unit_scale_factor:float =1.,
+                       displacement_amplification_factor: float = 1., colormap: str = 'jet', clim: Union[list, ndarray] = None,
+                       length_unit: str = 'mm') -> Tuple[Figure, Axes3D, ScalarMappable]:
     """
     Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
 
@@ -220,10 +216,22 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
         pyNastran object created reading an op2 file with the load_geometry option set to True
     displacement_data: ndarray
         array with displacement data to plot
+    node_ids: ndarray
+        array with nodes' identification numbers
     displacement_component: str
-        string with the name of the displacement component used for the colormap
-    displacement_scale_factor: float
-        scale factor for displacements (used to plot buckling modes)
+        name of the displacement component used for the colorbar
+    displacement_unit_scale_factor: float
+        unit scale factor for displacements
+    coordinate_unit_scale_factor: float
+        unit scale factor for nodes coordinates
+    displacement_amplification_factor: float
+        amplification factor for displacements
+    colormap: str
+        name of the colormap used for the displacement colorbar
+    clim: Union[list, ndarray]:
+        colorbar values limits
+    length_unit: str
+        measurement unit of coordinates and displacements, used in the label of the axes
 
     Returns
     -------
@@ -254,13 +262,15 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
     # Iterate through the elements of the structure
     for count, element in enumerate(op2_object.elements.values()):
         # Store ids of the nodes as an array
-        node_ids = np.array(element.node_ids)
+        element_node_ids = np.array(element.node_ids)
+        # Find indexes of the element node ids into the global node ids array
+        node_indexes = np.nonzero(np.in1d(node_ids, element_node_ids))[0]
         # Store indicated displacement component for the current nodes
-        nodes_displacement[count] = displacement_data[-1, node_ids - 1, component_dict[displacement_component]]
+        nodes_displacement[count] = displacement_data[node_indexes, component_dict[displacement_component]]*displacement_unit_scale_factor
         # Store the coordinates of the nodes of the deformed elements
-        vertices[count] = np.vstack(
-            [op2_object.nodes[index].xyz + displacement_data[-1, index - 1, 0:3] *
-             displacement_scale_factor for index in node_ids])
+        vertices[count] = np.vstack([op2_object.nodes[node_id].xyz*coordinate_unit_scale_factor +
+        displacement_data[np.where(node_ids == node_id)[0], 0:3]*displacement_unit_scale_factor*displacement_amplification_factor
+        for node_id in element_node_ids])
     # Calculate displacement magnitude if requested
     if displacement_component == 'magnitude':
         nodes_displacement = np.apply_along_axis(np.linalg.norm, 1, nodes_displacement)
@@ -269,10 +279,13 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
     # Create 3D polygons to represent the elements
     pc = Poly3DCollection(vertices, linewidths=.05)
     # Create colormap for the displacement magnitude
-    m = mpl.cm.ScalarMappable(cmap=mpl.cm.jet)
+    m = ScalarMappable(cmap=colormap)
     m.set_array(elements_mean_displacement)
     # Set colormap min and max values and displacement values to colors
-    m.set_clim(vmin=np.amin(nodes_displacement), vmax=np.amax(nodes_displacement))
+    if clim is None:
+        m.set_clim(vmin=np.amin(nodes_displacement), vmax=np.amax(nodes_displacement))
+    else:
+        m.set_clim(vmin=clim[0], vmax=clim[1])
     rgba_array = m.to_rgba(elements_mean_displacement)
     # Color the elements' face by the average displacement magnitude
     pc.set_facecolor([(rgb[0], rgb[1], rgb[2]) for rgb in rgba_array])
@@ -281,9 +294,9 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
     # Add polygons to the plot
     ax.add_collection3d(pc)
     # Set axes label
-    ax.set_xlabel('x [mm]')
-    ax.set_ylabel('y [mm]')
-    ax.set_zlabel('z [mm]')
+    ax.set_xlabel(f'$x$, {length_unit}')
+    ax.set_ylabel(f'$y$, {length_unit}')
+    ax.set_zlabel(f'$z$, {length_unit}')
     # Set axes limits
     x_coordinates = [func(points[:, 0]) for points in vertices for func in (np.min, np.max)]
     y_coordinates = [func(points[:, 1]) for points in vertices for func in (np.min, np.max)]
@@ -297,8 +310,9 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement
     return fig, ax, m
 
 
-def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_component: str = 'magnitude') ->\
-        Tuple[Figure, Axes3D]:
+def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_number: int = 1, displacement_component: str = 'magnitude',
+                       unit_scale_factor: float = 1., displacement_amplification_factor: float = 200., colormap: str = 'jet',
+                       length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -308,36 +322,56 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: [int, tuple], displacement_c
         pyNastran object created reading an op2 file with the load_geometry option set to True
     subcase_id: int, tuple
         key of the eigenvectors' dictionary in the OP2 object corresponding to the selected subcase
+    mode_number: int
+        number of the buckling mode to be plotted
     displacement_component: str
-        string with the name of the displacement component used for the colormap
+        name of the displacement component used for the colorbar
+    unit_scale_factor: float
+        scale factor for unit conversion
+    displacement_amplification_factor: float
+        scale factor applied to the displacements
+    colormap: str
+        name of the colormap used for the displacement colorbar
+    length_unit: str
+        measurement unit of coordinates and displacements, used in the label of axes and colormap
 
     Returns
     -------
     fig: Figure
-        object of the plotted figure
+        figure object
     ax: Axes3D
-        object of the plot's axes
+        axes object
+    cbar: Colorbar
+        colorbar object
     """
     # Choose eigenvectors as displacement data
-    displacement_data = op2_object.eigenvectors[subcase_id].data
+    displacement_data = op2_object.eigenvectors[subcase_id].data[mode_number - 1, :, :]
     # Call plotting function
-    displacement_scale_factor = 200
-    fig, ax, m = plot_displacements(op2_object, displacement_data, displacement_component, displacement_scale_factor)
+    fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
+                                    node_ids=op2_object.eigenvectors[subcase_id].node_gridtype[:, 0],
+                                    displacement_component=displacement_component, displacement_unit_scale_factor=1.,
+                                    coordinate_unit_scale_factor=unit_scale_factor,
+                                    displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
+                                    length_unit=length_unit)
     # Add colorbar
-    label_dict = {'tx': 'Nondimensional displacement along $x$',
-                  'ty': 'Nondimensional displacement along $y$',
-                  'tz': 'Nondimensional displacement along $z$',
+    label_dict = {'tx': 'Nondimensional $u_x$',
+                  'ty': 'Nondimensional $u_y$',
+                  'tz': 'Nondimensional $u_z$',
                   'rx': 'Nondimensional rotation about $x$',
                   'ry': 'Nondimensional rotation about $y$',
                   'rz': 'Nondimensional rotation about $z$',
                   'magnitude': 'Nondimensional displacement magnitude'}
-    fig.colorbar(mappable=m, label=label_dict[displacement_component], pad=0.15)
+    cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component])
+    # Set whitespace to 0
+    fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
     # Return axes object
-    return fig, ax
+    return fig, ax, cbar
 
 
-def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displacement_component: str = 'magnitude')\
-        -> Tuple[Figure, Axes3D]:
+def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, load_step: int = 0,
+                            displacement_component: str = 'magnitude', unit_scale_factor: float = 1.,
+                            displacement_amplification_factor:float = 1., colormap: str = 'jet', clim: Union[list, ndarray] = None,
+                            length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -347,34 +381,56 @@ def plot_static_deformation(op2_object: OP2, subcase_id: [int, tuple] = 1, displ
         pyNastran object created reading an op2 file with the load_geometry option set to True
     subcase_id: int, tuple
         key of the displacements' dictionary in the OP2 object corresponding to the selected subcase
+    load_step: int
+        integer representing the load step of a nonlinear or a time-dependent analysis, default is 0 so that last step
+        is chosen
     displacement_component: str
-        string with the name of the displacement component used for the colormap
-
+        name of the displacement component used for the colorbar
+    unit_scale_factor: float
+        scale factor for unit conversion
+    displacement_amplification_factor: float
+        scale factor applied to the displacements
+    colormap: str
+        name of the colormap used for the displacement colorbar
+    clim: Union[list, ndarray]:
+        colorbar values limits
+    length_unit: str
+        measurement unit of coordinates and displacements, used in the label of axes and colormap
+    
     Returns
     -------
     fig: Figure
-        object of the plotted figure
+        figure object
     ax: Axes3D
-        object of the plot's axes
+        axes object
+    cbar: Colorbar
+        colorbar object
     """
     # Choose static displacements as displacement data
-    displacement_data = op2_object.displacements[subcase_id].data
+    displacement_data = op2_object.displacements[subcase_id].data[load_step - 1, :, :]
     # Call plotting function
-    fig, ax, m = plot_displacements(op2_object, displacement_data, displacement_component)
+    fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
+                                    node_ids=op2_object.displacements[subcase_id].node_gridtype[:, 0],
+                                    displacement_component=displacement_component, displacement_unit_scale_factor=unit_scale_factor,
+                                    coordinate_unit_scale_factor=unit_scale_factor,
+                                    displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
+                                    clim=clim, length_unit=length_unit)
     # Add colorbar
-    label_dict = {'tx': 'Displacement along $x$ [mm]',
-                  'ty': 'Displacement along $y$ [mm]',
-                  'tz': 'Displacement along $z$ [mm]',
-                  'rx': 'Rotation about $x$ [rad]',
-                  'ry': 'Rotation about $y$ [rad]',
-                  'rz': 'Rotation about $z$ [rad]',
-                  'magnitude': 'Displacement magnitude [mm]'}
-    fig.colorbar(mappable=m, label=label_dict[displacement_component], pad=0.15)
+    label_dict = {'tx': f'$u_x$, {length_unit}',
+                  'ty': f'$u_y$, {length_unit}',
+                  'tz': f'$u_z$, {length_unit}',
+                  'rx': '$\\theta_x$, rad',
+                  'ry': '$\\theta_y$, rad',
+                  'rz': '$\\theta_z$, rad',
+                  'magnitude': f'Displacement magnitude, {length_unit}'}
+    cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component])
+    # Set whitespace to 0
+    fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
     # Return axes object
-    return fig, ax
+    return fig, ax, cbar
 
 
-def add_unitary_force(bdf_object: BDF, nodes_ids: [list, ndarray], set_id: int, direction_vector: [list, ndarray]):
+def add_unitary_force(bdf_object: BDF, nodes_ids: Union[list, ndarray], set_id: int, direction_vector: Union[list, ndarray]):
     """
     Apply a uniform force over the indicated nodes such that the total magnitude is 1 N.
 
@@ -396,8 +452,9 @@ def add_unitary_force(bdf_object: BDF, nodes_ids: [list, ndarray], set_id: int, 
         bdf_object.add_force(sid=set_id, node=node_id, mag=force_magnitude, xyz=direction_vector)
 
 
-def set_up_newton_method(bdf_object: BDF, ninc: int = None, max_iter: int = 25, conv: str = 'PW', eps_u: float = 0.01,
-                         eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5):
+def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, max_iter: int = 25, conv: str = 'PW',
+                         eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5,
+                         subcase_id: int = 0):
     """
     Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM to set up
     the full Newton method.
@@ -406,6 +463,8 @@ def set_up_newton_method(bdf_object: BDF, ninc: int = None, max_iter: int = 25, 
     ----------
     bdf_object: BDF
         pyNastran object representing a bdf input file
+    nlparm_id: int
+        identification number of NLPARM card
     ninc: int
         number of increments
     max_iter: int
@@ -420,22 +479,24 @@ def set_up_newton_method(bdf_object: BDF, ninc: int = None, max_iter: int = 25, 
         error tolerance for work criterion
     max_bisect: int
         maximum number of bisections allowed for each load increment
+    subcase_id: int
+        identification number of the subcase where the NLPARM card is applied
     """
     # Assign SOL 106 as solution sequence
     bdf_object.sol = 106
     # Add parameter for large displacement effects
     bdf_object.add_param('LGDISP', [1])
     # Define parameters for the nonlinear iteration strategy with full Newton method
-    nlparm_id = 1
     bdf_object.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=1, max_iter=max_iter, conv=conv,
                           int_out='YES', eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect)
     # Add NLPARM id to the control case commands
-    bdf_object.case_control_deck.subcases[0].add_integer_type('NLPARM', nlparm_id)
+    bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)
 
 
-def set_up_arc_length_method(bdf_object: BDF, ninc: int = None, max_iter: int = 25, conv: str = 'PW',
-                             eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5,
-                             minalr: float = 0.25, maxalr: float = 4., desiter: int = 12, maxinc: int = 20):
+def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, max_iter: int = 25,
+                             conv: str = 'PW', eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01,
+                             max_bisect: int = 5, subcase_id: int = 0, minalr: float = 0.25, maxalr: float = 4.,
+                             desiter: int = 12, maxinc: int = 20):
     """
     Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM and NLPCI
     to set up the arc-length method.
@@ -444,6 +505,8 @@ def set_up_arc_length_method(bdf_object: BDF, ninc: int = None, max_iter: int = 
     ----------
     bdf_object: BDF
         pyNastran object representing a bdf input file
+    nlparm_id: int
+        identification number of NLPARM card
     ninc: int
         number of increments
     max_iter: int
@@ -458,6 +521,8 @@ def set_up_arc_length_method(bdf_object: BDF, ninc: int = None, max_iter: int = 
         error tolerance for work criterion
     max_bisect: int
         maximum number of bisections allowed for each load increment
+    subcase_id: int
+        identification number of the subcase where the NLPARM card is applied
     minalr: float
         minimum allowable arc-length adjustment ratio
     maxalr: float
@@ -468,7 +533,152 @@ def set_up_arc_length_method(bdf_object: BDF, ninc: int = None, max_iter: int = 
         maximum number of controlled increment steps allowed within a subcase
     """
     # Set up basic nonlinear analysis
-    set_up_newton_method(bdf_object=bdf_object, ninc=ninc, max_iter=max_iter, conv=conv, eps_u=eps_u, eps_p=eps_p,
-                         eps_w=eps_w, max_bisect=max_bisect)
+    set_up_newton_method(bdf_object=bdf_object, nlparm_id=nlparm_id, ninc=ninc, max_iter=max_iter, conv=conv,
+                         eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect, subcase_id=subcase_id)
     # Define parameters for the arc-length method
-    bdf_object.add_nlpci(nlpci_id=1, Type='CRIS', minalr=minalr, maxalr=maxalr, desiter=desiter, mxinc=maxinc)
+    bdf_object.add_nlpci(nlpci_id=nlparm_id, Type='CRIS', minalr=minalr, maxalr=maxalr, desiter=desiter, mxinc=maxinc)
+
+
+def run_sol_105_buckling_analysis(bdf_object: BDF, static_load_set_id: int, analysis_directory_path: str,
+                                  input_name: str, no_eigenvalues:int = 1, run_flag: bool = True) -> OP2:
+    """
+    Returns the OP2 object representing the results of SOL 105 analysis. The function defines subcase 1 to apply the
+    load set associated to the input set idenfitication number and subcase 2 to calculate the critical eigenvalue
+    using the EIGRL card.
+
+    Parameters
+    ----------
+    bdf_object: BDF
+        pyNastran object representing the bdf input of the box beam model
+    static_load_set_id: int
+        set id of the static load applied in the first subcase
+    analysis_directory_path: str
+        string with the path to the directory where the analysis is run
+    input_name: str
+        string with the name that will be given to the input file
+    no_eigenvalues: int
+        number of calculated buckling loads
+    run_flag: bool
+        boolean indicating whether Nastran analysis is actually run
+
+    Returns
+    -------
+    op2_output: OP2
+        object representing the op2 file produced by SOL 105
+    """
+    # Set SOL 105 as solution sequence (linear buckling analysis)
+    bdf_object.sol = 105
+    # Create first subcase for the application of the static load
+    load_application_subcase_id = 1
+    create_static_load_subcase(bdf_object=bdf_object, subcase_id=load_application_subcase_id,
+                               load_set_id=static_load_set_id)
+    # Add EIGRL card to define the parameters for the eigenvalues calculation
+    eigrl_set_id = static_load_set_id + 1
+    bdf_object.add_eigrl(sid=eigrl_set_id, v1=0., nd=no_eigenvalues)  # calculate the first nd positive eigenvalues
+    # Create second subcase for the calculation of the eigenvalues
+    eigenvalue_calculation_subcase_id = 2
+    bdf_object.create_subcases(eigenvalue_calculation_subcase_id)
+    bdf_object.case_control_deck.subcases[eigenvalue_calculation_subcase_id].add_integer_type('METHOD', eigrl_set_id)
+    # Run analysis
+    run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
+    # Read op2 file
+    op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
+    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
+    # Return OP2 object
+    return op2_output
+
+
+def run_nonlinear_buckling_method(bdf_object: BDF, method_set_id: int, analysis_directory_path: str, input_name: str,
+                                  calculate_tangent_stiffness_matrix_eigenvalues: bool = False,
+                                  no_eigenvalues: int = 1, run_flag: bool = True) -> OP2:
+    """
+    Returns the OP2 object representing the results of SOL 106 analysis employing the nonlinear buckling method. The
+    function requires the subcases with the associated load sets to be already defined. It applies the nonlinear
+    buckling method to all subcases using the PARAM,BUCKLE,2 command and the EIGRL card.
+
+    Parameters
+    ----------
+    bdf_object: BDF
+        pyNastran object representing the bdf input of the box beam model
+    method_set_id: int
+        identification number of the EIGRL card that is defined for the eigenvalue calculation
+    analysis_directory_path: str
+        string with the path to the directory where the analysis is run
+    input_name: str
+        string with the name that will be given to the input file
+    calculate_tangent_stiffness_matrix_eigenvalues: bool
+        boolean indicating whether lowest eigenvalues of tangent stiffness matrix will be calculated
+    no_eigenvalues: int
+        number of eigenvalues of the tangent stiffness matrix that will be calculated
+    run_flag: bool
+        boolean indicating whether Nastran analysis is actually run
+
+    Returns
+    -------
+    op2_output: OP2
+        object representing the op2 file produced by SOL 106
+    """
+    # Set SOL 106 as solution sequence (nonlinear analysis)
+    bdf_object.sol = 106
+    # Define parameters for nonlinear buckling method
+    bdf_object.add_param('BUCKLE', [2])
+    bdf_object.add_eigrl(sid=method_set_id, nd=no_eigenvalues)  # calculate lowest eigenvalues in magnitude
+    bdf_object.case_control_deck.subcases[0].add_integer_type('METHOD', method_set_id)  # add EIGRL id to case control
+    # Define parameters to calculate lowest eigenvalues of tangent stiffness matrix if requested
+    if calculate_tangent_stiffness_matrix_eigenvalues:
+        bdf_object.executive_control_lines[1:1] = [
+            'include \'' + os.path.join(os.pardir, os.pardir, 'resources', 'kllrh_lowest_eigenvalues.dmap') + '\'']
+        bdf_object.add_param('BMODES', [no_eigenvalues])
+    # Run analysis
+    run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
+    # Read op2 file
+    op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
+    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
+    # Return OP2 object
+    return op2_output
+
+
+def run_tangent_stiffness_matrix_eigenvalue_calculation(bdf_object: BDF, method_set_id: int,
+                                                        analysis_directory_path: str, input_name: str,
+                                                        no_eigenvalues: int = 1, run_flag: bool = True) -> OP2:
+    """
+    Returns the OP2 object representing the results of SOL 106 analysis employing the nonlinear buckling method. The
+    function requires the subcases with the associated load sets to be already defined. It applies the nonlinear
+    buckling method to all subcases using the PARAM,BUCKLE,2 command and the EIGRL card.
+
+    Parameters
+    ----------
+    bdf_object: BDF
+        pyNastran object representing the bdf input of the box beam model
+    method_set_id: int
+        identification number of the EIGRL card that is defined for the eigenvalue calculation
+    analysis_directory_path: str
+        string with the path to the directory where the analysis is run
+    input_name: str
+        string with the name that will be given to the input file
+    no_eigenvalues: int
+        number of eigenvalues of the tangent stiffness matrix that will be calculated
+    run_flag: bool
+        boolean indicating whether Nastran analysis is actually run
+
+    Returns
+    -------
+    op2_output: OP2
+        object representing the op2 file produced by SOL 106
+    """
+    # Set SOL 106 as solution sequence (nonlinear analysis)
+    bdf_object.sol = 106
+    # Define parameters to calculate lowest eigenvalues of tangent stiffness matrix
+    bdf_object.add_param('BUCKLE', [2])
+    bdf_object.add_eigrl(sid=method_set_id, nd=no_eigenvalues)  # calculate lowest eigenvalues in magnitude
+    bdf_object.case_control_deck.subcases[0].add_integer_type('METHOD', method_set_id)  # add EIGRL id to case control
+    bdf_object.executive_control_lines[1:1] = [
+        'include \'' + os.path.join(os.pardir, os.pardir, 'resources', 'kllrh_lowest_eigenvalues_nobuckle.dmap') + '\'']
+    bdf_object.add_param('BMODES', [no_eigenvalues])
+    # Run analysis
+    run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
+    # Read op2 file
+    op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
+    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
+    # Return OP2 object
+    return op2_output

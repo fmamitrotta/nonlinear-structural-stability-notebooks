@@ -30,8 +30,8 @@ def create_base_bdf(young_modulus: float, poisson_ratio: float, density: float, 
     bdf_input: BDF
         object representing the Nastran input of Euler's column
     """
-    # Create an instance of the BDF class without info/warning/error messages
-    bdf_input = BDF(debug=False)
+    # Create an instance of the BDF class without debug or info messages
+    bdf_input = BDF(debug=None)
     # Define isotropic material properties with MAT1 card
     material_id = 1
     bdf_input.add_mat1(mid=material_id, E=young_modulus, G='', nu=poisson_ratio, rho=density)
@@ -93,8 +93,8 @@ def plot_buckling_mode(op2_object: OP2):
     # Plot nodes
     ax.plot(nodes_xy_coordinates[:, 0], nodes_xy_coordinates[:, 1], '.-')
     # Set axes labels and grid
-    plt.xlabel('$x$ [mm]')
-    plt.ylabel('Nondimensional displacement along $y$')
+    plt.xlabel('$x$, mm')
+    plt.ylabel('Nondimensional $u_y$')
     plt.grid()
     # Show plot
     plt.show()
