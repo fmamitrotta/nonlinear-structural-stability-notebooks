@@ -266,7 +266,10 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
         # Find indexes of the element node ids into the global node ids array
         node_indexes = np.nonzero(np.in1d(node_ids, element_node_ids))[0]
         # Store indicated displacement component for the current nodes
-        nodes_displacement[count] = displacement_data[node_indexes, component_dict[displacement_component]]*displacement_unit_scale_factor
+        if displacement_component in ["rx", "ry", "rz"]:
+            nodes_displacement[count] = displacement_data[node_indexes, component_dict[displacement_component]]  # no unit conversion for rotations
+        else:
+            nodes_displacement[count] = displacement_data[node_indexes, component_dict[displacement_component]]*displacement_unit_scale_factor
         # Store the coordinates of the nodes of the deformed elements
         vertices[count] = np.vstack([op2_object.nodes[node_id].xyz*coordinate_unit_scale_factor +
         displacement_data[np.where(node_ids == node_id)[0], 0:3]*displacement_unit_scale_factor*displacement_amplification_factor
