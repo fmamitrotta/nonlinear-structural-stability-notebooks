@@ -254,31 +254,36 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     # Initialize array of displacements and vertices
+    no_elements = len(op2_object.elements)
     if displacement_component == 'magnitude':
-        nodes_displacement = np.empty((len(op2_object.elements), 3, 4))
+        nodes_displacement = np.empty((no_elements, 3, 4))  # 3 components for each node to calculate magnitude
     else:
-        nodes_displacement = np.empty((len(op2_object.elements), 4))
-    vertices = np.empty((len(op2_object.elements), 4, 3))
+        nodes_displacement = np.empty((no_elements, 4))  # 1 component for each node
+    vertices = np.empty((no_elements, 4, 3))
     # Iterate through the elements of the structure
     for count, element in enumerate(op2_object.elements.values()):
         # Store ids of the nodes as an array
         element_node_ids = np.array(element.node_ids)
         # Find indexes of the element node ids into the global node ids array
         node_indexes = np.nonzero(np.in1d(node_ids, element_node_ids))[0]
-        # Store indicated displacement component for the current nodes
-        if displacement_component in ["rx", "ry", "rz"]:
-            nodes_displacement[count] = displacement_data[node_indexes, component_dict[displacement_component]]  # no unit conversion for rotations
-        else:
-            nodes_displacement[count] = displacement_data[node_indexes, component_dict[displacement_component]]*displacement_unit_scale_factor
+        # Find the displacement of the nodes along the indicated component
+        nodes_disp_component = displacement_data[node_indexes, component_dict[displacement_component]]
+        # Apply unit conversion to displacements and not to rotations
+        if displacement_component not in ["rx", "ry", "rz"]:
+            nodes_disp_component *= displacement_unit_scale_factor
+        # Store the displacements in the appropriate array
+        nodes_displacement[count] = nodes_disp_component
         # Store the coordinates of the nodes of the deformed elements
-        vertices[count] = np.vstack([op2_object.nodes[node_id].xyz*coordinate_unit_scale_factor +
-        displacement_data[np.where(node_ids == node_id)[0], 0:3]*displacement_unit_scale_factor*displacement_amplification_factor
-        for node_id in element_node_ids])
+        vertices[count] = np.vstack([
+            op2_object.nodes[node_id].xyz * coordinate_unit_scale_factor +
+            displacement_data[np.where(node_ids == node_id)[0], 0:3] * displacement_unit_scale_factor * displacement_amplification_factor
+            for node_id in element_node_ids
+        ])
     # Calculate displacement magnitude if requested
     if displacement_component == 'magnitude':
-        nodes_displacement = np.apply_along_axis(np.linalg.norm, 1, nodes_displacement)
+        nodes_displacement = np.linalg.norm(nodes_displacement, axis=1)
     # Calculate average displacement for each element
-    elements_mean_displacement = np.apply_along_axis(np.mean, 1, nodes_displacement)
+    elements_mean_displacement = np.mean(nodes_displacement, axis=1)
     # Create 3D polygons to represent the elements
     pc = Poly3DCollection(vertices, linewidths=.05)
     # Create colormap for the displacement magnitude
@@ -301,12 +306,12 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     ax.set_ylabel(f'$y$, {length_unit}')
     ax.set_zlabel(f'$z$, {length_unit}')
     # Set axes limits
-    x_coordinates = [func(points[:, 0]) for points in vertices for func in (np.min, np.max)]
-    y_coordinates = [func(points[:, 1]) for points in vertices for func in (np.min, np.max)]
-    z_coordinates = [func(points[:, 2]) for points in vertices for func in (np.min, np.max)]
-    ax.set_xlim(min(x_coordinates), max(x_coordinates))
-    ax.set_ylim(min(y_coordinates), max(y_coordinates))
-    ax.set_zlim(min(z_coordinates), max(z_coordinates))
+    x_coords = vertices[..., 0].ravel()
+    y_coords = vertices[..., 1].ravel()
+    z_coords = vertices[..., 2].ravel()
+    ax.set_xlim(x_coords.min(), x_coords.max())
+    ax.set_ylim(y_coords.min(), y_coords.max())
+    ax.set_zlim(z_coords.min(), z_coords.max())
     # Set aspect ratio of the axes
     ax.set_box_aspect([ub - lb for lb, ub in (getattr(ax, f'get_{a}lim')() for a in 'xyz')])
     # Return axes object
@@ -497,9 +502,9 @@ def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, 
 
 
 def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, max_iter: int = 25,
-                             conv: str = 'PW', eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01,
-                             max_bisect: int = 5, subcase_id: int = 0, minalr: float = 0.25, maxalr: float = 4.,
-                             desiter: int = 12, maxinc: int = 20):
+                             conv: str = "PW", eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01,
+                             max_bisect: int = 5, subcase_id: int = 0, constraint_type: str = "CRIS",
+                             minalr: float = 0.25, maxalr: float = 4., desiter: int = 12, maxinc: int = 20):
     """
     Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM and NLPCI
     to set up the arc-length method.
@@ -526,6 +531,8 @@ def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = No
         maximum number of bisections allowed for each load increment
     subcase_id: int
         identification number of the subcase where the NLPARM card is applied
+    constraint_type: str
+        type of constraint used in the arc-length method
     minalr: float
         minimum allowable arc-length adjustment ratio
     maxalr: float
@@ -539,7 +546,7 @@ def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = No
     set_up_newton_method(bdf_object=bdf_object, nlparm_id=nlparm_id, ninc=ninc, max_iter=max_iter, conv=conv,
                          eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect, subcase_id=subcase_id)
     # Define parameters for the arc-length method
-    bdf_object.add_nlpci(nlpci_id=nlparm_id, Type='CRIS', minalr=minalr, maxalr=maxalr, desiter=desiter, mxinc=maxinc)
+    bdf_object.add_nlpci(nlpci_id=nlparm_id, Type=constraint_type, minalr=minalr, maxalr=maxalr, desiter=desiter, mxinc=maxinc)
 
 
 def run_sol_105_buckling_analysis(bdf_object: BDF, static_load_set_id: int, analysis_directory_path: str,
