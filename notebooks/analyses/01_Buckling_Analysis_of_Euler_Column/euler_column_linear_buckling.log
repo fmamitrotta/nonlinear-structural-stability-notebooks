@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/euler_column_linear_buckling.T17728_1'
-DBS='c:/temp/scratch/euler_column_linear_buckling.T17728_1'
+SDIR='c:/temp/scratch/euler_column_linear_buckling.T4020_7'
+DBS='c:/temp/scratch/euler_column_linear_buckling.T4020_7'
 SCR='yes'
 SMEM=100
 BPOOL=2022.5MB
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    16180 MB
- Physical memory available:           7074 MB
- Paging file size:                   23092 MB
- Paging file size available:          9884 MB
+ Physical memory available:           2468 MB
+ Paging file size:                   55138 MB
+ Paging file size available:          7998 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
@@ -61,21 +61,21 @@ System configuration:
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3733 MHz
+ Clock freq.:      3727 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
  Physical memory:  16180 MB
- Virtual memory:   23092 MB
+ Virtual memory:   55138 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Thu Jun  1 11:38:01 GST 2023 
- 11:38:02  Beginning Analysis
+MSC Nastran started  Sat Aug 26 19:40:08 GST 2023 
+ 19:40:11  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,60 +83,60 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 11:38:02  MSC Authorization Information - System Attributes (1004, 0)
- 11:38:02  -----------------------------------------------------------
-  Date:          Thu Jun  1 11:38:02 2023
+ 19:40:14  MSC Authorization Information - System Attributes (1004, 0)
+ 19:40:14  -----------------------------------------------------------
+  Date:          Sat Aug 26 19:40:14 2023
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
-  Hostname:      IT076000 (user qa21944, display IT080625)
+  Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
-  CEID:          52D366F0-6B62B3FA
+  CEID:          52D366F0-6B8G1313
   User:          qa21944
-  Display:       IT080625
+  Display:       IT076000
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
 
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6B62B3FA        * *
+  * *        52D366F0-6B8G1313        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 11:38:02  MSC Authorization Information - Checkout Successful (1016, 0)
- 11:38:02  -------------------------------------------------------------
- 11:38:02  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 19:40:14  MSC Authorization Information - Checkout Successful (1016, 0)
+ 19:40:14  -------------------------------------------------------------
+ 19:40:14  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 11:38:03  877 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_linear_buckling.bdf"
+ 19:40:16  877 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_linear_buckling.bdf"
 
 Processing of bulk data entries is complete.
 
- 11:38:03  Finite element model generation started.
- 11:38:03  Finite element model generated 2526 degrees of freedom.
- 11:38:03  Finite element model generation successfully completed.
- 11:38:03  Application of Loads and Boundary Conditions to the finite element model started.
- 11:38:03  Application of Loads and Boundary Conditions to the finite element model successfully completed.
- 11:38:03  Application of Loads and Boundary Conditions to the finite element model started.
- 11:38:03  Application of Loads and Boundary Conditions to the finite element model successfully completed.
- 11:38:03  Solution of the system equations for linear statics started.
- 11:38:03  Solution of the system equations for linear statics successfully completed.
- 11:38:03  Solution of the system equations for normal modes started.
- 11:38:03  Solution of the system equations for normal modes successfully completed.
+ 19:40:16  Finite element model generation started.
+ 19:40:16  Finite element model generated 2526 degrees of freedom.
+ 19:40:16  Finite element model generation successfully completed.
+ 19:40:16  Application of Loads and Boundary Conditions to the finite element model started.
+ 19:40:16  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 19:40:16  Application of Loads and Boundary Conditions to the finite element model started.
+ 19:40:16  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 19:40:16  Solution of the system equations for linear statics started.
+ 19:40:16  Solution of the system equations for linear statics successfully completed.
+ 19:40:16  Solution of the system equations for normal modes started.
+ 19:40:17  Solution of the system equations for normal modes successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 11:38:03  18 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_linear_buckling.bdf"
- 11:38:03  NSEXIT: EXIT(0)
- 11:38:03  Analysis complete  0
-Real:        0.918 seconds ( 0:00:00.918)
-User:        0.593 seconds ( 0:00:00.593)
-Sys:         0.359 seconds ( 0:00:00.359)
+ 19:40:17  18 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_linear_buckling.bdf"
+ 19:40:17  NSEXIT: EXIT(0)
+ 19:40:17  Analysis complete  0
+Real:        7.848 seconds ( 0:00:07.848)
+User:        0.750 seconds ( 0:00:00.750)
+Sys:         0.640 seconds ( 0:00:00.640)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -158,4 +158,4 @@ Sys:         0.359 seconds ( 0:00:00.359)
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Thu Jun  1 11:38:03 GST 2023 
+MSC Nastran finished Sat Aug 26 19:40:18 GST 2023 
