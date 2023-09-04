@@ -5202,7 +5202,7 @@ NLPARM         1     100            ITER       1             PUV     YES
 NLPARM         2     100            ITER       1             PUV     YES
             .001    .001
               10
-NLPCI          1    CRIS     .01     1.1      0.               5    2000
+NLPCI          1    CRIS     .01  1.0001      0.               5    2000
 $SPCs
 SPCADD         4       1       2       3
 SPC1           1     123       1       2       3       4       5       6
