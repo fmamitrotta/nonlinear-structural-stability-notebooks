@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1619"
    sodipodi:docname="10_BoxBeamStresses.svg"
-   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -25,14 +25,16 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="1.4142136"
-     inkscape:cx="142.83557"
-     inkscape:cy="163.34166"
-     inkscape:window-width="2304"
-     inkscape:window-height="1262"
-     inkscape:window-x="-11"
-     inkscape:window-y="0"
+     inkscape:cx="822.36516"
+     inkscape:cy="184.20131"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="layer1"
+     inkscape:showpageshadow="0"
+     inkscape:deskcolor="#505050" />
   <defs
      id="defs1616">
     <marker
@@ -318,8 +320,8 @@
     <rect
        x="692"
        y="51"
-       width="186.5183"
-       height="51.18198"
+       width="86.109138"
+       height="60.374367"
        id="rect12225-9-3" />
     <rect
        x="692"
@@ -565,10 +567,10 @@
        inkscape:label=""
        transform="matrix(0.79432624,0,0,0.79432624,146.05692,135.4889)"
        id="g20190"
-       style="stroke-width:1.25893;fill:#000080">
+       style="fill:#000080;stroke-width:1.25893">
       <g
          id="g2606"
-         style="stroke-width:1.25893;fill:#000080">
+         style="fill:#000080;stroke-width:1.25893">
         <g
            style="fill:#000080;fill-opacity:1;stroke-width:1.25893"
            id="g6725">
@@ -579,7 +581,7 @@
              id="use1332"
              width="100%"
              height="100%"
-             style="stroke-width:1.25893;fill:#000080" />
+             style="fill:#000080;stroke-width:1.25893" />
         </g>
       </g>
     </g>
@@ -677,7 +679,7 @@
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect12225);fill:#000080;fill-opacity:1;stroke:none"><tspan
          x="692"
          y="80.19457"
-         id="tspan29269">Spars</tspan></text>
+         id="tspan645">Spars</tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,62.405002,150.30955)"
@@ -685,7 +687,7 @@
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect12225-9);fill:#000080;fill-opacity:1;stroke:none"><tspan
          x="692"
          y="80.19457"
-         id="tspan29271">Skins</tspan></text>
+         id="tspan647">Skins</tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,101.62879,168.15027)"
@@ -693,11 +695,10 @@
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect12225-9-3);fill:#000080;fill-opacity:1;stroke:none"><tspan
          x="692"
          y="68.030197"
-         id="tspan29273">top skin
-</tspan><tspan
+         id="tspan649">top skin </tspan><tspan
          x="692"
          y="91.363571"
-         id="tspan29275">midplane</tspan></text>
+         id="tspan651">midplane</tspan></text>
     <path
        style="fill:#0000ff;stroke:#000080;stroke-width:0.300001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.20001, 0.600001, 0.300001, 0.600001;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#Arrow2Lstart);paint-order:normal"
        d="m 56.998344,176.44468 1.07994,33.87016"
@@ -706,10 +707,10 @@
        inkscape:label=""
        transform="matrix(0.8385388,0,0,0.8385388,121.97852,112.25754)"
        id="g36956"
-       style="stroke-width:1.19255;fill:#000080">
+       style="fill:#000080;stroke-width:1.19255">
       <g
          id="g8356"
-         style="stroke-width:1.19255;fill:#000080">
+         style="fill:#000080;stroke-width:1.19255">
         <g
            style="fill:#000080;fill-opacity:1;stroke-width:1.19255"
            id="g252">
@@ -720,7 +721,7 @@
              id="use1217"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
         </g>
         <g
            style="fill:#000080;fill-opacity:1;stroke-width:1.19255"
@@ -732,7 +733,7 @@
              id="use9967"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
         </g>
         <g
            style="fill:#000080;fill-opacity:1;stroke-width:1.19255"
@@ -744,7 +745,7 @@
              id="use7297"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
           <use
              xlink:href="#symbol4315"
              x="103.052"
@@ -752,7 +753,7 @@
              id="use7540"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
           <use
              xlink:href="#symbol709"
              x="106.61213"
@@ -760,7 +761,7 @@
              id="use9684"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
           <use
              xlink:href="#symbol1514"
              x="110.93379"
@@ -768,7 +769,7 @@
              id="use6264"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
         </g>
       </g>
     </g>
@@ -776,10 +777,10 @@
        inkscape:label=""
        transform="matrix(0.8385388,0,0,0.8385388,181.33693,112.01992)"
        id="g36956-0"
-       style="stroke-width:1.19255;fill:#000080">
+       style="fill:#000080;stroke-width:1.19255">
       <g
          id="g8356-6"
-         style="stroke-width:1.19255;fill:#000080">
+         style="fill:#000080;stroke-width:1.19255">
         <g
            style="fill:#000080;fill-opacity:1;stroke-width:1.19255"
            id="g252-7">
@@ -790,7 +791,7 @@
              id="use1217-7"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
         </g>
         <g
            style="fill:#000080;fill-opacity:1;stroke-width:1.19255"
@@ -802,7 +803,7 @@
              id="use9967-9"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
         </g>
         <g
            style="fill:#000080;fill-opacity:1;stroke-width:1.19255"
@@ -814,7 +815,7 @@
              id="use7297-2"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
           <use
              xlink:href="#symbol4315"
              x="103.052"
@@ -822,7 +823,7 @@
              id="use7540-2"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
           <use
              xlink:href="#symbol709"
              x="106.61213"
@@ -830,7 +831,7 @@
              id="use9684-4"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
           <use
              xlink:href="#symbol1514"
              x="110.93379"
@@ -838,7 +839,7 @@
              id="use6264-0"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080" />
+             style="fill:#000080;stroke-width:1.19255" />
         </g>
       </g>
     </g>
@@ -846,12 +847,12 @@
        inkscape:label=""
        transform="matrix(0.8385388,0,0,0.8385388,-18.826995,107.35565)"
        id="g36956-9"
-       style="stroke-width:1.19255;fill:#000080;stroke:#000000;stroke-opacity:1">
+       style="fill:#000080;stroke:#000000;stroke-width:1.19255;stroke-opacity:1">
       <g
          id="g8356-0"
-         style="stroke-width:1.19255;fill:#000080;stroke:#000000;stroke-opacity:1">
+         style="fill:#000080;stroke:#000000;stroke-width:1.19255;stroke-opacity:1">
         <g
-           style="fill:#000080;fill-opacity:1;stroke-width:1.19255;stroke:#000000;stroke-opacity:1"
+           style="fill:#000080;fill-opacity:1;stroke:#000000;stroke-width:1.19255;stroke-opacity:1"
            id="g252-3">
           <use
              xlink:href="#symbol2633"
@@ -860,10 +861,10 @@
              id="use1217-4"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080;stroke:#000000;stroke-opacity:1" />
+             style="fill:#000080;stroke:#000000;stroke-width:1.19255;stroke-opacity:1" />
         </g>
         <g
-           style="fill:#000080;fill-opacity:1;stroke-width:1.19255;stroke:#000000;stroke-opacity:1"
+           style="fill:#000080;fill-opacity:1;stroke:#000000;stroke-width:1.19255;stroke-opacity:1"
            id="g4406-7">
           <use
              xlink:href="#symbol1514"
@@ -872,10 +873,10 @@
              id="use9967-92"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080;stroke:#000000;stroke-opacity:1" />
+             style="fill:#000080;stroke:#000000;stroke-width:1.19255;stroke-opacity:1" />
         </g>
         <g
-           style="fill:#000080;fill-opacity:1;stroke-width:1.19255;stroke:#000000;stroke-opacity:1"
+           style="fill:#000080;fill-opacity:1;stroke:#000000;stroke-width:1.19255;stroke-opacity:1"
            id="g1139-04">
           <use
              xlink:href="#symbol8524"
@@ -884,7 +885,7 @@
              id="use7297-7"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080;stroke:#000000;stroke-opacity:1" />
+             style="fill:#000080;stroke:#000000;stroke-width:1.19255;stroke-opacity:1" />
           <use
              xlink:href="#symbol4315"
              x="103.052"
@@ -892,7 +893,7 @@
              id="use7540-24"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080;stroke:#000000;stroke-opacity:1" />
+             style="fill:#000080;stroke:#000000;stroke-width:1.19255;stroke-opacity:1" />
           <use
              xlink:href="#symbol709"
              x="106.61213"
@@ -900,7 +901,7 @@
              id="use9684-9"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080;stroke:#000000;stroke-opacity:1" />
+             style="fill:#000080;stroke:#000000;stroke-width:1.19255;stroke-opacity:1" />
           <use
              xlink:href="#symbol1514"
              x="110.93379"
@@ -908,7 +909,7 @@
              id="use6264-6"
              width="100%"
              height="100%"
-             style="stroke-width:1.19255;fill:#000080;stroke:#000000;stroke-opacity:1" />
+             style="fill:#000080;stroke:#000000;stroke-width:1.19255;stroke-opacity:1" />
         </g>
       </g>
     </g>
