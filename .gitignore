@@ -9,6 +9,7 @@
 *.ini
 *.rej
 *.pdf
+*.pyc
 *.zip
 notebooks/analyses/02_Supercritical_Pitchfork_Bifurcation_of_Euler_Column/arclength_method.f04
 notebooks/analyses/02_Supercritical_Pitchfork_Bifurcation_of_Euler_Column/arclength_method_pxpcr2_investigation_alternative_subcases.f04
