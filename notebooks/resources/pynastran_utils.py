@@ -1,3 +1,21 @@
+"""
+This file is part of the GitHub repository nonlinear-structural-stability-notebooks, created by Francesco M. A. Mitrotta.
+Copyright (C) 2023 Francesco Mario Antonio Mitrotta
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
+
 import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
 from matplotlib.colorbar import Colorbar
@@ -8,11 +26,15 @@ import numpy as np
 from numpy import ndarray
 import os
 from pyNastran.bdf.bdf import BDF
-from pyNastran.op2.op2 import OP2
-from pyNastran.op2.op2 import read_op2
+from pyNastran.op2.op2 import OP2, read_op2
 from pyNastran.utils.nastran_utils import run_nastran
 import re
 from typing import Tuple, Dict, Any, Union
+import tol_colors as tc
+
+# Register Tol's color-blind friendly colormaps
+plt.cm.register_cmap("sunset", tc.tol_cmap("sunset"))
+plt.cm.register_cmap("rainbow_PuRd", tc.tol_cmap("rainbow_PuRd"))
 
 
 def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: bool = True):
@@ -203,10 +225,10 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     return eigenvalue_array.T
 
 
-def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: ndarray, displacement_component: str = 'magnitude',
+def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: ndarray, displacement_component: str = "magnitude",
                        displacement_unit_scale_factor: float = 1., coordinate_unit_scale_factor:float =1.,
-                       displacement_amplification_factor: float = 1., colormap: str = 'jet', clim: Union[list, ndarray] = None,
-                       length_unit: str = 'mm') -> Tuple[Figure, Axes3D, ScalarMappable]:
+                       displacement_amplification_factor: float = 1., colormap: str = "rainbow_PuRd", clim: Union[list, ndarray] = None,
+                       length_unit: str = "mm") -> Tuple[Figure, Axes3D, ScalarMappable]:
     """
     Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
 
@@ -302,9 +324,9 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     # Add polygons to the plot
     ax.add_collection3d(pc)
     # Set axes label
-    ax.set_xlabel(f'$x$, {length_unit}')
-    ax.set_ylabel(f'$y$, {length_unit}')
-    ax.set_zlabel(f'$z$, {length_unit}')
+    ax.set_xlabel(f"$x,\,\mathrm{{{length_unit}}}$")
+    ax.set_ylabel(f"$y,\,\mathrm{{{length_unit}}}$")
+    ax.set_zlabel(f"$z,\,\mathrm{{{length_unit}}}$")
     # Set axes limits
     x_coords = vertices[..., 0].ravel()
     y_coords = vertices[..., 1].ravel()
@@ -318,9 +340,9 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     return fig, ax, m
 
 
-def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_number: int = 1, displacement_component: str = 'magnitude',
-                       unit_scale_factor: float = 1., displacement_amplification_factor: float = 200., colormap: str = 'jet',
-                       length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
+def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_number: int = 1, displacement_component: str = "magnitude",
+                       unit_scale_factor: float = 1., displacement_amplification_factor: float = 200., colormap: str = "rainbow_PuRd",
+                       length_unit: str = "mm") -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -377,9 +399,9 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_numb
 
 
 def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, load_step: int = 0,
-                            displacement_component: str = 'magnitude', unit_scale_factor: float = 1.,
-                            displacement_amplification_factor:float = 1., colormap: str = 'jet', clim: Union[list, ndarray] = None,
-                            length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
+                            displacement_component: str = "magnitude", unit_scale_factor: float = 1.,
+                            displacement_amplification_factor:float = 1., colormap: str = "rainbow_PuRd", clim: Union[list, ndarray] = None,
+                            length_unit: str = "mm") -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -427,9 +449,9 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
     label_dict = {'tx': f'$u_x$, {length_unit}',
                   'ty': f'$u_y$, {length_unit}',
                   'tz': f'$u_z$, {length_unit}',
-                  'rx': '$\\theta_x$, rad',
-                  'ry': '$\\theta_y$, rad',
-                  'rz': '$\\theta_z$, rad',
+                  'rx': '$\\theta_x,\,\mathrm{rad}$',
+                  'ry': '$\\theta_y,\,\mathrm{rad}$',
+                  'rz': '$\\theta_z,\,\mathrm{rad}$',
                   'magnitude': f'Displacement magnitude, {length_unit}'}
     cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component])
     # Set whitespace to 0
