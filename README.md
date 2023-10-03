@@ -6,6 +6,30 @@ If you use any of the code or of the other resources in this repository, please 
 
 F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. H. Cabral. _"Proof-of-concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations"_, 2023, RAeS 8th Aircraft Structural Design Conference
 
+## List of notebooks
+
+1. [Buckling Analysis of Euler's Column](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/01_Buckling_Analysis_of_Euler_Column.ipynb)
+2. [Supercritical Pitchfork Bifurcation of Euler's Column](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/02_Supercritical_Pitchfork_Bifurcation_of_Euler_Column.ipynb)
+3. [Equilibrium Diagram of a Thin Plate under Uniaxial Compression](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/03_Equilibrium_Diagram_of_a_Thin_Plate_under_Uniaxial_Compression.ipynb)
+4. [Nonlinear Buckling Analysis of a Box Beam](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/04_Nonlinear_Buckling_Analysis_of_a_Box_Beam.ipynb)
+5. [Sensitivity Study of SOL 106's Nonlinear Analysis Parameters](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/05_Sensitivity_Study_of_SOL_106_Nonlinear_Analysis_Parameters.ipynb)
+6. [Verification of SOL 106's Nonlinear Buckling Method](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/06_Verification_of_SOL_106_Nonlinear_Buckling_Method.ipynb)
+7. [Nonlinear Buckling Analysis of an Imperfect Euler's Column](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/07_Nonlinear_Buckling_Analysis_of_an_Imperfect_Euler_Column.ipynb)
+8. [Nonlinear Buckling Analysis of a Box Beam Reinforced with Ribs](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/08_Nonlinear_Buckling_Analysis_of_a_Box_Beam_Reinforced_with_Ribs.ipynb)
+9. [Verification of Shell Elements' Normal Vectors Consistency](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/09_Verification_of_Shell_Elements_Normal_Vectors_Consistency.ipynb)
+10. [On the Mechanical Cause of the Box Beam's Bifurcation Break](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/10_On_the_Mechanical_Cause_of_the_Box_Beam_Bifurcation_Break.ipynb)
+11. [Equilibrium Diagram of a Box Beam under Uniaxial Compression](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/11_Equilibrium_Diagram_of_a_Box_Beam_Under_Uniaxial_Compression.ipynb)
+12. [Nonlinear Buckling Analysis of a Box Beam Reinforced with Ribs and Stiffeners](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/12_Nonlinear_Buckling_Analysis_of_a_Box_Beam_Reinforced_with_Ribs_and_Stiffeners.ipynb)
+13. [On the Correct Application of the Nonlinear Buckling Method](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/13_On_the_Correct_Application_of_the_Nonlinear_Buckling_Method.ipynb)
+14. [Investigation of the Equilibrium Paths of the Unreinforced Box Beam](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/14_Investigation_of_the_Equilibrium_Paths_of_the_Unreinforced_Box_Beam.ipynb)
+15. [Investigation of the Equilibrium Paths of the Box Beam Reinforced with Ribs](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/15_Investigation_of_the_Equilibrium_Paths_of_the_Box_Beam_Reinforced_with_Ribs.ipynb)
+16. [Investigation of the Equilibrium Paths of the Box Beam Reinforced with Ribs and Stiffeners](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/16_Investigation_of_the_Equilibrium_Paths_of_the_Box_Beam_Reinforced_with_Ribs_and_Stiffeners.ipynb)
+17. [Nonlinear Buckling Analysis of the uCRM-9](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/17_Nonlinear_Buckling_Analysis_of_the_uCRM-9.ipynb)
+18. [Development and Nonlinear Buckling Analysis of a CRM-like Box Beam Model](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/18_Development_and_Nonlinear_Buckling_Analysis_of_a_CRM-like_Box_Beam_Model.ipynb)
+19. [One-variable Optimization of the CRM-like Box Beam](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/19_One-variable_Optimization_of_the_CRM-like_Box_Beam.ipynb)
+
+### Papers
+[Proof-of-concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Proof-of-concept_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimizations.ipynb)
 
 ## Copyright and License
 
