@@ -1,0 +1,1576 @@
+1
+ 
+ 
+ 
+ 
+                      Warning: This computer program is protected by copyright law and international treaties.       
+                  Unauthorized use, reproduction or distribution of this computer program, or any portion of it, may 
+                                          result in severe civil and criminal penalties.                             
+                         Copyright (C) 2021 MSC Software Corporation and its licensors. All rights reserved.         
+ 
+ 
+                                              * * * * * * * * * * * * * * * * * * * *
+                                              * * * * * * * * * * * * * * * * * * * *
+                                              * *                                 * *
+                                              * *           MSC Software          * *
+                                              * *               CORP              * *
+                                              * *                                 * *
+                                              * *      M S C   N a s t r a n      * *
+                                              * *                                 * *
+                                              * *                                 * *
+                                              * *                                 * *
+                                              * *     Version 2021.4-CL855437     * *
+                                              * *                                 * *
+                                              * *                                 * *
+                                              * *                                 * *
+                                              * *          DEC 14, 2021           * *
+                                              * *                                 * *
+                                              * *              Intel              * *
+                                              * * MODEL Intel(R) Core(TM) i7-8700 * *
+                                              * * Windows 10 Enterprise 6.2 9200  * *
+                                              * * Compiled for 8664 (SINGLE Mode) * *
+                                              * *                                 * *
+                                              * * * * * * * * * * * * * * * * * * * *
+                                              * * * * * * * * * * * * * * * * * * * *
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE     1
+                                                                                                                                    
+0        N A S T R A N    F I L E    A N D    S Y S T E M    P A R A M E T E R    E C H O                                           
+0                                                                                                                                   
+                                                                                                                                    
+                                                                                                                                    
+     $ SYSFIELD=SCR*(RAW=YES,BUFFIO=YES,WNUM=16,WSIZE=16MB) $(C:/PROGRAM FILES/MSC.SO
+     $ SYSFIELD=DBALL(RAW=YES,BUFFIO=YES,WNUM=16,WSIZE=16MB) $(C:/PROGRAM FILES/MSC.S
+     NASTRAN BUFFSIZE=32769 $(C:/PROGRAM FILES/MSC.SOFTWARE/MSC_NASTRAN/2021.4/CONF/N
+     $PYNASTRAN: VERSION=MSC                                                         
+     $PYNASTRAN: PUNCH=FALSE                                                         
+     $PYNASTRAN: ENCODING=UTF-8                                                      
+     $PYNASTRAN: NNODES=0                                                            
+     $PYNASTRAN: NELEMENTS=0                                                         
+     $EXECUTIVE CONTROL DECK                                                         
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE     2
+                                                                                                                                    
+0        N A S T R A N    E X E C U T I V E    C O N T R O L    E C H O                                                             
+0                                                                                                                                   
+                                                                                                                                    
+                                                                                                                                    
+     SOL 105                                                                                 
+     CEND                                                                                    
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE     3
+                                                                                                                                    
+0                                                                                                                                   
+0                                        C A S E    C O N T R O L    E C H O                                                        
+                 COMMAND                                                                                                            
+                 COUNT                                                                                                              
+                  1      $CASE CONTROL DECK                                                                      
+                  2      DISPLACEMENT(PLOT) = ALL                                                                
+                  3      ECHO = NONE                                                                             
+                  4      OLOAD(PLOT) = ALL                                                                       
+                  5      SPC = 1                                                                                 
+                  6      SUBCASE 1                                                                               
+                  7          LOAD = 1                                                                            
+                  8      SUBCASE 2                                                                               
+                  9          METHOD = 2                                                                          
+                 10      BEGIN BULK                                                                              
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE     4
+                                                                                                                                    
+0                                                                                                                                   
+                                              I N P U T   B U L K   D A T A   E C H O                                               
+                 ENTRY                                                                                                              
+                 COUNT        .   1  ..   2  ..   3  ..   4  ..   5  ..   6  ..   7  ..   8  ..   9  ..  10  .                      
+                              $INCLUDE "..\..\resources\uCRM-9_wingbox_coarse.bdf"
+ *** USER INFORMATION MESSAGE 9991 (SDLWIF)
+     Messages are being generated at include level 1.
+     File: ..\..\resources\uCRM-9_wingbox_coarse.bdf
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73737
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73738
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73739
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73740
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73741
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73742
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73743
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73744
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73745
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73746
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73747
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73757
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 73758
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74043
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74044
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74045
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74046
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74047
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74048
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74049
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74050
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74051
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74052
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74053
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74054
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74055
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74067
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74068
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74069
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74070
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74071
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74072
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74073
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74074
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74075
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74076
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74077
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74078
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74079
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74080
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULKPM)
+     SPC near line 74081
+      was entered more than once, with differences starting at field SID.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=4 near line 74229
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=8 near line 74246
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE     5
+                                                                                                                                    
+0                                                                                                                                   
+                                              I N P U T   B U L K   D A T A   E C H O                                               
+                 ENTRY                                                                                                              
+                 COUNT        .   1  ..   2  ..   3  ..   4  ..   5  ..   6  ..   7  ..   8  ..   9  ..  10  .                      
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=12 near line 74263
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=16 near line 74280
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=20 near line 74297
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=24 near line 74314
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=28 near line 74331
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=32 near line 74348
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=36 near line 74365
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=40 near line 74382
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=44 near line 74399
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=48 near line 74416
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=52 near line 74433
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=56 near line 74450
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=60 near line 74467
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=64 near line 74484
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=68 near line 74501
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=72 near line 74518
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=76 near line 74535
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=80 near line 74552
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=84 near line 74569
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=88 near line 74586
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=92 near line 74603
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=96 near line 74620
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=100 near line 74637
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=104 near line 74654
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=108 near line 74671
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=112 near line 74688
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=116 near line 74705
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=120 near line 74722
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=124 near line 74739
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=128 near line 74756
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=132 near line 74773
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=136 near line 74790
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=140 near line 74807
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=144 near line 74824
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=148 near line 74841
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=152 near line 74858
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=156 near line 74875
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=160 near line 74892
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=164 near line 74909
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=168 near line 74926
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=172 near line 74943
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=176 near line 74960
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=180 near line 74977
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=184 near line 74994
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=188 near line 75011
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE     6
+                                                                                                                                    
+0                                                                                                                                   
+                                              I N P U T   B U L K   D A T A   E C H O                                               
+                 ENTRY                                                                                                              
+                 COUNT        .   1  ..   2  ..   3  ..   4  ..   5  ..   6  ..   7  ..   8  ..   9  ..  10  .                      
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=192 near line 75028
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=196 near line 75045
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=200 near line 75062
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=204 near line 75079
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=208 near line 75096
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=212 near line 75113
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=216 near line 75130
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=220 near line 75147
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=224 near line 75164
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=228 near line 75181
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=232 near line 75198
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=236 near line 75215
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=240 near line 75232
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=244 near line 75249
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=248 near line 75266
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=252 near line 75283
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=256 near line 75300
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=260 near line 75317
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=264 near line 75334
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=268 near line 75351
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=272 near line 75368
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=276 near line 75385
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=280 near line 75402
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=284 near line 75419
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=288 near line 75436
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=292 near line 75453
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=296 near line 75470
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=300 near line 75487
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=304 near line 75504
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=308 near line 75521
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=312 near line 75538
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=316 near line 75555
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=320 near line 75572
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=324 near line 75589
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=328 near line 75606
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=332 near line 75623
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=336 near line 75640
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=340 near line 75657
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=344 near line 75674
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=348 near line 75691
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=352 near line 75708
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=356 near line 75725
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=360 near line 75742
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=364 near line 75759
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=368 near line 75776
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE     7
+                                                                                                                                    
+0                                                                                                                                   
+                                              I N P U T   B U L K   D A T A   E C H O                                               
+                 ENTRY                                                                                                              
+                 COUNT        .   1  ..   2  ..   3  ..   4  ..   5  ..   6  ..   7  ..   8  ..   9  ..  10  .                      
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=372 near line 75793
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=376 near line 75810
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=380 near line 75827
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=384 near line 75844
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=388 near line 75861
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=392 near line 75878
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=396 near line 75895
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=400 near line 75912
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=404 near line 75929
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=408 near line 75946
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=412 near line 75963
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=416 near line 75980
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=420 near line 75997
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=424 near line 76014
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=428 near line 76031
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=432 near line 76048
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=436 near line 76065
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=440 near line 76082
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=444 near line 76099
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=448 near line 76116
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=452 near line 76133
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=456 near line 76150
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=460 near line 76167
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=464 near line 76184
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=468 near line 76201
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=472 near line 76218
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=476 near line 76235
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=480 near line 76252
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=484 near line 76269
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=488 near line 76286
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=492 near line 76303
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=496 near line 76320
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=500 near line 76337
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=504 near line 76354
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=508 near line 76371
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=512 near line 76388
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=516 near line 76405
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=520 near line 76422
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=524 near line 76439
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=528 near line 76456
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=532 near line 76473
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=536 near line 76490
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=540 near line 76507
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=544 near line 76524
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=548 near line 76541
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE     8
+                                                                                                                                    
+0                                                                                                                                   
+                                              I N P U T   B U L K   D A T A   E C H O                                               
+                 ENTRY                                                                                                              
+                 COUNT        .   1  ..   2  ..   3  ..   4  ..   5  ..   6  ..   7  ..   8  ..   9  ..  10  .                      
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=552 near line 76558
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=556 near line 76575
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=560 near line 76592
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=564 near line 76609
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=568 near line 76626
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=572 near line 76643
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=576 near line 76660
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=580 near line 76677
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=584 near line 76694
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=588 near line 76711
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=592 near line 76728
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=596 near line 76745
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=600 near line 76762
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=604 near line 76779
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=608 near line 76796
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=612 near line 76813
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=616 near line 76830
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=620 near line 76847
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=624 near line 76864
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=628 near line 76881
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=632 near line 76898
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=636 near line 76915
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=640 near line 76932
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=644 near line 76949
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=648 near line 76966
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=652 near line 76983
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=656 near line 77000
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=660 near line 77017
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=664 near line 77034
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=668 near line 77051
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=672 near line 77068
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=676 near line 77085
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=680 near line 77102
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=684 near line 77119
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=688 near line 77136
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=692 near line 77153
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=696 near line 77170
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=700 near line 77187
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=704 near line 77204
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=708 near line 77221
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=712 near line 77238
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=716 near line 77255
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=720 near line 77272
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=724 near line 77289
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=728 near line 77306
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE     9
+                                                                                                                                    
+0                                                                                                                                   
+                                              I N P U T   B U L K   D A T A   E C H O                                               
+                 ENTRY                                                                                                              
+                 COUNT        .   1  ..   2  ..   3  ..   4  ..   5  ..   6  ..   7  ..   8  ..   9  ..  10  .                      
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=732 near line 77323
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=736 near line 77340
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=740 near line 77357
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=744 near line 77374
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=748 near line 77391
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=752 near line 77408
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=756 near line 77425
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=760 near line 77442
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=764 near line 77459
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=768 near line 77476
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=772 near line 77493
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=776 near line 77510
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=780 near line 77527
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=784 near line 77544
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=788 near line 77561
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=792 near line 77578
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=796 near line 77595
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=800 near line 77612
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=804 near line 77629
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=808 near line 77646
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=812 near line 77663
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=816 near line 77680
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=820 near line 77697
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=824 near line 77714
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=828 near line 77731
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=832 near line 77748
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=836 near line 77765
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=840 near line 77782
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=844 near line 77799
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=848 near line 77816
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=852 near line 77833
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=856 near line 77850
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=860 near line 77867
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=864 near line 77884
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=868 near line 77901
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=872 near line 77918
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=876 near line 77935
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=880 near line 77952
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=884 near line 77969
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=888 near line 77986
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=892 near line 78003
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=896 near line 78020
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=900 near line 78037
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=904 near line 78054
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=908 near line 78071
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    10
+                                                                                                                                    
+0                                                                                                                                   
+                                              I N P U T   B U L K   D A T A   E C H O                                               
+                 ENTRY                                                                                                              
+                 COUNT        .   1  ..   2  ..   3  ..   4  ..   5  ..   6  ..   7  ..   8  ..   9  ..  10  .                      
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=912 near line 78088
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=916 near line 78105
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=920 near line 78122
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=924 near line 78139
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=928 near line 78156
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=932 near line 78173
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=936 near line 78190
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=940 near line 78207
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=944 near line 78224
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=948 near line 78241
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=952 near line 78258
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=956 near line 78275
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=960 near line 78292
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=964 near line 78309
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+ *** USER WARNING MESSAGE 9994 (BULFUN)
+     MAT2 with MID=968 near line 78326
+     The Material Property Matrix is not positive definite. This may result in loss of accuracy.
+     User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
+                              $END OF INCLUDE "..\..\resources\uCRM-9_wingbox_coarse.bdf"
+                              $INCLUDE "..\..\resources\uCRM-9_aero_forces_1.0g_coarse.bdf"
+
+*** USER WARNING MESSAGE (fn: GETLIN)
+    The ENDDATA statement is missing.
+                              $END OF INCLUDE "..\..\resources\uCRM-9_aero_forces_1.0g_coarse.bdf"
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    11
+                                                                                                                                    
+0                                                                                                                                   
+                                        M O D E L   S U M M A R Y          BULK = 0
+                                   ENTRY NAME        NUMBER OF ENTRIES
+                                   ----------        -----------------
+                                       CORD2R                      242
+                                       CQUADR                    25055
+                                        EIGRL                        1
+                                        FORCE                    13586
+                                         GRID                    23738
+                                         MAT2                      968
+                                        PARAM                        7
+                                       PSHELL                      242
+                                          SPC                     1400
+
+ ^^^     
+ ^^^ >>> IFP OPERATIONS COMPLETE <<< 
+ ^^^     
+ *** USER INFORMATION MESSAGE 4109 (OUTPX2)
+     THE LABEL IS XXXXXXXX FOR FORTRAN UNIT    12
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =          7 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =         10 RECORDS.)
+                (TOTAL DATA WRITTEN FOR LABEL =         21 WORDS.)
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK GEOM1X   WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR GEOM1, TRL =
+                    101                 0              2048                 8                 0                 0                 0
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS GEOM1   
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       65538 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          29 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =      193100 WORDS.)
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK GEOM2X   WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR GEOM2, TRL =
+                    102                 0                 0                 0                 0                 1                 0
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS GEOM2   
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       65538 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          30 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =      375871 WORDS.)
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK GEOM3X   WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR GEOM3, TRL =
+                    103                 0                 0                64                 0                 0                 0
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS GEOM3   
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       65538 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          22 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =       95144 WORDS.)
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    12
+                                                                                                                                    
+0                                                                                                                                   
+0                                                                                                                                   
+                                                                                                                                    
+                                                                                                                                    
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK GEOM4X   WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR GEOM4, TRL =
+                    104                 0                 0                 0               512                 0                 0
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS GEOM4   
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =        7003 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =        7041 WORDS.)
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK EPTX     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR EPT, TRL =
+                    105                 0               512                 0                 0                 0                 0
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS EPT     
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =        2665 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =        2703 WORDS.)
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK MPTS     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR MPT, TRL =
+                    101             16384                 0                 0                 0                 0                 0
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS MPT     
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       22267 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =       22305 WORDS.)
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK DYNAMICS WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR DYNAMICS, TRL =
+                    103               256                 0                 0                 0                 0                 0
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS DYNAMICS
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =          30 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =          68 WORDS.)
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK CASESO   WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR CASECC, TRL =
+                    101                 2                 0              1000                 0                 0                 0
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS CASECC  
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =        1000 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =        2035 WORDS.)
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK CSTMS    WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR CSTM, TRL =
+                    102             23738               242                 1                 2              2904                 0
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS CSTM    
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =        2904 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =        3907 WORDS.)
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    13
+                                                                                                                                    
+0                                                                                                                                   
+0
+0
+0
+ 
+ *** USER INFORMATION MESSAGE 7555 (GMTSTS)
+     FINITE ELEMENT GEOMETRY CHECK RESULTS EXCEED TOLERANCE LEVELS FOR THE FOLLOWING ELEMENTS.  METRIC VALUES THAT EXCEED
+     TEST TOLERANCE LIMITS ARE IDENTIFIED BY ONE OF THE FOLLOWING FLAGS PLACED TO THE RIGHT OF THE METRIC VALUE.
+        "++++" FOR TEST RESULTS EXCEEDING TOLERANCES.  INFORMATIONAL ONLY.  PROBLEM SOLUTION CONTINUES.  (DEFAULT FLAG)
+        "IGNR" FOR TEST RESULTS EXCEEDING TOLERANCES.  INFORMATIONAL ONLY.  PROBLEM SOLUTION CONTINUES.
+        "WARN" FOR TEST RESULTS EXCEEDING TOLERANCES.  INFORMATIONAL ONLY.  PROBLEM SOLUTION CONTINUES.
+        "FAIL" FOR TEST RESULTS EXCEEDING TOLERANCES.  SEVERE ERROR.        PROBLEM SOLUTION TERMINATES.
+     USER ACTION: USE THE GEOMCHECK (EXECUTIVE CONTROL STATEMENT) KEYWORD=VALUE TO CHANGE TOLERANCE VALUES IF DESIRED.
+     A MAXIMUM OF        100 SKEW ANGLE (SA)       TOLERANCE LIMIT VIOLATIONS WILL BE IDENTIFIED BY THE FLAG "++++"
+                             PLACED AFTER THE VALUE METRIC FOR THE TEST.
+     A MAXIMUM OF        100 MIN INT. ANGLE (IA)   TOLERANCE LIMIT VIOLATIONS WILL BE IDENTIFIED BY THE FLAG "++++"
+                             PLACED AFTER THE VALUE METRIC FOR THE TEST.
+     A MAXIMUM OF        100 MAX INT. ANGLE (IA)   TOLERANCE LIMIT VIOLATIONS WILL BE IDENTIFIED BY THE FLAG "++++"
+                             PLACED AFTER THE VALUE METRIC FOR THE TEST.
+     A MAXIMUM OF        100 WARPING FACTOR (WF)   TOLERANCE LIMIT VIOLATIONS WILL BE IDENTIFIED BY THE FLAG "++++"
+                             PLACED AFTER THE VALUE METRIC FOR THE TEST.
+     A MAXIMUM OF        100 TAPER RATIO (TR)      TOLERANCE LIMIT VIOLATIONS WILL BE IDENTIFIED BY THE FLAG "++++"
+                             PLACED AFTER THE VALUE METRIC FOR THE TEST.
+     USER INFORMATION: THE MAXIMUM MESSAGE COUNT FOR ANY ONE ELEMENT ERROR TEST COULD BE EXCEEDED BY THE 
+     CUMULATIVE EFFECT OF ALL THE MESSAGES GENERATED FOR ALL OF THE DIFFERENT TESTS PERFORMED.
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    14
+                                                                                                                                    
+0                                                                                                                                   
+     TOLERANCE LIMITS ARE:  SA =  30.00, IA(MIN) =  30.00, IA(MAX) = 150.00, WF =   0.05, TR =   0.50 (FLAG = LIMIT VIOLATED)
+ ELEMENT TYPE    ID          SKEW ANGLE      MIN INT. ANGLE    MAX INT. ANGLE    WARPING FACTOR      TAPER RATIO  
+    QUADR        9936        89.16             63.23            130.85              0.00              0.55 ++++
+    QUADR        9998        89.86             63.89            131.40              0.00              0.55 ++++
+    QUADR       19113        85.49             68.21            133.29              0.00              0.53 ++++
+    QUADR       19371        44.16             29.88 ++++       143.68              0.00              0.41     
+    QUADR       19372        68.06             53.61            141.29              0.00              0.51 ++++
+    QUADR       19390        61.12             33.22            151.78 ++++         0.00              0.48     
+    QUADR       19421        84.77             39.90            141.38              0.00              0.54 ++++
+    QUADR       19566        41.01             28.66 ++++       131.86              0.00              0.46     
+    QUADR       19580        42.16             29.51 ++++       129.85              0.00              0.46     
+    QUADR       19810        41.15             28.77 ++++       131.68              0.00              0.46     
+    QUADR       19816        41.86             29.35 ++++       133.28              0.00              0.46     
+    QUADR       19956        41.32             28.90 ++++       131.45              0.00              0.46     
+    QUADR       19987        40.90             28.59 ++++       131.83              0.00              0.46     
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    15
+                                                                                                                                    
+0                                                                                                                                   
+
+
+                            E L E M E N T   G E O M E T R Y   T E S T   R E S U L T S   S U M M A R Y
+                                        TOTAL NUMBER OF TIMES TOLERANCES WERE EXCEEDED
+  ELEMENT        SKEW       ASPECT/     MINIMUM      MAXIMUM    SURFACE/FACE    OFFSET     EDGE POINT   EDGE POINT    JACOBIAN  
+    TYPE       ANGLE      TAPER RATIO INTER. ANGLE INTER. ANGLE  WARP FACTOR    RATIO     LENGTH RATIO ANGLE LIMIT  DETERMINANT 
+   QUADR           0            5            7            1            0          N/A          N/A          N/A          N/A        
+
+         N/A IN THE ABOVE TABLE INDICATES TESTS THAT ARE NOT APPLICABLE TO THE ELEMENT TYPE AND WERE NOT PERFORMED.
+         FOR ALL ELEMENTS WHERE GEOMETRY TEST RESULTS HAVE EXCEEDED TOLERANCES,
+
+         QUADR    ELEMENT ID     9998 PRODUCED LARGEST  TAPER RATIO      OF       0.55 (TOLERANCE =        0.50).
+         QUADR    ELEMENT ID    19987 PRODUCED SMALLEST INTERIOR ANGLE   OF      28.59 (TOLERANCE =       30.00).
+         QUADR    ELEMENT ID    19390 PRODUCED LARGEST  INTERIOR ANGLE   OF     151.78 (TOLERANCE =      150.00).
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    16
+                                                                                                                                    
+0                                                                                                                                   
+                           O U T P U T   F R O M   G R I D   P O I N T   W E I G H T   G E N E R A T O R
+0                                                     REFERENCE POINT =        1
+                                                                M O
+                      *  1.195849E+04  4.309888E-14  2.395556E-14 -1.723269E-13 -5.739307E+03  4.596804E+04 *
+                      *  4.309888E-14  1.195849E+04 -3.573794E-14  5.739307E+03 -7.870438E-14 -3.207225E+03 *
+                      *  2.395556E-14 -3.573794E-14  1.195849E+04 -4.596804E+04  3.207225E+03  2.510313E-13 *
+                      * -1.723269E-13  5.739307E+03 -4.596804E+04  6.810552E+05 -3.097141E+05 -1.049723E+04 *
+                      * -5.739307E+03 -7.870438E-14  3.207225E+03 -3.097141E+05  2.145435E+05 -4.153219E+04 *
+                      *  4.596804E+04 -3.207225E+03  2.510313E-13 -1.049723E+04 -4.153219E+04  8.808084E+05 *
+                                                                 S
+                                           *  1.000000E+00  0.000000E+00  0.000000E+00 *
+                                           *  0.000000E+00  1.000000E+00  0.000000E+00 *
+                                           *  0.000000E+00  0.000000E+00  1.000000E+00 *
+                               DIRECTION
+                          MASS AXIS SYSTEM (S)     MASS              X-C.G.        Y-C.G.        Z-C.G.
+                                  X            1.195849E+04     -1.441042E-17 -3.843967E+00 -4.799358E-01
+                                  Y            1.195849E+04     -2.681965E-01 -6.581464E-18 -4.799358E-01
+                                  Z            1.195849E+04     -2.681965E-01 -3.843967E+00  2.099189E-17
+                                                                I(S)
+                                           *  5.016011E+05  2.973856E+05  8.957967E+03 *
+                                           *  2.973856E+05  2.109288E+05  1.947049E+04 *
+                                           *  8.957967E+03  1.947049E+04  7.032486E+05 *
+                                                                I(Q)
+                                           *  7.043450E+05                             *
+                                           *                2.459926E+04               *
+                                           *                              6.868343E+05 *
+                                                                 Q
+                                           *  1.166166E-01 -5.292152E-01  8.404355E-01 *
+                                           * -1.092392E-01 -8.479097E-01 -5.187638E-01 *
+                                           *  9.871511E-01 -3.131205E-02 -1.566914E-01 *
+
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    17
+                                                                                                                                    
+0                                                                                                                                   
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    18
+                                                                                                                                    
+0                                                                                                                                   
+0 RESULTANTS ABOUT        1 IN SUPERELEMENT BASIC SYSTEM COORDINATES.
+
+0                                                  OLOAD    RESULTANT       
+  SUBCASE/    LOAD
+  DAREA ID    TYPE       T1            T2            T3            R1            R2            R3
+0        1     FX   -6.185963E+03     ----          ----          ----      -7.482105E+03  3.081570E+05                             
+               FY       ----      -4.082101E+04     ----       8.038014E+03     ----      -2.954851E+05                             
+               FZ       ----          ----       9.670107E+05  2.080973E+06 -3.005705E+06     ----                                  
+               MX       ----          ----          ----       0.000000E+00     ----          ----                                  
+               MY       ----          ----          ----          ----       0.000000E+00     ----                                  
+               MZ       ----          ----          ----          ----          ----       0.000000E+00                             
+             TOTALS -6.185963E+03 -4.082101E+04  9.670107E+05  2.089011E+06 -3.013187E+06  1.267186E+04
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    19
+                                                                                                                                    
+0                                                                                                                                   
+0 RESULTANTS ABOUT        1 IN SUPERELEMENT BASIC SYSTEM COORDINATES.
+
+0                                                  OLOAD    RESULTANT       
+  SUBCASE/    LOAD
+  DAREA ID    TYPE       T1            T2            T3            R1            R2            R3
+0        2     FX    0.000000E+00     ----          ----          ----       0.000000E+00  0.000000E+00                             
+               FY       ----       0.000000E+00     ----       0.000000E+00     ----       0.000000E+00                             
+               FZ       ----          ----       0.000000E+00  0.000000E+00  0.000000E+00     ----                                  
+               MX       ----          ----          ----       0.000000E+00     ----          ----                                  
+               MY       ----          ----          ----          ----       0.000000E+00     ----                                  
+               MZ       ----          ----          ----          ----          ----       0.000000E+00                             
+             TOTALS  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+  
+ *** SYSTEM INFORMATION MESSAGE 4159 (DFMSA)
+     THE DECOMPOSITION OF KLL      YIELDS A MAXIMUM MATRIX-TO-FACTOR-DIAGONAL RATIO OF    3.974866E+02
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    20
+                                                                                                                                    
+0                                                                                                            SUBCASE 1              
+ *** USER INFORMATION MESSAGE 5293 (SSG3A)
+    FOR DATA BLOCK KLL     
+    LOAD SEQ. NO.             EPSILON              EXTERNAL WORK      EPSILONS LARGER THAN 0.001 ARE FLAGGED WITH ASTERISKS
+                1          5.5720513E-11          2.8572479E+05
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK OUG1     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR OUG1, TRL =
+                    101                 0            189904                 0                 0                 0                 2
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS OUG1    
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       65536 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          24 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =      190092 WORDS.)
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK OPG1     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR OPG, TRL =
+                    101                 0            189904                 0                 0                 0                 2
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS OPG1    
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       65536 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          24 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =      190092 WORDS.)
+ ^^^     
+ *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
+     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
+ ^^^     
+ *** USER INFORMATION MESSAGE 5010 (LNCILS)
+     STURM SEQUENCE DATA FOR EIGENVALUE EXTRACTION.
+     TRIAL EIGENVALUE = 1.000000D+00, CYCLES = 1.591549D-01 THE STURM COUNT = 0
+ *** USER INFORMATION MESSAGE 5010 (LNCILS)
+     STURM SEQUENCE DATA FOR EIGENVALUE EXTRACTION.
+     TRIAL EIGENVALUE = -1.000000D-02, CYCLES = 1.591549D-02 THE STURM COUNT = 0
+ *** USER INFORMATION MESSAGE 5010 (LNCILS)
+     STURM SEQUENCE DATA FOR EIGENVALUE EXTRACTION.
+     TRIAL EIGENVALUE = 2.965729D+00, CYCLES = 2.740854D-01 THE STURM COUNT = 1
+
+ TABLE OF SHIFTS:  (LNNRIGL)
+ SHIFT #        SHIFT VALUE         FREQUENCY, CYCLES     # EIGENVALUES BELOW    # NEW EIGENVALUES FOUND
+     1.        1.0000000E+00          1.5915494E-01                 0                        0
+     2.       -1.0000000E-02         -1.5915494E-02                 0                        0
+     3.        2.9657288E+00          2.7408537E-01                 1                        1
+
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    21
+                                                                                                                                    
+0                                                                                                            SUBCASE 2              
+0
+
+
+                          E I G E N V A L U E  A N A L Y S I S   S U M M A R Y   (READ MODULE) 
+
+
+
+                                     BLOCK SIZE USED ......................     2
+
+                                     NUMBER OF DECOMPOSITIONS .............     3
+
+                                     NUMBER OF ROOTS FOUND ................     1
+
+                                     NUMBER OF SOLVES REQUIRED ............    20
+
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    22
+                                                                                                                                    
+0                                                                                                            SUBCASE 2              
+ 
+                                              R E A L   E I G E N V A L U E S
+   MODE    EXTRACTION      EIGENVALUE            RADIANS             CYCLES            GENERALIZED         GENERALIZED
+    NO.       ORDER                                                                       MASS              STIFFNESS
+        1         1        2.945097E+00        1.716129E+00        2.731303E-01        1.094089E+04        3.222198E+04
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK OUG1     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR OUG1, TRL =
+                    101                 0            189904                 0                 0                 0                 2
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS OUG1    
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       65536 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          24 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =      190092 WORDS.)
+ *** USER INFORMATION MESSAGE 4114 (OUTPX2)
+     DATA BLOCK SCRATCH  WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR QUALINFO, TRL =
+                    301                 1                10                 0                 0                 0                 0
+     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS QUALINFO
+        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =          65 WORDS.)
+           (NUMBER OF FORTRAN RECORDS WRITTEN =          60 RECORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =         410 WORDS.)
+ *** USER INFORMATION MESSAGE 4110 (OUTPX2)
+                                 END-OF-DATA SIMULATION ON FORTRAN UNIT    12
+                                 (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =      1 WORDS.)
+                                       (NUMBER OF FORTRAN RECORDS WRITTEN =      1 RECORDS.)
+                                       (TOTAL DATA WRITTEN FOR EOF MARKER =      1 WORDS.)
+1                                                                           OCTOBER   1, 2023  MSC Nastran 12/14/21   PAGE    23
+                                                                                                                                    
+0                                                                                                            SUBCASE 2              
+ * * * *  D B D I C T   P R I N T  * * * *      SUBDMAP = PRTSUM  ,  DMAP STATEMENT NO.     74
+
+
+
+0                                   * * * *  A N A L Y S I S  S U M M A R Y  T A B L E  * * * *
+0 SEID  PEID PROJ VERS APRCH      SEMG SEMR SEKR SELG SELR MODES DYNRED SOLLIN SOLNL LOOPID DESIGN CYCLE SENSITIVITY
+ -------------------------------------------------------------------------------------------------------------------
+     0     0    1    1 '        '    T    T    T    T    T     T      F      T     F     -1            0           F
+0SEID = SUPERELEMENT ID.
+ PEID = PRIMARY SUPERELEMENT ID OF IMAGE SUPERELEMENT.
+ PROJ = PROJECT ID NUMBER.
+ VERS = VERSION ID.
+ APRCH = BLANK FOR STRUCTURAL ANALYSIS.  HEAT FOR HEAT TRANSFER ANALYSIS.
+ SEMG = STIFFNESS AND MASS MATRIX GENERATION STEP.
+ SEMR = MASS MATRIX REDUCTION STEP (INCLUDES EIGENVALUE SOLUTION FOR MODES).
+ SEKR = STIFFNESS MATRIX REDUCTION STEP.
+ SELG = LOAD MATRIX GENERATION STEP.
+ SELR = LOAD MATRIX REDUCTION STEP. 
+ MODES = T (TRUE) IF NORMAL MODES OR BUCKLING MODES CALCULATED.
+ DYNRED = T (TRUE) MEANS GENERALIZED DYNAMIC AND/OR COMPONENT MODE REDUCTION PERFORMED.
+ SOLLIN = T (TRUE) IF LINEAR SOLUTION EXISTS IN DATABASE.
+ LOOPID = THE LAST LOOPID VALUE USED IN THE NONLINEAR ANALYSIS.  USEFUL FOR RESTARTS.
+ SOLNL = T (TRUE) IF NONLINEAR SOLUTION EXISTS IN DATABASE.
+ DESIGN CYCLE = THE LAST DESIGN CYCLE (ONLY VALID IN OPTIMIZATION).
+ SENSITIVITY = SENSITIVITY MATRIX GENERATION FLAG.
+ 
+ No PARAM values were set in the Control File.
+ 
+1                                        * * * END OF JOB * * *
+ 
+ 
+ No Symbolic Replacement variables or values were specified.
+
