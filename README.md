@@ -8,6 +8,7 @@ F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. 
 
 ## List of notebooks
 
+0. [Failed Attempt of the Nonlinear Buckling Analysis of the uCRM-9](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/00_Failed_Attempt_of_the_Nonlinear_Buckling_Analysis_of_the_uCRM-9.ipynb)
 1. [Buckling Analysis of Euler's Column](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/01_Buckling_Analysis_of_Euler_Column.ipynb)
 2. [Supercritical Pitchfork Bifurcation of Euler's Column](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/02_Supercritical_Pitchfork_Bifurcation_of_Euler_Column.ipynb)
 3. [Equilibrium Diagram of a Thin Plate under Uniaxial Compression](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/03_Equilibrium_Diagram_of_a_Thin_Plate_under_Uniaxial_Compression.ipynb)
