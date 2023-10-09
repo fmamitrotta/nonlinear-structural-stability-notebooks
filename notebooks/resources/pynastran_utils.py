@@ -160,7 +160,7 @@ def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) ->
     valid_subcase_ids = [subcase_id for subcase_id in op2_object.load_vectors if
                          hasattr(op2_object.load_vectors[subcase_id], 'lftsfqs')]
     # Initialize list of nonlinear buckling load vectors
-    nonlinear_buckling_load_vectors = np.empty((len(alphas)) + np.shape(op2_object.load_vectors[valid_subcase_ids[0]].data[-1, :, :]))
+    nonlinear_buckling_load_vectors = np.empty(tuple([len(alphas)]) + np.shape(op2_object.load_vectors[valid_subcase_ids[0]].data[-1, :, :]))
     # Iterate through the valid subcases
     for i, subcase_id in enumerate(valid_subcase_ids):
         # Find the final load vector of current subcase
