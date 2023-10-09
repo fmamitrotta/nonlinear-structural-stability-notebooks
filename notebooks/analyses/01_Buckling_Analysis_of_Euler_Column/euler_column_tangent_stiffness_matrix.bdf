@@ -874,7 +874,7 @@ $LOADS
 FORCE          4     421          91000.     -1.      0.      0.
 $DYNAMIC
 EIGB           5     INV -10000.  10000.       1
-NLPARM         1     100            ITER       1             PUV     YES
+NLPARM         1     100            ITER      -1             PUV     YES
             .001    .001
               10
 NLPCI          1    CRIS     .01  1.0001      0.               5    1000
