@@ -5,7 +5,7 @@ $ sysfield=DBALL(RAW=YES,BUFFIO=YES,wnum=16,wsize=16mb) $(c:/program files/msc.s
 Nastran BUFFSIZE=32769 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[6])
 JID='c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_tangent_stiffness_matrix.bdf'
 OUT='./euler_column_tangent_stiffness_matrix'
-MEM=8090MB      $ 
+MEM=16282MB      $ 
 MACH='Intel'
 OPER='Windows 10 Enterprise'
 OSV='6.2 9200'
@@ -19,11 +19,11 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/euler_column_tangent_stiffness_matrix.T13372_29'
-DBS='c:/temp/scratch/euler_column_tangent_stiffness_matrix.T13372_29'
+SDIR='c:/temp/scratch/euler_column_tangent_stiffness_matrix.T23232_2'
+DBS='c:/temp/scratch/euler_column_tangent_stiffness_matrix.T23232_2'
 SCR='yes'
 SMEM=100
-BPOOL=2022.5MB
+BPOOL=4070.5MB
 DMPMEM=estimate
 NEWDEL='c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/sss'
 DEL='MSCDEF'
@@ -49,33 +49,33 @@ MSC_MSG:     stderr
 FPE:         yes  
 ----------------------------------------------------------------- 
 Current resource limits:
- Physical memory:                    16180 MB
- Physical memory available:           2281 MB
- Paging file size:                   59271 MB
- Paging file size available:         11918 MB
+ Physical memory:                    32564 MB
+ Physical memory available:          18867 MB
+ Paging file size:                   37428 MB
+ Paging file size available:         20321 MB
  Virtual memory:                 134217727 MB
- Virtual memory available:       134213510 MB
+ Virtual memory available:       134213509 MB
 ----------------------------------------------------------------- 
 System configuration:
  Hostname:         IT076000.users.bris.ac.uk
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3216 MHz
+ Clock freq.:      3733 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
- Physical memory:  16180 MB
- Virtual memory:   59271 MB
+ Physical memory:  32564 MB
+ Virtual memory:   37428 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Sat Aug 26 19:40:29 GST 2023 
- 19:40:31  Beginning Analysis
+MSC Nastran started  Mon Oct  9 16:34:03 GST 2023 
+ 16:34:04  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,13 +83,13 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 19:40:32  MSC Authorization Information - System Attributes (1004, 0)
- 19:40:32  -----------------------------------------------------------
-  Date:          Sat Aug 26 19:40:31 2023
+ 16:34:04  MSC Authorization Information - System Attributes (1004, 0)
+ 16:34:04  -----------------------------------------------------------
+  Date:          Mon Oct  9 16:34:04 2023
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
   Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
-  CEID:          52D366F0-6B8G1313
+  CEID:          52D366F0-6BA2D3ED
   User:          qa21944
   Display:       IT076000
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
@@ -98,56 +98,57 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6B8G1313        * *
+  * *        52D366F0-6BA2D3ED        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 19:40:32  MSC Authorization Information - Checkout Successful (1016, 0)
- 19:40:32  -------------------------------------------------------------
- 19:40:32  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 16:34:04  MSC Authorization Information - Checkout Successful (1016, 0)
+ 16:34:04  -------------------------------------------------------------
+ 16:34:04  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
- 19:40:32  Reading INCLUDE file "../../resources/kllrh_lowest_eigenvalues_nobuckle.dmap"
- 19:40:32  32 records read from INCLUDE file "../../resources/kllrh_lowest_eigenvalues_nobuckle.dmap"
+ 16:34:04  Reading INCLUDE file "../../resources/kllrh_lowest_eigenvalues_nobuckle.dmap"
+ 16:34:04  65 records read from INCLUDE file "../../resources/kllrh_lowest_eigenvalues_nobuckle.dmap"
 
- 19:40:32  MSC Authorization Information - Checkout Successful (1016, 0)
- 19:40:32  -------------------------------------------------------------
- 19:40:32  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 16:34:04  MSC Authorization Information - Checkout Successful (1016, 0)
+ 16:34:04  -------------------------------------------------------------
+ 16:34:04  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 19:40:32  MSC Authorization Information - Checkout Successful (1016, 0)
- 19:40:32  -------------------------------------------------------------
- 19:40:32  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
+ 16:34:04  MSC Authorization Information - Checkout Successful (1016, 0)
+ 16:34:04  -------------------------------------------------------------
+ 16:34:04  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 19:40:32  Reading INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues_nobuckle.dmap"
- 19:40:32  32 records read from INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues_nobuckle.dmap"
- 19:40:32  884 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_tangent_stiffness_matrix.bdf"
- 19:40:32  A total of 916 records were read from 2 files.
+ 16:34:05  Reading INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues_nobuckle.dmap"
+ 16:34:05  65 records read from INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues_nobuckle.dmap"
+ 16:34:05  884 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_tangent_stiffness_matrix.bdf"
+ 16:34:05  A total of 949 records were read from 2 files.
 
 Processing of bulk data entries is complete.
 
- 19:40:32  Finite element model generation started.
- 19:40:32  Finite element model generated 2526 degrees of freedom.
- 19:40:32  Finite element model generation successfully completed.
- 19:40:32  Application of Loads and Boundary Conditions to the finite element model started.
- 19:40:32  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 16:34:05  Finite element model generation started.
+ 16:34:05  Finite element model generated 2526 degrees of freedom.
+ 16:34:05  Finite element model generation successfully completed.
+ 16:34:05  Application of Loads and Boundary Conditions to the finite element model started.
+ 16:34:05  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
-       USER WARNING MESSAGE     4642.0          1 
+       USER WARNING MESSAGE      316.2          1 
+       USER WARNING MESSAGE     4698.0          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 19:41:01  19 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_tangent_stiffness_matrix.bdf"
- 19:41:01  A total of 51 records were read from 2 files.
- 19:41:01  NSEXIT: EXIT(0)
- 19:41:01  Analysis complete  0
-Real:       31.142 seconds ( 0:00:31.142)
-User:       24.734 seconds ( 0:00:24.734)
-Sys:         5.000 seconds ( 0:00:05.000)
+ 16:34:45  19 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_tangent_stiffness_matrix.bdf"
+ 16:34:45  A total of 84 records were read from 2 files.
+ 16:34:45  NSEXIT: EXIT(0)
+ 16:34:45  Analysis complete  0
+Real:       41.876 seconds ( 0:00:41.876)
+User:       37.421 seconds ( 0:00:37.421)
+Sys:         3.093 seconds ( 0:00:03.093)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -161,18 +162,18 @@ Sys:         5.000 seconds ( 0:00:05.000)
  Nsocket:                      1
  Ncore:                        6  ( 1 X 6 )
  HyperThreading:               On
- Ram:                          16180 Mb
+ Ram:                          32564 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation         1.1          0 
- Eigenvalue                   8.2          9 
- Miscellaneous               19.4         20 
+ Stiffness Generation         2.0          2 
+ Eigenvalue                  11.9          4 
+ Miscellaneous               25.7         35 
  -------------------------------------------
- Total:                      28.7         29 
+ Total:                      39.6         41 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Sat Aug 26 19:41:03 GST 2023 
+MSC Nastran finished Mon Oct  9 16:34:47 GST 2023 

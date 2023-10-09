@@ -5,7 +5,7 @@ $ sysfield=DBALL(RAW=YES,BUFFIO=YES,wnum=16,wsize=16mb) $(c:/program files/msc.s
 Nastran BUFFSIZE=32769 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[6])
 JID='c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_nonlinear_buckling_method.bdf'
 OUT='./euler_column_nonlinear_buckling_method'
-MEM=8090MB      $ 
+MEM=16282MB      $ 
 MACH='Intel'
 OPER='Windows 10 Enterprise'
 OSV='6.2 9200'
@@ -19,11 +19,11 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/euler_column_nonlinear_buckling_method.T1144_19'
-DBS='c:/temp/scratch/euler_column_nonlinear_buckling_method.T1144_19'
+SDIR='c:/temp/scratch/euler_column_nonlinear_buckling_method.T16652_52'
+DBS='c:/temp/scratch/euler_column_nonlinear_buckling_method.T16652_52'
 SCR='yes'
 SMEM=100
-BPOOL=2022.5MB
+BPOOL=4070.5MB
 DMPMEM=estimate
 NEWDEL='c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/sss'
 DEL='MSCDEF'
@@ -49,33 +49,33 @@ MSC_MSG:     stderr
 FPE:         yes  
 ----------------------------------------------------------------- 
 Current resource limits:
- Physical memory:                    16180 MB
- Physical memory available:           2448 MB
- Paging file size:                   59147 MB
- Paging file size available:         11965 MB
+ Physical memory:                    32564 MB
+ Physical memory available:          18406 MB
+ Paging file size:                   37428 MB
+ Paging file size available:         19012 MB
  Virtual memory:                 134217727 MB
- Virtual memory available:       134213510 MB
+ Virtual memory available:       134213509 MB
 ----------------------------------------------------------------- 
 System configuration:
  Hostname:         IT076000.users.bris.ac.uk
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3727 MHz
+ Clock freq.:      3733 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
- Physical memory:  16180 MB
- Virtual memory:   59147 MB
+ Physical memory:  32564 MB
+ Virtual memory:   37428 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Sat Aug 26 19:40:19 GST 2023 
- 19:40:20  Beginning Analysis
+MSC Nastran started  Mon Oct  9 16:33:52 GST 2023 
+ 16:33:53  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,13 +83,13 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 19:40:21  MSC Authorization Information - System Attributes (1004, 0)
- 19:40:21  -----------------------------------------------------------
-  Date:          Sat Aug 26 19:40:21 2023
+ 16:33:54  MSC Authorization Information - System Attributes (1004, 0)
+ 16:33:54  -----------------------------------------------------------
+  Date:          Mon Oct  9 16:33:54 2023
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
   Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
-  CEID:          52D366F0-6B8G1313
+  CEID:          52D366F0-6BA2D3ED
   User:          qa21944
   Display:       IT076000
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
@@ -98,47 +98,48 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6B8G1313        * *
+  * *        52D366F0-6BA2D3ED        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 19:40:21  MSC Authorization Information - Checkout Successful (1016, 0)
- 19:40:21  -------------------------------------------------------------
- 19:40:21  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 16:33:54  MSC Authorization Information - Checkout Successful (1016, 0)
+ 16:33:54  -------------------------------------------------------------
+ 16:33:54  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 19:40:21  MSC Authorization Information - Checkout Successful (1016, 0)
- 19:40:21  -------------------------------------------------------------
- 19:40:21  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 16:33:54  MSC Authorization Information - Checkout Successful (1016, 0)
+ 16:33:54  -------------------------------------------------------------
+ 16:33:54  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 19:40:21  883 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_nonlinear_buckling_method.bdf"
+ 16:33:54  883 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_nonlinear_buckling_method.bdf"
 
 Processing of bulk data entries is complete.
 
- 19:40:21  Finite element model generation started.
- 19:40:21  Finite element model generated 2526 degrees of freedom.
- 19:40:21  Finite element model generation successfully completed.
- 19:40:21  Application of Loads and Boundary Conditions to the finite element model started.
- 19:40:21  Application of Loads and Boundary Conditions to the finite element model successfully completed.
- 19:40:27  Solution of the system equations for normal modes started.
- 19:40:27  Solution of the system equations for normal modes successfully completed.
+ 16:33:54  Finite element model generation started.
+ 16:33:54  Finite element model generated 2526 degrees of freedom.
+ 16:33:54  Finite element model generation successfully completed.
+ 16:33:54  Application of Loads and Boundary Conditions to the finite element model started.
+ 16:33:54  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 16:34:01  Solution of the system equations for normal modes started.
+ 16:34:01  Solution of the system equations for normal modes successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
-       USER WARNING MESSAGE     4642.0          1 
+       USER WARNING MESSAGE      316.2          1 
+       USER WARNING MESSAGE     4698.0          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 19:40:27  18 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_nonlinear_buckling_method.bdf"
- 19:40:27  NSEXIT: EXIT(0)
- 19:40:27  Analysis complete  0
-Real:        7.230 seconds ( 0:00:07.230)
-User:        5.671 seconds ( 0:00:05.671)
-Sys:         1.203 seconds ( 0:00:01.203)
+ 16:34:01  18 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_nonlinear_buckling_method.bdf"
+ 16:34:01  NSEXIT: EXIT(0)
+ 16:34:01  Analysis complete  0
+Real:        7.992 seconds ( 0:00:07.992)
+User:        6.437 seconds ( 0:00:06.437)
+Sys:         1.281 seconds ( 0:00:01.281)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -152,17 +153,17 @@ Sys:         1.203 seconds ( 0:00:01.203)
  Nsocket:                      1
  Ncore:                        6  ( 1 X 6 )
  HyperThreading:               On
- Ram:                          16180 Mb
+ Ram:                          32564 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation         1.3          2 
- Miscellaneous                4.8          4 
+ Stiffness Generation         1.4          0 
+ Miscellaneous                5.7          7 
  -------------------------------------------
- Total:                       6.2          6 
+ Total:                       7.0          7 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Sat Aug 26 19:40:28 GST 2023 
+MSC Nastran finished Mon Oct  9 16:34:02 GST 2023 
