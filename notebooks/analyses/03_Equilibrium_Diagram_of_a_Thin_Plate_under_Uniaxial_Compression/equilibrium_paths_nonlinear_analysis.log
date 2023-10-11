@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/equilibrium_paths_nonlinear_analysis.T17184_6'
-DBS='c:/temp/scratch/equilibrium_paths_nonlinear_analysis.T17184_6'
+SDIR='c:/temp/scratch/equilibrium_paths_nonlinear_analysis.T10388_56'
+DBS='c:/temp/scratch/equilibrium_paths_nonlinear_analysis.T10388_56'
 SCR='yes'
 SMEM=100
 BPOOL=4070.5MB
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    32564 MB
- Physical memory available:          17983 MB
- Paging file size:                   71476 MB
- Paging file size available:         55686 MB
+ Physical memory available:          19652 MB
+ Paging file size:                   37428 MB
+ Paging file size available:         23663 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
@@ -67,15 +67,15 @@ System configuration:
  Raw model ID:     6
  Config number:    6
  Physical memory:  32564 MB
- Virtual memory:   71476 MB
+ Virtual memory:   37428 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Mon Aug 28 13:51:07 GST 2023 
- 13:51:11  Beginning Analysis
+MSC Nastran started  Wed Oct 11 19:18:57 GST 2023 
+ 19:18:59  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,13 +83,13 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 13:51:13  MSC Authorization Information - System Attributes (1004, 0)
- 13:51:13  -----------------------------------------------------------
-  Date:          Mon Aug 28 13:51:13 2023
+ 19:19:01  MSC Authorization Information - System Attributes (1004, 0)
+ 19:19:01  -----------------------------------------------------------
+  Date:          Wed Oct 11 19:19:01 2023
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
   Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
-  CEID:          52D366F0-6B8G1313
+  CEID:          52D366F0-6BA2D3ED
   User:          qa21944
   Display:       IT076000
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
@@ -98,48 +98,48 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6B8G1313        * *
+  * *        52D366F0-6BA2D3ED        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 13:51:13  MSC Authorization Information - Checkout Successful (1016, 0)
- 13:51:13  -------------------------------------------------------------
- 13:51:13  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 19:19:01  MSC Authorization Information - Checkout Successful (1016, 0)
+ 19:19:01  -------------------------------------------------------------
+ 19:19:01  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 13:51:13  MSC Authorization Information - Checkout Successful (1016, 0)
- 13:51:13  -------------------------------------------------------------
- 13:51:13  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 19:19:01  MSC Authorization Information - Checkout Successful (1016, 0)
+ 19:19:01  -------------------------------------------------------------
+ 19:19:01  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 13:51:14  5234 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/03_equilibrium_diagram_of_a_thin_plate_under_uniaxial_compression/equilibrium_paths_nonlinear_analysis.bdf"
+ 19:19:02  5233 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/03_equilibrium_diagram_of_a_thin_plate_under_uniaxial_compression/equilibrium_paths_nonlinear_analysis.bdf"
 
 Processing of bulk data entries is complete.
 
- 13:51:14  Finite element model generation started.
- 13:51:14  Finite element model generated 15606 degrees of freedom.
- 13:51:14  Finite element model generation successfully completed.
- 13:51:14  Application of Loads and Boundary Conditions to the finite element model started.
- 13:51:14  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 19:19:02  Finite element model generation started.
+ 19:19:02  Finite element model generated 15606 degrees of freedom.
+ 19:19:02  Finite element model generation successfully completed.
+ 19:19:02  Application of Loads and Boundary Conditions to the finite element model started.
+ 19:19:02  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
-       USER WARNING MESSAGE     4642.0          1 
-       USER WARNING MESSAGE     4642.0          6 
+       USER WARNING MESSAGE      316.2          1 
+       USER WARNING MESSAGE      316.2          1 
        USER WARNING MESSAGE     6195.0          1 
-       USER WARNING MESSAGE     4698.0        424 
+       USER WARNING MESSAGE     4698.0       1049 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 14:06:20  30 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/03_equilibrium_diagram_of_a_thin_plate_under_uniaxial_compression/equilibrium_paths_nonlinear_analysis.bdf"
- 14:06:20  NSEXIT: EXIT(0)
- 14:06:20  Analysis complete  0
-Real:      911.419 seconds ( 0:15:11.419)
-User:      842.718 seconds ( 0:14:02.718)
-Sys:        27.578 seconds ( 0:00:27.578)
+ 19:42:51  29 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/03_equilibrium_diagram_of_a_thin_plate_under_uniaxial_compression/equilibrium_paths_nonlinear_analysis.bdf"
+ 19:42:51  NSEXIT: EXIT(0)
+ 19:42:51  Analysis complete  0
+Real:     1433.489 seconds ( 0:23:53.489)
+User:     1381.437 seconds ( 0:23:01.437)
+Sys:        32.609 seconds ( 0:00:32.609)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -156,14 +156,14 @@ Sys:        27.578 seconds ( 0:00:27.578)
  Ram:                          32564 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation       113.8        122 
- Miscellaneous              754.8        784 
+ Stiffness Generation       183.8        182 
+ Miscellaneous             1227.7       1246 
  -------------------------------------------
- Total:                     868.5        906 
+ Total:                    1411.5       1428 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Mon Aug 28 14:06:21 GST 2023 
+MSC Nastran finished Wed Oct 11 19:42:52 GST 2023 
