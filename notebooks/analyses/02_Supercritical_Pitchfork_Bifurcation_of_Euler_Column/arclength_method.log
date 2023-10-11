@@ -5,7 +5,7 @@ $ sysfield=DBALL(RAW=YES,BUFFIO=YES,wnum=16,wsize=16mb) $(c:/program files/msc.s
 Nastran BUFFSIZE=32769 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[6])
 JID='c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/02_supercritical_pitchfork_bifurcation_of_euler_column/arclength_method.bdf'
 OUT='./arclength_method'
-MEM=8090MB      $ 
+MEM=16282MB      $ 
 MACH='Intel'
 OPER='Windows 10 Enterprise'
 OSV='6.2 9200'
@@ -19,11 +19,11 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/arclength_method.T880_16'
-DBS='c:/temp/scratch/arclength_method.T880_16'
+SDIR='c:/temp/scratch/arclength_method.T15096_13'
+DBS='c:/temp/scratch/arclength_method.T15096_13'
 SCR='yes'
 SMEM=100
-BPOOL=2022.5MB
+BPOOL=4070.5MB
 DMPMEM=estimate
 NEWDEL='c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/sss'
 DEL='MSCDEF'
@@ -49,33 +49,33 @@ MSC_MSG:     stderr
 FPE:         yes  
 ----------------------------------------------------------------- 
 Current resource limits:
- Physical memory:                    16180 MB
- Physical memory available:           3094 MB
- Paging file size:                   57383 MB
- Paging file size available:         11518 MB
+ Physical memory:                    32564 MB
+ Physical memory available:          21093 MB
+ Paging file size:                   37428 MB
+ Paging file size available:         22070 MB
  Virtual memory:                 134217727 MB
- Virtual memory available:       134213510 MB
+ Virtual memory available:       134213509 MB
 ----------------------------------------------------------------- 
 System configuration:
  Hostname:         IT076000.users.bris.ac.uk
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3688 MHz
+ Clock freq.:      3725 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
- Physical memory:  16180 MB
- Virtual memory:   57383 MB
+ Physical memory:  32564 MB
+ Virtual memory:   37428 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Sat Aug 26 19:51:17 GST 2023 
- 19:51:18  Beginning Analysis
+MSC Nastran started  Tue Oct 10 19:22:13 GST 2023 
+ 19:22:14  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,13 +83,13 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 19:51:19  MSC Authorization Information - System Attributes (1004, 0)
- 19:51:19  -----------------------------------------------------------
-  Date:          Sat Aug 26 19:51:19 2023
+ 19:22:14  MSC Authorization Information - System Attributes (1004, 0)
+ 19:22:14  -----------------------------------------------------------
+  Date:          Tue Oct 10 19:22:14 2023
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
   Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
-  CEID:          52D366F0-6B8G1313
+  CEID:          52D366F0-6BA2D3ED
   User:          qa21944
   Display:       IT076000
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
@@ -98,48 +98,46 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6B8G1313        * *
+  * *        52D366F0-6BA2D3ED        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 19:51:19  MSC Authorization Information - Checkout Successful (1016, 0)
- 19:51:19  -------------------------------------------------------------
- 19:51:19  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 19:22:14  MSC Authorization Information - Checkout Successful (1016, 0)
+ 19:22:14  -------------------------------------------------------------
+ 19:22:14  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 19:51:19  MSC Authorization Information - Checkout Successful (1016, 0)
- 19:51:19  -------------------------------------------------------------
- 19:51:19  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 19:22:14  MSC Authorization Information - Checkout Successful (1016, 0)
+ 19:22:14  -------------------------------------------------------------
+ 19:22:14  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 19:51:19  891 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/02_supercritical_pitchfork_bifurcation_of_euler_column/arclength_method.bdf"
+ 19:22:15  891 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/02_supercritical_pitchfork_bifurcation_of_euler_column/arclength_method.bdf"
 
 Processing of bulk data entries is complete.
 
- 19:51:19  Finite element model generation started.
- 19:51:19  Finite element model generated 2526 degrees of freedom.
- 19:51:19  Finite element model generation successfully completed.
- 19:51:19  Application of Loads and Boundary Conditions to the finite element model started.
- 19:51:19  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 19:22:15  Finite element model generation started.
+ 19:22:15  Finite element model generated 2526 degrees of freedom.
+ 19:22:15  Finite element model generation successfully completed.
+ 19:22:15  Application of Loads and Boundary Conditions to the finite element model started.
+ 19:22:15  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
-       USER WARNING MESSAGE     4642.0          1 
-       USER WARNING MESSAGE     4698.0        433 
-       USER WARNING MESSAGE     4642.0          3 
-         USER FATAL MESSAGE     6190.0          1 
+       USER WARNING MESSAGE      316.2          1 
+       USER WARNING MESSAGE     4698.0        421 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 19:53:42  25 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/02_supercritical_pitchfork_bifurcation_of_euler_column/arclength_method.bdf"
- 19:53:42  NSEXIT: EXIT(0)
- 19:53:42  Analysis complete  0
-Real:      144.272 seconds ( 0:02:24.272)
-User:       73.218 seconds ( 0:01:13.218)
-Sys:        18.390 seconds ( 0:00:18.390)
+ 19:24:46  25 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/02_supercritical_pitchfork_bifurcation_of_euler_column/arclength_method.bdf"
+ 19:24:46  NSEXIT: EXIT(0)
+ 19:24:46  Analysis complete  0
+Real:      152.149 seconds ( 0:02:32.149)
+User:      123.562 seconds ( 0:02:03.562)
+Sys:        21.703 seconds ( 0:00:21.703)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -153,17 +151,17 @@ Sys:        18.390 seconds ( 0:00:18.390)
  Nsocket:                      1
  Ncore:                        6  ( 1 X 6 )
  HyperThreading:               On
- Ram:                          16180 Mb
+ Ram:                          32564 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation        16.7         21 
- Miscellaneous               74.0        122 
+ Stiffness Generation        31.3         20 
+ Miscellaneous              111.9        130 
  -------------------------------------------
- Total:                      90.7        143 
+ Total:                     143.2        150 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Sat Aug 26 19:53:43 GST 2023 
+MSC Nastran finished Tue Oct 10 19:24:47 GST 2023 
