@@ -132,8 +132,8 @@ def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_i
 
 def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) -> Tuple[ndarray, ndarray]:
     """
-    Return nonlinear buckling loads and critical buckling factors by reading the .f06 and .op2 files including the
-    results of the analyis with the nonlinear buckling method.
+    Return nonlinear buckling load vector and critical buckling factors by reading the .f06 and .op2 files of a
+    SOL 106 analyis with the nonlinear buckling method.
 
     Parameters
     ----------
@@ -145,9 +145,9 @@ def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) ->
     Returns
     -------
     nonlinear_buckling_load_vectors: ndarray
-        array of the nonlinear buckling load vectors, calculated as P + Delta P * alpha
+        array of the nonlinear buckling load vectors, calculated as P + Delta P * alpha, dimensions (number of subcases, number of nodes, 6)
     alphas: ndarray
-        array of critical buckling factors, used to verify that absolute value is not greater than unity
+        array of critical buckling factors, dimensions (number of subcases)
     """
     # Read critical buckling factor ALPHA for each subcase
     alphas = []  # empty list of critical buckling factors
@@ -473,7 +473,7 @@ def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, 
                          subcase_id: int = 0):
     """
     Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM to set up
-    the full Newton method.
+    the load control method with full Newton iteration.
 
     Parameters
     ----------
@@ -502,8 +502,8 @@ def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, 
     bdf_object.sol = 106
     # Add parameter for large displacement effects
     bdf_object.add_param('LGDISP', [1])
-    # Define parameters for the nonlinear iteration strategy with full Newton method
-    bdf_object.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=1, max_iter=max_iter, conv=conv,
+    # Define parameters for the nonlinear iteration strategy with full Newton method (update tangent stiffness matrix after every converged iteration)
+    bdf_object.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=-1, max_iter=max_iter, conv=conv,
                           int_out='YES', eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect)
     # Add NLPARM id to the control case commands
     bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)
