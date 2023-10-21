@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/nonlinear_buckling_verification.T2644_0'
-DBS='c:/temp/scratch/nonlinear_buckling_verification.T2644_0'
+SDIR='c:/temp/scratch/nonlinear_buckling_verification.T11832_27'
+DBS='c:/temp/scratch/nonlinear_buckling_verification.T11832_27'
 SCR='yes'
 SMEM=100
 BPOOL=4070.5MB
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    32564 MB
- Physical memory available:          10905 MB
- Paging file size:                   38458 MB
- Paging file size available:          5210 MB
+ Physical memory available:          19289 MB
+ Paging file size:                   37428 MB
+ Paging file size available:         21777 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
@@ -67,15 +67,15 @@ System configuration:
  Raw model ID:     6
  Config number:    6
  Physical memory:  32564 MB
- Virtual memory:   38458 MB
+ Virtual memory:   37428 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Thu Oct 19 12:17:00 GST 2023 
- 12:17:01  Beginning Analysis
+MSC Nastran started  Sat Oct 21 15:24:27 GST 2023 
+ 15:24:29  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,9 +83,9 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 12:17:02  MSC Authorization Information - System Attributes (1004, 0)
- 12:17:02  -----------------------------------------------------------
-  Date:          Thu Oct 19 12:17:02 2023
+ 15:24:31  MSC Authorization Information - System Attributes (1004, 0)
+ 15:24:31  -----------------------------------------------------------
+  Date:          Sat Oct 21 15:24:31 2023
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
   Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
@@ -103,71 +103,71 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 12:17:02  MSC Authorization Information - Checkout Successful (1016, 0)
- 12:17:02  -------------------------------------------------------------
- 12:17:02  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 15:24:31  MSC Authorization Information - Checkout Successful (1016, 0)
+ 15:24:31  -------------------------------------------------------------
+ 15:24:31  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
- 12:17:02  Reading INCLUDE file "../../resources/kllrh_lowest_eigenvalues.dmap"
- 12:17:02  60 records read from INCLUDE file "../../resources/kllrh_lowest_eigenvalues.dmap"
+ 15:24:31  Reading INCLUDE file "../../resources/kllrh_lowest_eigenvalues.dmap"
+ 15:24:31  60 records read from INCLUDE file "../../resources/kllrh_lowest_eigenvalues.dmap"
 
- 12:17:02  MSC Authorization Information - Checkout Successful (1016, 0)
- 12:17:02  -------------------------------------------------------------
- 12:17:02  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 15:24:31  MSC Authorization Information - Checkout Successful (1016, 0)
+ 15:24:31  -------------------------------------------------------------
+ 15:24:31  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 12:17:02  MSC Authorization Information - Checkout Successful (1016, 0)
- 12:17:02  -------------------------------------------------------------
- 12:17:02  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
+ 15:24:31  MSC Authorization Information - Checkout Successful (1016, 0)
+ 15:24:31  -------------------------------------------------------------
+ 15:24:31  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 12:17:02  Reading INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues.dmap"
- 12:17:02  60 records read from INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues.dmap"
- 12:17:02  9290 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/08_nonlinear_buckling_analysis_of_a_reinforced_box_beam/nonlinear_buckling_verification.bdf"
- 12:17:02  A total of 9350 records were read from 2 files.
+ 15:24:31  Reading INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues.dmap"
+ 15:24:31  60 records read from INCLUDE file "..\..\resources\kllrh_lowest_eigenvalues.dmap"
+ 15:24:31  9290 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/08_nonlinear_buckling_analysis_of_a_reinforced_box_beam/nonlinear_buckling_verification.bdf"
+ 15:24:31  A total of 9350 records were read from 2 files.
 
 Processing of bulk data entries is complete.
 
- 12:17:03  Finite element model generation started.
- 12:17:03  Finite element model generated 27090 degrees of freedom.
- 12:17:03  Finite element model generation successfully completed.
- 12:17:03  Application of Loads and Boundary Conditions to the finite element model started.
- 12:17:03  Application of Loads and Boundary Conditions to the finite element model successfully completed.
- 12:19:25  Solution of the system equations for normal modes started.
- 12:19:26  Solution of the system equations for normal modes successfully completed.
- 12:21:51  Solution of the system equations for normal modes started.
- 12:21:52  Solution of the system equations for normal modes successfully completed.
- 12:24:17  Solution of the system equations for normal modes started.
- 12:24:19  Solution of the system equations for normal modes successfully completed.
- 12:26:52  Solution of the system equations for normal modes started.
- 12:26:52  Solution of the system equations for normal modes successfully completed.
- 12:29:19  Solution of the system equations for normal modes started.
- 12:29:20  Solution of the system equations for normal modes successfully completed.
- 12:31:47  Solution of the system equations for normal modes started.
- 12:31:48  Solution of the system equations for normal modes successfully completed.
- 12:34:08  Solution of the system equations for normal modes started.
- 12:34:09  Solution of the system equations for normal modes successfully completed.
- 12:36:29  Solution of the system equations for normal modes started.
- 12:36:30  Solution of the system equations for normal modes successfully completed.
- 12:38:49  Solution of the system equations for normal modes started.
- 12:38:51  Solution of the system equations for normal modes successfully completed.
- 12:41:07  Solution of the system equations for normal modes started.
- 12:41:09  Solution of the system equations for normal modes successfully completed.
+ 15:24:32  Finite element model generation started.
+ 15:24:32  Finite element model generated 27090 degrees of freedom.
+ 15:24:32  Finite element model generation successfully completed.
+ 15:24:32  Application of Loads and Boundary Conditions to the finite element model started.
+ 15:24:32  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 15:27:18  Solution of the system equations for normal modes started.
+ 15:27:19  Solution of the system equations for normal modes successfully completed.
+ 15:30:01  Solution of the system equations for normal modes started.
+ 15:30:02  Solution of the system equations for normal modes successfully completed.
+ 15:32:45  Solution of the system equations for normal modes started.
+ 15:32:46  Solution of the system equations for normal modes successfully completed.
+ 15:35:30  Solution of the system equations for normal modes started.
+ 15:35:30  Solution of the system equations for normal modes successfully completed.
+ 15:38:21  Solution of the system equations for normal modes started.
+ 15:38:22  Solution of the system equations for normal modes successfully completed.
+ 15:41:21  Solution of the system equations for normal modes started.
+ 15:41:22  Solution of the system equations for normal modes successfully completed.
+ 15:44:11  Solution of the system equations for normal modes started.
+ 15:44:12  Solution of the system equations for normal modes successfully completed.
+ 15:46:59  Solution of the system equations for normal modes started.
+ 15:47:01  Solution of the system equations for normal modes successfully completed.
+ 15:49:50  Solution of the system equations for normal modes started.
+ 15:49:51  Solution of the system equations for normal modes successfully completed.
+ 15:52:37  Solution of the system equations for normal modes started.
+ 15:52:39  Solution of the system equations for normal modes successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
        USER WARNING MESSAGE      316.2          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 12:41:22  37 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/08_nonlinear_buckling_analysis_of_a_reinforced_box_beam/nonlinear_buckling_verification.bdf"
- 12:41:22  A total of 97 records were read from 2 files.
- 12:41:22  NSEXIT: EXIT(0)
- 12:41:22  Analysis complete  0
-Real:     1462.105 seconds ( 0:24:22.105)
-User:     1424.984 seconds ( 0:23:44.984)
-Sys:        19.531 seconds ( 0:00:19.531)
+ 15:52:48  37 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/08_nonlinear_buckling_analysis_of_a_reinforced_box_beam/nonlinear_buckling_verification.bdf"
+ 15:52:48  A total of 97 records were read from 2 files.
+ 15:52:48  NSEXIT: EXIT(0)
+ 15:52:48  Analysis complete  0
+Real:     1700.868 seconds ( 0:28:20.868)
+User:     1666.671 seconds ( 0:27:46.671)
+Sys:        23.015 seconds ( 0:00:23.015)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -184,16 +184,15 @@ Sys:        19.531 seconds ( 0:00:19.531)
  Ram:                          32564 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation       119.6        105 
- Solver                      15.4         29 
- Eigenvalue                 223.0        232 
- Miscellaneous             1084.6       1094 
+ Stiffness Generation       152.9        169 
+ Eigenvalue                 198.4        241 
+ Miscellaneous             1336.0       1286 
  -------------------------------------------
- Total:                    1442.6       1460 
+ Total:                    1687.3       1696 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Thu Oct 19 12:41:24 GST 2023 
+MSC Nastran finished Sat Oct 21 15:52:49 GST 2023 
