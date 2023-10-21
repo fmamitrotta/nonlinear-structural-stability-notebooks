@@ -3,7 +3,7 @@ MSC Nastran V2021.4 (Intel Windows 10 Enterprise 6.2 9200) Control File:
 $ sysfield=SCR*(RAW=YES,BUFFIO=YES,wnum=16,wsize=16mb) $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[2])
 $ sysfield=DBALL(RAW=YES,BUFFIO=YES,wnum=16,wsize=16mb) $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[3])
 Nastran BUFFSIZE=32769 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[6])
-JID='c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/10_on_the_mechanical_cause_of_the_box_beam_bifurcation_break/reinforced_box_beam_nonlinear_analysis.bdf'
+JID='c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/10_on_the_mechanical_cause_of_the_box_beam_broken_supercritical_pitchfork/reinforced_box_beam_nonlinear_analysis.bdf'
 OUT='./reinforced_box_beam_nonlinear_analysis'
 MEM=16282MB      $ 
 MACH='Intel'
@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/reinforced_box_beam_nonlinear_analysis.T4164_19'
-DBS='c:/temp/scratch/reinforced_box_beam_nonlinear_analysis.T4164_19'
+SDIR='c:/temp/scratch/reinforced_box_beam_nonlinear_analysis.T2088_14'
+DBS='c:/temp/scratch/reinforced_box_beam_nonlinear_analysis.T2088_14'
 SCR='yes'
 SMEM=100
 BPOOL=4070.5MB
@@ -40,8 +40,8 @@ MSC_JIDPATH=
 PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Scripts;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;C:\Users\qa21944\AppData\Local\Programs\Git\cmd;C:\Users\qa21944\Anaconda3\Scripts;C:\Users\qa21944\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\qa21944\AppData\Local\Programs\MiKTeX\miktex\bin\x64;.;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
 SCA_SERVICE_CATALOG=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res\SCAServiceCatalog.xml 
 SCA_RESOURCE_DIR=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res 
-Cmd Line:    C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\win64i8\nastran.exe c:\Users\qa21944\Github\phd-jupyter-notebooks\notebooks\analyses\10_On_the_Mechanical_Cause_of_the_Box_Beam_Bifurcation_Break\reinforced_box_beam_nonlinear_analysis.bdf scr=yes bat=no old=no news=no notify=no 
-Current Dir: c:\Users\qa21944\Github\phd-jupyter-notebooks\notebooks\analyses\10_On_the_Mechanical_Cause_of_the_Box_Beam_Bifurcation_Break 
+Cmd Line:    C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\win64i8\nastran.exe c:\Users\qa21944\Github\phd-jupyter-notebooks\notebooks\analyses\10_On_the_Mechanical_Cause_of_the_Box_Beam_Broken_Supercritical_Pitchfork\reinforced_box_beam_nonlinear_analysis.bdf scr=yes bat=no old=no news=no notify=no 
+Current Dir: c:\Users\qa21944\Github\phd-jupyter-notebooks\notebooks\analyses\10_On_the_Mechanical_Cause_of_the_Box_Beam_Broken_Supercritical_Pitchfork 
 Time Cmd:    c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msctime 
 Executable:  c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\analysis.exe 
 Arch= Kywd:  [Not specified]  
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    32564 MB
- Physical memory available:          20669 MB
+ Physical memory available:          19616 MB
  Paging file size:                   37428 MB
- Paging file size available:         24364 MB
+ Paging file size available:         22355 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
@@ -61,7 +61,7 @@ System configuration:
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3733 MHz
+ Clock freq.:      3727 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
@@ -74,8 +74,8 @@ System configuration:
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Fri Oct 20 09:28:19 GST 2023 
- 09:28:20  Beginning Analysis
+MSC Nastran started  Sat Oct 21 17:17:14 GST 2023 
+ 17:17:15  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,9 +83,9 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 09:28:20  MSC Authorization Information - System Attributes (1004, 0)
- 09:28:20  -----------------------------------------------------------
-  Date:          Fri Oct 20 09:28:20 2023
+ 17:17:15  MSC Authorization Information - System Attributes (1004, 0)
+ 17:17:15  -----------------------------------------------------------
+  Date:          Sat Oct 21 17:17:15 2023
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
   Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
@@ -103,40 +103,40 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 09:28:20  MSC Authorization Information - Checkout Successful (1016, 0)
- 09:28:20  -------------------------------------------------------------
- 09:28:20  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 17:17:15  MSC Authorization Information - Checkout Successful (1016, 0)
+ 17:17:15  -------------------------------------------------------------
+ 17:17:15  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 09:28:20  MSC Authorization Information - Checkout Successful (1016, 0)
- 09:28:20  -------------------------------------------------------------
- 09:28:20  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 17:17:15  MSC Authorization Information - Checkout Successful (1016, 0)
+ 17:17:15  -------------------------------------------------------------
+ 17:17:15  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 09:28:20  9261 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/10_on_the_mechanical_cause_of_the_box_beam_bifurcation_break/reinforced_box_beam_nonlinear_analysis.bdf"
+ 17:17:16  9260 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/10_on_the_mechanical_cause_of_the_box_beam_broken_supercritical_pitchfork/reinforced_box_beam_nonlinear_analysis.bdf"
 
 Processing of bulk data entries is complete.
 
- 09:28:21  Finite element model generation started.
- 09:28:21  Finite element model generated 27090 degrees of freedom.
- 09:28:21  Finite element model generation successfully completed.
- 09:28:21  Application of Loads and Boundary Conditions to the finite element model started.
- 09:28:21  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 17:17:16  Finite element model generation started.
+ 17:17:16  Finite element model generated 27090 degrees of freedom.
+ 17:17:16  Finite element model generation successfully completed.
+ 17:17:16  Application of Loads and Boundary Conditions to the finite element model started.
+ 17:17:16  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
        USER WARNING MESSAGE      316.2          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 09:31:02  18 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/10_on_the_mechanical_cause_of_the_box_beam_bifurcation_break/reinforced_box_beam_nonlinear_analysis.bdf"
- 09:31:02  NSEXIT: EXIT(0)
- 09:31:02  Analysis complete  0
-Real:      162.403 seconds ( 0:02:42.403)
-User:      159.593 seconds ( 0:02:39.593)
-Sys:         2.000 seconds ( 0:00:02.000)
+ 17:20:06  18 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/10_on_the_mechanical_cause_of_the_box_beam_broken_supercritical_pitchfork/reinforced_box_beam_nonlinear_analysis.bdf"
+ 17:20:06  NSEXIT: EXIT(0)
+ 17:20:06  Analysis complete  0
+Real:      171.483 seconds ( 0:02:51.483)
+User:      168.578 seconds ( 0:02:48.578)
+Sys:         2.250 seconds ( 0:00:02.250)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -153,15 +153,14 @@ Sys:         2.000 seconds ( 0:00:02.000)
  Ram:                          32564 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation        18.7         19 
- Solver                       1.0         14 
- Miscellaneous              141.2        129 
+ Stiffness Generation        21.0         18 
+ Miscellaneous              149.1        153 
  -------------------------------------------
- Total:                     160.9        162 
+ Total:                     170.0        171 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Fri Oct 20 09:31:03 GST 2023 
+MSC Nastran finished Sat Oct 21 17:20:07 GST 2023 
