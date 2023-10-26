@@ -32,7 +32,7 @@
                                               * *                                 * *
                                               * * * * * * * * * * * * * * * * * * * *
                                               * * * * * * * * * * * * * * * * * * * *
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE     1
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE     1
                                                                                                                                     
 0        N A S T R A N    F I L E    A N D    S Y S T E M    P A R A M E T E R    E C H O                                           
 0                                                                                                                                   
@@ -47,7 +47,7 @@
      $PYNASTRAN: NNODES=3389                                                         
      $PYNASTRAN: NELEMENTS=3344                                                      
      $EXECUTIVE CONTROL DECK                                                         
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE     2
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE     2
                                                                                                                                     
 0        N A S T R A N    E X E C U T I V E    C O N T R O L    E C H O                                                             
 0                                                                                                                                   
@@ -55,7 +55,7 @@
                                                                                                                                     
      SOL 106                                                                                 
      CEND                                                                                    
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE     3
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE     3
                                                                                                                                     
 0                                                                                                                                   
 0                                        C A S E    C O N T R O L    E C H O                                                        
@@ -70,7 +70,7 @@
                   7      SUBCASE 1                                                                               
                   8          LOAD = 12                                                                           
                   9      BEGIN BULK                                                                              
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE     4
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE     4
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -79,7 +79,7 @@
 
 *** USER WARNING MESSAGE (fn: GETLIN)
     The ENDDATA statement is missing.
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE     5
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE     5
                                                                                                                                     
 0                                                                                                                                   
                                         M O D E L   S U M M A R Y          BULK = 0
@@ -139,7 +139,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =          10 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          25 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =          61 WORDS.)
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE     6
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE     6
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
@@ -177,7 +177,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =        1000 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          15 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =        1031 WORDS.)
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE     7
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE     7
                                                                                                                                     
 0                                                                                                                                   
  *** USER INFORMATION MESSAGE 7310 (VECPRN)
@@ -194,12 +194,12 @@
                MY       ----          ----          ----          ----       0.000000E+00     ----                                  
                MZ       ----          ----          ----          ----          ----       0.000000E+00                             
              TOTALS  0.000000E+00  0.000000E+00  1.654000E+03  7.443000E+06 -8.270000E+05  0.000000E+00
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE     8
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE     8
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.30 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.27 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   0.1000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -212,7 +212,7 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE     9
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE     9
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
@@ -230,7 +230,7 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    10
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    10
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
@@ -254,13 +254,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    11
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    11
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.36 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   0.2999871
+     STIFFNESS UPDATE TIME          0.38 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   0.2999871
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -272,7 +272,7 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    12
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    12
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
@@ -290,7 +290,7 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    13
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    13
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
@@ -314,12 +314,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    14
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    14
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.34 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.36 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   0.6997438
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -332,7 +332,7 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    15
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    15
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
@@ -350,12 +350,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    16
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    16
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.34 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.33 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   0.6992625
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -374,12 +374,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    17
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    17
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.36 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.34 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -392,12 +392,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    18
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    18
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.34 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.33 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -410,13 +410,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    19
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    19
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.34 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   1.0000000
+     STIFFNESS UPDATE TIME          0.33 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -428,12 +428,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    20
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    20
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.36 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.34 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -446,12 +446,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    21
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    21
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.36 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.34 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -464,13 +464,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    22
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    22
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.36 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   1.0000000
+     STIFFNESS UPDATE TIME          0.33 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -482,13 +482,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    23
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    23
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.39 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   1.0000000
+     STIFFNESS UPDATE TIME          0.36 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -500,12 +500,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    24
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    24
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.42 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.38 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -518,13 +518,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    25
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    25
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
      STIFFNESS UPDATE TIME          0.36 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   1.0000000
+            ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -536,12 +536,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    26
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    26
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.42 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.33 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -589,7 +589,7 @@
                                  (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =      1 WORDS.)
                                        (NUMBER OF FORTRAN RECORDS WRITTEN =      1 RECORDS.)
                                        (TOTAL DATA WRITTEN FOR EOF MARKER =      1 WORDS.)
-1                                                                           OCTOBER  21, 2023  MSC Nastran 12/14/21   PAGE    27
+1                                                                           OCTOBER  26, 2023  MSC Nastran 12/14/21   PAGE    27
                                                                                                                                     
 0                                                                                                                                   
  * * * *  D B D I C T   P R I N T  * * * *      SUBDMAP = PRTSUM  ,  DMAP STATEMENT NO.     74
