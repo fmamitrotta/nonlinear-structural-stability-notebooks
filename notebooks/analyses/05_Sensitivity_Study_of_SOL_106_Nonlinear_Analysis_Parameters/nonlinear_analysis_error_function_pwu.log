@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/nonlinear_analysis_error_function_pwu.T4804_58'
-DBS='c:/temp/scratch/nonlinear_analysis_error_function_pwu.T4804_58'
+SDIR='c:/temp/scratch/nonlinear_analysis_error_function_pwu.T14508_47'
+DBS='c:/temp/scratch/nonlinear_analysis_error_function_pwu.T14508_47'
 SCR='yes'
 SMEM=100
 BPOOL=4070.5MB
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    32564 MB
- Physical memory available:          19431 MB
- Paging file size:                   37428 MB
- Paging file size available:         23325 MB
+ Physical memory available:          16584 MB
+ Paging file size:                   57086 MB
+ Paging file size available:         30656 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
@@ -61,21 +61,21 @@ System configuration:
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3727 MHz
+ Clock freq.:      3659 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
  Physical memory:  32564 MB
- Virtual memory:   37428 MB
+ Virtual memory:   57086 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Sat Oct 21 14:26:59 GST 2023 
- 14:27:00  Beginning Analysis
+MSC Nastran started  Thu Oct 26 10:54:48 GST 2023 
+ 10:54:49  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,9 +83,9 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 14:27:00  MSC Authorization Information - System Attributes (1004, 0)
- 14:27:00  -----------------------------------------------------------
-  Date:          Sat Oct 21 14:27:00 2023
+ 10:54:49  MSC Authorization Information - System Attributes (1004, 0)
+ 10:54:49  -----------------------------------------------------------
+  Date:          Thu Oct 26 10:54:49 2023
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
   Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
@@ -103,40 +103,40 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 14:27:00  MSC Authorization Information - Checkout Successful (1016, 0)
- 14:27:00  -------------------------------------------------------------
- 14:27:00  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 10:54:49  MSC Authorization Information - Checkout Successful (1016, 0)
+ 10:54:49  -------------------------------------------------------------
+ 10:54:49  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 14:27:00  MSC Authorization Information - Checkout Successful (1016, 0)
- 14:27:00  -------------------------------------------------------------
- 14:27:00  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 10:54:49  MSC Authorization Information - Checkout Successful (1016, 0)
+ 10:54:49  -------------------------------------------------------------
+ 10:54:49  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 14:27:00  6779 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/05_sensitivity_study_of_sol_106_nonlinear_analysis_parameters/nonlinear_analysis_error_function_pwu.bdf"
+ 10:54:49  6779 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/05_sensitivity_study_of_sol_106_nonlinear_analysis_parameters/nonlinear_analysis_error_function_pwu.bdf"
 
 Processing of bulk data entries is complete.
 
- 14:27:00  Finite element model generation started.
- 14:27:00  Finite element model generated 20334 degrees of freedom.
- 14:27:00  Finite element model generation successfully completed.
- 14:27:00  Application of Loads and Boundary Conditions to the finite element model started.
- 14:27:00  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 10:54:49  Finite element model generation started.
+ 10:54:49  Finite element model generated 20334 degrees of freedom.
+ 10:54:49  Finite element model generation successfully completed.
+ 10:54:49  Application of Loads and Boundary Conditions to the finite element model started.
+ 10:54:49  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
        USER WARNING MESSAGE      316.2          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 14:27:09  17 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/05_sensitivity_study_of_sol_106_nonlinear_analysis_parameters/nonlinear_analysis_error_function_pwu.bdf"
- 14:27:09  NSEXIT: EXIT(0)
- 14:27:09  Analysis complete  0
-Real:        9.711 seconds ( 0:00:09.711)
-User:        9.078 seconds ( 0:00:09.078)
-Sys:         0.468 seconds ( 0:00:00.468)
+ 10:54:58  17 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/05_sensitivity_study_of_sol_106_nonlinear_analysis_parameters/nonlinear_analysis_error_function_pwu.bdf"
+ 10:54:58  NSEXIT: EXIT(0)
+ 10:54:58  Analysis complete  0
+Real:        9.466 seconds ( 0:00:09.466)
+User:        8.968 seconds ( 0:00:08.968)
+Sys:         0.437 seconds ( 0:00:00.437)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -153,14 +153,14 @@ Sys:         0.468 seconds ( 0:00:00.468)
  Ram:                          32564 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation         1.2          0 
- Miscellaneous                7.9          9 
+ Stiffness Generation         1.2          2 
+ Miscellaneous                7.7          7 
  -------------------------------------------
- Total:                       9.0          9 
+ Total:                       8.9          9 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Sat Oct 21 14:27:10 GST 2023 
+MSC Nastran finished Thu Oct 26 10:54:58 GST 2023 
