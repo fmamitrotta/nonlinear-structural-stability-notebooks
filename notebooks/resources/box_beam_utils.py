@@ -13,7 +13,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 from pyNastran.bdf.bdf import BDF
 from numpy import ndarray
 import numpy as np
-from pyNastran.op2.op2 import read_op2
 import pyvista
 from pyvista import PolyData
 
@@ -356,7 +355,8 @@ def mesh_stiffened_box_beam_with_pyvista(height: float, width: float, ribs_y_coo
 
 
 def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: float, shell_thickness: float,
-                          nodes_xyz_array: ndarray, nodes_connectivity_matrix: ndarray) -> BDF:
+                          nodes_xyz_array: ndarray, nodes_connectivity_matrix: ndarray, parallel:bool = False,
+                          no_cores:int = 6) -> BDF:
     """
     Returns a BDF object with material properties, nodes, elements, boundary conditions and output files defaults for
     the box beam model.
@@ -376,6 +376,10 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
     nodes_connectivity_matrix: ndarray
         nx4 array with the connectivity information of the nodes, where each row indicates the indices of the
          nodes_xyz_array corresponding to the nodes composing the element
+    parallel: bool
+        flag to enable or disable the parallel execution of Nastran
+    no_cores: int
+        number of cores used for the parallel execution of Nastran
 
     Returns
     -------
@@ -414,5 +418,8 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
     # Cross-reference BDF object
     bdf_input._xref = True
     bdf_input.cross_reference()
+    # Set parallel execution of Nastran if requested
+    if parallel:
+        bdf_input.system_command_lines[0:0] = [f"NASTRAN PARALLEL={no_cores:d}"]
     # Return BDF object
     return bdf_input
