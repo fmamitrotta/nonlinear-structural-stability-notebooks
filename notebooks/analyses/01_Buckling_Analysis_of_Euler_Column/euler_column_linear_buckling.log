@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/euler_column_linear_buckling.T17052_45'
-DBS='c:/temp/scratch/euler_column_linear_buckling.T17052_45'
+SDIR='c:/temp/scratch/euler_column_linear_buckling.T17596_33'
+DBS='c:/temp/scratch/euler_column_linear_buckling.T17596_33'
 SCR='yes'
 SMEM=100
 BPOOL=4070.5MB
@@ -37,7 +37,7 @@ MSGDEST='f06'
 ----------------------------------------------------------------- 
 MSC_ISHELLPATH=C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\actran\win64\Actran_2022.0.2\bin;C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\nast; 
 MSC_JIDPATH= 
-PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Scripts;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;C:\Users\qa21944\AppData\Local\Programs\Git\cmd;C:\Users\qa21944\Anaconda3\Scripts;C:\Users\qa21944\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\qa21944\AppData\Local\Programs\MiKTeX\miktex\bin\x64;.;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
+PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Scripts;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\dotnet;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;C:\Users\qa21944\AppData\Local\Programs\Git\cmd;C:\Users\qa21944\Anaconda3\Scripts;C:\Users\qa21944\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\qa21944\AppData\Local\Programs\MiKTeX\miktex\bin\x64;.;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
 SCA_SERVICE_CATALOG=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res\SCAServiceCatalog.xml 
 SCA_RESOURCE_DIR=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res 
 Cmd Line:    C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\win64i8\nastran.exe c:\Users\qa21944\Github\phd-jupyter-notebooks\notebooks\analyses\01_Buckling_Analysis_of_Euler_Column\euler_column_linear_buckling.bdf scr=yes bat=no old=no news=no notify=no 
@@ -50,32 +50,32 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    32564 MB
- Physical memory available:          17934 MB
- Paging file size:                   37428 MB
- Paging file size available:         18540 MB
+ Physical memory available:          19554 MB
+ Paging file size:                   69428 MB
+ Paging file size available:         42007 MB
  Virtual memory:                 134217727 MB
- Virtual memory available:       134213509 MB
+ Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
 System configuration:
  Hostname:         IT076000.users.bris.ac.uk
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3727 MHz
+ Clock freq.:      3725 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
  Physical memory:  32564 MB
- Virtual memory:   37428 MB
+ Virtual memory:   69428 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Mon Oct  9 16:33:46 GST 2023 
- 16:33:48  Beginning Analysis
+MSC Nastran started  Fri Dec 22 08:33:33 GST 2023 
+ 08:33:35  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,60 +83,60 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 16:33:50  MSC Authorization Information - System Attributes (1004, 0)
- 16:33:50  -----------------------------------------------------------
-  Date:          Mon Oct  9 16:33:50 2023
+ 08:33:37  MSC Authorization Information - System Attributes (1004, 0)
+ 08:33:37  -----------------------------------------------------------
+  Date:          Fri Dec 22 08:33:36 2023
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
-  Hostname:      IT076000 (user qa21944, display IT076000)
+  Hostname:      IT076000 (user qa21944, display IT080625)
   License files: 27500@ze-ls0.fen.bris.ac.uk
-  CEID:          52D366F0-6BA2D3ED
+  CEID:          52D366F0-6BC354CF
   User:          qa21944
-  Display:       IT076000
+  Display:       IT080625
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
 
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6BA2D3ED        * *
+  * *        52D366F0-6BC354CF        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 16:33:50  MSC Authorization Information - Checkout Successful (1016, 0)
- 16:33:50  -------------------------------------------------------------
- 16:33:50  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 08:33:37  MSC Authorization Information - Checkout Successful (1016, 0)
+ 08:33:37  -------------------------------------------------------------
+ 08:33:37  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 16:33:50  877 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_linear_buckling.bdf"
+ 08:33:37  877 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_linear_buckling.bdf"
 
 Processing of bulk data entries is complete.
 
- 16:33:50  Finite element model generation started.
- 16:33:50  Finite element model generated 2526 degrees of freedom.
- 16:33:50  Finite element model generation successfully completed.
- 16:33:50  Application of Loads and Boundary Conditions to the finite element model started.
- 16:33:50  Application of Loads and Boundary Conditions to the finite element model successfully completed.
- 16:33:50  Application of Loads and Boundary Conditions to the finite element model started.
- 16:33:50  Application of Loads and Boundary Conditions to the finite element model successfully completed.
- 16:33:50  Solution of the system equations for linear statics started.
- 16:33:50  Solution of the system equations for linear statics successfully completed.
- 16:33:51  Solution of the system equations for normal modes started.
- 16:33:51  Solution of the system equations for normal modes successfully completed.
+ 08:33:37  Finite element model generation started.
+ 08:33:37  Finite element model generated 2526 degrees of freedom.
+ 08:33:37  Finite element model generation successfully completed.
+ 08:33:37  Application of Loads and Boundary Conditions to the finite element model started.
+ 08:33:37  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 08:33:37  Application of Loads and Boundary Conditions to the finite element model started.
+ 08:33:37  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 08:33:37  Solution of the system equations for linear statics started.
+ 08:33:37  Solution of the system equations for linear statics successfully completed.
+ 08:33:37  Solution of the system equations for normal modes started.
+ 08:33:37  Solution of the system equations for normal modes successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 16:33:51  18 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_linear_buckling.bdf"
- 16:33:51  NSEXIT: EXIT(0)
- 16:33:51  Analysis complete  0
-Real:        3.992 seconds ( 0:00:03.992)
-User:        0.593 seconds ( 0:00:00.593)
-Sys:         0.609 seconds ( 0:00:00.609)
+ 08:33:37  18 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_linear_buckling.bdf"
+ 08:33:37  NSEXIT: EXIT(0)
+ 08:33:37  Analysis complete  0
+Real:        3.654 seconds ( 0:00:03.654)
+User:        0.484 seconds ( 0:00:00.484)
+Sys:         0.375 seconds ( 0:00:00.375)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -158,4 +158,4 @@ Sys:         0.609 seconds ( 0:00:00.609)
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Mon Oct  9 16:33:51 GST 2023 
+MSC Nastran finished Fri Dec 22 08:33:38 GST 2023 
