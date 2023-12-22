@@ -32,7 +32,7 @@
                                               * *                                 * *
                                               * * * * * * * * * * * * * * * * * * * *
                                               * * * * * * * * * * * * * * * * * * * *
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE     1
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE     1
                                                                                                                                     
 0        N A S T R A N    F I L E    A N D    S Y S T E M    P A R A M E T E R    E C H O                                           
 0                                                                                                                                   
@@ -47,7 +47,7 @@
      $PYNASTRAN: NNODES=4515                                                         
      $PYNASTRAN: NELEMENTS=4680                                                      
      $EXECUTIVE CONTROL DECK                                                         
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE     2
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE     2
                                                                                                                                     
 0        N A S T R A N    E X E C U T I V E    C O N T R O L    E C H O                                                             
 0                                                                                                                                   
@@ -55,7 +55,7 @@
                                                                                                                                     
      SOL 106                                                                                 
      CEND                                                                                    
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE     3
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE     3
                                                                                                                                     
 0                                                                                                                                   
 0                                        C A S E    C O N T R O L    E C H O                                                        
@@ -70,7 +70,7 @@
                   7      SUBCASE 1                                                                               
                   8          LOAD = 12                                                                           
                   9      BEGIN BULK                                                                              
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE     4
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE     4
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -79,7 +79,7 @@
 
 *** USER WARNING MESSAGE (fn: GETLIN)
     The ENDDATA statement is missing.
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE     5
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE     5
                                                                                                                                     
 0                                                                                                                                   
                                         M O D E L   S U M M A R Y          BULK = 0
@@ -139,7 +139,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =          10 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          25 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =          61 WORDS.)
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE     6
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE     6
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
@@ -177,7 +177,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =        1000 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          15 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =        1031 WORDS.)
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE     7
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE     7
                                                                                                                                     
 0                                                                                                                                   
  *** USER INFORMATION MESSAGE 7310 (VECPRN)
@@ -189,12 +189,12 @@
   DAREA ID    TYPE       T1            T2            T3            R1            R2            R3
 0        1     FX    0.000000E+00     ----          ----          ----       0.000000E+00  0.000000E+00                             
                FY       ----       0.000000E+00     ----       0.000000E+00     ----       0.000000E+00                             
-               FZ       ----          ----       6.201953E+03  2.790879E+07 -3.100976E+06     ----                                  
+               FZ       ----          ----       6.202000E+03  2.790900E+07 -3.101000E+06     ----                                  
                MX       ----          ----          ----       0.000000E+00     ----          ----                                  
                MY       ----          ----          ----          ----       0.000000E+00     ----                                  
                MZ       ----          ----          ----          ----          ----       0.000000E+00                             
-             TOTALS  0.000000E+00  0.000000E+00  6.201953E+03  2.790879E+07 -3.100976E+06  0.000000E+00
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE     8
+             TOTALS  0.000000E+00  0.000000E+00  6.202000E+03  2.790900E+07 -3.101000E+06  0.000000E+00
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE     8
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
@@ -205,25 +205,25 @@
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  9.9000E+01  3.8178E+00  3.8178E+00  1.0000E-01  2.2135E-01  1.0000E+00 -5.9459E-04 -5.9459E-04    0    0          0    1
+         1  9.9000E+01  3.8179E+00  3.8179E+00  1.0000E-01  2.2135E-01  1.0000E+00 -5.9460E-04 -5.9460E-04    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE     9
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE     9
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.62 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   0.0999993
+     STIFFNESS UPDATE TIME          0.58 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   0.0999993
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  6.6544E-02  9.1741E-06  7.3143E-09  1.0000E-01  1.3172E-05  1.0000E+00  6.4687E-06  6.4687E-06    0    0          0    1
+         2  6.6545E-02  9.1741E-06  7.3078E-09  1.0000E-01  1.3172E-05  1.0000E+00  6.4688E-06  6.4688E-06    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID    1     LOAD STEP    0.100     LOAD FACTOR 0.09999932
@@ -236,36 +236,36 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    10
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    10
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.52 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.58 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   0.3449431
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  7.0301E+01  2.2914E+01  1.6271E+01  1.0000E-01  1.3304E+00  1.0000E+00 -3.5011E-03 -3.5011E-03    0    0          0    1
+         1  7.0301E+01  2.2914E+01  1.6272E+01  1.0000E-01  1.3304E+00  1.0000E+00 -3.5011E-03 -3.5011E-03    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    11
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    11
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.55 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.58 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   0.3449103
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  1.2212E-01  5.4546E-04  8.7297E-07  1.0000E-01  1.3194E-03  1.0000E+00  8.0672E-05  8.0672E-05    0    0          0    1
+         2  1.2212E-01  5.4548E-04  8.7301E-07  1.0000E-01  1.3195E-03  1.0000E+00  8.0674E-05  8.0674E-05    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID    2     LOAD STEP    0.345     LOAD FACTOR 0.34491034
@@ -278,88 +278,18 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    12
-                                                                                                                                    
-0                                                                                                                                   
-0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
-
-     STIFFNESS UPDATE TIME          0.50 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   0.9446146
-
-                        - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
-0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
-
-         1  6.2863E+01  1.3773E+02  8.7457E+01  1.0000E-01  8.2302E+00  1.0000E+00 -1.9788E-02 -1.9788E-02    0    0          0    1
- *** USER INFORMATION MESSAGE 4550 (NCONVG)
-     *** NEW STIFFNESS MATRIX IS REQUIRED ***
- ^^^     
- *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
-     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
- ^^^     
- *** USER WARNING MESSAGE 4698 (DCMPD)
-     STATISTICS FOR DECOMPOSITION OF MATRIX KLLRH.
-     THE FOLLOWING DEGREES OF FREEDOM HAVE FACTOR DIAGONAL RATIOS GREATER THAN
-     1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
-     USER INFORMATION:
-     THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    13
-                                                                                                                                    
-0                                                                                                                                   
-0                                                                                                                                   
-         GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
-                                                                                                                                    
-              89                    T3                  -4.75115E+02                   3.11493E+04
-             489                    T3                  -7.61425E-01                   3.11693E+04
-             514                    R1                  -2.54792E+00                   1.11981E+07
-             954                    R1                  -1.18365E+01                   1.11981E+07
-            1436                    R2                  -1.18747E+01                   1.19201E+07
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    14
-                                                                                                                                    
-0                                                                                                                                   
-0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
-
-     STIFFNESS UPDATE TIME          0.48 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   0.9466420
-
-                        - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
-0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
-
-         2  5.4478E-01  3.2220E+00  1.9625E-02  1.0000E-01  2.4836E+00  1.0000E+00 -3.5440E-02 -3.5440E-02    0    0          0    1
- *** USER INFORMATION MESSAGE 4550 (NCONVG)
-     *** NEW STIFFNESS MATRIX IS REQUIRED ***
- ^^^     
- *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
-     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
- ^^^     
- *** USER WARNING MESSAGE 4698 (DCMPD)
-     STATISTICS FOR DECOMPOSITION OF MATRIX KLLRH.
-     THE FOLLOWING DEGREES OF FREEDOM HAVE FACTOR DIAGONAL RATIOS GREATER THAN
-     1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
-     USER INFORMATION:
-     THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    15
-                                                                                                                                    
-0                                                                                                                                   
-0                                                                                                                                   
-         GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
-                                                                                                                                    
-              89                    T3                  -4.87113E+02                   3.11573E+04
-             489                    T3                  -5.89334E+00                   3.11720E+04
-             514                    R1                  -4.24759E+00                   1.11981E+07
-             954                    R1                  -1.88162E+01                   1.11981E+07
-            1436                    T3                  -2.24771E+03                   3.12380E+04
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    16
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    12
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
      STIFFNESS UPDATE TIME          0.53 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   0.9417059
+            ITERATION TIME          0.05 SECONDS                                                        LOAD FACTOR   0.9446146
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  1.7630E-01  1.7292E-01  6.1279E-04  1.0000E-01  1.0239E-01  1.0000E+00  2.3965E-02  2.3965E-02    0    0          0    1
+         1  6.2863E+01  1.3773E+02  8.7457E+01  1.0000E-01  8.2303E+00  1.0000E+00 -1.9789E-02 -1.9789E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -372,32 +302,102 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    17
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    13
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-              89                    T3                  -4.52304E+02                   3.11563E+04
-             196                    R1                  -1.91309E+01                   1.67971E+07
-             514                    R1                  -2.78176E+00                   1.11981E+07
-             954                    R1                  -1.09339E+01                   1.11981E+07
-            1436                    R1                  -7.60912E+00                   1.11981E+07
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    18
+              89                    T3                  -4.75087E+02                   3.11493E+04
+             489                    T3                  -7.46041E-01                   3.11693E+04
+             514                    R1                  -2.54713E+00                   1.11981E+07
+             954                    R1                  -1.18336E+01                   1.11981E+07
+            1436                    R2                  -1.18573E+01                   1.19201E+07
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    14
+                                                                                                                                    
+0                                                                                                                                   
+0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
+
+     STIFFNESS UPDATE TIME          0.59 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   0.9466419
+
+                        - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
+0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
+
+         2  5.4478E-01  3.2223E+00  1.9628E-02  1.0000E-01  2.4837E+00  1.0000E+00 -3.5458E-02 -3.5458E-02    0    0          0    1
+ *** USER INFORMATION MESSAGE 4550 (NCONVG)
+     *** NEW STIFFNESS MATRIX IS REQUIRED ***
+ ^^^     
+ *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
+     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
+ ^^^     
+ *** USER WARNING MESSAGE 4698 (DCMPD)
+     STATISTICS FOR DECOMPOSITION OF MATRIX KLLRH.
+     THE FOLLOWING DEGREES OF FREEDOM HAVE FACTOR DIAGONAL RATIOS GREATER THAN
+     1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
+     USER INFORMATION:
+     THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    15
+                                                                                                                                    
+0                                                                                                                                   
+0                                                                                                                                   
+         GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
+                                                                                                                                    
+              89                    T3                  -4.87078E+02                   3.11573E+04
+             489                    T3                  -5.85575E+00                   3.11720E+04
+             514                    R1                  -4.24639E+00                   1.11981E+07
+             954                    R1                  -1.88091E+01                   1.11981E+07
+            1436                    T3                  -2.24489E+03                   3.12380E+04
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    16
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
      STIFFNESS UPDATE TIME          0.52 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   0.9413485
+            ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   0.9417056
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  2.5956E-02  7.5222E-03  3.6459E-06  1.0000E-01  5.9208E-03  1.0000E+00 -1.8909E-03 -1.8909E-03    0    0          0    1
+         3  1.7630E-01  1.7293E-01  6.1284E-04  1.0000E-01  1.0239E-01  1.0000E+00  2.3965E-02  2.3965E-02    0    0          0    1
+ *** USER INFORMATION MESSAGE 4550 (NCONVG)
+     *** NEW STIFFNESS MATRIX IS REQUIRED ***
+ ^^^     
+ *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
+     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
+ ^^^     
+ *** USER WARNING MESSAGE 4698 (DCMPD)
+     STATISTICS FOR DECOMPOSITION OF MATRIX KLLRH.
+     THE FOLLOWING DEGREES OF FREEDOM HAVE FACTOR DIAGONAL RATIOS GREATER THAN
+     1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
+     USER INFORMATION:
+     THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    17
+                                                                                                                                    
+0                                                                                                                                   
+0                                                                                                                                   
+         GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
+                                                                                                                                    
+              89                    T3                  -4.52276E+02                   3.11563E+04
+             196                    R1                  -1.89937E+01                   1.67971E+07
+             514                    R1                  -2.78098E+00                   1.11981E+07
+             954                    R1                  -1.09312E+01                   1.11981E+07
+            1436                    R1                  -7.55532E+00                   1.11981E+07
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    18
+                                                                                                                                    
+0                                                                                                                                   
+0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
+
+     STIFFNESS UPDATE TIME          0.52 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   0.9413481
+
+                        - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
+0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
+
+         4  2.5960E-02  7.5245E-03  3.6476E-06  1.0000E-01  5.9226E-03  1.0000E+00 -1.9015E-03 -1.9015E-03    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
-         SUBID    1     LOOPID    3     LOAD STEP    0.941     LOAD FACTOR 0.94134847
+         SUBID    1     LOOPID    3     LOAD STEP    0.941     LOAD FACTOR 0.94134809
 
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
 
@@ -413,29 +413,29 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    19
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    19
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-              89                    T3                  -4.53059E+02                   3.11563E+04
-             196                    R1                  -2.53062E+01                   1.67971E+07
-             514                    R1                  -2.80664E+00                   1.11981E+07
-             954                    R1                  -1.08015E+01                   1.11981E+07
-            1436                    R1                  -1.11906E+01                   1.11981E+07
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    20
+              89                    T3                  -4.53032E+02                   3.11563E+04
+             196                    R1                  -2.50963E+01                   1.67971E+07
+             514                    R1                  -2.80586E+00                   1.11981E+07
+             954                    R1                  -1.07989E+01                   1.11981E+07
+            1436                    R1                  -1.11235E+01                   1.11981E+07
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    20
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.52 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   1.0000000
+     STIFFNESS UPDATE TIME          0.55 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.05 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  6.1114E+00  2.9812E+00  1.8307E-01  1.0000E-01  9.6555E-01  1.0000E+00  3.0531E-02  3.0531E-02    0    0          0    1
+         1  6.1115E+00  2.9814E+00  1.8309E-01  1.0000E-01  9.6567E-01  1.0000E+00  3.0528E-02  3.0528E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -448,29 +448,29 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    21
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    21
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-              89                    T3                  -2.97546E+02                   3.11498E+04
-             176                    R1                  -2.09108E+00                   1.11981E+07
-             533                    R1                  -1.13409E+02                   1.11981E+07
-             954                    R1                  -4.95708E-01                   1.11981E+07
-            1436                    T3                  -4.96890E+02                   3.12358E+04
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    22
+              89                    T3                  -2.97533E+02                   3.11498E+04
+             176                    R1                  -2.08855E+00                   1.11981E+07
+             533                    R1                  -1.13354E+02                   1.11981E+07
+             954                    R1                  -4.95180E-01                   1.11981E+07
+            1436                    T3                  -4.96802E+02                   3.12358E+04
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    22
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          0.50 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          0.55 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  3.7647E-01  1.3862E-01  6.5521E-04  1.0000E-01  1.6020E-01  1.0000E+00 -1.0982E-02 -1.0982E-02    0    0          0    1
+         2  3.7651E-01  1.3863E-01  6.5539E-04  1.0000E-01  1.6024E-01  1.0000E+00 -1.1001E-02 -1.1001E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -483,29 +483,29 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    23
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    23
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-              89                    T3                  -3.02721E+02                   3.11533E+04
-             176                    R1                  -3.20231E+00                   1.11981E+07
-             533                    R1                  -1.90911E+03                   1.11981E+07
-             954                    R1                  -1.49165E+00                   1.11981E+07
-            1436                    T3                  -3.82993E+02                   3.12416E+04
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    24
+              89                    T3                  -3.02711E+02                   3.11533E+04
+             176                    R1                  -3.19982E+00                   1.11981E+07
+             533                    R1                  -1.90250E+03                   1.11981E+07
+             954                    R1                  -1.49130E+00                   1.11981E+07
+            1436                    T3                  -3.82944E+02                   3.12416E+04
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    24
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
      STIFFNESS UPDATE TIME          0.48 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.03 SECONDS                                                        LOAD FACTOR   1.0000000
+            ITERATION TIME          0.02 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  3.2087E-02  2.0401E-04  8.6725E-08  1.0000E-01  2.4515E-04  1.0000E+00  1.8269E-03  1.8269E-03    0    0          0    1
+         3  3.2093E-02  2.0409E-04  8.6785E-08  1.0000E-01  2.4528E-04  1.0000E+00  1.8280E-03  1.8280E-03    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID    4     LOAD STEP    1.000     LOAD FACTOR 1.00000000
@@ -547,7 +547,7 @@
                                  (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =      1 WORDS.)
                                        (NUMBER OF FORTRAN RECORDS WRITTEN =      1 RECORDS.)
                                        (TOTAL DATA WRITTEN FOR EOF MARKER =      1 WORDS.)
-1                                                                           OCTOBER  19, 2023  MSC Nastran 12/14/21   PAGE    25
+1                                                                          DECEMBER  22, 2023  MSC Nastran 12/14/21   PAGE    25
                                                                                                                                     
 0                                                                                                                                   
  * * * *  D B D I C T   P R I N T  * * * *      SUBDMAP = PRTSUM  ,  DMAP STATEMENT NO.     74
