@@ -493,6 +493,8 @@ def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, 
         identification number of NLPARM card
     ninc: int
         number of increments
+    kstep: int
+        number of iterations before the stiffness update
     max_iter: int
         limit on number of iterations for each load increment
     conv: str
@@ -538,6 +540,8 @@ def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = No
         identification number of NLPARM card
     ninc: int
         number of increments
+    kstep: int
+        number of iterations before the stiffness update
     max_iter: int
         limit on number of iterations for each load increment
     conv: str
