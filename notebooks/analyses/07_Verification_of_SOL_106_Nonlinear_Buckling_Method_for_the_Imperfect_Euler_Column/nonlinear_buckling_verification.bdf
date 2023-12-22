@@ -5,7 +5,7 @@ $pyNastran: nnodes=421
 $pyNastran: nelements=420
 $EXECUTIVE CONTROL DECK
 SOL 106
-include '..\..\resources\kllrh_lowest_eigenvalues.dmap'
+include '..\..\resources\kllrh_eigenvalues.dmap'
 CEND
 $CASE CONTROL DECK
 DISPLACEMENT(PLOT) = ALL
@@ -906,7 +906,7 @@ EIGRL          6      0.               1
 NLPARM         1     100            ITER      -1             PUV     YES
             .001    .001
               10
-NLPCI          1    CRIS     .01    1.01      0.               5    2000
+NLPCI          1    CRIS     .01    1.01      0.               5    1000
 $SPCs
 SPCADD         3       1       2
 SPC1           1      12       1
