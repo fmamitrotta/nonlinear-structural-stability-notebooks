@@ -6768,7 +6768,7 @@ $LOADS
 LOAD          12      1.   1654.      11
 FORCE         11    3389              1.      0.      0.      1.
 $DYNAMIC
-NLPARM         1     100            ITER      -1                     YES
+NLPARM         1     100            ITER       1                     YES
 NLPCI          1    CRIS     .25      4.      0.              12      20
 $SPCs
 SPC1           1  123456       1      78     155     232     309     386
