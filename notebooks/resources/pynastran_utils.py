@@ -478,7 +478,7 @@ def add_unitary_force(bdf_object: BDF, nodes_ids: Union[list, ndarray], set_id: 
         bdf_object.add_force(sid=set_id, node=node_id, mag=force_magnitude, xyz=direction_vector)
 
 
-def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = 1, max_iter: int = 25, conv: str = 'PW',
+def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = -1, max_iter: int = 25, conv: str = 'PW',
                          eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5,
                          subcase_id: int = 0):
     """
@@ -514,9 +514,6 @@ def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, 
     bdf_object.sol = 106
     # Add parameter for large displacement effects
     bdf_object.add_param('LGDISP', [1])
-    # Change KSTEP field to -1 if displacement error fundtion is used (otherwise displacement error function is ignored)
-    if kstep == 1 and 'U' in conv:
-        kstep = -1
     # Define parameters for the nonlinear iteration strategy with full Newton method (update tangent stiffness matrix after every converged iteration)
     bdf_object.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=kstep, max_iter=max_iter, conv=conv,
                           int_out='YES', eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect)
@@ -524,7 +521,7 @@ def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, 
     bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)
 
 
-def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = 1, max_iter: int = 25,
+def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = -1, max_iter: int = 25,
                              conv: str = 'PW', eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01,
                              max_bisect: int = 5, subcase_id: int = 0, constraint_type: str = 'CRIS',
                              minalr: float = 0.25, maxalr: float = 4., desiter: int = 12, maxinc: int = 20):
