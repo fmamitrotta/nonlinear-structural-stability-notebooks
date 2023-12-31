@@ -17397,15 +17397,21 @@ RBE3        8785            8563  123456      1.  123456    6674      1.
           123456    7362      1.  123456    7363      1.  123456    7364
 $LOADS
 <<<<<<< HEAD
+<<<<<<< HEAD
 LOAD          12      1.  16848.      11
 FORCE         11    8563              1.      0.      0.      1.
 $DYNAMIC
 NLPARM         1                    ITER      -1             PUV     YES
 =======
+=======
+>>>>>>> d2002a135fdb8efee1c4c5a77d2f73789305adf5
 LOAD          12      1.16847.75      11
 FORCE         11    8563              1.      0.      0.      1.
 $DYNAMIC
 NLPARM         1                    ITER       1             PUV     YES
+<<<<<<< HEAD
+>>>>>>> d2002a135fdb8efee1c4c5a77d2f73789305adf5
+=======
 >>>>>>> d2002a135fdb8efee1c4c5a77d2f73789305adf5
 NLPCI          1    CRIS     .25      4.      0.              12      20
 $SPCs

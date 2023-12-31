@@ -6,7 +6,11 @@ $pyNastran: nelements=8784
 $EXECUTIVE CONTROL DECK
 SOL 106
 <<<<<<< HEAD
+<<<<<<< HEAD
 include '..\..\resources\kllrh_eigenvalues.dmap'
+=======
+include '..\..\resources\kllrh_lowest_eigenvalues.dmap'
+>>>>>>> d2002a135fdb8efee1c4c5a77d2f73789305adf5
 =======
 include '..\..\resources\kllrh_lowest_eigenvalues.dmap'
 >>>>>>> d2002a135fdb8efee1c4c5a77d2f73789305adf5
@@ -17422,6 +17426,7 @@ RBE3        8785            8563  123456      1.  123456    6674      1.
           123456    7362      1.  123456    7363      1.  123456    7364
 $LOADS
 <<<<<<< HEAD
+<<<<<<< HEAD
 LOAD          12      1.  1684.8      11
 LOAD          13      1.  3369.6      11
 LOAD          14      1.  5054.4      11
@@ -17439,6 +17444,8 @@ NLPARM         1     100            ITER      -1                     YES
                     .001.0000001
 NLPCI          1    CRIS     .25    1.01      0.               5     200
 =======
+=======
+>>>>>>> d2002a135fdb8efee1c4c5a77d2f73789305adf5
 LOAD          12      1.1684.775      11
 LOAD          13      1.3369.549      11
 LOAD          14      1.5054.324      11
@@ -17455,6 +17462,9 @@ EIGRL         22      0.               1
 NLPARM         1     100            ITER       1                     YES
                     .001.0000001
 NLPCI          1    CRIS     .25     1.1      0.               5     100
+<<<<<<< HEAD
+>>>>>>> d2002a135fdb8efee1c4c5a77d2f73789305adf5
+=======
 >>>>>>> d2002a135fdb8efee1c4c5a77d2f73789305adf5
 $SPCs
 SPC1           1  123456       1       2       5       7       9      11
