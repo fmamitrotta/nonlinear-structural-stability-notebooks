@@ -33,8 +33,8 @@ F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. 
 20. [Two-variables Optimization of the CRM-like Box Beam](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/20_Two-variables_Optimization_of_the_CRM-like_Box_Beam.ipynb)
 
 ### Papers
-[Proof of concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Proof_of_concept_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimizations.ipynb)
-[Development of a Nonlinear Structural Stability Constraint for Aeroelastic Optimization](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Development_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimization.ipynb)
+- [Proof of concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Proof_of_concept_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimizations.ipynb)
+- [Development of a Nonlinear Structural Stability Constraint for Aeroelastic Optimization](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Development_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimization.ipynb)
 
 ## Copyright and License
 
