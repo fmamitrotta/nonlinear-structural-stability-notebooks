@@ -1,0 +1,67 @@
+$ This file is part of the GitHub repository 
+$ nonlinear-structural-stability-notebooks, created by Francesco M. A. 
+$ Mitrotta.
+$ The contribution of Mike Coleman from MSC Software to the development 
+$ of this DMAP program is greatly acknowledged.
+$ Copyright (C) 2022 Francesco Mario Antonio Mitrotta
+$ 
+$ Redistribution and use in source and binary forms, with or without 
+$ modification, are permitted provided that the following conditions are
+$ met:
+$
+$ 1. Redistributions of source code must retain the above copyright 
+$    notice, this list of conditions and the following disclaimer.
+$ 2. Redistributions in binary form must reproduce the above copyright 
+$    notice, this list of conditions and the following disclaimer in the
+$    documentation and/or other materials provided with the 
+$    distribution.
+$ 3. Neither the name of the copyright holder nor the names of its 
+$    contributors may be used to endorse or promote products derived 
+$    from this software without specific prior written permission.
+$ 
+$ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+$ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+$ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR 
+$ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+$ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+$ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+$ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+$ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY 
+$ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+$ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+$ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+$
+ECHOOFF $
+compile nlstatic $
+alter 2 $
+type parm,,rs,y,lowereig=-1.e32 $
+type parm,,rs,y,uppereig=1.e32 $
+type parm,,i,y,bmodes=1 $
+type parm,,i,y,bloop=0 $
+alter 'ENDIF.*BUCKLE.-1 AND CONV.-1'  $
+if (conv>0 and (newp=-1 or cbuckle>0)) then $
+PARAML KLLRH//'TRAILER'/1/S,N,NC//         $
+MATGEN ,/IM/1/NC $
+READ KLLRH,IM,,,,,,,,,,,,/                                                     
+     LAMA0,PH0,M0X,OEIGS0,LAMMAT0,/                                           
+     'MODES'/S,N,NEIGV////-1/'LAN'/lowereig/uppereig//bmodes/0////                                
+     FALSE/1.e7     $    
+message //'' $
+if (cbuckle<1) nloop=nloop-1 $
+message //'NLOOP ='/nloop $
+if (cbuckle<1) nloop=nloop+1 $
+bloop=0 $
+do while (bloop<neigv) $
+bloop=bloop+1 $
+PARAML lammat0//'dmi'/bloop/bloop/s,n,leigvmc        $
+message //'kllrh eigenvalue '/ bloop /' = '/leigvmc $
+enddo $
+ofp oeigs0// $
+endif $
+alter 'paraml *casesx2.*cmethod'  $
+if (cbuckle=2) then $
+cbuckle=-1 $
+lbuckle=false $
+JUMP LENDDO $
+endif $
+ECHOON $

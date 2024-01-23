@@ -2,9 +2,11 @@
 
 This repository contains the jupyter notebooks that I developed for my PhD research on aeroelastic optimization with nonlinear structural stability.
 
-If you use any of the code or of the other resources in this repository, please cite the following paper:
+If you use any of the code or of the other resources in this repository, please one of the following papers:
 
 F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. H. Cabral. _"Proof-of-concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations"_, 2023, RAeS 8th Aircraft Structural Design Conference
+
+F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. H. Cabral. _"Development of a Nonlinear Structural Stability Constraint for Aeroelastic Optimization"_, 2024, AIAA SciTech Forum
 
 ## List of notebooks
 
@@ -28,13 +30,15 @@ F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. 
 17. [Nonlinear Buckling Analysis of the uCRM-9](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/17_Nonlinear_Buckling_Analysis_of_the_uCRM-9.ipynb)
 18. [Development and Nonlinear Buckling Analysis of a CRM-like Box Beam Model](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/18_Development_and_Nonlinear_Buckling_Analysis_of_a_CRM-like_Box_Beam_Model.ipynb)
 19. [One-variable Optimization of the CRM-like Box Beam](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/19_One-variable_Optimization_of_the_CRM-like_Box_Beam.ipynb)
+20. [Two-variables Optimization of the CRM-like Box Beam](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/20_Two-variables_Optimization_of_the_CRM-like_Box_Beam.ipynb)
 
 ### Papers
-[Proof-of-concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Proof-of-concept_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimizations.ipynb)
+- [Proof of concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Proof_of_concept_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimizations.ipynb)
+- [Development of a Nonlinear Structural Stability Constraint for Aeroelastic Optimization](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Development_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimization.ipynb)
 
 ## Copyright and License
 
-(c) 2022-2023 Francesco Mario Antonio Mitrotta. All code is under [BSD-3 clause](https://spdx.org/licenses/BSD-3-Clause.html) and all other content is under Creative Commons Attribution [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). 
+(c) 2022-2024 Francesco Mario Antonio Mitrotta. All code is under [BSD-3 clause](https://spdx.org/licenses/BSD-3-Clause.html) and all other content is under Creative Commons Attribution [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). 
 
 I'm happy if this content can help you with a smooth understanding of nonlinear structural stability and if you want to re-use it in any way!
 

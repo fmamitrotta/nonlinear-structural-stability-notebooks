@@ -1,0 +1,86 @@
+ECHOOFF  $ do not print following commands to output file
+compile nlstatic  $ request compilation of nlstatic solution sequence
+$
+$ Insert parameters definition at the start of the solution sequence
+alter 2  $
+type parm,,rs,y,lowereig=-1.e32  $ lower bound for eigenvalue extraction
+type parm,,rs,y,uppereig=1.e32  $ upper bound for eigenvalue extraction
+type parm,,rs,n,loadfmc  $ parameter for load factor
+type parm,,i,y,bmodes=1  $ number of eigenvalues to be extracted
+type parm,,i,n,nosort2=1  $ parameter for sorting of displacements
+$
+$ Insert DMAP statements just before decomposition of KLLRH
+alter 'ENDIF.*BUCKLE.-1 AND CONV.-1'  $
+$
+$ Check increment convergence before eigenvalue calculation
+if (conv>0 and (newp=-1 or cbuckle>0)) then  $
+$ con>0 checks that last increment has converged
+$ newp=-1 checks convergence of first increment of subcase
+$ cbuckle>0 allows eigenvalue calculation for last increment of subcase,
+$ where newp=+1
+$
+$ Extract number of columns in tangent stiffness matrix (KLLRH)
+PARAML KLLRH//'TRAILER'/1/S,N,NC//  $
+$
+MATGEN ,/IM/1/NC  $ create identity matrix of the same size as KLLRH
+$
+$ Calculate the lowest magnitude eigenvalues of KLLRH
+READ KLLRH,IM,,,,,,,,,,,,/                                                     
+     LAMA0,PH0,M0X,OEIGS0,LAMMAT0,/                                           
+     'MODES'/S,N,NEIGV////-1/'LAN'/lowereig/uppereig//bmodes/0////                                
+     FALSE/1.e7  $
+$ LAMA0 - normal modes eigenvalue summary table
+$ PH0 - normal modes eigenvector matrix in the a-set
+$ M0X - modeal mass matrix
+$ OEIGS0 - real eigenvalue extraction report
+$ LAMMAT0 - diagonal matrix of eigenvalues
+$
+endif $
+$
+$ Test for the presence of the ph0 datablock
+paraml ph0//'presence'////s,n,noph0  $
+$
+if (noph0>-1) then  $ if ph0 datablock is present
+$
+$ Compute displacements of constraint at the g-set
+sdr1 usetnl,pg,ph0,uoo,ys,goa,gmnl,,,,,/ph0g,,/1/'bkl1'/-1  $
+$ ph0g - displacement matrix in the g-set for all boundary conditions
+$
+loadfmc=real(loadfac)  $ convert load factor to real number
+$
+$ Create output table of eigenvectors datablock with SDR2
+SDR2     CASESx2  , CSTMS  , MPTS   , DITS   , EQEXINS ,              
+          , ETT    , LAMA0 , BGPDTs ,      ,              
+          , ph0g    , EST   , , ,             
+          ,        , , , ,              
+          , , , EDT    ,         ,              
+          ,    ,        ,        ,         ,              
+          ,        ,        ,        ,         ,              
+          ,        ,        ,        ,         ,              
+          ,        ,        ,  ,         ,              
+          ,        ,  ,        ,         ,              
+          ,        /                                          
+          ,        , Oug1   /                                 
+          'bkl1'/S,N,NOSORT2//////                         
+         //-1./-1.///FALSE/                                 
+         ////////////////             
+         LOADFMC/ $
+$ oug1 - table of displacements in SORT2 format
+$
+$ Write eigenvector table onto op2 file
+output2 oug1//0/12///'oug' $
+$ 'oug' - NDDL name corresponding to OUG table
+$
+endif $
+$
+$ Insert DMAP statements just before nonlinear buckling analysis
+alter 'paraml *casesx2.*cmethod'  $
+$
+$ Stop nonlinear buckling analysis from occurring
+if (cbuckle=2) then  $
+cbuckle=-1  $
+lbuckle=false  $
+JUMP LENDDO  $
+endif  $
+$
+ECHOON  $ print following commands to output file

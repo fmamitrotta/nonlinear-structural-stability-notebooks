@@ -26,13 +26,13 @@
                                               * *          DEC 14, 2021           * *
                                               * *                                 * *
                                               * *              Intel              * *
-                                              * *MODEL Intel(R) Core(TM) i7-10850 * *
+                                              * * MODEL Intel(R) Core(TM) i7-8700 * *
                                               * * Windows 10 Enterprise 6.2 9200  * *
                                               * * Compiled for 8664 (SINGLE Mode) * *
                                               * *                                 * *
                                               * * * * * * * * * * * * * * * * * * * *
                                               * * * * * * * * * * * * * * * * * * * *
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE     1
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE     1
                                                                                                                                     
 0        N A S T R A N    F I L E    A N D    S Y S T E M    P A R A M E T E R    E C H O                                           
 0                                                                                                                                   
@@ -44,10 +44,10 @@
      $PYNASTRAN: VERSION=MSC                                                         
      $PYNASTRAN: PUNCH=FALSE                                                         
      $PYNASTRAN: ENCODING=UTF-8                                                      
-     $PYNASTRAN: NNODES=1761                                                         
-     $PYNASTRAN: NELEMENTS=1728                                                      
+     $PYNASTRAN: NNODES=3389                                                         
+     $PYNASTRAN: NELEMENTS=3344                                                      
      $EXECUTIVE CONTROL DECK                                                         
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE     2
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE     2
                                                                                                                                     
 0        N A S T R A N    E X E C U T I V E    C O N T R O L    E C H O                                                             
 0                                                                                                                                   
@@ -55,7 +55,7 @@
                                                                                                                                     
      SOL 105                                                                                 
      CEND                                                                                    
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE     3
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE     3
                                                                                                                                     
 0                                                                                                                                   
 0                                        C A S E    C O N T R O L    E C H O                                                        
@@ -66,13 +66,12 @@
                   3      ECHO = NONE                                                                             
                   4      OLOAD(PLOT) = ALL                                                                       
                   5      SPC = 1                                                                                 
-                  6      SPCFORCES(PLOT) = ALL                                                                   
-                  7      SUBCASE 1                                                                               
-                  8          LOAD = 11                                                                           
-                  9      SUBCASE 2                                                                               
-                 10          METHOD = 12                                                                         
-                 11      BEGIN BULK                                                                              
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE     4
+                  6      SUBCASE 1                                                                               
+                  7          LOAD = 11                                                                           
+                  8      SUBCASE 2                                                                               
+                  9          METHOD = 12                                                                         
+                 10      BEGIN BULK                                                                              
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE     4
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -81,16 +80,16 @@
 
 *** USER WARNING MESSAGE (fn: GETLIN)
     The ENDDATA statement is missing.
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE     5
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE     5
                                                                                                                                     
 0                                                                                                                                   
                                         M O D E L   S U M M A R Y          BULK = 0
                                    ENTRY NAME        NUMBER OF ENTRIES
                                    ----------        -----------------
-                                       CQUAD4                     1728
+                                       CQUAD4                     3344
                                         EIGRL                        1
                                         FORCE                        1
-                                         GRID                     1761
+                                         GRID                     3389
                                          MAT1                        1
                                         PARAM                        1
                                        PSHELL                        1
@@ -110,17 +109,17 @@
                     101                 0                 0                 8                 0                 0                 0
      NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS GEOM1   
         (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
-     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       14091 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       27115 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
-           (TOTAL DATA WRITTEN FOR DATA BLOCK =       14129 WORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =       27153 WORDS.)
  *** USER INFORMATION MESSAGE 4114 (OUTPX2)
      DATA BLOCK GEOM2X   WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR GEOM2, TRL =
                     102                 0                 0                 0              8192                 0                 0
      NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS GEOM2   
         (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
-     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       25923 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       50163 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
-           (TOTAL DATA WRITTEN FOR DATA BLOCK =       25961 WORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =       50201 WORDS.)
  *** USER INFORMATION MESSAGE 4114 (OUTPX2)
      DATA BLOCK GEOM3X   WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR GEOM3, TRL =
                     103                 0                 0                64                 0                 0                 0
@@ -129,7 +128,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =          10 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =          48 WORDS.)
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE     6
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE     6
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
@@ -140,9 +139,9 @@
                     104                 0                 0                 0                64              2048                 0
      NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS GEOM4   
         (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
-     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =          41 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =          53 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          25 RECORDS.)
-           (TOTAL DATA WRITTEN FOR DATA BLOCK =         122 WORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =         146 WORDS.)
  *** USER INFORMATION MESSAGE 4114 (OUTPX2)
      DATA BLOCK EPTX     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR EPT, TRL =
                     105                 0               512                 0                 0                 0                 0
@@ -175,7 +174,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =        1000 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =        2035 WORDS.)
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE     7
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE     7
                                                                                                                                     
 0                                                                                                                                   
  *** USER INFORMATION MESSAGE 7310 (VECPRN)
@@ -192,7 +191,7 @@
                MY       ----          ----          ----          ----       0.000000E+00     ----                                  
                MZ       ----          ----          ----          ----          ----       0.000000E+00                             
              TOTALS  0.000000E+00  0.000000E+00  1.000000E+00  4.500000E+03 -5.000000E+02  0.000000E+00
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE     8
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE     8
                                                                                                                                     
 0                                                                                                                                   
  *** USER INFORMATION MESSAGE 7310 (VECPRN)
@@ -211,76 +210,51 @@
              TOTALS  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
   
  *** SYSTEM INFORMATION MESSAGE 4159 (DFMSA)
-     THE DECOMPOSITION OF KLL      YIELDS A MAXIMUM MATRIX-TO-FACTOR-DIAGONAL RATIO OF    2.971036E+02
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE     9
+     THE DECOMPOSITION OF KLL      YIELDS A MAXIMUM MATRIX-TO-FACTOR-DIAGONAL RATIO OF    3.609259E+02
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE     9
                                                                                                                                     
 0                                                                                                            SUBCASE 1              
  *** USER INFORMATION MESSAGE 5293 (SSG3A)
     FOR DATA BLOCK KLL     
     LOAD SEQ. NO.             EPSILON              EXTERNAL WORK      EPSILONS LARGER THAN 0.001 ARE FLAGGED WITH ASTERISKS
-                1         -8.4622997E-12          2.5245820E-03
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE    10
-                                                                                                                                    
-0                                                                                                                                   
- *** USER INFORMATION MESSAGE 7310 (VECPRN)
-     ORIGIN OF SUPERELEMENT OR MODULE BASIC COORDINATE SYSTEM WILL BE USED AS REFERENCE LOCATION.
-     RESULTANTS ABOUT ORIGIN OF SUPERELEMENT OR MODULE BASIC COORDINATE SYSTEM IN SUPERELEMENT OR MODULE
-     BASIC SYSTEM COORDINATES.
-0                                                  SPCFORCE RESULTANT       
-  SUBCASE/    LOAD
-  DAREA ID    TYPE       T1            T2            T3            R1            R2            R3
-0        1     FX   -1.464088E-12     ----          ----          ----       1.929086E-08  0.000000E+00                             
-               FY       ----      -2.329248E-13     ----      -4.498488E+03     ----      -3.389863E-09                             
-               FZ       ----          ----      -1.000000E+00  0.000000E+00  5.000000E+02     ----                                  
-               MX       ----          ----          ----      -1.512219E+00     ----          ----                                  
-               MY       ----          ----          ----          ----       1.681087E-08     ----                                  
-               MZ       ----          ----          ----          ----          ----      -3.168299E-14                             
-             TOTALS -1.464088E-12 -2.329248E-13 -1.000000E+00 -4.500000E+03  5.000000E+02 -3.389895E-09
- *** USER INFORMATION MESSAGE 4114 (OUTPX2)
-     DATA BLOCK OQG1     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR OQG1, TRL =
-                    101                 0             14088                 0                 0                 0                 2
-     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS OQG1    
-        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
-     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       14088 WORDS.)
-           (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
-           (TOTAL DATA WRITTEN FOR DATA BLOCK =       14274 WORDS.)
+                1         -1.7003026E-12          2.5253287E-03
  *** USER INFORMATION MESSAGE 4114 (OUTPX2)
      DATA BLOCK OUG1     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR OUG1, TRL =
-                    101                 0             14088                 0                 0                 0                 2
+                    101                 0             27112                 0                 0                 0                 2
      NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS OUG1    
         (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
-     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       14088 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       27112 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
-           (TOTAL DATA WRITTEN FOR DATA BLOCK =       14274 WORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =       27298 WORDS.)
  *** USER INFORMATION MESSAGE 4114 (OUTPX2)
      DATA BLOCK OPG1     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR OPG, TRL =
-                    101                 0             14088                 0                 0                 0                 2
+                    101                 0             27112                 0                 0                 0                 2
      NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS OPG1    
         (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
-     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       14088 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       27112 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
-           (TOTAL DATA WRITTEN FOR DATA BLOCK =       14274 WORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =       27298 WORDS.)
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
  *** USER INFORMATION MESSAGE 5010 (LNCILS)
      STURM SEQUENCE DATA FOR EIGENVALUE EXTRACTION.
-     TRIAL EIGENVALUE = 1.000000D+00, CYCLES = 1.591549D-01 THE STURM COUNT = 0
+     TRIAL EIGENVALUE = 1.548433D+03, CYCLES = 6.262768D+00 THE STURM COUNT = 0
  *** USER INFORMATION MESSAGE 5010 (LNCILS)
      STURM SEQUENCE DATA FOR EIGENVALUE EXTRACTION.
      TRIAL EIGENVALUE = -1.000000D-02, CYCLES = 1.591549D-02 THE STURM COUNT = 0
  *** USER INFORMATION MESSAGE 5010 (LNCILS)
      STURM SEQUENCE DATA FOR EIGENVALUE EXTRACTION.
-     TRIAL EIGENVALUE = 1.715968D+03, CYCLES = 6.592873D+00 THE STURM COUNT = 1
+     TRIAL EIGENVALUE = 1.712536D+03, CYCLES = 6.586277D+00 THE STURM COUNT = 1
 
  TABLE OF SHIFTS:  (LNNRIGL)
  SHIFT #        SHIFT VALUE         FREQUENCY, CYCLES     # EIGENVALUES BELOW    # NEW EIGENVALUES FOUND
-     1.        1.0000000E+00          1.5915494E-01                 0                        2
+     1.        1.5484327E+03          6.2627677E+00                 0                        1
      2.       -1.0000000E-02         -1.5915494E-02                 0                        0
-     3.        1.7159681E+03          6.5928734E+00                 1                        0
+     3.        1.7125361E+03          6.5862771E+00                 1                        0
 
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE    11
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE    10
                                                                                                                                     
 0                                                                                                            SUBCASE 2              
 0
@@ -296,32 +270,24 @@
 
                                      NUMBER OF ROOTS FOUND ................     1
 
-                                     NUMBER OF SOLVES REQUIRED ............    18
+                                     NUMBER OF SOLVES REQUIRED ............     7
 
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE    12
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE    11
                                                                                                                                     
 0                                                                                                            SUBCASE 2              
  
                                               R E A L   E I G E N V A L U E S
    MODE    EXTRACTION      EIGENVALUE            RADIANS             CYCLES            GENERALIZED         GENERALIZED
     NO.       ORDER                                                                       MASS              STIFFNESS
-        1         1        1.657185E+03        4.070854E+01        6.478965E+00        7.893304E-02        1.308067E+02
- *** USER INFORMATION MESSAGE 4114 (OUTPX2)
-     DATA BLOCK OQG1     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR OQG1, TRL =
-                    101                 0             14088                 0                 0                 0                 2
-     NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS OQG1    
-        (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
-     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       14088 WORDS.)
-           (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
-           (TOTAL DATA WRITTEN FOR DATA BLOCK =       14274 WORDS.)
+        1         1        1.654422E+03        4.067459E+01        6.473562E+00        8.097672E-02        1.339697E+02
  *** USER INFORMATION MESSAGE 4114 (OUTPX2)
      DATA BLOCK OUG1     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR OUG1, TRL =
-                    101                 0             14088                 0                 0                 0                 2
+                    101                 0             27112                 0                 0                 0                 2
      NAME OF DATA BLOCK WRITTEN ON FORTRAN UNIT IS OUG1    
         (MAXIMUM POSSIBLE FORTRAN RECORD SIZE =       65538 WORDS.)
-     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       14088 WORDS.)
+     (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       27112 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
-           (TOTAL DATA WRITTEN FOR DATA BLOCK =       14274 WORDS.)
+           (TOTAL DATA WRITTEN FOR DATA BLOCK =       27298 WORDS.)
  *** USER INFORMATION MESSAGE 4114 (OUTPX2)
      DATA BLOCK SCRATCH  WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR QUALINFO, TRL =
                     301                 1                 9                 0                 0                 0                 0
@@ -335,7 +301,7 @@
                                  (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =      1 WORDS.)
                                        (NUMBER OF FORTRAN RECORDS WRITTEN =      1 RECORDS.)
                                        (TOTAL DATA WRITTEN FOR EOF MARKER =      1 WORDS.)
-1                                                                          DECEMBER   6, 2022  MSC Nastran 12/14/21   PAGE    13
+1                                                                            AUGUST  26, 2023  MSC Nastran 12/14/21   PAGE    12
                                                                                                                                     
 0                                                                                                            SUBCASE 2              
  * * * *  D B D I C T   P R I N T  * * * *      SUBDMAP = PRTSUM  ,  DMAP STATEMENT NO.     74

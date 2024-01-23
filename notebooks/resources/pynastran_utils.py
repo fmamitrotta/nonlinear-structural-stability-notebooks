@@ -31,7 +31,8 @@ plt.cm.register_cmap("sunset", tc.tol_cmap("sunset"))
 plt.cm.register_cmap("rainbow_PuRd", tc.tol_cmap("rainbow_PuRd"))
 
 
-def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: bool = True):
+def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: bool = True,
+                 parallel:bool = False, no_cores:int = 6):
     """
     Write .bdf input file from BDF object and execute Nastran analysis.
 
@@ -45,16 +46,25 @@ def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: 
         name of the input file
     run_flag: bool
         flag to enable or disable the actual execution of Nastran
+    parallel: bool
+        flag to enable or disable the parallel execution of Nastran
+    no_cores: int
+        number of cores used for the parallel execution of Nastran
     """
-    # Create analysis directory
+    # Create analysis directory if it does not exist
     os.makedirs(directory_path, exist_ok=True)
     # Write bdf file
     bdf_filename = filename + '.bdf'
     bdf_filepath = os.path.join(directory_path, bdf_filename)
     bdf_object.write_bdf(bdf_filepath)
+    # Create keywords list for parallel execution
+    if parallel:
+        keywords_list = ['scr=yes', 'bat=no', 'old=no', 'news=no', 'notify=no', f"smp={no_cores:d}"]
+    else:
+        keywords_list = None
     # Run Nastran
     nastran_path = 'C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastran.exe'
-    run_nastran(bdf_filename=bdf_filepath, nastran_cmd=nastran_path, run_in_bdf_dir=True, run=run_flag)
+    run_nastran(bdf_filename=bdf_filepath, nastran_cmd=nastran_path, run_in_bdf_dir=True, run=run_flag, keywords=keywords_list)
     # Read and print wall time of simulation
     log_filepath = os.path.join(directory_path, filename + '.log')
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')  # compiled regular expression pattern
@@ -62,7 +72,7 @@ def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: 
         for line in log_file:
             if 'Total' in line:
                 wall_time = float(re.findall(regexp, line)[1])
-                print(f'Nastran job {bdf_filename} completed\nWall time: {wall_time:.1f} s')
+                print(f"Nastran job {bdf_filename} completed\nWall time: {wall_time:.1f} s")
                 break
 
 
@@ -132,8 +142,8 @@ def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_i
 
 def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) -> Tuple[ndarray, ndarray]:
     """
-    Return nonlinear buckling loads and critical buckling factors by reading the .f06 and .op2 files including the
-    results of the analyis with the nonlinear buckling method.
+    Return nonlinear buckling load vector and critical buckling factors by reading the .f06 and .op2 files of a
+    SOL 106 analyis with the nonlinear buckling method.
 
     Parameters
     ----------
@@ -145,9 +155,9 @@ def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2_object: OP2) ->
     Returns
     -------
     nonlinear_buckling_load_vectors: ndarray
-        array of the nonlinear buckling load vectors, calculated as P + Delta P * alpha
+        array of the nonlinear buckling load vectors, calculated as P + Delta P * alpha, dimensions (number of subcases, number of nodes, 6)
     alphas: ndarray
-        array of critical buckling factors, used to verify that absolute value is not greater than unity
+        array of critical buckling factors, dimensions (number of subcases)
     """
     # Read critical buckling factor ALPHA for each subcase
     alphas = []  # empty list of critical buckling factors
@@ -277,7 +287,7 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
         # Find the displacement of the nodes along the indicated component
         nodes_disp_component = displacement_data[node_indexes, component_dict[displacement_component]]
         # Apply unit conversion to displacements and not to rotations
-        if displacement_component not in ["rx", "ry", "rz"]:
+        if displacement_component not in ['rx', 'ry', 'rz']:
             nodes_disp_component *= displacement_unit_scale_factor
         # Store the displacements in the appropriate array
         nodes_displacement[count] = nodes_disp_component
@@ -321,14 +331,14 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     ax.set_ylim(y_coords.min(), y_coords.max())
     ax.set_zlim(z_coords.min(), z_coords.max())
     # Set aspect ratio of the axes
-    ax.set_box_aspect([ub - lb for lb, ub in (getattr(ax, f'get_{a}lim')() for a in 'xyz')])
+    ax.set_box_aspect([ub - lb for lb, ub in (getattr(ax, f"get_{a}lim")() for a in 'xyz')])
     # Return axes object
     return fig, ax, m
 
 
-def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_number: int = 1, displacement_component: str = "magnitude",
-                       unit_scale_factor: float = 1., displacement_amplification_factor: float = 200., colormap: str = "rainbow_PuRd",
-                       length_unit: str = "mm") -> Tuple[Figure, Axes3D, Colorbar]:
+def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_number: int = 1, displacement_component: str = 'magnitude',
+                       unit_scale_factor: float = 1., displacement_amplification_factor: float = 200., colormap: str = 'rainbow_PuRd',
+                       length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -468,12 +478,12 @@ def add_unitary_force(bdf_object: BDF, nodes_ids: Union[list, ndarray], set_id: 
         bdf_object.add_force(sid=set_id, node=node_id, mag=force_magnitude, xyz=direction_vector)
 
 
-def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, max_iter: int = 25, conv: str = 'PW',
+def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = -1, max_iter: int = 25, conv: str = 'PW',
                          eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5,
                          subcase_id: int = 0):
     """
     Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM to set up
-    the full Newton method.
+    the load control method with full Newton iteration.
 
     Parameters
     ----------
@@ -483,6 +493,8 @@ def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, 
         identification number of NLPARM card
     ninc: int
         number of increments
+    kstep: int
+        number of iterations before the stiffness update
     max_iter: int
         limit on number of iterations for each load increment
     conv: str
@@ -502,16 +514,16 @@ def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, 
     bdf_object.sol = 106
     # Add parameter for large displacement effects
     bdf_object.add_param('LGDISP', [1])
-    # Define parameters for the nonlinear iteration strategy with full Newton method
-    bdf_object.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=1, max_iter=max_iter, conv=conv,
+    # Define parameters for the nonlinear iteration strategy with full Newton method (update tangent stiffness matrix after every converged iteration)
+    bdf_object.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=kstep, max_iter=max_iter, conv=conv,
                           int_out='YES', eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect)
     # Add NLPARM id to the control case commands
     bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)
 
 
-def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, max_iter: int = 25,
-                             conv: str = "PW", eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01,
-                             max_bisect: int = 5, subcase_id: int = 0, constraint_type: str = "CRIS",
+def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = -1, max_iter: int = 25,
+                             conv: str = 'PW', eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01,
+                             max_bisect: int = 5, subcase_id: int = 0, constraint_type: str = 'CRIS',
                              minalr: float = 0.25, maxalr: float = 4., desiter: int = 12, maxinc: int = 20):
     """
     Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM and NLPCI
@@ -525,6 +537,8 @@ def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = No
         identification number of NLPARM card
     ninc: int
         number of increments
+    kstep: int
+        number of iterations before the stiffness update
     max_iter: int
         limit on number of iterations for each load increment
     conv: str
@@ -551,7 +565,7 @@ def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = No
         maximum number of controlled increment steps allowed within a subcase
     """
     # Set up basic nonlinear analysis
-    set_up_newton_method(bdf_object=bdf_object, nlparm_id=nlparm_id, ninc=ninc, max_iter=max_iter, conv=conv,
+    set_up_newton_method(bdf_object=bdf_object, nlparm_id=nlparm_id, ninc=ninc, kstep=kstep, max_iter=max_iter, conv=conv,
                          eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect, subcase_id=subcase_id)
     # Define parameters for the arc-length method
     bdf_object.add_nlpci(nlpci_id=nlparm_id, Type=constraint_type, minalr=minalr, maxalr=maxalr, desiter=desiter, mxinc=maxinc)
@@ -645,7 +659,7 @@ def run_nonlinear_buckling_method(bdf_object: BDF, method_set_id: int, analysis_
     # Define parameters to calculate lowest eigenvalues of tangent stiffness matrix if requested
     if calculate_tangent_stiffness_matrix_eigenvalues:
         bdf_object.executive_control_lines[1:1] = [
-            'include \'' + os.path.join(os.pardir, os.pardir, 'resources', 'kllrh_lowest_eigenvalues.dmap') + '\'']
+            'include \'' + os.path.join(os.pardir, os.pardir, 'resources', 'kllrh_eigenvalues.dmap') + '\'']
         bdf_object.add_param('BMODES', [no_eigenvalues])
     # Run analysis
     run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
@@ -658,7 +672,9 @@ def run_nonlinear_buckling_method(bdf_object: BDF, method_set_id: int, analysis_
 
 def run_tangent_stiffness_matrix_eigenvalue_calculation(bdf_object: BDF, method_set_id: int,
                                                         analysis_directory_path: str, input_name: str,
-                                                        no_eigenvalues: int = 1, run_flag: bool = True) -> OP2:
+                                                        no_eigenvalues: int = 1, lower_eig: float = -1.e32,
+                                                        upper_eig: float = 1.e32, eigenvectors_flag: bool = False,
+                                                        run_flag: bool = True) -> OP2:
     """
     Returns the OP2 object representing the results of SOL 106 analysis employing the nonlinear buckling method. The
     function requires the subcases with the associated load sets to be already defined. It applies the nonlinear
@@ -676,6 +692,12 @@ def run_tangent_stiffness_matrix_eigenvalue_calculation(bdf_object: BDF, method_
         string with the name that will be given to the input file
     no_eigenvalues: int
         number of eigenvalues of the tangent stiffness matrix that will be calculated
+    lower_eig: float
+        lower bound of the eigenvalues to be calculated
+    upper_eig: float
+        upper bound of the eigenvalues to be calculated
+    eigenvectors_flag: bool
+        boolean indicating whether eigenvectors will be calculated
     run_flag: bool
         boolean indicating whether Nastran analysis is actually run
 
@@ -686,13 +708,22 @@ def run_tangent_stiffness_matrix_eigenvalue_calculation(bdf_object: BDF, method_
     """
     # Set SOL 106 as solution sequence (nonlinear analysis)
     bdf_object.sol = 106
-    # Define parameters to calculate lowest eigenvalues of tangent stiffness matrix
+    # Define parameters to calculate smallest magnitude eigenvalues of tangent stiffness matrix
     bdf_object.add_param('BUCKLE', [2])
     bdf_object.add_eigrl(sid=method_set_id, nd=no_eigenvalues)  # calculate lowest eigenvalues in magnitude
     bdf_object.case_control_deck.subcases[0].add_integer_type('METHOD', method_set_id)  # add EIGRL id to case control
-    bdf_object.executive_control_lines[1:1] = [
-        'include \'' + os.path.join(os.pardir, os.pardir, 'resources', 'kllrh_lowest_eigenvalues_nobuckle.dmap') + '\'']
-    bdf_object.add_param('BMODES', [no_eigenvalues])
+    if eigenvectors_flag:
+        bdf_object.executive_control_lines[1:1] = [
+            'include \'' + os.path.join(os.pardir, os.pardir, 'resources', 'kllrh_eigenvectors.dmap') + '\'']  # include DMAP to calculate eigenvectors
+    else:
+        bdf_object.executive_control_lines[1:1] = [
+            'include \'' + os.path.join(os.pardir, os.pardir, 'resources', 'kllrh_eigenvalues_nobuckle.dmap') + '\'']  # include DMAP to calculate only eigenvalues
+    if no_eigenvalues > 1:
+        bdf_object.add_param('BMODES', [no_eigenvalues])  # add PARAM BMODES if more than one eigenvalue is calculated
+    if lower_eig > -1.e32:
+        bdf_object.add_param('LOWEREIG', [np.sqrt(lower_eig)/(2*np.pi)])  # convert eigenvalue to cycles
+    if upper_eig < 1.e32:
+        bdf_object.add_param('UPPEREIG', [np.sqrt(upper_eig)/(2*np.pi)])  # convert eigenvalue to cycles
     # Run analysis
     run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
     # Read op2 file
