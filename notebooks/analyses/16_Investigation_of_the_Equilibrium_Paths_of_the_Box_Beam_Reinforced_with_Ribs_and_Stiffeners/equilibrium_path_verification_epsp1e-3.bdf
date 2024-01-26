@@ -17410,8 +17410,8 @@ $DYNAMIC
 EIGRL         14                      10
 NLPARM         1                    ITER      -1                     YES
                     .001.0000001
-NLPARM         2     100            ITER      -1       4     PUV     YES
-            .001    .001                      25
+NLPARM         2     100            ITER      -1       5     PUV     YES
+            .001    .001
               10
 NLPCI          1    CRIS     .25      4.      0.              12      20
 NLPCI          2    CRIS     .01  1.0001      0.               5     200
