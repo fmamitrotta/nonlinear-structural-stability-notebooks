@@ -26,13 +26,13 @@
                                               * *          DEC 14, 2021           * *
                                               * *                                 * *
                                               * *              Intel              * *
-                                              * *MODEL Intel(R) Core(TM) i7-10850 * *
+                                              * * MODEL Intel(R) Core(TM) i7-8700 * *
                                               * * Windows 10 Enterprise 6.2 9200  * *
                                               * * Compiled for 8664 (SINGLE Mode) * *
                                               * *                                 * *
                                               * * * * * * * * * * * * * * * * * * * *
                                               * * * * * * * * * * * * * * * * * * * *
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE     1
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE     1
                                                                                                                                     
 0        N A S T R A N    F I L E    A N D    S Y S T E M    P A R A M E T E R    E C H O                                           
 0                                                                                                                                   
@@ -47,7 +47,7 @@
      $PYNASTRAN: NNODES=0                                                            
      $PYNASTRAN: NELEMENTS=0                                                         
      $EXECUTIVE CONTROL DECK                                                         
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE     2
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE     2
                                                                                                                                     
 0        N A S T R A N    E X E C U T I V E    C O N T R O L    E C H O                                                             
 0                                                                                                                                   
@@ -55,7 +55,7 @@
                                                                                                                                     
      SOL 105                                                                                 
      CEND                                                                                    
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE     3
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE     3
                                                                                                                                     
 0                                                                                                                                   
 0                                        C A S E    C O N T R O L    E C H O                                                        
@@ -71,16 +71,16 @@
                   8      SUBCASE 2                                                                               
                   9          METHOD = 2                                                                          
                  10      BEGIN BULK                                                                              
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE     4
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE     4
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
                  ENTRY                                                                                                              
                  COUNT        .   1  ..   2  ..   3  ..   4  ..   5  ..   6  ..   7  ..   8  ..   9  ..  10  .                      
-                              $INCLUDE "..\..\resources\uCRM-9_wingbox_coarse.bdf"
+                              $INCLUDE "..\..\resources\uCRM-9\uCRM-9_wingbox_coarse.bdf"
  *** USER INFORMATION MESSAGE 9991 (SDLWIF)
      Messages are being generated at include level 1.
-     File: ..\..\resources\uCRM-9_wingbox_coarse.bdf
+     File: ..\..\resources\uCRM-9\uCRM-9_wingbox_coarse.bdf
  *** USER WARNING MESSAGE 9994 (BULKPM)
      SPC near line 73736
       was entered more than once, with differences starting at field SID.
@@ -212,7 +212,7 @@
      MAT2 with MID=8 near line 74245
      The Material Property Matrix is not positive definite. This may result in loss of accuracy.
      User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE     5
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE     5
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -398,7 +398,7 @@
      MAT2 with MID=188 near line 75010
      The Material Property Matrix is not positive definite. This may result in loss of accuracy.
      User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE     6
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE     6
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -584,7 +584,7 @@
      MAT2 with MID=368 near line 75775
      The Material Property Matrix is not positive definite. This may result in loss of accuracy.
      User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE     7
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE     7
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -770,7 +770,7 @@
      MAT2 with MID=548 near line 76540
      The Material Property Matrix is not positive definite. This may result in loss of accuracy.
      User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE     8
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE     8
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -956,7 +956,7 @@
      MAT2 with MID=728 near line 77305
      The Material Property Matrix is not positive definite. This may result in loss of accuracy.
      User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE     9
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE     9
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -1142,7 +1142,7 @@
      MAT2 with MID=908 near line 78070
      The Material Property Matrix is not positive definite. This may result in loss of accuracy.
      User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    10
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    10
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -1208,13 +1208,13 @@
      MAT2 with MID=968 near line 78325
      The Material Property Matrix is not positive definite. This may result in loss of accuracy.
      User Action: If MID4 matrix is for a PSHELL, the matrix does not need to be positive definite; otherwise check model.
-                              $END OF INCLUDE "..\..\resources\uCRM-9_wingbox_coarse.bdf"
-                              $INCLUDE "..\..\resources\uCRM-9_aero_forces_1.0g_coarse.bdf"
+                              $END OF INCLUDE "..\..\resources\uCRM-9\uCRM-9_wingbox_coarse.bdf"
+                              $INCLUDE "..\..\resources\uCRM-9\uCRM-9_aero_forces_1.0g_coarse.bdf"
 
 *** USER WARNING MESSAGE (fn: GETLIN)
     The ENDDATA statement is missing.
-                              $END OF INCLUDE "..\..\resources\uCRM-9_aero_forces_1.0g_coarse.bdf"
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    11
+                              $END OF INCLUDE "..\..\resources\uCRM-9\uCRM-9_aero_forces_1.0g_coarse.bdf"
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    11
                                                                                                                                     
 0                                                                                                                                   
                                         M O D E L   S U M M A R Y          BULK = 0
@@ -1226,7 +1226,7 @@
                                         FORCE                    13586
                                          GRID                    23738
                                          MAT2                      968
-                                        PARAM                        6
+                                        PARAM                        7
                                        PSHELL                      242
                                           SPC                     1400
 
@@ -1262,7 +1262,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =       65538 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          22 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =       95144 WORDS.)
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    12
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    12
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
@@ -1316,7 +1316,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =        2904 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =        3907 WORDS.)
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    13
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    13
                                                                                                                                     
 0                                                                                                                                   
 0
@@ -1343,7 +1343,7 @@
                              PLACED AFTER THE VALUE METRIC FOR THE TEST.
      USER INFORMATION: THE MAXIMUM MESSAGE COUNT FOR ANY ONE ELEMENT ERROR TEST COULD BE EXCEEDED BY THE 
      CUMULATIVE EFFECT OF ALL THE MESSAGES GENERATED FOR ALL OF THE DIFFERENT TESTS PERFORMED.
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    14
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    14
                                                                                                                                     
 0                                                                                                                                   
      TOLERANCE LIMITS ARE:  SA =  30.00, IA(MIN) =  30.00, IA(MAX) = 150.00, WF =   0.05, TR =   0.50 (FLAG = LIMIT VIOLATED)
@@ -1361,7 +1361,7 @@
     QUADR       19816        41.86             29.35 ++++       133.28              0.00              0.46     
     QUADR       19956        41.32             28.90 ++++       131.45              0.00              0.46     
     QUADR       19987        40.90             28.59 ++++       131.83              0.00              0.46     
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    15
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    15
                                                                                                                                     
 0                                                                                                                                   
 
@@ -1378,7 +1378,7 @@
          QUADR    ELEMENT ID     9998 PRODUCED LARGEST  TAPER RATIO      OF       0.55 (TOLERANCE =        0.50).
          QUADR    ELEMENT ID    19987 PRODUCED SMALLEST INTERIOR ANGLE   OF      28.59 (TOLERANCE =       30.00).
          QUADR    ELEMENT ID    19390 PRODUCED LARGEST  INTERIOR ANGLE   OF     151.78 (TOLERANCE =      150.00).
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    16
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    16
                                                                                                                                     
 0                                                                                                                                   
                            O U T P U T   F R O M   G R I D   P O I N T   W E I G H T   G E N E R A T O R
@@ -1412,10 +1412,10 @@
                                            * -1.092392E-01 -8.479097E-01 -5.187638E-01 *
                                            *  9.871511E-01 -3.131205E-02 -1.566914E-01 *
 
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    17
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    17
                                                                                                                                     
 0                                                                                                                                   
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    18
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    18
                                                                                                                                     
 0                                                                                                                                   
 0 RESULTANTS ABOUT        1 IN SUPERELEMENT BASIC SYSTEM COORDINATES.
@@ -1430,7 +1430,7 @@
                MY       ----          ----          ----          ----       0.000000E+00     ----                                  
                MZ       ----          ----          ----          ----          ----       0.000000E+00                             
              TOTALS -6.185963E+03 -4.082101E+04  9.670107E+05  2.089011E+06 -3.013187E+06  1.267186E+04
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    19
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    19
                                                                                                                                     
 0                                                                                                                                   
 0 RESULTANTS ABOUT        1 IN SUPERELEMENT BASIC SYSTEM COORDINATES.
@@ -1448,7 +1448,7 @@
   
  *** SYSTEM INFORMATION MESSAGE 4159 (DFMSA)
      THE DECOMPOSITION OF KLL      YIELDS A MAXIMUM MATRIX-TO-FACTOR-DIAGONAL RATIO OF    3.974866E+02
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    20
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    20
                                                                                                                                     
 0                                                                                                            SUBCASE 1              
  *** USER INFORMATION MESSAGE 5293 (SSG3A)
@@ -1491,7 +1491,7 @@
      2.       -1.0000000E-02         -1.5915494E-02                 0                        0
      3.        2.9657288E+00          2.7408537E-01                 1                        1
 
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    21
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    21
                                                                                                                                     
 0                                                                                                            SUBCASE 2              
 0
@@ -1509,7 +1509,7 @@
 
                                      NUMBER OF SOLVES REQUIRED ............    20
 
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    22
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    22
                                                                                                                                     
 0                                                                                                            SUBCASE 2              
  
@@ -1538,7 +1538,7 @@
                                  (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =      1 WORDS.)
                                        (NUMBER OF FORTRAN RECORDS WRITTEN =      1 RECORDS.)
                                        (TOTAL DATA WRITTEN FOR EOF MARKER =      1 WORDS.)
-1                                                                          FEBRUARY  25, 2023  MSC Nastran 12/14/21   PAGE    23
+1                                                                           JANUARY   2, 2024  MSC Nastran 12/14/21   PAGE    23
                                                                                                                                     
 0                                                                                                            SUBCASE 2              
  * * * *  D B D I C T   P R I N T  * * * *      SUBDMAP = PRTSUM  ,  DMAP STATEMENT NO.     74
