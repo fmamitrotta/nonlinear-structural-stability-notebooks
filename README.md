@@ -31,6 +31,7 @@ F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. 
 18. [Development and Nonlinear Buckling Analysis of a CRM-like Box Beam Model](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/18_Development_and_Nonlinear_Buckling_Analysis_of_a_CRM-like_Box_Beam_Model.ipynb)
 19. [One-variable Optimization of the CRM-like Box Beam](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/19_One-variable_Optimization_of_the_CRM-like_Box_Beam.ipynb)
 20. [Two-variables Optimization of the CRM-like Box Beam](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/20_Two-variables_Optimization_of_the_CRM-like_Box_Beam.ipynb)
+21. [Optimization of the CRM-like Box Beam with Distributed Load](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/21_Optimization_of_the_CRM-like_Box_Beam_with_Distributed_Load.ipynb)
 
 ### Papers
 - [Proof of concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Proof_of_concept_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimizations.ipynb)

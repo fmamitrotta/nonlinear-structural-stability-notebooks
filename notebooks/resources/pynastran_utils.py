@@ -132,7 +132,7 @@ def read_load_displacement_history_from_op2(op2_object: OP2, displacement_node_i
         # Save load steps of current subcase
         load_steps[subcase_id] = op2_object.load_vectors[subcase_id].lftsfqs
         # Save loads summation of current subcase
-        loads[subcase_id] = np.apply_along_axis(np.sum, 1, op2_object.load_vectors[subcase_id].data[:, :, 0:3])
+        loads[subcase_id] = np.sum(op2_object.load_vectors[subcase_id].data[:, :, 0:3], axis=1)
         # Save displacements of indicated node id and current subcase
         node_index = np.where(op2_object.displacements[subcase_id].node_gridtype[:, 0] == displacement_node_id)[0][0]
         displacements[subcase_id] = op2_object.displacements[subcase_id].data[:, node_index, :]
@@ -396,8 +396,8 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_numb
 
 def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, load_step: int = 0,
                             displacement_component: str = "magnitude", unit_scale_factor: float = 1.,
-                            displacement_amplification_factor:float = 1., colormap: str = "rainbow_PuRd", clim: Union[list, ndarray] = None,
-                            length_unit: str = "mm") -> Tuple[Figure, Axes3D, Colorbar]:
+                            displacement_amplification_factor:float = 1., colormap: str = "rainbow_PuRd",
+                            clim: Union[list, ndarray] = None, length_unit: str = "mm") -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot the buckling shape using the eigenvectors of the input OP2 object.
 
@@ -456,9 +456,9 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
     return fig, ax, cbar
 
 
-def add_unitary_force(bdf_object: BDF, nodes_ids: Union[list, ndarray], set_id: int, direction_vector: Union[list, ndarray]):
+def add_uniform_force(bdf_object: BDF, nodes_ids: Union[list, ndarray], set_id: int, direction_vector: Union[list, ndarray], force_magnitude: float = 1):
     """
-    Apply a uniform force over the indicated nodes such that the total magnitude is 1 N.
+    Apply a uniformly distributed force over the indicated nodes.
 
     Parameters
     ----------
@@ -470,12 +470,14 @@ def add_unitary_force(bdf_object: BDF, nodes_ids: Union[list, ndarray], set_id: 
         set id of the force card
     direction_vector: [list, ndarray]
         vector with the force components along the x, y and z axes
+    force_magnitude: float
+        total magnitude of the applied force, to be distributed uniformly over the nodes
     """
     # Define force magnitude so that the total magnitude is 1 N
-    force_magnitude = 1 / len(nodes_ids)
+    nodal_force = force_magnitude / len(nodes_ids)
     # Add a force card for each input node id
     for node_id in nodes_ids:
-        bdf_object.add_force(sid=set_id, node=node_id, mag=force_magnitude, xyz=direction_vector)
+        bdf_object.add_force(sid=set_id, node=node_id, mag=nodal_force, xyz=direction_vector)
 
 
 def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = -1, max_iter: int = 25, conv: str = 'PW',
@@ -513,12 +515,16 @@ def set_up_newton_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, 
     # Assign SOL 106 as solution sequence
     bdf_object.sol = 106
     # Add parameter for large displacement effects
-    bdf_object.add_param('LGDISP', [1])
+    if 'LGDISP' not in bdf_object.params:
+        bdf_object.add_param('LGDISP', [1])
     # Define parameters for the nonlinear iteration strategy with full Newton method (update tangent stiffness matrix after every converged iteration)
     bdf_object.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=kstep, max_iter=max_iter, conv=conv,
                           int_out='YES', eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect)
-    # Add NLPARM id to the control case commands
-    bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)
+    # Add NLPARM id to case control deck of the indicated subcase
+    if 'NLPARM' not in bdf_object.case_control_deck.subcases[subcase_id].params:
+        bdf_object.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)  # add new NLPARM command if not present
+    else:
+        bdf_object.case_control_deck.subcases[subcase_id].params['NLPARM'][0] = nlparm_id  # overwrite existing NLPARM id if command is already present
 
 
 def set_up_arc_length_method(bdf_object: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = -1, max_iter: int = 25,
@@ -721,9 +727,15 @@ def run_tangent_stiffness_matrix_eigenvalue_calculation(bdf_object: BDF, method_
     if no_eigenvalues > 1:
         bdf_object.add_param('BMODES', [no_eigenvalues])  # add PARAM BMODES if more than one eigenvalue is calculated
     if lower_eig > -1.e32:
-        bdf_object.add_param('LOWEREIG', [np.sqrt(lower_eig)/(2*np.pi)])  # convert eigenvalue to cycles
+        if lower_eig < 0:  # if negative convert absolute value of eigenvalue to cycle
+            bdf_object.add_param('LOWEREIG', [-np.sqrt(np.abs(lower_eig))/(2*np.pi)])
+        else:  # if positive convert eigenvalue to cycle
+            bdf_object.add_param('LOWEREIG', [np.sqrt(lower_eig)/(2*np.pi)])
     if upper_eig < 1.e32:
-        bdf_object.add_param('UPPEREIG', [np.sqrt(upper_eig)/(2*np.pi)])  # convert eigenvalue to cycles
+        if upper_eig < 0:  # if negative convert absolute value of eigenvalue to cycle
+            bdf_object.add_param('UPPEREIG', [-np.sqrt(np.abs(upper_eig))/(2*np.pi)])
+        else:  # if positive convert eigenvalue to cycle
+            bdf_object.add_param('UPPEREIG', [np.sqrt(upper_eig)/(2*np.pi)])
     # Run analysis
     run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
     # Read op2 file

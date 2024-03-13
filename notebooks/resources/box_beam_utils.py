@@ -173,10 +173,10 @@ def mesh_rib_with_pyvista(height: float, width: float, y_coordinate: float, elem
         pyvista object including the xyz coordinates of the nodes and their connectivity information
     """
     # Find number of elements along each side of the rib
-    no_elements = [np.ceil(side/element_length/2).astype('int')*2 for side in [width, height]]
+    no_elements = [np.ceil(side/element_length/2).astype('int')*2 for side in [height, width]]
     # Discretize rib
-    rib_mesh = pyvista.Plane(center=[x_0 + width/2, y_coordinate, 0], direction=[0, 1, 0], i_size=width,
-                             j_size=height, i_resolution=no_elements[0], j_resolution=no_elements[1])
+    rib_mesh = pyvista.Plane(center=[x_0 + width/2, y_coordinate, 0], direction=[0, 1, 0], i_size=height,
+                             j_size=width, i_resolution=no_elements[0], j_resolution=no_elements[1])
     # Return discretized geometry
     return rib_mesh
 
@@ -267,7 +267,7 @@ def mesh_stiffened_box_with_pyvista(height: float, length: float, width: float, 
     no_stiffener_elements = np.ceil(stiffeners_height/element_length/2).astype('int')*2
     x_0 = 0
     # Iterate through the x-coordinates of the stiffeners, except last one
-    for count, x in enumerate(stiffeners_x_coordinates):
+    for x in stiffeners_x_coordinates:
         # Find number of elements along the width
         no_width_elements = np.ceil((x - x_0)/element_length/2).astype('int')*2
         # Discretize top skin segment

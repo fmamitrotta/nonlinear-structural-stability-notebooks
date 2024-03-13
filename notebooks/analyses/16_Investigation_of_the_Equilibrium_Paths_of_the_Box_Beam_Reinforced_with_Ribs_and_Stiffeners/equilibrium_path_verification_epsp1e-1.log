@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/equilibrium_path_verification_epsp1e-1.T7316_28'
-DBS='c:/temp/scratch/equilibrium_path_verification_epsp1e-1.T7316_28'
+SDIR='c:/temp/scratch/equilibrium_path_verification_epsp1e-1.T24064_53'
+DBS='c:/temp/scratch/equilibrium_path_verification_epsp1e-1.T24064_53'
 SCR='yes'
 SMEM=100
 BPOOL=4070.5MB
@@ -50,32 +50,32 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    32564 MB
- Physical memory available:          20023 MB
- Paging file size:                   69428 MB
- Paging file size available:         54734 MB
+ Physical memory available:          10340 MB
+ Paging file size:                   62029 MB
+ Paging file size available:         11379 MB
  Virtual memory:                 134217727 MB
- Virtual memory available:       134213509 MB
+ Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
 System configuration:
  Hostname:         IT076000.users.bris.ac.uk
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3727 MHz
+ Clock freq.:      3733 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
  Physical memory:  32564 MB
- Virtual memory:   69428 MB
+ Virtual memory:   62029 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Mon Jan  1 17:16:28 GST 2024 
- 17:16:30  Beginning Analysis
+MSC Nastran started  Fri Jan 26 10:41:54 GST 2024 
+ 10:41:57  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,15 +83,15 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 17:16:32  MSC Authorization Information - System Attributes (1004, 0)
- 17:16:32  -----------------------------------------------------------
-  Date:          Mon Jan  1 17:16:32 2024
+ 10:42:00  MSC Authorization Information - System Attributes (1004, 0)
+ 10:42:00  -----------------------------------------------------------
+  Date:          Fri Jan 26 10:42:00 2024
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
-  Hostname:      IT076000 (user qa21944, display IT080625)
+  Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
   CEID:          52D366F0-6B11GFD6
   User:          qa21944
-  Display:       IT080625
+  Display:       IT076000
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
 
   * * * * * * * * * * * * * * * * * * * *
@@ -103,53 +103,54 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 17:16:32  MSC Authorization Information - Checkout Successful (1016, 0)
- 17:16:32  -------------------------------------------------------------
- 17:16:32  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 10:42:00  MSC Authorization Information - Checkout Successful (1016, 0)
+ 10:42:00  -------------------------------------------------------------
+ 10:42:00  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
- 17:16:32  Reading INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
- 17:16:32  67 records read from INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
+ 10:42:00  Reading INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
+ 10:42:00  67 records read from INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
 
- 17:16:32  MSC Authorization Information - Checkout Successful (1016, 0)
- 17:16:32  -------------------------------------------------------------
- 17:16:32  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 10:42:00  MSC Authorization Information - Checkout Successful (1016, 0)
+ 10:42:00  -------------------------------------------------------------
+ 10:42:00  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 17:16:32  MSC Authorization Information - Checkout Successful (1016, 0)
- 17:16:32  -------------------------------------------------------------
- 17:16:32  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
+ 10:42:01  MSC Authorization Information - Checkout Successful (1016, 0)
+ 10:42:01  -------------------------------------------------------------
+ 10:42:01  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 17:16:32  Reading INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
- 17:16:32  67 records read from INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
- 17:16:32  17442 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/16_investigation_of_the_equilibrium_paths_of_the_box_beam_reinforced_with_ribs_and_stiffeners/equilibrium_path_verification_epsp1e-1.bdf"
- 17:16:32  A total of 17509 records were read from 2 files.
+ 10:42:02  Reading INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
+ 10:42:02  67 records read from INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
+ 10:42:02  17442 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/16_investigation_of_the_equilibrium_paths_of_the_box_beam_reinforced_with_ribs_and_stiffeners/equilibrium_path_verification_epsp1e-1.bdf"
+ 10:42:02  A total of 17509 records were read from 2 files.
 
 Processing of bulk data entries is complete.
 
- 17:16:33  Finite element model generation started.
- 17:16:33  Finite element model generated 51378 degrees of freedom.
- 17:16:33  Finite element model generation successfully completed.
- 17:16:33  Application of Loads and Boundary Conditions to the finite element model started.
- 17:16:33  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 10:42:02  Finite element model generation started.
+ 10:42:03  Finite element model generated 51378 degrees of freedom.
+ 10:42:03  Finite element model generation successfully completed.
+ 10:42:03  Application of Loads and Boundary Conditions to the finite element model started.
+ 10:42:03  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
        USER WARNING MESSAGE      316.2          1 
        USER WARNING MESSAGE      316.2          1 
-       USER WARNING MESSAGE     4698.0         11 
+       USER WARNING MESSAGE     4698.0        345 
+         USER FATAL MESSAGE     6190.0          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 17:25:17  22 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/16_investigation_of_the_equilibrium_paths_of_the_box_beam_reinforced_with_ribs_and_stiffeners/equilibrium_path_verification_epsp1e-1.bdf"
- 17:25:17  A total of 89 records were read from 2 files.
- 17:25:17  NSEXIT: EXIT(0)
- 17:25:17  Analysis complete  0
-Real:      528.509 seconds ( 0:08:48.509)
-User:      519.921 seconds ( 0:08:39.921)
-Sys:         4.593 seconds ( 0:00:04.593)
+ 11:07:04  22 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/16_investigation_of_the_equilibrium_paths_of_the_box_beam_reinforced_with_ribs_and_stiffeners/equilibrium_path_verification_epsp1e-1.bdf"
+ 11:07:04  A total of 89 records were read from 2 files.
+ 11:07:04  NSEXIT: EXIT(0)
+ 11:07:04  Analysis complete  0
+Real:     1509.528 seconds ( 0:25:09.528)
+User:     1463.000 seconds ( 0:24:23.000)
+Sys:        10.546 seconds ( 0:00:10.546)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -166,12 +167,12 @@ Sys:         4.593 seconds ( 0:00:04.593)
  Ram:                          32564 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation        35.8         39 
- Solver                      52.4         94 
- Eigenvalue                 209.8        208 
- Miscellaneous              225.2        184 
+ Stiffness Generation        89.0         84 
+ Solver                     176.5        186 
+ Eigenvalue                 674.5        699 
+ Miscellaneous              532.0        535 
  -------------------------------------------
- Total:                     523.3        525 
+ Total:                    1472.0       1504 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  Consider using SMP = 12 ( The number of cores per socket )
@@ -179,4 +180,4 @@ Sys:         4.593 seconds ( 0:00:04.593)
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Mon Jan  1 17:25:18 GST 2024 
+MSC Nastran finished Fri Jan 26 11:07:05 GST 2024 
