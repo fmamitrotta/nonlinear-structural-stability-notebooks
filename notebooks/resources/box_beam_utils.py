@@ -356,7 +356,7 @@ def mesh_stiffened_box_beam_with_pyvista(height: float, width: float, ribs_y_coo
 
 def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: float, shell_thickness: float,
                           nodes_xyz_array: ndarray, nodes_connectivity_matrix: ndarray, parallel:bool = False,
-                          no_cores:int = 6) -> BDF:
+                          no_cores:int = 8) -> BDF:
     """
     Returns a BDF object with material properties, nodes, elements, boundary conditions and output files defaults for
     the box beam model.
@@ -404,7 +404,8 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
                              nids=[nodes_id_array[nodes_indices[0]], nodes_id_array[nodes_indices[1]],
                                    nodes_id_array[nodes_indices[2]], nodes_id_array[nodes_indices[3]]])
     # Add SPC1 card (single-point constraint) defining fixed boundary conditions at the root nodes
-    root_nodes_ids = nodes_id_array[np.abs(nodes_xyz_array[:, 1]) < shell_thickness / 100]
+    tolerance = np.linalg.norm(bdf_input.nodes[2].xyz - bdf_input.nodes[1].xyz)/100
+    root_nodes_ids = nodes_id_array[np.abs(nodes_xyz_array[:, 1]) < tolerance]
     constraint_set_id = 1
     bdf_input.add_spc1(constraint_set_id, '123456', root_nodes_ids)
     # Add SCP1 card to case control deck
@@ -423,3 +424,61 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
         bdf_input.system_command_lines[0:0] = [f"NASTRAN PARALLEL={no_cores:d}"]
     # Return BDF object
     return bdf_input
+
+def define_property_patches(bdf_input: BDF, ribs_y_locations: ndarray, stiffeners_x_locations: ndarray):
+    """
+    Defines the property cards of the design patches of the box beam model based on the input locations of the ribs.
+
+    Parameters
+    ----------
+    bdf_input: BDF
+        pyNastran object representing the bdf input of the box beam model
+    ribs_y_locations: ndarray
+        y-coordinates of the ribs
+    stiffeners_x_locations: ndarray
+        x-coordinates of the stiffeners
+    """
+    # Find element ids and centroid coordinates
+    element_ids = np.array(list(bdf_input.element_ids))
+    centroids_xyz = np.empty((len(bdf_input.elements), 3))
+    for count, (eid, elem) in enumerate(bdf_input.elements.items()):
+        centroids_xyz[count] = elem.Centroid()
+    # Define tolerance to find elements inside each patch based on the distance between the first two nodes of the first element
+    tolerance = np.linalg.norm(bdf_input.elements[1].nodes_ref[1].xyz - bdf_input.elements[1].nodes_ref[0].xyz)/100
+    # Find default thickness
+    rib_pid = 1  # initialize PSHELL id
+    t = bdf_input.properties[rib_pid].t  # find default thickness
+    # Add PSHELL card for each optimization patch and group element ids of external and internal structure
+    material_id = 1  # default material id
+    internal_elements_ids = element_ids[np.where(np.abs(centroids_xyz[:, 1] - ribs_y_locations[0]) < tolerance)[0]]  # initialize both internal and external elements ids with the first rib
+    external_elements_ids = element_ids[np.where(np.abs(centroids_xyz[:, 1] - ribs_y_locations[0]) < tolerance)[0]]
+    for i in range(1, len(ribs_y_locations)):  # iterate over the ribs except the first
+        # Stiffened box path
+        stiffened_box_pid = rib_pid + 1  # increment PSHELL id
+        bdf_input.add_pshell(pid=stiffened_box_pid, mid1=material_id, t=t, mid2=material_id, mid3=material_id)  # add PSHELL card
+        bdf_input.properties[stiffened_box_pid].cross_reference(bdf_input)  # cross-reference PSHELL card
+        stiffened_box_element_indices = np.where((centroids_xyz[:, 1] > ribs_y_locations[i - 1]) &
+                                                (centroids_xyz[:, 1] < ribs_y_locations[i]))[0]  # find indices of the elements belonging to current stiffened box patch
+        stiffened_box_element_ids = element_ids[stiffened_box_element_indices]  # find corresponding element ids
+        stiffened_box_element_centroids_xyz = centroids_xyz[stiffened_box_element_indices]  # find corresponding element centroids
+        stiffeners_boolean = np.any(np.isclose(stiffened_box_element_centroids_xyz[:, 0], stiffeners_x_locations[:, None],
+                                               atol=tolerance), axis=0)  # find boolean array of which elements belong to stiffeners
+        internal_elements_ids = np.concatenate((internal_elements_ids, stiffened_box_element_ids[stiffeners_boolean]))  # add element ids of stiffeners to internal elements ids
+        external_elements_ids = np.concatenate((external_elements_ids, stiffened_box_element_ids[~stiffeners_boolean]))  # add remaining element ids to external elements ids
+        for eid in stiffened_box_element_ids:  # iterate over element ids of current stiffened box patch
+            elem = bdf_input.elements[eid]  # get element object
+            elem.uncross_reference()  # uncross-reference element object
+            elem.pid = stiffened_box_pid  # update PSHELL id
+            elem.cross_reference(bdf_input)  # recross-reference element object
+        # Rib patch
+        rib_pid = stiffened_box_pid + 1  # increment PSHELL id
+        bdf_input.add_pshell(pid=rib_pid, mid1=material_id, t=t, mid2=material_id, mid3=material_id)  # add PSHELL card
+        bdf_input.properties[rib_pid].cross_reference(bdf_input)  # cross-reference PSHELL card
+        rib_element_ids = element_ids[np.where(np.abs(centroids_xyz[:, 1] - ribs_y_locations[i]) < tolerance)[0]]  # find element ids of current rib
+        internal_elements_ids = np.concatenate((internal_elements_ids, rib_element_ids))  # add element ids of rib to internal elements ids
+        for eid in rib_element_ids:  # iterate over element ids of current rib
+            elem = bdf_input.elements[eid]  # get element object
+            elem.uncross_reference()  # uncross-reference element object
+            elem.pid = rib_pid  # update PSHELL id
+            elem.cross_reference(bdf_input)  # recross-reference element object  # find which elements belong to stiffeners
+    external_elements_ids = np.concatenate((external_elements_ids, rib_element_ids))  # add element ids of last rib to external elements ids
