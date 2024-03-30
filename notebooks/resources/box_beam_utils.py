@@ -13,8 +13,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 from pyNastran.bdf.bdf import BDF
 from numpy import ndarray
 import numpy as np
-import pyvista
+import pyvista as pv
 from pyvista import PolyData
+from typing import Tuple
 
 
 def mesh_box(height: float, length: float, width: float, element_length: float) -> tuple[ndarray, ndarray]:
@@ -129,17 +130,17 @@ def mesh_box_with_pyvista(height: float, length: float, width: float, element_le
     # an even number of elements over each dimension to better approximate the buckling shape
     no_elements = [np.ceil(side/element_length/2).astype('int')*2 for side in [width, length, height]]
     # Discretize top skin of the box
-    top_skin_mesh = pyvista.Plane(center=[width/2, y_0 + length/2, height/2], direction=[0, 0, 1],
+    top_skin_mesh = pv.Plane(center=[width/2, y_0 + length/2, height/2], direction=[0, 0, 1],
                                   i_size=width, j_size=length, i_resolution=no_elements[0], j_resolution=no_elements[1])
     # Discretize bottom skin of the box
-    bottom_skin_mesh = pyvista.Plane(center=[width/2, y_0 + length/2, -height/2], direction=[0, 0, -1],
+    bottom_skin_mesh = pv.Plane(center=[width/2, y_0 + length/2, -height/2], direction=[0, 0, -1],
                                      i_size=width, j_size=length, i_resolution=no_elements[0],
                                      j_resolution=no_elements[1])
     # Discretize front spar of the box
-    front_spar_mesh = pyvista.Plane(center=[0, y_0 + length/2, 0], direction=[-1, 0, 0], i_size=height,
+    front_spar_mesh = pv.Plane(center=[0, y_0 + length/2, 0], direction=[-1, 0, 0], i_size=height,
                                     j_size=length, i_resolution=no_elements[2], j_resolution=no_elements[1])
     # Discretize rear spar of the box
-    rear_spar_mesh = pyvista.Plane(center=[width, y_0 + length/2, 0], direction=[1, 0, 0], i_size=height,
+    rear_spar_mesh = pv.Plane(center=[width, y_0 + length/2, 0], direction=[1, 0, 0], i_size=height,
                                    j_size=length, i_resolution=no_elements[2], j_resolution=no_elements[1])
     # Merge different components together
     merged_mesh = top_skin_mesh.merge([bottom_skin_mesh, front_spar_mesh, rear_spar_mesh])
@@ -175,7 +176,7 @@ def mesh_rib_with_pyvista(height: float, width: float, y_coordinate: float, elem
     # Find number of elements along each side of the rib
     no_elements = [np.ceil(side/element_length/2).astype('int')*2 for side in [height, width]]
     # Discretize rib
-    rib_mesh = pyvista.Plane(center=[x_0 + width/2, y_coordinate, 0], direction=[0, 1, 0], i_size=height,
+    rib_mesh = pv.Plane(center=[x_0 + width/2, y_coordinate, 0], direction=[0, 1, 0], i_size=height,
                              j_size=width, i_resolution=no_elements[0], j_resolution=no_elements[1])
     # Return discretized geometry
     return rib_mesh
@@ -254,10 +255,10 @@ def mesh_stiffened_box_with_pyvista(height: float, length: float, width: float, 
     # Find number of elements along each side of the box based on the prescribed edge length. We make sure that there is an even number of elements over each dimension to better approximate the buckling shape
     no_elements = [np.ceil(side/element_length/2).astype('int')*2 for side in [height, length]]
     # Discretize front spar of the stiffened box
-    front_spar_mesh = pyvista.Plane(center=[0, y_0 + length/2, 0], direction=[-1, 0, 0], i_size=height,
+    front_spar_mesh = pv.Plane(center=[0, y_0 + length/2, 0], direction=[-1, 0, 0], i_size=height,
                                     j_size=length, i_resolution=no_elements[0], j_resolution=no_elements[1])
     # Discretize rear spar of the box
-    rear_spar_mesh = pyvista.Plane(center=[width, y_0 + length/2, 0], direction=[1, 0, 0], i_size=height,
+    rear_spar_mesh = pv.Plane(center=[width, y_0 + length/2, 0], direction=[1, 0, 0], i_size=height,
                                    j_size=length, i_resolution=no_elements[0], j_resolution=no_elements[1])
     # Initialize lists of the PolyData objects corresponding to the box segments and to the ribs
     top_skin_meshes = []
@@ -271,25 +272,25 @@ def mesh_stiffened_box_with_pyvista(height: float, length: float, width: float, 
         # Find number of elements along the width
         no_width_elements = np.ceil((x - x_0)/element_length/2).astype('int')*2
         # Discretize top skin segment
-        top_skin_meshes.append(pyvista.Plane(center=[(x_0 + x)/2, y_0 + length/2, height/2], direction=[0, 0, 1],
+        top_skin_meshes.append(pv.Plane(center=[(x_0 + x)/2, y_0 + length/2, height/2], direction=[0, 0, 1],
                                              i_size=x - x_0, j_size=length, i_resolution=no_width_elements, j_resolution=no_elements[1]))
         # Discretize top stiffener
-        top_stiffeners_meshes.append(pyvista.Plane(center=[x, y_0 + length/2, height/2 - stiffeners_height/2],
+        top_stiffeners_meshes.append(pv.Plane(center=[x, y_0 + length/2, height/2 - stiffeners_height/2],
                                                    direction=[1, 0, 0], i_size=stiffeners_height, j_size=length,
                                                    i_resolution=no_stiffener_elements, j_resolution=no_elements[1]))
         # Discretize bottom skin segment
-        bottom_skin_meshes.append(pyvista.Plane(center=[(x_0 + x)/2, y_0 + length/2, -height/2], direction=[0, 0, -1],
+        bottom_skin_meshes.append(pv.Plane(center=[(x_0 + x)/2, y_0 + length/2, -height/2], direction=[0, 0, -1],
          i_size=x - x_0, j_size=length, i_resolution=no_width_elements, j_resolution=no_elements[1]))
         # Discretize bottom stiffener
-        bottom_stiffeners_meshes.append(pyvista.Plane(center=[x, y_0 + length/2, -height/2 + stiffeners_height/2],
+        bottom_stiffeners_meshes.append(pv.Plane(center=[x, y_0 + length/2, -height/2 + stiffeners_height/2],
          direction=[1, 0, 0], i_size=stiffeners_height, j_size=length, i_resolution=no_stiffener_elements, j_resolution=no_elements[1]))
         # Update x_0
         x_0 = x
     # Discretize last rib-stiffener bay of the skins
     no_width_elements = np.ceil((width - x_0)/element_length/2).astype('int')*2
-    top_skin_meshes.append(pyvista.Plane(center=[(x_0 + width)/2, y_0 + length/2, height/2], direction=[0, 0, 1], i_size=width - x_0,
+    top_skin_meshes.append(pv.Plane(center=[(x_0 + width)/2, y_0 + length/2, height/2], direction=[0, 0, 1], i_size=width - x_0,
                                          j_size=length, i_resolution=no_width_elements, j_resolution=no_elements[1]))
-    bottom_skin_meshes.append(pyvista.Plane(center=[(x_0 + width)/2, y_0 + length/2, -height/2], direction=[0, 0, -1],
+    bottom_skin_meshes.append(pv.Plane(center=[(x_0 + width)/2, y_0 + length/2, -height/2], direction=[0, 0, -1],
                                             i_size=width - x_0, j_size=length, i_resolution=no_width_elements, j_resolution=no_elements[1]))
     # Merge all box segments and ribs together
     merged_mesh = front_spar_mesh.merge([rear_spar_mesh] + top_skin_meshes + top_stiffeners_meshes + bottom_skin_meshes +
@@ -400,7 +401,7 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
         bdf_input.add_grid(nid=nodes_id_array[count], xyz=node_xyz)
     # Add CQUAD4 cards (shell elements) based on input connectivity matrix
     for count, nodes_indices in enumerate(nodes_connectivity_matrix):
-        bdf_input.add_cquad4(eid=count+1, pid=property_id,
+        bdf_input.add_cquad4(eid=count + 1, pid=property_id,
                              nids=[nodes_id_array[nodes_indices[0]], nodes_id_array[nodes_indices[1]],
                                    nodes_id_array[nodes_indices[2]], nodes_id_array[nodes_indices[3]]])
     # Add SPC1 card (single-point constraint) defining fixed boundary conditions at the root nodes
@@ -424,6 +425,7 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
         bdf_input.system_command_lines[0:0] = [f"NASTRAN PARALLEL={no_cores:d}"]
     # Return BDF object
     return bdf_input
+
 
 def define_property_patches(bdf_input: BDF, ribs_y_locations: ndarray, stiffeners_x_locations: ndarray):
     """
@@ -482,3 +484,308 @@ def define_property_patches(bdf_input: BDF, ribs_y_locations: ndarray, stiffener
             elem.pid = rib_pid  # update PSHELL id
             elem.cross_reference(bdf_input)  # recross-reference element object  # find which elements belong to stiffeners
     external_elements_ids = np.concatenate((external_elements_ids, rib_element_ids))  # add element ids of last rib to external elements ids
+
+
+def discretize_length(length: float, target_element_length: float) -> int:
+    """
+    Calculates the required number of nodes to evenly discretize a specified length such that each element has a length
+    equal to or less than a target length. The calculation ensures an even number of elements by rounding up if necessary.
+
+    Parameters
+    ----------
+    length : float
+        The total length to be discretized.
+    target_element_length : float
+        The maximum allowable length of each discretized element.
+    
+    Returns
+    -------
+    int
+        The number of nodes required to discretize the length.
+    """
+    # Calculate the minimum number of elements needed and ensure it's even, then calculate nodes
+    return int(np.ceil(length / target_element_length / 2)) * 2 + 1
+
+
+def mesh_between_profiles(start_profile_xyz_array: ndarray, end_profile_xyz_array: ndarray, no_nodes: int, tag: str) -> PolyData:
+    """
+    Generates a mesh between two profiles using linear interpolation to create quadrilateral shell elements.
+    Ensures compatibility with the PyVista package by arranging the mesh data into a format it can process.
+    
+    Parameters
+    ----------
+    start_profile_xyz_array : ndarray
+        An Nx3 array representing XYZ coordinates of the start profile's nodes.
+    end_profile_xyz_array : ndarray
+        An Nx3 array representing XYZ coordinates of the end profile's nodes.
+    no_nodes : int
+        The total number of nodes to be placed between the start and end profiles, inclusive of the profiles themselves.
+    tag : str
+        A tag to identify the mesh.
+    
+    Returns
+    -------
+    mesh_polydata : PolyData
+        A PyVista PolyData object containing the mesh's points and connectivity.
+    
+    Raises
+    ------
+    ValueError
+        If the start and end profiles have differing numbers of nodes.
+    """
+    # Ensure the profiles have the same number of nodes
+    if start_profile_xyz_array.shape != end_profile_xyz_array.shape:
+        raise ValueError("Start and end profiles must have the same number of nodes.")
+    # Generate interpolated points between the profiles
+    t = np.linspace(0, 1, no_nodes)[np.newaxis, :, np.newaxis]
+    interpolated_nodes = start_profile_xyz_array[:, np.newaxis, :] * (1 - t) + end_profile_xyz_array[:, np.newaxis, :] * t
+    # Reshape to a single array of points for the mesh
+    mesh_xyz_array = interpolated_nodes.reshape(-1, 3)
+    # Create quadrilateral connectivity between points
+    no_profile_nodes = start_profile_xyz_array.shape[0]
+    indices = np.arange(no_profile_nodes * no_nodes).reshape(no_profile_nodes, no_nodes)
+    quads = np.hstack([indices[:-1, :-1].reshape(-1, 1), indices[1:, :-1].reshape(-1, 1),
+                       indices[1:, 1:].reshape(-1, 1), indices[:-1, 1:].reshape(-1, 1)])
+    # Format for PyVista: prepend each quad with a 4 to indicate it's a quadrilateral
+    faces = np.insert(quads, 0, 4, axis=1).flatten()
+    # Create and return the PyVista PolyData object
+    mesh_polydata = pv.PolyData()
+    mesh_polydata.points = mesh_xyz_array
+    mesh_polydata.faces = faces
+    mesh_polydata.cell_data['tag'] = [tag]*mesh_polydata.n_cells  # add tag to cell data
+    return mesh_polydata
+
+
+def mesh_along_y_axis(x_coordinates: ndarray, y_coordinates_start: ndarray, y_coordinates_end: ndarray, z_coordinates: ndarray,
+                      no_y_nodes: int, tag: str) -> PolyData:
+    """
+    Helper function to create a mesh along the Y-axis between two points.
+    
+    Parameters are arrays of X, starting Y, ending Y, and Z coordinates, along with the number of nodes to interpolate
+    along the Y direction. Calls mesh_between_profiles to generate the mesh.
+    
+    Parameters
+    ----------
+    x_coordinates : ndarray
+        X coordinates for meshing.
+    y_coordinates_start : ndarray
+        Starting Y coordinates for meshing.
+    y_coordinates_end : ndarray
+        Ending Y coordinates for meshing.
+    z_coordinates : ndarray
+        Z coordinates for meshing.
+    no_y_nodes : int
+        Number of nodes to use along the Y-axis.
+    tag : str
+        A tag to identify the mesh.
+    
+    Returns
+    -------
+    PolyData
+        The mesh generated along the Y-axis as a PyVista PolyData object.
+    """
+    start_profile_xyz_array = np.column_stack((x_coordinates, y_coordinates_start, z_coordinates))
+    end_profile_xyz_array = np.column_stack((x_coordinates, y_coordinates_end, z_coordinates))
+    return mesh_between_profiles(start_profile_xyz_array, end_profile_xyz_array, no_y_nodes, tag)
+
+
+def mesh_along_z_axis(x_coordinates: ndarray, y_coordinates: ndarray, z_coordinates_start: ndarray, z_coordinates_end: ndarray,
+                      no_z_nodes: int, tag: str) -> PolyData:
+    """
+    Helper function to create a mesh along the Z-axis between two points.
+    
+    Parameters are arrays of X, Y, starting Z, and ending Z coordinates, along with the number of nodes
+    to interpolate along the Z direction. Calls mesh_between_profiles to generate the mesh.
+
+    Parameters
+    --------- 
+    x_coordinates : ndarray
+        X coordinates for meshing.
+    y_coordinates : ndarray
+        Y coordinates for meshing.
+    z_coordinates_start : ndarray
+        Starting Z coordinates for meshing.
+    z_coordinates_end : ndarray
+        Ending Z coordinates for meshing.
+    no_z_nodes : int
+        Number of nodes to use along the Z-axis.
+    tag : str
+        A tag to identify the mesh.
+
+    Returns
+    -------
+    PolyData
+        The mesh generated along the Z-axis as a PyVista PolyData object.
+    """
+    start_profile_xyz_array = np.column_stack((x_coordinates, y_coordinates, z_coordinates_start))
+    end_profile_xyz_array = np.column_stack((x_coordinates, y_coordinates, z_coordinates_end))
+    return mesh_between_profiles(start_profile_xyz_array, end_profile_xyz_array, no_z_nodes, tag)
+
+
+def find_coordinates_along_arc(x_c: float, z_c: float, r: float, p1: ndarray, p2: ndarray, y_start: float, y_end: float,
+                               element_length: float) -> Tuple[ndarray, ndarray, ndarray, ndarray]:
+    """
+    Calculates the coordinates for nodes along an arc defined by its center, radius, and two points on the arc. This is
+    used to discretize arcs into segments of a specified maximum length.
+
+    Parameters
+    ----------
+    x_c, z_c : float
+        The x and z coordinates of the arc's center.
+    r : float
+        The radius of the arc.
+    p1, p2 : ndarray
+        The starting and ending points of the arc segment.
+    y_start, y_end : float
+        The y coordinates for the start and end of the arc, assuming the arc is extruded linearly in y-direction.
+    element_length : float
+        The target maximum length of each segment along the arc.
+
+    Returns
+    -------
+    Tuple[ndarray, ndarray, ndarray, ndarray]
+        The x, starting y, ending y, and z coordinates of the nodes along the arc.
+    """
+    # Calculate the initial angle of the arc based on the starting point and the center
+    angle_0 = np.arctan2(p1[1] - z_c, p1[0] - x_c)
+    # Calculate the total angle spanned by the arc segment between points p1 and p2
+    segment_arc_angle = np.arccos((2*r**2 - np.linalg.norm(p1 - p2)**2) / (2*r**2))
+    # Determine the length of the arc segment using the radius and the segment's angle
+    segment_arc_length = r * segment_arc_angle
+    # Calculate the number of nodes required to discretize the arc segment based on the specified element length
+    no_arc_segment_nodes = discretize_length(segment_arc_length, element_length)
+    # Generate angles for each node along the arc segment, evenly spaced over the segment's total angle
+    arc_angles = np.linspace(0, segment_arc_angle, no_arc_segment_nodes)
+    # Calculate the x coordinates of the nodes along the arc using cosine
+    x_coordinates = x_c + r * np.cos(angle_0 - arc_angles)
+    # Create arrays for the starting and ending y coordinates, filled with the specified y_start and y_end values
+    y_coordinates_start = y_start * np.ones(no_arc_segment_nodes)
+    y_coordinates_end = y_end * np.ones(no_arc_segment_nodes)
+    # Calculate the z coordinates of the nodes along the arc using sine
+    z_coordinates = z_c + r * np.sin(angle_0 - arc_angles)
+    # Return the calculated coordinates as four arrays: x, y_start, y_end, and z
+    return x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates
+
+
+def mesh_stiffened_box_beam_with_curved_skins(height: float, width: float, arc_height: float, ribs_y_coordinates: ndarray,
+                                              stiffeners_x_coordinates: ndarray, stiffeners_height: float, element_length: float) -> PolyData:
+    """
+    Creates a mesh for a box beam with curved skins, reinforced with ribs and stiffeners. The beam is discretized into quadrilateral
+    shell elements. It uses PyVista for mesh generation, handling curved surfaces with special consideration.
+
+    Parameters
+    ----------
+    height : float
+        The height of the box beam.
+    width : float
+        The width of the box beam.
+    arc_height : float
+        The height of the arc (curvature) on the top and bottom skins.
+    ribs_y_coordinates : ndarray
+        The y coordinates of the ribs within the beam.
+    stiffeners_x_coordinates : ndarray
+        The x coordinates of the stiffeners along the beam.
+    stiffeners_height : float
+        The height of the stiffeners.
+    element_length : float
+        The target length of the elements used in mesh discretization.
+
+    Returns
+    -------
+    cleaned_box_beam_mesh : PolyData
+        The final cleaned mesh of the box beam, including all discretized elements.
+    """
+    # Initialize the list to store individual mesh segments
+    meshes = []
+    # Calculate the arc's radius and center position based on beam geometry
+    r = ((width / 2) ** 2 + arc_height ** 2) / (2 * arc_height)
+    x_c = width / 2
+    z_c_top = -r + arc_height + height / 2
+
+    # Function to convert x-coordinate to z-coordinate on the arc, given the arc's geometry
+    def x2z(x, r, x_c, z_c):
+        return z_c + np.sqrt(r ** 2 - (x - x_c) ** 2)
+    
+    # Prepare coordinates for the width segments
+    width_segment_x_coordinates = np.hstack(([0.], stiffeners_x_coordinates, [width]))
+    width_segment_z_coordinates = x2z(width_segment_x_coordinates, r, x_c, z_c_top)
+    # Pair up start and end points for segments to mesh
+    width_segment_xz_coordinates_start = np.column_stack((width_segment_x_coordinates[:-2], width_segment_z_coordinates[:-2]))
+    width_segment_xz_coordinates_end = np.column_stack((width_segment_x_coordinates[1:-1], width_segment_z_coordinates[1:-1]))
+    # Determine the number of nodes along the spar and stiffeners based on their heights
+    no_z_nodes_spar = discretize_length(height, element_length)
+    no_z_nodes_stiffener = discretize_length(stiffeners_height, element_length)
+    # Loop through each pair of ribs to create segments between them
+    for i, y_start in enumerate(ribs_y_coordinates[:-1]):
+        y_end = ribs_y_coordinates[i + 1]
+        no_y_nodes = discretize_length(y_end - y_start, element_length)
+        # Set up coordinates for meshing the front and rear spars
+        x_coordinates = np.zeros(no_z_nodes_spar)
+        y_coordinates_start = y_start * np.ones(no_z_nodes_spar)
+        y_coordinates_end = y_end * np.ones(no_z_nodes_spar)
+        z_coordinates = np.linspace(-height / 2, height / 2, no_z_nodes_spar)
+        # Add front and rear spar segments to the mesh list
+        meshes.append(mesh_along_y_axis(x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates, no_y_nodes, "front spar"))
+        meshes.append(mesh_along_y_axis(x_coordinates + width, y_coordinates_start, y_coordinates_end, z_coordinates, no_y_nodes, "rear spar"))
+        # Mesh each section of the top and bottom skins and the stiffeners
+        for j, _ in enumerate(width_segment_xz_coordinates_start):
+            # Determine coordinates along the arc for top skin segments and their mirrored bottom segments
+            x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates = find_coordinates_along_arc(
+                x_c, z_c_top, r, width_segment_xz_coordinates_start[j], width_segment_xz_coordinates_end[j], y_start,
+                y_end, element_length)
+            # Mesh top and bottom skin segments
+            meshes.append(mesh_along_y_axis(x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates, no_y_nodes, "top skin"))
+            meshes.append(mesh_along_y_axis(x_coordinates, y_coordinates_start, y_coordinates_end, -z_coordinates, no_y_nodes, "bottom skin"))
+            # Mesh rib segment
+            meshes.append(mesh_along_z_axis(x_coordinates, y_coordinates_start, z_coordinates, -z_coordinates, no_z_nodes_spar, "rib"))
+            # Determine the coordinates for the stiffeners
+            x_coordinates = stiffeners_x_coordinates[j]*np.ones(no_z_nodes_stiffener)
+            y_coordinates_start = y_start * np.ones(no_z_nodes_stiffener)
+            y_coordinates_end = y_end * np.ones(no_z_nodes_stiffener)
+            z_coordinates = np.linspace(z_coordinates[-1] - stiffeners_height, z_coordinates[-1], no_z_nodes_stiffener)
+            # Mesh top skin stiffener
+            meshes.append(mesh_along_y_axis(x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates, no_y_nodes, "stiffener"))
+            # Mesh bottom skin stiffener, mirroring the top
+            meshes.append(mesh_along_y_axis(x_coordinates, y_coordinates_start, y_coordinates_end, -z_coordinates, no_y_nodes, "stiffener"))
+        # Determine the coordinates for the final top and bottom skin segments
+        x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates = find_coordinates_along_arc(
+            x_c, z_c_top, r, width_segment_xz_coordinates_end[-1], np.array([width, height/2]), y_start,
+            y_end, element_length)
+        # Mesh the final top and bottom skin segments
+        meshes.append(mesh_along_y_axis(x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates, no_y_nodes, "top skin"))
+        meshes.append(mesh_along_y_axis(x_coordinates, y_coordinates_start, y_coordinates_end, -z_coordinates, no_y_nodes, "bottom skin"))
+        # Mesh the final rib segment
+        meshes.append(mesh_along_z_axis(x_coordinates, y_coordinates_start, z_coordinates, -z_coordinates, no_z_nodes_spar, "rib"))
+    # Prepare coordinates for the last rib
+    width_segment_xz_coordinates_start = np.column_stack((width_segment_x_coordinates[:-1], width_segment_z_coordinates[:-1]))
+    width_segment_xz_coordinates_end = np.column_stack((width_segment_x_coordinates[1:], width_segment_z_coordinates[1:]))
+    # Mesh the last rib segment by segment
+    for j, _ in enumerate(width_segment_xz_coordinates_start):
+        # Determine coordinates to mesh the rib segment
+        x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates = find_coordinates_along_arc(
+            x_c, z_c_top, r, width_segment_xz_coordinates_start[j], width_segment_xz_coordinates_end[j], ribs_y_coordinates[-1],
+            ribs_y_coordinates[-1], element_length)
+        # Mesh rib segment
+        meshes.append(mesh_along_z_axis(x_coordinates, y_coordinates_start, z_coordinates, -z_coordinates, no_z_nodes_spar, "rib"))
+    # Merge all the mesh segments together
+    merged_box_beam_mesh = meshes[0].merge(meshes[1:])
+    # Clean the obtained mesh by merging points closer than a specified tolerance
+    cleaned_box_beam_mesh = merged_box_beam_mesh.clean(tolerance=element_length / 100)
+
+    # Tag the points based on the faces they belong to
+    # Step 1: gather the indices of points that form each face
+    cells = cleaned_box_beam_mesh.faces.reshape(-1, 5)[:, 1:]  # assume quad cells
+    point_indices = cells.flatten()  # flatten the cells array to get a list of point indices, repeated per cell occurrence
+    cell_tags_repeated = np.repeat(cleaned_box_beam_mesh.cell_data['tag'], 4)  # array of the same shape as point_indices, where each cell tag is repeated for each of its points
+    # Step 2: Map cell tags to point tags using an indirect sorting approach
+    sort_order = np.argsort(point_indices)  # get the sort order to rearrange the point indices
+    sorted_point_indices = point_indices[sort_order]  # sort the point indices
+    sorted_tags = cell_tags_repeated[sort_order]  # sort the cell tags in the same order
+    _, boundaries_indices = np.unique(sorted_point_indices, return_index=True)  # find the boundaries between different points in the sorted point indices
+    # Step 3: Split the sorted tags array at these boundaries to get lists of tags for each point
+    tags_split = np.split(sorted_tags, boundaries_indices[1:])  # split the sorted tags array at the boundaries to get lists of tags for each point
+    point_tags_list = np.array([', '.join(tags) for tags in tags_split])  # convert each list of tags into a comma-separated string
+    cleaned_box_beam_mesh.point_data['tags'] = point_tags_list  # apply the tags to the point_data of the mesh
+    
+    # Return the cleaned, final mesh
+    return cleaned_box_beam_mesh
