@@ -228,7 +228,7 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     return eigenvalue_array.T
 
 
-def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: ndarray, displacement_component: str = "magnitude",
+def plot_displacements(op2_object: OP2, displacement_data: ndarray, displacement_component: str = "magnitude",
                        displacement_unit_scale_factor: float = 1., coordinate_unit_scale_factor:float =1.,
                        displacement_amplification_factor: float = 1., colormap: str = "rainbow_PuRd", clim: Union[list, ndarray] = None,
                        length_unit: str = "mm") -> Tuple[Figure, Axes3D, ScalarMappable]:
@@ -241,8 +241,6 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
         pyNastran object created reading an op2 file with the load_geometry option set to True
     displacement_data: ndarray
         array with displacement data to plot
-    node_ids: ndarray
-        array with nodes' identification numbers
     displacement_component: str
         name of the displacement component used for the colorbar
     displacement_unit_scale_factor: float
@@ -267,63 +265,44 @@ def plot_displacements(op2_object: OP2, displacement_data: ndarray, node_ids: nd
     m: ScalarMappable
         mappable object for the colorbar
     """
-    # Dictionary mapping displacement component names to indices of displacement data array
-    component_dict = {'tx': 0,
-                      'ty': 1,
-                      'tz': 2,
-                      'rx': 3,
-                      'ry': 4,
-                      'rz': 5,
-                      'magnitude': np.array([0, 1, 2])[:, np.newaxis]}
-    # Create figure and axes
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    # Initialize array of displacements and vertices
-    no_elements = len(op2_object.elements)
+    # Extract mapping from node ids to indexes and undeformed coordinates
+    node_id_to_index = {}
+    undeformed_coordinates_array = np.empty((len(op2_object.nodes), 3))
+    for node_index, (node_id, node) in enumerate(op2_object.nodes.items()):
+        node_id_to_index[node_id] = node_index
+        undeformed_coordinates_array[node_index] = node.xyz
+    # Apply scalings and find deformed coordinates
+    undeformed_coordinates_array *= coordinate_unit_scale_factor  # apply unit conversion to undeformed coordinates
+    displacement_data[:, :3] = displacement_data[:, :3] * displacement_unit_scale_factor  # apply unit conversion to displacements
+    deformed_coordinates_array = undeformed_coordinates_array + displacement_data[:, :3] * displacement_amplification_factor  # apply amplification factor to displacements and calculate deformed coordinates
+    # Find node indexes for each element
+    element_node_indexes = np.array([[node_id_to_index[node_id] for node_id in element.node_ids] for element in op2_object.elements.values()])
+    # Find vertices coordinates for Poly3DCollection
+    vertices = deformed_coordinates_array[element_node_indexes]
+    # Create Poly3DCollection
+    pc = Poly3DCollection(vertices, linewidths=.05, edgecolor='k')
+    # Handle displacement component and calculate nodal displacement array of interest
     if displacement_component == 'magnitude':
-        nodes_displacement = np.empty((no_elements, 3, 4))  # 3 components for each node to calculate magnitude
+        nodal_displacement_array = np.linalg.norm(displacement_data[:, :3], axis=1)  # calculate displacement magnitude
     else:
-        nodes_displacement = np.empty((no_elements, 4))  # 1 component for each node
-    vertices = np.empty((no_elements, 4, 3))
-    # Iterate through the elements of the structure
-    for count, element in enumerate(op2_object.elements.values()):
-        # Store ids of the nodes as an array
-        element_node_ids = np.array(element.node_ids)
-        # Find indexes of the element node ids into the global node ids array
-        node_indexes = np.nonzero(np.in1d(node_ids, element_node_ids))[0]
-        # Find the displacement of the nodes along the indicated component
-        nodes_disp_component = displacement_data[node_indexes, component_dict[displacement_component]]
-        # Apply unit conversion to displacements and not to rotations
-        if displacement_component not in ['rx', 'ry', 'rz']:
-            nodes_disp_component *= displacement_unit_scale_factor
-        # Store the displacements in the appropriate array
-        nodes_displacement[count] = nodes_disp_component
-        # Store the coordinates of the nodes of the deformed elements
-        vertices[count] = np.vstack([
-            op2_object.nodes[node_id].xyz * coordinate_unit_scale_factor +
-            displacement_data[np.where(node_ids == node_id)[0], 0:3] * displacement_unit_scale_factor * displacement_amplification_factor
-            for node_id in element_node_ids
-        ])
-    # Calculate displacement magnitude if requested
-    if displacement_component == 'magnitude':
-        nodes_displacement = np.linalg.norm(nodes_displacement, axis=1)
+        component_dict = {'tx': 0, 'ty': 1, 'tz': 2, 'rx': 3, 'ry': 4, 'rz': 5}
+        nodal_displacement_array = displacement_data[:, component_dict[displacement_component]]  # select displacement component
     # Calculate average displacement for each element
-    elements_mean_displacement = np.mean(nodes_displacement, axis=1)
-    # Create 3D polygons to represent the elements
-    pc = Poly3DCollection(vertices, linewidths=.05)
+    fringe_data = np.mean(nodal_displacement_array[element_node_indexes], axis=1)
     # Create colormap for the displacement magnitude
     m = ScalarMappable(cmap=colormap)
-    m.set_array(elements_mean_displacement)
+    m.set_array(fringe_data)
     # Set colormap min and max values and displacement values to colors
     if clim is None:
-        m.set_clim(vmin=np.amin(nodes_displacement), vmax=np.amax(nodes_displacement))
+        m.set_clim(vmin=np.amin(nodal_displacement_array), vmax=np.amax(nodal_displacement_array))
     else:
         m.set_clim(vmin=clim[0], vmax=clim[1])
-    rgba_array = m.to_rgba(elements_mean_displacement)
-    # Color the elements' face by the average displacement magnitude
+    rgba_array = m.to_rgba(fringe_data)
+    # Color the elements' face by the average displacement of interest
     pc.set_facecolor([(rgb[0], rgb[1], rgb[2]) for rgb in rgba_array])
-    # Set the edge color black
-    pc.set_edgecolor('k')
+    # Initialize figure and 3D axes
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
     # Add polygons to the plot
     ax.add_collection3d(pc)
     # Set axes label
@@ -381,19 +360,18 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_numb
     displacement_data = op2_object.eigenvectors[subcase_id].data[mode_number - 1, :, :]
     # Call plotting function
     fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
-                                    node_ids=op2_object.eigenvectors[subcase_id].node_gridtype[:, 0],
                                     displacement_component=displacement_component, displacement_unit_scale_factor=1.,
                                     coordinate_unit_scale_factor=unit_scale_factor,
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
                                     length_unit=length_unit)
     # Add colorbar
-    label_dict = {'tx': 'Nondimensional $u_x$',
-                  'ty': 'Nondimensional $u_y$',
-                  'tz': 'Nondimensional $u_z$',
-                  'rx': 'Nondimensional rotation about $x$',
-                  'ry': 'Nondimensional rotation about $y$',
-                  'rz': 'Nondimensional rotation about $z$',
-                  'magnitude': 'Nondimensional displacement magnitude'}
+    label_dict = {'tx': "Nondimensional $u_x$",
+                  'ty': "Nondimensional $u_y$",
+                  'tz': "Nondimensional $u_z$",
+                  'rx': "Nondimensional $\\theta_x$",
+                  'ry': "Nondimensional $\\theta_y$",
+                  'rz': "Nondimensional $\\theta_z$",
+                  'magnitude': "Nondimensional $\|u\|$"}
     cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component])
     # Set whitespace to 0
     fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
@@ -443,19 +421,18 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
     displacement_data = op2_object.displacements[subcase_id].data[load_step - 1, :, :]
     # Call plotting function
     fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
-                                    node_ids=op2_object.displacements[subcase_id].node_gridtype[:, 0],
                                     displacement_component=displacement_component, displacement_unit_scale_factor=unit_scale_factor,
                                     coordinate_unit_scale_factor=unit_scale_factor,
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
                                     clim=clim, length_unit=length_unit)
     # Add colorbar
-    label_dict = {'tx': f'$u_x$, {length_unit}',
-                  'ty': f'$u_y$, {length_unit}',
-                  'tz': f'$u_z$, {length_unit}',
-                  'rx': '$\\theta_x,\,\mathrm{rad}$',
-                  'ry': '$\\theta_y,\,\mathrm{rad}$',
-                  'rz': '$\\theta_z,\,\mathrm{rad}$',
-                  'magnitude': f'Displacement magnitude, {length_unit}'}
+    label_dict = {'tx': f"$u_x$, {length_unit}",
+                  'ty': f"$u_y$, {length_unit}",
+                  'tz': f"$u_z$, {length_unit}",
+                  'rx': "$\\theta_x,\,\mathrm{rad}$",
+                  'ry': "$\\theta_y,\,\mathrm{rad}$",
+                  'rz': "$\\theta_z,\,\mathrm{rad}$",
+                  'magnitude': f"\|u\|, {length_unit}"}
     cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component])
     # Set whitespace to 0
     fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
