@@ -108,11 +108,13 @@ def plot_3d_load_displacements_stability(eigenvalues, axes, displacements1, disp
                     loads[plot_index_segments[0]], marker + '--', color=UNSTABLE_COLOR)
     # Plot the remaining segments
     lowest_eigenvalue_row = eigenvalues[0]  # get the lowest eigenvalue at each equilibrium point
-    for count, segment in enumerate(index_segments[1:]):  # loop through the remaining segments
+    for count, current_segment_indices in enumerate(index_segments[1:]):  # loop through the remaining segments
+        last_segment_indices = index_segments[count]
         delta_num_neg_eigvals = num_neg_eigvals[count + 1] - num_neg_eigvals[count]  # get the change in the number of negative eigenvalues
-        lowest_new_eigenvalue = lowest_eigenvalue_row[segment[0]]  # get the lowest eigenvalue at the first equilibrium point of the segment
-        predicted_eigenvalue = lowest_eigenvalue_row[index_segments[count][-1]] + np.diff(lowest_eigenvalue_row[index_segments[count][-2:]])  # predict the lowest eigenvalue at the first equilibrium point of the next segment using the last two points of the previous segment
-        tolerance = np.std(np.abs(np.diff(lowest_eigenvalue_row[index_segments[count] + index_segments[count + 1]])))*3  # set the tolerance as three times the standard deviation of the changes in the lowest eigenvalue during the previous and the current segment
+        lowest_new_eigenvalue = lowest_eigenvalue_row[current_segment_indices[0]]  # get the lowest eigenvalue at the first equilibrium point of the segment
+        predicted_eigenvalue = lowest_eigenvalue_row[last_segment_indices[-1]] + np.diff(lowest_eigenvalue_row[last_segment_indices[-1] - 1:last_segment_indices[-1] + 1])  # predict the lowest eigenvalue at the first equilibrium point of the next segment using the last two points of the previous segment
+        eigenvalue_abs_diffs = np.abs(np.diff(lowest_eigenvalue_row[last_segment_indices + current_segment_indices]))  # calculate the absolute differences in the lowest eigenvalue during the previous and the current segment
+        tolerance = np.mean(eigenvalue_abs_diffs) + np.std(eigenvalue_abs_diffs)*7  # set the tolerance as average change plus seven times the standard deviation
         if np.abs(lowest_new_eigenvalue - predicted_eigenvalue) <= tolerance:  # if the lowest eigenvalue at the first equilibrium point of the segment is close to the predicted value update the actual number of negative eigenvalues
             actual_neg_eigenvalues += delta_num_neg_eigvals
         if actual_neg_eigenvalues == 0:  # plot with a solid line if segment is stable
