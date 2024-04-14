@@ -359,7 +359,7 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_numb
     # Choose eigenvectors as displacement data
     displacement_data = op2_object.eigenvectors[subcase_id].data[mode_number - 1, :, :]
     # Call plotting function
-    fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
+    fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data.copy(),
                                     displacement_component=displacement_component, displacement_unit_scale_factor=1.,
                                     coordinate_unit_scale_factor=unit_scale_factor,
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
@@ -420,7 +420,7 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
     # Choose static displacements as displacement data
     displacement_data = op2_object.displacements[subcase_id].data[load_step - 1, :, :]
     # Call plotting function
-    fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data,
+    fig, ax, m = plot_displacements(op2_object=op2_object, displacement_data=displacement_data.copy(),
                                     displacement_component=displacement_component, displacement_unit_scale_factor=unit_scale_factor,
                                     coordinate_unit_scale_factor=unit_scale_factor,
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
