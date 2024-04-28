@@ -604,6 +604,8 @@ def set_up_sol_105(bdf_object: BDF, static_load_set_id: int, no_eigenvalues:int 
                                load_set_id=static_load_set_id)
     # Add EIGRL card to define the parameters for the eigenvalue calculation
     eigrl_set_id = static_load_set_id + 1
+    if eigrl_set_id in bdf_object.methods:
+        eigrl_set_id += 1
     bdf_object.add_eigrl(sid=eigrl_set_id, v1=0., nd=no_eigenvalues)  # calculate the first nd positive eigenvalues
     # Create second subcase for the calculation of the buckling eigenvalues
     eigenvalue_calculation_subcase_id = 2
@@ -699,9 +701,30 @@ def run_nonlinear_buckling_method(bdf_object: BDF, method_set_id: int, analysis_
     return op2_output
 
 
+def eig_to_cycles(eig: float) -> float:
+    """
+    Convert the eigenvalue unit to cycles.
+
+    Parameters
+    ----------
+    eig: float
+        eigenvalue of the tangent stiffness matrix
+
+    Returns
+    -------
+    cycles: float
+        number of cycles corresponding to the input eigenvalue
+    """
+    if eig < 0:  # if negative convert absolute value of eigenvalue to cycles and then make the final number negative
+        cycles = -np.sqrt(np.abs(eig))/(2*np.pi)
+    else:  # if positive convert eigenvalue to cycles
+        cycles = np.sqrt(eig)/(2*np.pi)
+    return cycles
+
+
 def set_up_sol_106_with_kllrh_eigenvalues(bdf_object: BDF, analysis_directory_path: str, method_set_id: int,
                                           no_eigenvalues: int = 1, lower_eig: float = -1.e32, upper_eig: float = 1.e32,
-                                          eigenvectors_flag: bool = False) -> OP2:
+                                          dmap_option: str = None) -> OP2:
     """
     Set up a SOL 106 analysis with the calculation of the eigenvalues of the tangent stiffness matrix.
 
@@ -719,8 +742,9 @@ def set_up_sol_106_with_kllrh_eigenvalues(bdf_object: BDF, analysis_directory_pa
         lower bound of the eigenvalues to be calculated
     upper_eig: float
         upper bound of the eigenvalues to be calculated
-    eigenvectors_flag: bool
-        boolean indicating whether eigenvectors will be calculated
+    dmap_option: str
+        string indicating the additional task to be performed by the DMAP. "eigenvectors" will calculate eigenvectors,
+        "stop" will stop the analysis after the first negative eigenvalue. If None, the default DMAp will be used.
 
     Returns
     -------
@@ -735,30 +759,29 @@ def set_up_sol_106_with_kllrh_eigenvalues(bdf_object: BDF, analysis_directory_pa
     bdf_object.case_control_deck.subcases[0].add_integer_type('METHOD', method_set_id)  # add EIGRL id to case control
     # Include DMAP to calculate eigenvalues of tangent stiffness matrix
     relative_path_to_resources = os.path.relpath(RESOURCES_PATH, analysis_directory_path)  # relative path to resources folder
-    if eigenvectors_flag:
+    if dmap_option is None:
         bdf_object.executive_control_lines[1:1] = [
-            "include '" + os.path.join(relative_path_to_resources, "kllrh_eigenvectors.dmap") + "'"]  # include DMAP to calculate eigenvectors
+            "include '" + os.path.join(relative_path_to_resources, "kllrh_eigenvalues_nobuckle.dmap") + "'"]  # include DMAP to calculate eigenvalues and print them in the f06 file
+    elif dmap_option == "eigenvectors":
+        bdf_object.executive_control_lines[1:1] = [
+            "include '" + os.path.join(relative_path_to_resources, "kllrh_eigenvectors.dmap") + "'"]  # include DMAP to calculate eigenvalues and eigenvectors and print them in the f06 file
+    elif dmap_option == "stop":
+        bdf_object.executive_control_lines[1:1] = [
+            "include '" + os.path.join(relative_path_to_resources, "kllrh_eigenvalues_stop.dmap") + "'"]  # include DMAP to calculate eigenvalues and stop the analysis after the first negative eigenvalue
     else:
-        bdf_object.executive_control_lines[1:1] = [
-            "include '" + os.path.join(relative_path_to_resources, "kllrh_eigenvalues_nobuckle.dmap") + "'"]  # include DMAP to calculate only eigenvalues
+        raise ValueError("Invalid DMAP option. Choose 'eigenvectors' or 'stop'.")
     # Define parameters to calculate lowest eigenvalues of tangent stiffness matrix
     if no_eigenvalues > 1:
         bdf_object.add_param('BMODES', [no_eigenvalues])  # add PARAM BMODES if more than one eigenvalue is calculated
     if lower_eig > -1.e32:
-        if lower_eig < 0:  # if negative convert absolute value of eigenvalue to cycle
-            bdf_object.add_param('LOWEREIG', [-np.sqrt(np.abs(lower_eig))/(2*np.pi)])
-        else:  # if positive convert eigenvalue to cycle
-            bdf_object.add_param('LOWEREIG', [np.sqrt(lower_eig)/(2*np.pi)])
+        bdf_object.add_param('LOWEREIG', [eig_to_cycles(lower_eig)])  # add PARAM LOWEREIG if lower bound is defined
     if upper_eig < 1.e32:
-        if upper_eig < 0:  # if negative convert absolute value of eigenvalue to cycle
-            bdf_object.add_param('UPPEREIG', [-np.sqrt(np.abs(upper_eig))/(2*np.pi)])
-        else:  # if positive convert eigenvalue to cycle
-            bdf_object.add_param('UPPEREIG', [np.sqrt(upper_eig)/(2*np.pi)])
+        bdf_object.add_param('UPPEREIG', [eig_to_cycles(upper_eig)])  # add PARAM UPPEREIG if upper bound is defined
 
 
 def run_sol_106_with_kllrh_eigenvalues(bdf_object: BDF, method_set_id: int, analysis_directory_path: str, input_name: str,
                                        no_eigenvalues: int = 1, lower_eig: float = -1.e32, upper_eig: float = 1.e32,
-                                       eigenvectors_flag: bool = False, run_flag: bool = True) -> OP2:
+                                       dmap_option: str = None, run_flag: bool = True) -> OP2:
     """
     Set up and run a SOL 106 analysis with the calculation of the eigenvalues of the tangent stiffness matrix.
 
@@ -778,8 +801,9 @@ def run_sol_106_with_kllrh_eigenvalues(bdf_object: BDF, method_set_id: int, anal
         lower bound of the eigenvalues to be calculated
     upper_eig: float
         upper bound of the eigenvalues to be calculated
-    eigenvectors_flag: bool
-        boolean indicating whether eigenvectors will be calculated
+    dmap_option: str
+        string indicating the additional task to be performed by the DMAP. "eigenvectors" will calculate eigenvectors,
+        "stop" will stop the analysis after the first negative eigenvalue. If None, the default DMAp will be used.
     run_flag: bool
         boolean indicating whether Nastran analysis is actually run
 
@@ -791,7 +815,7 @@ def run_sol_106_with_kllrh_eigenvalues(bdf_object: BDF, method_set_id: int, anal
     # Set up SOL 106 analyis with the calculation of the eigenvalues of the tangent stiffness matrix
     set_up_sol_106_with_kllrh_eigenvalues(bdf_object=bdf_object, analysis_directory_path=analysis_directory_path,
                                           method_set_id=method_set_id, no_eigenvalues=no_eigenvalues, lower_eig=lower_eig,
-                                          upper_eig=upper_eig, eigenvectors_flag=eigenvectors_flag)
+                                          upper_eig=upper_eig, dmap_option=dmap_option)
     # Run analysis
     run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
     # Read op2 file
