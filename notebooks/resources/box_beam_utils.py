@@ -258,7 +258,7 @@ def mesh_spars_segment(no_z_nodes, no_y_nodes, y_start, y_end, height, width):
 
     # Mesh front and rear spar segment as PolyData objects
     front_spar_mesh = mesh_along_y_axis(x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates, no_y_nodes, "front spar")
-    rear_spar_mesh = mesh_along_y_axis(x_coordinates + width, y_coordinates_start, y_coordinates_end, z_coordinates, no_y_nodes, "rear spar")
+    rear_spar_mesh = mesh_along_y_axis(x_coordinates + width, y_coordinates_end, y_coordinates_start, z_coordinates, no_y_nodes, "rear spar")  # swap start and end coordinates to ensure that all normal vectors to the elements point outward
     
     # Return list with PolyData objects
     return [front_spar_mesh, rear_spar_mesh]
@@ -289,7 +289,7 @@ def mesh_skins_segment(x_coordinates, y_coordinates_start, y_coordinates_end, z_
     """
     # Mesh top and bottom skin segments as PolyData objects
     top_skin_mesh = mesh_along_y_axis(x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates, no_y_nodes, "top skin")
-    bottom_skin_mesh = mesh_along_y_axis(x_coordinates, y_coordinates_start, y_coordinates_end, -z_coordinates, no_y_nodes, "bottom skin")  # mirror along z-axis
+    bottom_skin_mesh = mesh_along_y_axis(x_coordinates, y_coordinates_end, y_coordinates_start, -z_coordinates, no_y_nodes, "bottom skin")  # swap start and end coordinates to ensure that all normal vectors to the elements point outward
     
     # Return list with PolyData objects
     return [top_skin_mesh, bottom_skin_mesh]
