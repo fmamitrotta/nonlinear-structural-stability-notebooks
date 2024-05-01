@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/sol_106_optimization3_feasible.T11656_41'
-DBS='c:/temp/scratch/sol_106_optimization3_feasible.T11656_41'
+SDIR='c:/temp/scratch/sol_106_optimization3_feasible.T22432_59'
+DBS='c:/temp/scratch/sol_106_optimization3_feasible.T22432_59'
 SCR='yes'
 SMEM=100
 BPOOL=31gb
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    65332 MB
- Physical memory available:          42394 MB
- Paging file size:                   75060 MB
- Paging file size available:         50400 MB
+ Physical memory available:          29197 MB
+ Paging file size:                   88562 MB
+ Paging file size available:         30254 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
@@ -67,15 +67,15 @@ System configuration:
  Raw model ID:     6
  Config number:    6
  Physical memory:  65332 MB
- Virtual memory:   75060 MB
+ Virtual memory:   88562 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Thu Apr 25 23:25:46 GST 2024 
- 23:25:47  Beginning Analysis
+MSC Nastran started  Tue Apr 30 19:35:04 GST 2024 
+ 19:35:06  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,15 +83,15 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 23:25:49  MSC Authorization Information - System Attributes (1004, 0)
- 23:25:49  -----------------------------------------------------------
-  Date:          Thu Apr 25 23:25:49 2024
+ 19:35:08  MSC Authorization Information - System Attributes (1004, 0)
+ 19:35:08  -----------------------------------------------------------
+  Date:          Tue Apr 30 19:35:08 2024
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
-  Hostname:      IT076000 (user qa21944, display IT080625)
+  Hostname:      IT076000 (user qa21944, display IT076000)
   License files: 27500@ze-ls0.fen.bris.ac.uk
   CEID:          52D366F0-6B4E9DE8
   User:          qa21944
-  Display:       IT080625
+  Display:       IT076000
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
 
   * * * * * * * * * * * * * * * * * * * *
@@ -103,43 +103,43 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 23:25:49  MSC Authorization Information - Checkout Successful (1016, 0)
- 23:25:49  -------------------------------------------------------------
- 23:25:49  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 19:35:08  MSC Authorization Information - Checkout Successful (1016, 0)
+ 19:35:08  -------------------------------------------------------------
+ 19:35:08  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
 
- 23:25:49  Reading INCLUDE file "../../resources/kllrh_eigenvalues_stop.dmap"
- 23:25:49  73 records read from INCLUDE file "../../resources/kllrh_eigenvalues_stop.dmap"
+ 19:35:08  Reading INCLUDE file "../../resources/kllrh_eigenvalues_stop.dmap"
+ 19:35:08  73 records read from INCLUDE file "../../resources/kllrh_eigenvalues_stop.dmap"
 
- 23:25:50  MSC Authorization Information - Checkout Successful (1016, 0)
- 23:25:50  -------------------------------------------------------------
- 23:25:50  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 19:35:08  MSC Authorization Information - Checkout Successful (1016, 0)
+ 19:35:08  -------------------------------------------------------------
+ 19:35:08  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
 
 
- 23:25:50  MSC Authorization Information - Checkout Successful (1016, 0)
- 23:25:50  -------------------------------------------------------------
- 23:25:50  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
+ 19:35:08  MSC Authorization Information - Checkout Successful (1016, 0)
+ 19:35:08  -------------------------------------------------------------
+ 19:35:08  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 23:25:50  Reading INCLUDE file "..\..\resources\kllrh_eigenvalues_stop.dmap"
- 23:25:50  73 records read from INCLUDE file "..\..\resources\kllrh_eigenvalues_stop.dmap"
- 23:25:50  59036 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/19_one-variable_optimization_of_the_crm-like_box_beam/sol_106_optimization3_feasible.bdf"
- 23:25:50  A total of 59109 records were read from 2 files.
+ 19:35:09  Reading INCLUDE file "..\..\resources\kllrh_eigenvalues_stop.dmap"
+ 19:35:09  73 records read from INCLUDE file "..\..\resources\kllrh_eigenvalues_stop.dmap"
+ 19:35:09  59036 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/19_one-variable_optimization_of_the_crm-like_box_beam/sol_106_optimization3_feasible.bdf"
+ 19:35:09  A total of 59109 records were read from 2 files.
 
 Processing of bulk data entries is complete.
 
- 23:25:51  Finite element model generation started.
- 23:25:51  Finite element model generated 86964 degrees of freedom.
- 23:25:51  Finite element model generation successfully completed.
- 23:25:51  Application of Loads and Boundary Conditions to the finite element model started.
- 23:25:51  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 19:35:09  Finite element model generation started.
+ 19:35:10  Finite element model generated 86964 degrees of freedom.
+ 19:35:10  Finite element model generation successfully completed.
+ 19:35:10  Application of Loads and Boundary Conditions to the finite element model started.
+ 19:35:10  Application of Loads and Boundary Conditions to the finite element model successfully completed.
 
- 23:25:52  MSC Authorization Information - Checkout Successful (1016, 0)
- 23:25:52  -------------------------------------------------------------
- 23:25:52  Acquired 4 licenses for MSC Nastran Parallel from license server on host ze-ls0.fen.bris.ac.uk
+ 19:35:10  MSC Authorization Information - Checkout Successful (1016, 0)
+ 19:35:10  -------------------------------------------------------------
+ 19:35:10  Acquired 4 licenses for MSC Nastran Parallel from license server on host ze-ls0.fen.bris.ac.uk
 
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
@@ -147,13 +147,13 @@ Processing of bulk data entries is complete.
        USER WARNING MESSAGE     4698.0          7 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 23:33:57  21 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/19_one-variable_optimization_of_the_crm-like_box_beam/sol_106_optimization3_feasible.bdf"
- 23:33:57  A total of 94 records were read from 2 files.
- 23:33:57  NSEXIT: EXIT(0)
- 23:33:57  Analysis complete  0
-Real:      490.914 seconds ( 0:08:10.914)
-User:     1222.546 seconds ( 0:20:22.546)
-Sys:       153.109 seconds ( 0:02:33.109)
+ 19:43:07  21 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/19_one-variable_optimization_of_the_crm-like_box_beam/sol_106_optimization3_feasible.bdf"
+ 19:43:07  A total of 94 records were read from 2 files.
+ 19:43:07  NSEXIT: EXIT(0)
+ 19:43:07  Analysis complete  0
+Real:      483.268 seconds ( 0:08:03.268)
+User:     1203.078 seconds ( 0:20:03.078)
+Sys:       151.906 seconds ( 0:02:31.906)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -170,12 +170,12 @@ Sys:       153.109 seconds ( 0:02:33.109)
  Ram:                          65332 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation        46.7         45 
- Solver                     111.2         75 
- Eigenvalue                 277.7        166 
- Miscellaneous              203.0        202 
+ Stiffness Generation        45.1         50 
+ Solver                     117.9         88 
+ Eigenvalue                 272.0        150 
+ Miscellaneous              196.2        191 
  -------------------------------------------
- Total:                     638.5        488 
+ Total:                     631.2        479 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  Consider using SMP = 12 ( The number of cores per socket )
@@ -183,4 +183,4 @@ Sys:       153.109 seconds ( 0:02:33.109)
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Thu Apr 25 23:33:58 GST 2024 
+MSC Nastran finished Tue Apr 30 19:43:08 GST 2024 
