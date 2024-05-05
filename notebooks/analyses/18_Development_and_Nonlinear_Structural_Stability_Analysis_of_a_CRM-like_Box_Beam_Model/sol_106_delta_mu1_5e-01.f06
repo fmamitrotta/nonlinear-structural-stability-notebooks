@@ -32,7 +32,7 @@
                                               * *                                 * *
                                               * * * * * * * * * * * * * * * * * * * *
                                               * * * * * * * * * * * * * * * * * * * *
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE     1
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE     1
                                                                                                                                     
 0        N A S T R A N    F I L E    A N D    S Y S T E M    P A R A M E T E R    E C H O                                           
 0                                                                                                                                   
@@ -47,7 +47,7 @@
      $PYNASTRAN: NNODES=14494                                                        
      $PYNASTRAN: NELEMENTS=14976                                                     
      $EXECUTIVE CONTROL DECK                                                         
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE     2
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE     2
                                                                                                                                     
 0        N A S T R A N    E X E C U T I V E    C O N T R O L    E C H O                                                             
 0                                                                                                                                   
@@ -55,7 +55,7 @@
                                                                                                                                     
      SOL 106                                                                                 
      CEND                                                                                    
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE     3
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE     3
                                                                                                                                     
 0                                                                                                                                   
 0                                        C A S E    C O N T R O L    E C H O                                                        
@@ -71,7 +71,7 @@
                   8          LOAD = 12                                                                           
                   9          NLPARM = 2                                                                          
                  10      BEGIN BULK                                                                              
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE     4
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE     4
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -80,7 +80,7 @@
 
 *** USER WARNING MESSAGE (fn: GETLIN)
     The ENDDATA statement is missing.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE     5
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE     5
                                                                                                                                     
 0                                                                                                                                   
                                         M O D E L   S U M M A R Y          BULK = 0
@@ -134,7 +134,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =          15 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          25 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =          67 WORDS.)
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE     6
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE     6
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
@@ -172,7 +172,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =        1000 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          15 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =        1031 WORDS.)
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE     7
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE     7
                                                                                                                                     
 0                                                                                                                                   
  *** USER INFORMATION MESSAGE 7310 (VECPRN)
@@ -189,12 +189,12 @@
                MY       ----          ----          ----          ----       0.000000E+00     ----                                  
                MZ       ----          ----          ----          ----          ----       0.000000E+00                             
              TOTALS  0.000000E+00  0.000000E+00  2.503400E+04  7.354989E+08 -4.268297E+07  0.000000E+00
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE     8
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE     8
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.58 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          1.72 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -207,7 +207,7 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE     9
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE     9
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
@@ -218,25 +218,25 @@
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  3.5102E-01  5.5273E-03  2.1257E-05  1.0000E-01  1.0299E-01  1.0000E+00  3.1237E-05  3.1237E-05    0    0          0    1
+         2  3.5102E-01  5.5273E-03  2.1256E-05  1.0000E-01  1.0299E-01  1.0000E+00  3.1237E-05  3.1237E-05    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    10
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    10
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.06 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.4999123
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  1.1039E-03  3.8395E-05  1.0024E-09  1.0000E-01  2.0471E-04  1.0000E+00  2.5122E-04  2.5122E-04    0    0          0    1
+         3  1.1039E-03  3.8397E-05  1.0024E-09  1.0000E-01  2.0471E-04  1.0000E+00  2.5121E-04  2.5121E-04    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID    1     LOAD STEP    0.500     LOAD FACTOR 0.49991228
@@ -249,12 +249,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    11
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    11
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.23 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.03 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -273,52 +273,52 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    12
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    12
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-             128                    T3                  -4.38551E+02                   3.42753E+04
-             146                    T3                  -1.72917E+01                   3.42788E+04
-             245                    R2                  -1.40567E+01                   9.79583E+07
-             261                    R1                  -1.20534E+01                   1.59508E+08
-             270                    T3                  -1.69152E+01                   3.43426E+04
-             295                    R1                  -4.36285E-01                   1.12292E+08
-             852                    R2                  -4.00127E+00                   9.79600E+07
-             879                    R1                  -3.93972E+00                   1.12292E+08
-             929                    R1                  -4.22615E+00                   1.12293E+08
-             937                    R1                  -6.66914E+01                   1.12293E+08
-            1004                    R2                  -6.93666E+01                   9.79602E+07
-            1010                    R2                  -2.11771E+01                   9.79598E+07
-            1532                    R2                  -4.04910E+01                   9.79583E+07
-            1633                    R1                  -1.58524E+01                   1.12293E+08
-            1641                    R1                  -2.15005E+01                   1.12293E+08
-            1674                    R1                  -1.50766E+02                   1.12293E+08
-            1723                    R2                  -1.91873E+02                   9.79562E+07
-            1778                    T2                  -1.97971E+00                   5.54104E+05
-            2229                    R1                  -8.93894E+01                   1.12293E+08
-            2238                    R1                  -1.08654E+03                   1.12293E+08
-            2335                    R1                  -3.64775E+00                   1.12293E+08
-            2392                    R1                  -3.84157E+00                   1.12293E+08
-            2406                    R1                  -1.76874E+01                   1.12293E+08
-            2887                    R2                  -7.67637E+00                   9.49439E+07
-            2929                    R2                  -1.04338E+01                   9.79525E+07
-            3004                    R2                  -7.01951E+00                   1.37926E+08
-            3607                    R2                  -2.28911E+02                   9.79497E+07
-            3652                    R2                  -1.25302E+02                   1.37925E+08
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    13
+            1061                    T3                  -2.16072E+00                   3.43318E+04
+            1064                    T3                  -2.60879E-02                   3.42731E+04
+            1265                    R2                  -5.63632E+01                   9.79538E+07
+            1479                    R1                  -2.83530E+00                   1.12292E+08
+            1537                    T1                  -1.03817E+00                   1.11453E+06
+            1639                    R3                  -7.12717E+00                   1.15066E+08
+            1789                    T2                  -2.74277E-01                   4.12008E+04
+            1810                    R1                  -4.10731E+00                   1.12293E+08
+            1867                    T3                  -9.37239E+01                   1.76867E+06
+            2045                    R1                  -1.89078E+01                   1.12293E+08
+            2108                    R2                  -7.29608E+02                   1.37932E+08
+            2269                    R2                  -1.25558E+00                   9.79597E+07
+            2632                    R2                  -4.40291E+00                   9.79584E+07
+            2635                    R1                  -9.76898E+01                   1.12293E+08
+            2861                    T3                  -2.15490E+03                   3.43189E+04
+            3107                    R1                  -5.52870E+02                   1.12293E+08
+            3120                    R2                  -2.03016E+01                   9.79564E+07
+            3130                    R2                  -2.61217E+01                   9.79568E+07
+            3408                    R1                  -1.42748E+01                   1.12293E+08
+            3692                    T3                  -5.47587E+01                   3.43779E+04
+            3696                    T3                  -2.31424E+03                   1.76869E+06
+            3699                    R2                  -4.20949E+01                   1.37928E+08
+            3876                    R1                  -1.23549E+01                   1.12293E+08
+            4234                    R1                  -2.39624E+00                   1.12293E+08
+            4465                    R1                  -3.51867E+01                   1.12293E+08
+            4635                    T2                  -1.13649E+00                   4.12402E+04
+            5050                    R2                  -1.78915E+02                   1.37924E+08
+            6080                    R2                  -2.84210E+01                   1.37923E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    13
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.95 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.25 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  3.3497E+00  1.8872E+01  2.0601E+00  1.0000E-01  2.5760E+02  1.0000E+00 -1.4633E+00 -1.4633E+00    0    0          1    1
+         2  3.3497E+00  1.8873E+01  2.0603E+00  1.0000E-01  2.5762E+02  1.0000E+00 -1.4636E+00 -1.4636E+00    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -331,26 +331,26 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    14
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    14
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-            2928                    R2                  -7.51963E+01                   9.79595E+07
-            2980                    R2                  -9.96578E+00                   1.37928E+08
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    15
+            4234                    R1                  -6.10411E+00                   1.12291E+08
+            4640                    T2                  -3.21410E+01                   4.12394E+04
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    15
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.92 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   1.0000000
+     STIFFNESS UPDATE TIME          2.12 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  6.4801E+00  1.4429E+03  1.8138E+02  1.0000E-01  3.7299E+03  1.0000E+00 -5.7827E+02 -5.7827E+02    0    0          1    1
+         3  6.4723E+00  1.4331E+03  1.7949E+02  1.0000E-01  3.7053E+03  1.0000E+00 -5.7100E+02 -5.7100E+02    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -363,45 +363,45 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    16
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    16
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-             981                    T2                  -1.15757E+00                   9.70982E+05
-            1541                    R1                  -5.20681E+01                   1.12290E+08
-            1558                    T2                  -9.70283E+02                   9.50254E+05
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    17
+            2635                    T2                  -4.37262E+00                   9.50254E+05
+            2862                    T1                  -4.75756E+00                   1.11455E+06
+            3109                    R1                  -3.75755E+01                   1.12284E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    17
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.91 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          1.97 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  1.8891E+01  2.6574E+02  4.5556E+01  1.0000E-01  3.4152E+02  1.0000E+00  8.6873E-02  8.6873E-02    0    0          0    1
+         4  1.8799E+01  2.6284E+02  4.4834E+01  1.0000E-01  3.3839E+02  1.0000E+00  8.6905E-02  8.6905E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    18
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    18
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.89 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   1.0000000
+     STIFFNESS UPDATE TIME          2.02 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         5  1.1139E+01  2.6143E+02  2.2957E+01  1.0000E-01  4.8646E+02  1.0000E+00  1.5836E-01  1.5836E-01    0    0          0    1
+         5  1.1117E+01  2.5980E+02  2.2654E+01  1.0000E-01  4.8599E+02  1.0000E+00  1.5740E-01  1.5740E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 6194 (NCONVG)
      *** STOPPED ITERATIONS DUE TO REACHING MAXIMUM ITERATION LIMIT WITHOUT CONVERGENCE ***
  *** USER INFORMATION MESSAGE 6187 (NCONVG)
@@ -414,18 +414,18 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    19
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    19
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.05 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.14 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.9984011
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  4.9525E+01  3.3320E+02  1.6705E+02  1.0000E-01  2.3523E+02  1.0000E+00 -1.1856E+00 -1.1856E+00    0    0          1    1
+         1  4.9525E+01  3.3320E+02  1.6705E+02  1.0000E-01  2.3522E+02  1.0000E+00 -1.1856E+00 -1.1856E+00    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -438,52 +438,52 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    20
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    20
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-             128                    T3                  -4.64935E+02                   3.42755E+04
-             146                    T3                  -2.04051E+01                   3.42791E+04
-             245                    R2                  -4.38013E+01                   9.79583E+07
-             261                    R1                  -1.73578E+01                   1.59508E+08
-             270                    T3                  -1.26289E+02                   3.43424E+04
-             295                    R1                  -5.81427E-01                   1.12292E+08
-             852                    R2                  -4.36468E+00                   9.79600E+07
-             879                    R1                  -4.36230E+00                   1.12292E+08
-             913                    T2                  -1.45850E+00                   9.50432E+05
-             929                    R1                  -4.79915E+00                   1.12293E+08
-             997                    T3                  -2.10202E+00                   3.42896E+04
-            1010                    R2                  -1.08278E+01                   9.79598E+07
-            1532                    R2                  -1.92879E+02                   9.79583E+07
-            1558                    R2                  -2.43352E+01                   9.79561E+07
-            1633                    R1                  -1.68317E+01                   1.12293E+08
-            1641                    R1                  -2.26407E+01                   1.12293E+08
-            1674                    R1                  -4.18676E+02                   1.12293E+08
-            1778                    T2                  -6.04257E+00                   5.54104E+05
-            2229                    R1                  -1.05545E+02                   1.12293E+08
-            2238                    R2                  -7.60075E-02                   9.79543E+07
-            2335                    R1                  -6.23322E+00                   1.12293E+08
-            2392                    R1                  -5.58328E+00                   1.12293E+08
-            2406                    R1                  -2.31834E+01                   1.12293E+08
-            2887                    R2                  -1.07198E+01                   9.49439E+07
-            2929                    R2                  -1.69340E+01                   9.79525E+07
-            3004                    R2                  -1.11532E+01                   1.37926E+08
-            3608                    R1                  -2.31328E+00                   1.12293E+08
-            3652                    R2                  -2.60987E+02                   1.37925E+08
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    21
+            1061                    T3                  -3.74771E+00                   3.43316E+04
+            1064                    T3                  -8.71345E-01                   3.42734E+04
+            1265                    R2                  -2.09724E+03                   9.79539E+07
+            1479                    R1                  -3.88484E+00                   1.12292E+08
+            1537                    T1                  -8.15965E+00                   1.11453E+06
+            1639                    R2                  -7.98096E+00                   9.19330E+07
+            1810                    R1                  -5.25199E+00                   1.12293E+08
+            1869                    R2                  -4.72523E+00                   1.37932E+08
+            1994                    T2                  -4.77510E+00                   4.12003E+04
+            2045                    R1                  -8.48812E+01                   1.12293E+08
+            2107                    T3                  -6.20452E+00                   1.76867E+06
+            2269                    R2                  -1.78138E+00                   9.79597E+07
+            2633                    T3                  -1.50256E+00                   3.43336E+04
+            2635                    R1                  -1.16411E+02                   1.12293E+08
+            2861                    T3                  -2.65709E+03                   3.43191E+04
+            3107                    R1                  -2.15139E+04                   1.12293E+08
+            3120                    R2                  -2.51881E+01                   9.79564E+07
+            3130                    R2                  -1.34901E+02                   9.79569E+07
+            3408                    R1                  -1.61651E+01                   1.12293E+08
+            3682                    R1                  -8.85664E+00                   1.12293E+08
+            3696                    T3                  -1.75265E+04                   1.76869E+06
+            3699                    R2                  -2.22295E+03                   1.37928E+08
+            3876                    R1                  -1.63124E+01                   1.12293E+08
+            4234                    R1                  -3.45427E+00                   1.12293E+08
+            4465                    R1                  -5.68846E+01                   1.12293E+08
+            4635                    R3                  -5.12961E-01                   1.03301E+08
+            5010                    R1                  -2.50515E+00                   1.12293E+08
+            5050                    R2                  -4.75328E+03                   1.37924E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    21
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.05 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.9674581
+     STIFFNESS UPDATE TIME          2.14 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.9674584
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  8.9138E-01  1.5414E+01  1.2809E+00  1.0000E-01  2.1405E+02  1.0000E+00 -1.0444E+00 -1.0444E+00    0    0          1    1
+         2  8.9137E-01  1.5415E+01  1.2810E+00  1.0000E-01  2.1406E+02  1.0000E+00 -1.0446E+00 -1.0446E+00    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -496,26 +496,26 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    22
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    22
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-            2980                    R2                  -1.69653E+01                   1.37928E+08
-            3542                    T3                  -9.74753E+01                   3.44847E+04
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    23
+            4465                    R1                  -9.33857E+01                   1.12289E+08
+            4640                    R3                  -8.37826E-01                   1.03301E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    23
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.92 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.9435861
+     STIFFNESS UPDATE TIME          1.94 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.9435844
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  2.8580E-01  1.6099E+00  6.3860E-02  1.0000E-01  2.3811E+01  1.0000E+00  9.8818E-02  9.8818E-02    0    0          0    1
+         3  2.8582E-01  1.6094E+00  6.3857E-02  1.0000E-01  2.3809E+01  1.0000E+00  9.8819E-02  9.8819E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -528,47 +528,47 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    24
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    24
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-            1702                    R2                  -5.36090E+01                   9.79467E+07
-            2342                    R1                  -4.08457E-01                   1.59507E+08
-            2980                    R2                  -1.25977E+02                   1.37927E+08
-            3004                    R2                  -1.38959E+02                   1.37928E+08
-            3095                    R1                  -9.55872E-01                   1.59507E+08
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    25
+            2861                    T3                  -2.85015E+03                   3.46380E+04
+            3433                    T2                  -1.24897E+00                   9.70976E+05
+            4194                    T3                  -4.04347E+02                   3.44413E+04
+            4234                    R1                  -1.15409E+02                   1.12292E+08
+            4683                    R1                  -2.05652E+01                   1.59507E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    25
+                                                                                                                                    
+0                                                                                                                                   
+0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
+
+     STIFFNESS UPDATE TIME          2.02 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.9668561
+
+                        - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
+0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
+
+         4  3.9927E-01  1.2222E+01  6.8245E-01  1.0000E-01  1.1013E+02  1.0000E+00 -1.0564E+01 -1.0564E+01    0    0          1    1
+ *** USER INFORMATION MESSAGE 4550 (NCONVG)
+     *** NEW STIFFNESS MATRIX IS REQUIRED ***
+ ^^^     
+ *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
+     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
+ ^^^     
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    26
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
      STIFFNESS UPDATE TIME          1.95 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.9668581
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.9489025
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  3.9929E-01  1.2227E+01  6.8287E-01  1.0000E-01  1.1018E+02  1.0000E+00 -1.0574E+01 -1.0574E+01    0    0          1    1
- *** USER INFORMATION MESSAGE 4550 (NCONVG)
-     *** NEW STIFFNESS MATRIX IS REQUIRED ***
- ^^^     
- *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
-     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
- ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    26
-                                                                                                                                    
-0                                                                                                                                   
-0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
-
-     STIFFNESS UPDATE TIME          1.89 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.9488993
-
-                        - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
-0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
-
-         5  3.6053E-01  4.4584E+01  2.0401E+00  1.0000E-01  2.7220E+02  1.0000E+00 -1.2235E+01 -1.2235E+01    0    0          1    1
+         5  3.6078E-01  4.4756E+01  2.0495E+00  1.0000E-01  2.7290E+02  1.0000E+00 -1.2307E+01 -1.2307E+01    0    0          1    1
  *** USER INFORMATION MESSAGE 6194 (NCONVG)
      *** STOPPED ITERATIONS DUE TO REACHING MAXIMUM ITERATION LIMIT WITHOUT CONVERGENCE ***
  *** USER INFORMATION MESSAGE 6187 (NCONVG)
@@ -581,18 +581,18 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    27
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    27
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7491567
+     STIFFNESS UPDATE TIME          2.17 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7491567
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  3.3022E+01  8.3147E+01  2.7776E+01  1.0000E-01  5.7927E+01  1.0000E+00 -2.5148E-01 -2.5148E-01    0    0          0    1
+         1  3.3022E+01  8.3147E+01  2.7776E+01  1.0000E-01  5.7926E+01  1.0000E+00 -2.5146E-01 -2.5146E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -605,34 +605,34 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    28
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    28
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-             146                    R2                  -4.46165E-01                   9.79608E+07
-             295                    T3                  -5.83421E+03                   3.43191E+04
-             329                    R2                  -1.62752E+00                   9.79601E+07
-             358                    R2                  -1.32950E+01                   7.99461E+07
-             929                    T3                  -2.03111E+02                   3.43357E+04
-             929                    R1                  -2.06406E+02                   1.12293E+08
-            1716                    R1                  -2.20638E+02                   1.12293E+08
-            1752                    T3                  -2.48040E+00                   1.73440E+06
-            1778                    R3                  -2.51060E+01                   4.36155E+07
-            2980                    R2                  -9.72358E+00                   1.37930E+08
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    29
+            1064                    R1                  -4.80133E+00                   1.12293E+08
+            1265                    T3                  -9.61663E+00                   3.43485E+04
+            1306                    R2                  -8.75691E-02                   9.79603E+07
+            1719                    R3                  -2.84649E+01                   1.15066E+08
+            1866                    R2                  -1.73840E+01                   1.37933E+08
+            1868                    R2                  -5.35268E+00                   1.37933E+08
+            2865                    R1                  -2.85459E+01                   1.12293E+08
+            3108                    R1                  -8.11171E+00                   1.12293E+08
+            3131                    T3                  -3.47494E+02                   3.43691E+04
+            4434                    R1                  -6.00682E+01                   1.12293E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    29
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.97 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7419050
+     STIFFNESS UPDATE TIME          2.08 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7419051
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  2.9498E-01  5.3615E-01  2.3275E-02  1.0000E-01  1.5535E+01  1.0000E+00 -2.4074E-01 -2.4074E-01    0    0          0    1
+         2  2.9498E-01  5.3613E-01  2.3274E-02  1.0000E-01  1.5534E+01  1.0000E+00 -2.4075E-01 -2.4075E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -645,28 +645,28 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    30
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    30
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-             246                    R1                  -1.15549E+00                   1.12290E+08
-             895                    R1                  -2.09267E-01                   1.12293E+08
-            1557                    R1                  -3.60072E+01                   1.12293E+08
-            1663                    R1                  -7.41418E+00                   1.59508E+08
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    31
+            1061                    R2                  -3.48083E-01                   9.79607E+07
+            1871                    R2                  -1.85381E+00                   1.37933E+08
+            2865                    R1                  -5.70360E+01                   1.12293E+08
+            2878                    R1                  -1.16966E+01                   1.59507E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    31
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.91 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.00 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7393248
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  6.6779E-02  1.1231E-01  1.6771E-03  1.0000E-01  2.9861E+00  1.0000E+00  7.9033E-02  7.9033E-02    0    0          0    1
+         3  6.6780E-02  1.1229E-01  1.6769E-03  1.0000E-01  2.9858E+00  1.0000E+00  7.9029E-02  7.9029E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -679,31 +679,31 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    32
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    32
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-             247                    T3                  -2.13664E+01                   3.43348E+04
-             295                    T3                  -3.85802E+02                   3.44702E+04
-             894                    R2                  -4.00930E+00                   9.79609E+07
-            1560                    R2                  -4.10114E+01                   9.79587E+07
-            1702                    R1                  -2.87248E+02                   1.12293E+08
-            1736                    R1                  -1.62460E+00                   1.59508E+08
-            3569                    T3                  -1.18909E+02                   3.44185E+04
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    33
+             450                    R1                  -1.78694E+01                   1.59507E+08
+            1265                    R1                  -5.27756E+01                   1.12292E+08
+            1871                    R2                  -1.88478E+01                   1.37933E+08
+            2628                    R1                  -1.94722E-01                   1.59507E+08
+            2861                    T3                  -1.65009E+02                   3.43644E+04
+            3131                    R2                  -2.91461E+00                   9.79587E+07
+            4468                    R1                  -9.60805E+00                   1.59507E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    33
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.92 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7399560
+     STIFFNESS UPDATE TIME          2.08 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7399557
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  6.5510E-02  2.7965E+00  3.3004E-02  1.0000E-01  2.1155E+01  1.0000E+00 -5.5451E+01 -5.5451E+01    0    0          1    1
+         4  6.5488E-02  2.7949E+00  3.2978E-02  1.0000E-01  2.1134E+01  1.0000E+00 -5.5341E+01 -5.5341E+01    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -716,27 +716,27 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    34
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    34
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-              89                    R1                  -1.68947E+01                   1.12292E+08
-             256                    R2                  -1.98789E+01                   1.37934E+08
-            1752                    R2                  -1.15763E+01                   3.99731E+07
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    35
+            1061                    R2                  -8.54387E+00                   9.79607E+07
+            1266                    R1                  -1.36919E+01                   1.12292E+08
+            2848                    R1                  -2.68197E+00                   1.59507E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    35
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7377607
+     STIFFNESS UPDATE TIME          2.17 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.11 SECONDS                                                        LOAD FACTOR   0.7377628
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         5  4.2276E-02  1.4484E-01  9.1104E-04  1.0000E-01  1.6166E+00  1.0000E+00  1.1587E-01  1.1587E-01    0    0          0    1
+         5  4.2247E-02  1.4487E-01  9.1090E-04  1.0000E-01  1.6169E+00  1.0000E+00  1.1604E-01  1.1604E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 6194 (NCONVG)
      *** STOPPED ITERATIONS DUE TO REACHING MAXIMUM ITERATION LIMIT WITHOUT CONVERGENCE ***
  *** USER INFORMATION MESSAGE 6187 (NCONVG)
@@ -749,18 +749,18 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    36
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    36
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.88 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.20 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6245345
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  1.9816E+01  2.0771E+01  4.1616E+00  1.0000E-01  1.4379E+01  1.0000E+00 -4.0245E-02 -4.0245E-02    0    0          0    1
+         1  1.9816E+01  2.0771E+01  4.1616E+00  1.0000E-01  1.4379E+01  1.0000E+00 -4.0241E-02 -4.0241E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
@@ -773,80 +773,80 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    37
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    37
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-             329                    R2                  -4.40540E+02                   9.79605E+07
-             929                    T3                  -4.06988E+01                   3.43569E+04
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    38
+            1028                    R1                  -6.60934E+01                   1.59507E+08
+            1064                    R2                  -1.72628E+01                   9.79610E+07
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    38
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.92 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6229558
+     STIFFNESS UPDATE TIME          2.00 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6229557
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  1.0718E-01  4.8798E-01  3.3068E-02  1.0000E-01  1.6686E+01  1.0000E+00 -8.2429E+00 -8.2429E+00    0    0          1    1
+         2  1.0718E-01  4.8791E-01  3.3059E-02  1.0000E-01  1.6684E+01  1.0000E+00 -8.2403E+00 -8.2403E+00    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    39
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    39
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.94 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6190496
+     STIFFNESS UPDATE TIME          1.97 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6190501
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  1.1786E-01  1.7213E-02  5.5549E-04  1.0000E-01  7.6764E-01  1.0000E+00  5.3649E-02  5.3649E-02    0    0          0    1
+         3  1.1785E-01  1.7209E-02  5.5529E-04  1.0000E-01  7.6751E-01  1.0000E+00  5.3645E-02  5.3645E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    40
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    40
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.88 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6195664
+     STIFFNESS UPDATE TIME          2.05 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6195663
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  2.2928E-02  2.9228E-02  3.0786E-04  1.0000E-01  1.0119E+00  1.0000E+00  2.2372E-01  2.2372E-01    0    0          0    1
+         4  2.2916E-02  2.9233E-02  3.0789E-04  1.0000E-01  1.0121E+00  1.0000E+00  2.2371E-01  2.2371E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    41
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    41
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.86 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6180710
+     STIFFNESS UPDATE TIME          2.19 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6180718
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         5  5.0433E-02  6.2952E-02  9.3162E-04  1.0000E-01  2.5937E+00  1.0000E+00 -1.4505E+00 -1.4505E+00    0    0          1    1
+         5  5.0403E-02  6.2872E-02  9.3000E-04  1.0000E-01  2.5906E+00  1.0000E+00 -1.4464E+00 -1.4464E+00    0    0          1    1
  *** USER INFORMATION MESSAGE 6194 (NCONVG)
      *** STOPPED ITERATIONS DUE TO REACHING MAXIMUM ITERATION LIMIT WITHOUT CONVERGENCE ***
  *** USER INFORMATION MESSAGE 6187 (NCONVG)
@@ -859,57 +859,57 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    42
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    42
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.84 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.5622234
+     STIFFNESS UPDATE TIME          1.97 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5622234
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  1.1010E+01  5.1910E+00  5.7770E-01  1.0000E-01  3.5842E+00  1.0000E+00  1.2610E-03  1.2610E-03    0    0          0    1
+         1  1.1010E+01  5.1910E+00  5.7770E-01  1.0000E-01  3.5842E+00  1.0000E+00  1.2616E-03  1.2616E-03    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    43
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    43
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.86 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.5610037
+     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5610037
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  5.8748E-02  1.4120E-02  3.2294E-04  1.0000E-01  8.1731E-01  1.0000E+00 -1.2728E-02 -1.2728E-02    0    0          0    1
+         2  5.8748E-02  1.4121E-02  3.2298E-04  1.0000E-01  8.1738E-01  1.0000E+00 -1.2751E-02 -1.2751E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    44
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    44
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.89 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5607429
+     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.11 SECONDS                                                        LOAD FACTOR   0.5607429
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  1.0365E-02  1.7447E-04  8.1307E-07  1.0000E-01  1.1483E-02  1.0000E+00  2.2289E-02  2.2289E-02    0    0          0    1
+         3  1.0365E-02  1.7450E-04  8.1319E-07  1.0000E-01  1.1483E-02  1.0000E+00  2.2293E-02  2.2293E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
-         SUBID    1     LOOPID    2     LOAD STEP    0.561     LOAD FACTOR 0.56074292
+         SUBID    1     LOOPID    2     LOAD STEP    0.561     LOAD FACTOR 0.56074291
 
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
 
@@ -919,12 +919,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    45
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    45
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.89 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.17 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6809873
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -943,80 +943,80 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    46
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    46
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-             929                    R2                  -1.51623E+01                   9.79603E+07
-             982                    R1                  -3.40963E-01                   1.59508E+08
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    47
+            1866                    R2                  -7.39610E+01                   1.37933E+08
+            3106                    R1                  -1.77026E+01                   1.12293E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    47
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.89 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6814823
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  2.9196E-01  6.8977E+01  1.5565E+01  1.0000E-01  5.1377E+02  1.0000E+00 -6.8770E+03 -6.8770E+03    0    0          1    1
+         2  2.9197E-01  6.8977E+01  1.5565E+01  1.0000E-01  5.1377E+02  1.0000E+00 -6.8773E+03 -6.8773E+03    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    48
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    48
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.94 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6171474
+     STIFFNESS UPDATE TIME          1.97 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6171467
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  1.0534E+00  3.0390E+00  5.5231E-01  1.0000E-01  4.1570E+01  1.0000E+00  9.1934E-02  9.1934E-02    0    0          0    1
+         3  1.0535E+00  3.0390E+00  5.5232E-01  1.0000E-01  4.1570E+01  1.0000E+00  9.1934E-02  9.1934E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    49
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    49
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.88 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6544796
+     STIFFNESS UPDATE TIME          2.02 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.11 SECONDS                                                        LOAD FACTOR   0.6544794
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  6.2178E-01  8.5987E+00  1.0518E+00  1.0000E-01  5.3206E+01  1.0000E+00  1.8063E-01  1.8063E-01    0    0          0    1
+         4  6.2178E-01  8.5988E+00  1.0518E+00  1.0000E-01  5.3207E+01  1.0000E+00  1.8063E-01  1.8063E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    50
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    50
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.91 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6634635
+     STIFFNESS UPDATE TIME          2.19 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.11 SECONDS                                                        LOAD FACTOR   0.6634634
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         5  1.7139E-01  1.1490E+00  6.6272E-02  1.0000E-01  1.5112E+01  1.0000E+00  2.8877E-01  2.8877E-01    0    0          0    1
+         5  1.7140E-01  1.1490E+00  6.6273E-02  1.0000E-01  1.5112E+01  1.0000E+00  2.8877E-01  2.8877E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 6194 (NCONVG)
      *** STOPPED ITERATIONS DUE TO REACHING MAXIMUM ITERATION LIMIT WITHOUT CONVERGENCE ***
  *** USER INFORMATION MESSAGE 6187 (NCONVG)
@@ -1029,12 +1029,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    51
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    51
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.92 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.12 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6208651
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -1047,72 +1047,72 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    52
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    52
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.89 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5909458
+     STIFFNESS UPDATE TIME          2.02 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5909473
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  1.1368E+00  1.5797E+02  1.0550E+02  1.0000E-01  1.6590E+03  1.0000E+00 -2.7249E+04 -2.7249E+04    0    0          1    1
+         2  1.1368E+00  1.5794E+02  1.0548E+02  1.0000E-01  1.6589E+03  1.0000E+00 -2.7245E+04 -2.7245E+04    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    53
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    53
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.14 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.3210318
+     STIFFNESS UPDATE TIME          1.94 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.3210585
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  6.6532E+00  2.7084E+01  5.9029E+00  1.0000E-01  1.1722E+02  1.0000E+00  9.7523E-02  9.7523E-02    0    0          0    1
+         3  6.6526E+00  2.7079E+01  5.9017E+00  1.0000E-01  1.1720E+02  1.0000E+00  9.7523E-02  9.7523E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    54
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    54
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.28 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5103913
+     STIFFNESS UPDATE TIME          2.06 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5104009
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  4.7543E+00  1.8556E+01  6.9519E+00  1.0000E-01  1.9253E+02  1.0000E+00  1.7423E-01  1.7423E-01    0    0          0    1
+         4  4.7538E+00  1.8553E+01  6.9506E+00  1.0000E-01  1.9251E+02  1.0000E+00  1.7423E-01  1.7423E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    55
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    55
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.23 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5535071
+     STIFFNESS UPDATE TIME          2.12 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5535130
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         5  1.0953E+00  2.1494E+00  4.3851E-01  1.0000E-01  3.4681E+01  1.0000E+00  2.8446E-01  2.8446E-01    0    0          0    1
+         5  1.0952E+00  2.1491E+00  4.3843E-01  1.0000E-01  3.4678E+01  1.0000E+00  2.8446E-01  2.8446E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 6194 (NCONVG)
      *** STOPPED ITERATIONS DUE TO REACHING MAXIMUM ITERATION LIMIT WITHOUT CONVERGENCE ***
  *** USER INFORMATION MESSAGE 6187 (NCONVG)
@@ -1125,31 +1125,31 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    56
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    56
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.20 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.5908040
+     STIFFNESS UPDATE TIME          1.95 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5908040
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  5.2321E+00  1.2789E+00  6.7461E-02  1.0000E-01  1.2173E+00  1.0000E+00  9.9305E-04  9.9305E-04    0    0          0    1
+         1  5.2321E+00  1.2789E+00  6.7461E-02  1.0000E-01  1.2173E+00  1.0000E+00  9.9299E-04  9.9299E-04    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    57
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    57
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.06 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.5903114
+     STIFFNESS UPDATE TIME          1.95 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.11 SECONDS                                                        LOAD FACTOR   0.5903114
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1161,18 +1161,18 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    58
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    58
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.03 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.11 SECONDS                                                        LOAD FACTOR   0.5902776
+     STIFFNESS UPDATE TIME          2.02 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.5902776
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  1.5451E-03  3.1838E-04  3.9406E-07  1.0000E-01  7.4554E-03  1.0000E+00  5.1299E-02  5.1299E-02    0    0          0    1
+         3  1.5451E-03  3.1837E-04  3.9405E-07  1.0000E-01  7.4553E-03  1.0000E+00  5.1298E-02  5.1298E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID    3     LOAD STEP    0.590     LOAD FACTOR 0.59027760
@@ -1185,13 +1185,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    59
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    59
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.12 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6476268
+     STIFFNESS UPDATE TIME          2.03 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6476267
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1203,49 +1203,49 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    60
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    60
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.95 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          1.97 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6442572
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  9.0371E-02  1.5670E-01  1.2998E-03  1.0000E-01  1.8553E+00  1.0000E+00 -4.7393E-02 -4.7393E-02    0    0          0    1
+         2  9.0371E-02  1.5670E-01  1.2998E-03  1.0000E-01  1.8553E+00  1.0000E+00 -4.7392E-02 -4.7392E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    61
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    61
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.94 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.11 SECONDS                                                        LOAD FACTOR   0.6446360
+     STIFFNESS UPDATE TIME          2.09 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6446360
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  1.4827E-02  6.6901E-03  2.1157E-05  1.0000E-01  1.1198E-01  1.0000E+00  7.7232E-02  7.7232E-02    0    0          0    1
+         3  1.4827E-02  6.6901E-03  2.1157E-05  1.0000E-01  1.1198E-01  1.0000E+00  7.7233E-02  7.7233E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    62
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    62
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.92 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6447453
+     STIFFNESS UPDATE TIME          2.20 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6447453
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1263,13 +1263,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    63
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    63
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.89 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7352724
+     STIFFNESS UPDATE TIME          1.97 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7352724
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1281,72 +1281,72 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    64
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    64
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.00 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.02 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7287442
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  1.2509E-01  2.0598E+00  1.5900E-02  1.0000E-01  1.1896E+01  1.0000E+00 -6.6898E-01 -6.6898E-01    0    0          0    1
+         2  1.2509E-01  2.0598E+00  1.5900E-02  1.0000E-01  1.1896E+01  1.0000E+00 -6.6897E-01 -6.6897E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    65
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    65
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.78 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.12 SECONDS                                                        LOAD FACTOR   0.7250484
+     STIFFNESS UPDATE TIME          2.05 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7250484
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  1.1383E-01  7.1447E-01  3.7783E-01  1.0000E-01  7.6997E+01  1.0000E+00 -1.5185E+02 -1.5185E+02    0    0          1    1
+         3  1.1383E-01  7.1446E-01  3.7782E-01  1.0000E-01  7.6996E+01  1.0000E+00 -1.5185E+02 -1.5185E+02    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    66
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    66
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          2.03 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.11 SECONDS                                                        LOAD FACTOR   0.7138982
+     STIFFNESS UPDATE TIME          2.11 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7138984
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  4.2410E-01  3.4162E-01  2.1031E-02  1.0000E-01  5.2123E+00  1.0000E+00  7.2046E-02  7.2046E-02    0    0          0    1
+         4  4.2409E-01  3.4162E-01  2.1030E-02  1.0000E-01  5.2122E+00  1.0000E+00  7.2045E-02  7.2045E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    67
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    67
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.81 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7230112
+     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7230113
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         5  2.9222E-01  8.0467E-02  6.9506E-03  1.0000E-01  3.9039E+00  1.0000E+00  2.1290E-01  2.1290E-01    0    0          0    1
+         5  2.9222E-01  8.0466E-02  6.9504E-03  1.0000E-01  3.9038E+00  1.0000E+00  2.1290E-01  2.1290E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 6194 (NCONVG)
      *** STOPPED ITERATIONS DUE TO REACHING MAXIMUM ITERATION LIMIT WITHOUT CONVERGENCE ***
  *** USER INFORMATION MESSAGE 6187 (NCONVG)
@@ -1359,13 +1359,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    68
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    68
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.83 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6900088
+     STIFFNESS UPDATE TIME          1.91 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6900088
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1377,13 +1377,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    69
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    69
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.84 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6886017
+     STIFFNESS UPDATE TIME          2.00 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6886017
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1395,36 +1395,36 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    70
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    70
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.80 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.6888166
+     STIFFNESS UPDATE TIME          2.00 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6888166
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  5.8571E-03  1.1017E-03  7.5337E-07  1.0000E-01  1.4147E-02  1.0000E+00  2.6958E-02  2.6958E-02    0    0          0    1
+         3  5.8571E-03  1.1017E-03  7.5336E-07  1.0000E-01  1.4147E-02  1.0000E+00  2.6958E-02  2.6958E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    71
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    71
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.86 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          1.94 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.6888240
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  1.7561E-04  5.9288E-06  2.7134E-10  1.0000E-01  2.0903E-04  1.0000E+00  0.0000E+00  0.0000E+00    0    0          0    1
+         4  1.7561E-04  5.9284E-06  2.7134E-10  1.0000E-01  2.0903E-04  1.0000E+00  0.0000E+00  0.0000E+00    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID    5     LOAD STEP    0.689     LOAD FACTOR 0.68882396
@@ -1437,13 +1437,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    72
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    72
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.84 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7632909
+     STIFFNESS UPDATE TIME          2.09 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7632909
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1461,38 +1461,38 @@
      1.000000E+07 OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL.
      USER INFORMATION:
      THIS MESSAGE MAY BE IGNORED IF NO GRID POINT IDS OR HIGH RATIO MESSAGES APPEAR IN THE TABLE ON THE NEXT PAGE.
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    73
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    73
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
          GRID POINT ID       DEGREE OF FREEDOM   MATRIX/FACTOR DIAGONAL RATIO        MATRIX DIAGONAL                                
                                                                                                                                     
-               1                    T2                  -5.21216E-01                   9.40146E+05
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    74
+             496                    R2                  -4.04752E+00                   1.37934E+08
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    74
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.86 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7627951
+     STIFFNESS UPDATE TIME          2.05 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7627951
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  9.1063E-02  5.3612E-01  3.9645E-02  1.0000E-01  2.3605E+01  1.0000E+00 -2.2398E+01 -2.2398E+01    0    0          1    1
+         2  9.1063E-02  5.3613E-01  3.9645E-02  1.0000E-01  2.3605E+01  1.0000E+00 -2.2398E+01 -2.2398E+01    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    75
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    75
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.84 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7604545
+     STIFFNESS UPDATE TIME          2.02 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7604544
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1504,13 +1504,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    76
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    76
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.88 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7618217
+     STIFFNESS UPDATE TIME          2.02 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7618217
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1522,18 +1522,18 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    77
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    77
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.88 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.06 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7617116
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         5  4.7111E-03  3.1729E-03  2.1020E-04  1.0000E-01  6.8862E-01  1.0000E+00  3.6510E-01  3.6510E-01    0    0          0    1
+         5  4.7111E-03  3.1730E-03  2.1020E-04  1.0000E-01  6.8862E-01  1.0000E+00  3.6510E-01  3.6510E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 6194 (NCONVG)
      *** STOPPED ITERATIONS DUE TO REACHING MAXIMUM ITERATION LIMIT WITHOUT CONVERGENCE ***
  *** USER INFORMATION MESSAGE 6187 (NCONVG)
@@ -1546,90 +1546,90 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    78
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    78
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.83 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7260574
+     STIFFNESS UPDATE TIME          2.11 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7260574
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  6.1820E+00  3.0351E+00  1.9083E-01  1.0000E-01  5.4793E+00  1.0000E+00 -2.5964E-02 -2.5964E-02    0    0          0    1
+         1  6.1820E+00  3.0351E+00  1.9083E-01  1.0000E-01  5.4792E+00  1.0000E+00 -2.5964E-02 -2.5964E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    79
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    79
+                                                                                                                                    
+0                                                                                                                                   
+0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
+
+     STIFFNESS UPDATE TIME          2.00 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7244569
+
+                        - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
+0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
+
+         2  3.7882E-02  5.6216E-02  1.7981E-03  1.0000E-01  4.4928E+00  1.0000E+00 -3.0896E+00 -3.0896E+00    0    0          1    1
+ *** USER INFORMATION MESSAGE 4550 (NCONVG)
+     *** NEW STIFFNESS MATRIX IS REQUIRED ***
+ ^^^     
+ *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
+     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
+ ^^^     
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    80
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
      STIFFNESS UPDATE TIME          1.92 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7244569
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7229218
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  3.7882E-02  5.6216E-02  1.7981E-03  1.0000E-01  4.4929E+00  1.0000E+00 -3.0896E+00 -3.0896E+00    0    0          1    1
+         3  5.5683E-02  9.2193E-03  5.9311E-04  1.0000E-01  1.4175E+00  1.0000E+00  3.8434E-01  3.8434E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    80
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    81
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.91 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7229218
+     STIFFNESS UPDATE TIME          2.02 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7200456
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  5.5683E-02  9.2192E-03  5.9311E-04  1.0000E-01  1.4174E+00  1.0000E+00  3.8434E-01  3.8434E-01    0    0          0    1
+         4  1.0041E-01  4.7596E-02  9.1893E-03  1.0000E-01  7.6227E+00  1.0000E+00 -6.1920E+00 -6.1920E+00    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    81
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    82
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.94 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7200455
+     STIFFNESS UPDATE TIME          2.17 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7203529
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  1.0041E-01  4.7598E-02  9.1898E-03  1.0000E-01  7.6230E+00  1.0000E+00 -6.1923E+00 -6.1923E+00    0    0          1    1
- *** USER INFORMATION MESSAGE 4550 (NCONVG)
-     *** NEW STIFFNESS MATRIX IS REQUIRED ***
- ^^^     
- *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
-     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
- ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    82
-                                                                                                                                    
-0                                                                                                                                   
-0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
-
-     STIFFNESS UPDATE TIME          1.88 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7203528
-
-                        - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
-0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
-
-         5  9.5460E-03  2.6663E-03  1.5440E-04  1.0000E-01  3.3645E-01  1.0000E+00  6.4979E-02  6.4979E-02    0    0          0    1
+         5  9.5459E-03  2.6662E-03  1.5439E-04  1.0000E-01  3.3643E-01  1.0000E+00  6.4977E-02  6.4977E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 6194 (NCONVG)
      *** STOPPED ITERATIONS DUE TO REACHING MAXIMUM ITERATION LIMIT WITHOUT CONVERGENCE ***
  *** USER INFORMATION MESSAGE 6187 (NCONVG)
@@ -1642,12 +1642,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    83
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    83
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.89 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          1.95 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7074407
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -1660,36 +1660,36 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    84
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    84
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.80 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7072256
+     STIFFNESS UPDATE TIME          1.95 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.11 SECONDS                                                        LOAD FACTOR   0.7072256
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  4.7772E-03  2.7416E-03  1.7093E-06  1.0000E-01  4.4264E-02  1.0000E+00  4.6738E-02  4.6738E-02    0    0          0    1
+         2  4.7772E-03  2.7416E-03  1.7093E-06  1.0000E-01  4.4264E-02  1.0000E+00  4.6737E-02  4.6737E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    85
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    85
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.80 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7071981
+     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7071981
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  1.0813E-03  3.2550E-05  9.3004E-08  1.0000E-01  6.8860E-03  1.0000E+00  1.9047E-01  1.9047E-01    0    0          0    1
+         3  1.0813E-03  3.2550E-05  9.3003E-08  1.0000E-01  6.8860E-03  1.0000E+00  1.9047E-01  1.9047E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID    6     LOAD STEP    0.707     LOAD FACTOR 0.70719809
@@ -1702,90 +1702,90 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    86
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    86
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.91 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7425725
+     STIFFNESS UPDATE TIME          2.20 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7425725
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  6.0108E+00  3.0430E+00  1.9171E-01  1.0000E-01  1.5697E+01  1.0000E+00 -8.5397E-01 -8.5397E-01    0    0          0    1
+         1  6.0108E+00  3.0430E+00  1.9171E-01  1.0000E-01  1.5697E+01  1.0000E+00 -8.5395E-01 -8.5395E-01    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    87
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    87
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.80 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.12 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7395032
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         2  8.8607E-02  1.9456E-02  7.1176E-04  1.0000E-01  1.0414E+00  1.0000E+00  8.3836E-02  8.3836E-02    0    0          0    1
+         2  8.8607E-02  1.9456E-02  7.1176E-04  1.0000E-01  1.0414E+00  1.0000E+00  8.3838E-02  8.3838E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    88
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    88
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.86 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7374523
+     STIFFNESS UPDATE TIME          1.94 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7374523
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  7.3433E-02  3.1232E-02  4.8748E-03  1.0000E-01  4.9663E+00  1.0000E+00 -2.8472E+00 -2.8472E+00    0    0          1    1
+         3  7.3434E-02  3.1232E-02  4.8750E-03  1.0000E-01  4.9664E+00  1.0000E+00 -2.8473E+00 -2.8473E+00    0    0          1    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    89
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    89
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.86 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          1.91 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7379746
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  1.6453E-02  1.4990E-03  5.8902E-05  1.0000E-01  1.8894E-01  1.0000E+00  5.9574E-02  5.9574E-02    0    0          0    1
+         4  1.6453E-02  1.4991E-03  5.8905E-05  1.0000E-01  1.8894E-01  1.0000E+00  5.9575E-02  5.9575E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    90
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    90
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.81 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7382559
+     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7382559
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         5  9.6331E-03  2.8583E-04  4.4557E-06  1.0000E-01  4.6349E-02  1.0000E+00  7.8263E-02  7.8263E-02    0    0          0    1
+         5  9.6335E-03  2.8585E-04  4.4563E-06  1.0000E-01  4.6353E-02  1.0000E+00  7.8266E-02  7.8266E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID    7     LOAD STEP    0.738     LOAD FACTOR 0.73825591
@@ -1798,31 +1798,31 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    91
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    91
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.83 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7915814
+     STIFFNESS UPDATE TIME          1.94 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7915814
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         1  8.5069E+00  7.2950E+00  6.3274E-01  1.0000E-01  1.1330E+01  1.0000E+00 -5.2429E-02 -5.2429E-02    0    0          0    1
+         1  8.5069E+00  7.2950E+00  6.3274E-01  1.0000E-01  1.1330E+01  1.0000E+00 -5.2430E-02 -5.2430E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    92
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    92
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.78 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7906083
+     STIFFNESS UPDATE TIME          2.00 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.11 SECONDS                                                        LOAD FACTOR   0.7906083
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1834,36 +1834,36 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    93
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    93
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.80 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.17 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7907896
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  3.0326E-03  2.7712E-03  6.7623E-07  1.0000E-01  1.4661E-02  1.0000E+00  2.8933E-02  2.8933E-02    0    0          0    1
+         3  3.0326E-03  2.7713E-03  6.7624E-07  1.0000E-01  1.4661E-02  1.0000E+00  2.8933E-02  2.8933E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    94
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    94
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.7907933
+     STIFFNESS UPDATE TIME          2.09 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.7907933
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  9.9339E-05  1.9197E-05  4.3404E-10  1.0000E-01  2.5321E-04  1.0000E+00  0.0000E+00  0.0000E+00    0    0          0    1
+         4  9.9340E-05  1.9196E-05  4.3404E-10  1.0000E-01  2.5322E-04  1.0000E+00  0.0000E+00  0.0000E+00    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID    8     LOAD STEP    0.791     LOAD FACTOR 0.79079330
@@ -1876,13 +1876,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    95
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    95
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.92 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.8803909
+     STIFFNESS UPDATE TIME          2.05 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.8803909
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1894,12 +1894,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    96
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    96
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.81 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          1.95 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.8780568
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -1912,12 +1912,12 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    97
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    97
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.83 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          2.08 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.8787038
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
@@ -1930,13 +1930,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    98
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    98
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.91 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.8787355
+     STIFFNESS UPDATE TIME          2.17 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.8787355
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1948,18 +1948,18 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE    99
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE    99
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.95 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   0.8787361
+     STIFFNESS UPDATE TIME          1.94 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   0.8787361
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         5  1.8555E-05  6.6805E-07  2.5296E-12  1.0000E-01  5.1715E-05  1.0000E+00  0.0000E+00  0.0000E+00    0    0          0    1
+         5  1.8555E-05  6.6880E-07  2.5299E-12  1.0000E-01  5.1716E-05  1.0000E+00  0.0000E+00  0.0000E+00    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID    9     LOAD STEP    0.879     LOAD FACTOR 0.87873609
@@ -1972,13 +1972,13 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE   100
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE   100
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.89 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   1.0000000
+     STIFFNESS UPDATE TIME          1.92 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
@@ -1990,61 +1990,43 @@
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE   101
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE   101
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.88 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   1.0000000
-
-                        - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
-0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
-
-         2  3.6898E-01  1.2655E+00  4.1468E-03  1.0000E-01  2.8611E+00  1.0000E+00  1.2341E-02  1.2341E-02    0    0          0    1
- *** USER INFORMATION MESSAGE 4550 (NCONVG)
-     *** NEW STIFFNESS MATRIX IS REQUIRED ***
- ^^^     
- *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
-     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
- ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE   102
-                                                                                                                                    
-0                                                                                                                                   
-0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
-
-     STIFFNESS UPDATE TIME          1.81 SECONDS                                                               SUBCASE        1
+     STIFFNESS UPDATE TIME          1.98 SECONDS                                                               SUBCASE        1
             ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         3  8.3703E-02  6.9242E-02  6.2892E-05  1.0000E-01  1.8242E-01  1.0000E+00  6.2178E-02  6.2178E-02    0    0          0    1
+         2  3.6898E-01  1.2655E+00  4.1467E-03  1.0000E-01  2.8611E+00  1.0000E+00  1.2342E-02  1.2342E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE   103
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE   102
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
 
-     STIFFNESS UPDATE TIME          1.84 SECONDS                                                               SUBCASE        1
-            ITERATION TIME          0.08 SECONDS                                                        LOAD FACTOR   1.0000000
+     STIFFNESS UPDATE TIME          2.20 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   1.0000000
 
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         4  5.5009E-03  3.2121E-03  1.6451E-07  1.0000E-01  8.6234E-03  1.0000E+00  2.7002E-02  2.7002E-02    0    0          0    1
+         3  8.3704E-02  6.9242E-02  6.2892E-05  1.0000E-01  1.8242E-01  1.0000E+00  6.2178E-02  6.2178E-02    0    0          0    1
  *** USER INFORMATION MESSAGE 4550 (NCONVG)
      *** NEW STIFFNESS MATRIX IS REQUIRED ***
  ^^^     
  *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
      PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
  ^^^     
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE   104
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE   103
                                                                                                                                     
 0                                                                                                                                   
 0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
@@ -2055,7 +2037,25 @@
                         - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
 0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
 
-         5  1.4029E-04  2.9998E-06  7.9327E-12  1.0000E-01  1.1296E-04  1.0000E+00  0.0000E+00  0.0000E+00    0    0          0    1
+         4  5.5008E-03  3.2120E-03  1.6451E-07  1.0000E-01  8.6233E-03  1.0000E+00  2.7001E-02  2.7001E-02    0    0          0    1
+ *** USER INFORMATION MESSAGE 4550 (NCONVG)
+     *** NEW STIFFNESS MATRIX IS REQUIRED ***
+ ^^^     
+ *** USER INFORMATION MESSAGE 22713 (SUBDMAP SEKDR)
+     PARAMETER EXCLUDE IS NOT DEFINED DIFFERENTIAL STIFFNESS IS COMPUTED FOR ALL ELEMENTS.
+ ^^^     
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE   104
+                                                                                                                                    
+0                                                                                                                                   
+0                             N O N - L I N E A R   I T E R A T I O N   M O D U L E   O U T P U T
+
+     STIFFNESS UPDATE TIME          2.03 SECONDS                                                               SUBCASE        1
+            ITERATION TIME          0.09 SECONDS                                                        LOAD FACTOR   1.0000000
+
+                        - - - CONVERGENCE  FACTORS - - -                      - - - LINE SEARCH DATA - - -
+0ITERATION      EUI         EPI         EWI      LAMBDA       DLMAG       FACTOR     E-FIRST     E-FINAL   NQNV  NLS  ENIC  NDV  MDV
+
+         5  1.4029E-04  2.9988E-06  7.9315E-12  1.0000E-01  1.1295E-04  1.0000E+00  0.0000E+00  0.0000E+00    0    0          0    1
  *** USER INFORMATION MESSAGE 6186 (NCONVG)
      *** SOLUTION HAS CONVERGED ***
          SUBID    1     LOOPID   10     LOAD STEP    1.000     LOAD FACTOR 1.00000000
@@ -2097,7 +2097,7 @@
                                  (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =      1 WORDS.)
                                        (NUMBER OF FORTRAN RECORDS WRITTEN =      1 RECORDS.)
                                        (TOTAL DATA WRITTEN FOR EOF MARKER =      1 WORDS.)
-1                                                                             MARCH  20, 2024  MSC Nastran 12/14/21   PAGE   105
+1                                                                               MAY   1, 2024  MSC Nastran 12/14/21   PAGE   105
                                                                                                                                     
 0                                                                                                                                   
  * * * *  D B D I C T   P R I N T  * * * *      SUBDMAP = PRTSUM  ,  DMAP STATEMENT NO.     74

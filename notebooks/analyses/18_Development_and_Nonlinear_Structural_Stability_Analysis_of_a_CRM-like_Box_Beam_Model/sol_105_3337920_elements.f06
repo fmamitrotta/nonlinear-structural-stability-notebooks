@@ -128,7 +128,7 @@
   
       https://www.mscsoftware.com/msc-training
   
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE     1
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE     1
                                                                                                                                     
 0        N A S T R A N    F I L E    A N D    S Y S T E M    P A R A M E T E R    E C H O                                           
 0                                                                                                                                   
@@ -145,7 +145,7 @@
      $PYNASTRAN: NNODES=3329884                                                      
      $PYNASTRAN: NELEMENTS=3337920                                                   
      $EXECUTIVE CONTROL DECK                                                         
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE     2
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE     2
                                                                                                                                     
 0        N A S T R A N    E X E C U T I V E    C O N T R O L    E C H O                                                             
 0                                                                                                                                   
@@ -153,7 +153,7 @@
                                                                                                                                     
      SOL 105                                                                                 
      CEND                                                                                    
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE     3
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE     3
                                                                                                                                     
 0                                                                                                                                   
 0                                        C A S E    C O N T R O L    E C H O                                                        
@@ -169,7 +169,7 @@
                   8      SUBCASE 2                                                                               
                   9          METHOD = 12                                                                         
                  10      BEGIN BULK                                                                              
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE     4
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE     4
                                                                                                                                     
 0                                                                                                                                   
                                               I N P U T   B U L K   D A T A   E C H O                                               
@@ -178,7 +178,7 @@
 
 *** USER WARNING MESSAGE (fn: GETLIN)
     The ENDDATA statement is missing.
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE     5
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE     5
                                                                                                                                     
 0                                                                                                                                   
                                         M O D E L   S U M M A R Y          BULK = 0
@@ -226,7 +226,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =          10 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =          48 WORDS.)
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE     6
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE     6
                                                                                                                                     
 0                                                                                                                                   
 0                                                                                                                                   
@@ -272,7 +272,7 @@
      (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =        1000 WORDS.)
            (NUMBER OF FORTRAN RECORDS WRITTEN =          20 RECORDS.)
            (TOTAL DATA WRITTEN FOR DATA BLOCK =        2035 WORDS.)
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE     7
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE     7
                                                                                                                                     
 0                                                                                                                                   
  *** USER INFORMATION MESSAGE 7310 (VECPRN)
@@ -289,7 +289,7 @@
                MY       ----          ----          ----          ----       0.000000E+00     ----                                  
                MZ       ----          ----          ----          ----          ----       0.000000E+00                             
              TOTALS  0.000000E+00  0.000000E+00  1.000000E+00  2.938000E+04 -1.705000E+03  0.000000E+00
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE     8
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE     8
                                                                                                                                     
 0                                                                                                                                   
  *** USER INFORMATION MESSAGE 7310 (VECPRN)
@@ -308,14 +308,14 @@
              TOTALS  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
   
  *** SYSTEM INFORMATION MESSAGE 4159 (DFMSA)
-     THE DECOMPOSITION OF KLL      YIELDS A MAXIMUM MATRIX-TO-FACTOR-DIAGONAL RATIO OF    1.328412E+03
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE     9
+     THE DECOMPOSITION OF KLL      YIELDS A MAXIMUM MATRIX-TO-FACTOR-DIAGONAL RATIO OF    1.419641E+03
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE     9
                                                                                                                                     
 0                                                                                                            SUBCASE 1              
  *** USER INFORMATION MESSAGE 5293 (SSG3B)
     FOR DATA BLOCK KLL     
     LOAD SEQ. NO.             EPSILON              EXTERNAL WORK      EPSILONS LARGER THAN 0.001 ARE FLAGGED WITH ASTERISKS
-                1         -3.8772233E-07          6.7220703E-03
+                1         -3.2842375E-07          6.7220707E-03
  *** USER INFORMATION MESSAGE 4114 (OUTPX2)
      DATA BLOCK OUG1     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR OUG1, TRL =
                     101                 0          26639072                 0                 0                 0                 2
@@ -338,25 +338,21 @@
  ^^^     
  *** USER INFORMATION MESSAGE 5010 (LNCILS)
      STURM SEQUENCE DATA FOR EIGENVALUE EXTRACTION.
-     TRIAL EIGENVALUE = 1.000000D+00, CYCLES = 1.591549D-01 THE STURM COUNT = 0
+     TRIAL EIGENVALUE = 1.179634D+04, CYCLES = 1.728597D+01 THE STURM COUNT = 0
  *** USER INFORMATION MESSAGE 5010 (LNCILS)
      STURM SEQUENCE DATA FOR EIGENVALUE EXTRACTION.
      TRIAL EIGENVALUE = -1.000000D-02, CYCLES = 1.591549D-02 THE STURM COUNT = 0
  *** USER INFORMATION MESSAGE 5010 (LNCILS)
      STURM SEQUENCE DATA FOR EIGENVALUE EXTRACTION.
-     TRIAL EIGENVALUE = 1.100000D+01, CYCLES = 5.278572D-01 THE STURM COUNT = 0
- *** USER INFORMATION MESSAGE 5010 (LNCILS)
-     STURM SEQUENCE DATA FOR EIGENVALUE EXTRACTION.
-     TRIAL EIGENVALUE = 1.323975D+04, CYCLES = 1.831302D+01 THE STURM COUNT = 1
+     TRIAL EIGENVALUE = 1.319040D+04, CYCLES = 1.827886D+01 THE STURM COUNT = 1
 
  TABLE OF SHIFTS:  (LNNRIGL)
  SHIFT #        SHIFT VALUE         FREQUENCY, CYCLES     # EIGENVALUES BELOW    # NEW EIGENVALUES FOUND
-     1.        1.0000000E+00          1.5915494E-01                 0                        0
+     1.        1.1796345E+04          1.7285974E+01                 0                        1
      2.       -1.0000000E-02         -1.5915494E-02                 0                        0
-     3.        1.1000000E+01          5.2785723E-01                 0                        0
-     4.        1.3239752E+04          1.8313023E+01                 1                        1
+     3.        1.3190402E+04          1.8278862E+01                 1                        0
 
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE    10
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE    10
                                                                                                                                     
 0                                                                                                            SUBCASE 2              
 0
@@ -368,20 +364,20 @@
 
                                      BLOCK SIZE USED ......................     2
 
-                                     NUMBER OF DECOMPOSITIONS .............     4
+                                     NUMBER OF DECOMPOSITIONS .............     3
 
                                      NUMBER OF ROOTS FOUND ................     1
 
-                                     NUMBER OF SOLVES REQUIRED ............    26
+                                     NUMBER OF SOLVES REQUIRED ............     9
 
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE    11
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE    11
                                                                                                                                     
 0                                                                                                            SUBCASE 2              
  
                                               R E A L   E I G E N V A L U E S
    MODE    EXTRACTION      EIGENVALUE            RADIANS             CYCLES            GENERALIZED         GENERALIZED
     NO.       ORDER                                                                       MASS              STIFFNESS
-        1         1        1.241831E+04        1.114375E+02        1.773583E+01        3.350126E-02        4.160291E+02
+        1         1        1.241831E+04        1.114375E+02        1.773583E+01        3.350125E-02        4.160290E+02
  *** USER INFORMATION MESSAGE 4114 (OUTPX2)
      DATA BLOCK OUG1     WRITTEN ON FORTRAN UNIT    12 IN BINARY (LTLEND) FORMAT USING NDDL DESCRIPTION FOR OUG1, TRL =
                     101                 0          26639072                 0                 0                 0                 2
@@ -403,7 +399,7 @@
                                  (MAXIMUM SIZE OF FORTRAN RECORDS WRITTEN =      1 WORDS.)
                                        (NUMBER OF FORTRAN RECORDS WRITTEN =      1 RECORDS.)
                                        (TOTAL DATA WRITTEN FOR EOF MARKER =      1 WORDS.)
-1                                                                             MARCH  15, 2024  MSC Nastran 12/12/23   PAGE    12
+1                                                                             APRIL  30, 2024  MSC Nastran 12/12/23   PAGE    12
                                                                                                                                     
 0                                                                                                            SUBCASE 2              
  * * * *  D B D I C T   P R I N T  * * * *      SUBDMAP = PRTSUM  ,  DMAP STATEMENT NO.     74
