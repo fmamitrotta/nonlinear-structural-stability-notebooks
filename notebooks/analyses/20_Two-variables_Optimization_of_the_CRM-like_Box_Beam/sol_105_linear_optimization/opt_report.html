@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<title>OpenMDAO Optimization Report for Problem sol_105_linear_optimization</title>
+
+<!-- CSS style to set alternate table
+row using color -->
+<style>
+    body {
+        font: normal 10px Verdana, Arial, sans-serif;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 90%;
+    }
+
+    th {
+      background-color: SlateGray;
+      color: white;
+      }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: LightGray;
+    }
+
+    tr:nth-child(odd) {
+        background-color: GhostWhite;
+    }
+
+    span.equality-constraint {
+        font-size: 25px;
+     }
+    span.equality-constraint-satisfied {
+        font-size: 25px;
+        color: green;
+     }
+    span.equality-constraint-violated {
+        font-size: 25px;
+        color: red;
+     }
+</style>
+</head>
+
+<body>
+<h1>OpenMDAO Optimization Report for Problem sol_105_linear_optimization (All values are in unscaled, physical units)</h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2></h2>
+        <table style="border: 1px solid #999; border-collapse: collapse;">
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Problem:</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">sol_105_linear_optimization</td></tr>
+       <tr style="background-color: #F3F3F3;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Script:</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">c:\Users\qa21944\Anaconda3\envs\phd-notebooks\lib\site-packages\ipykernel_launcher.py</td></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Optimizer:</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">ScipyOptimize_COBYLA</td></tr>
+       <tr style="background-color: #F3F3F3;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Number of driver iterations:</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">58</td></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Number of objective calls:</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">57</td></tr>
+       <tr style="background-color: #F3F3F3;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Number of derivative calls:</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Execution start time:</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">2024-04-30 00:32:04 </td></tr>
+       <tr style="background-color: #F3F3F3;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Wall clock run time:</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">00 hours 21 minutes 27 seconds 333.2 milliseconds</td></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Exit status:</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">SUCCESS</td></tr>
+    </table>
+</body>
+</html>
+
+<h2>Objectives</h2>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2></h2>
+        <table style="border: 1px solid #999; border-collapse: collapse;">
+        <tr><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">name</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">val</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: right;">ref</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: right;">ref0</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: right;">adder</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: right;">scaler</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">units</th></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">nastran_solver.mass</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">[0.56630693]</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: right;">6.519</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: right;">3.26</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: right;">-3.26</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: right;">0.3068</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td></tr>
+    </table>
+</body>
+</html>
+
+<h2>Design Variables</h2>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2></h2>
+        <table style="border: 1px solid #999; border-collapse: collapse;">
+        <tr><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">name</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">alias</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: right;">size</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">min</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">max</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">mean</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">lower</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">upper</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">equals</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">ref</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">ref0</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">units</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">visual</th></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">interp.t_cp</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: right;">2</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">|0.448|</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">|1.05|</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">|0.751|</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">0</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">2.84</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">7.7</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">1</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"><img width=300 src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZUAAAAjCAYAAABcv5fnAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjcuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/bCgiHAAAACXBIWXMAABcSAAAXEgFnn9JSAAAEe0lEQVR4nO3db2hVdRzH8fdnjmU6YQaZkyyjMTTBNCMqTUToLxFBJQU9KfBBENajIAhZkljEILI/TwQtikqSiEwSKiEQijSQ1AgRklqaWQTONi/bvj04Z3Qa3rurO7vn7PZ5wbj3/s53v30P7O677/mde44iAjMzszy0nG9QUoekVyQdlnRW0klJOyUtHG9CSddL2i3ptKQzkvZLWlsjfqOkkLR9AvthZmYlcN6iAnQC1wAbgBuAe4F24EtJs6tNJmkm8DkwCKwBlgK7gPclrcjEtUt6Q9JfwHPAWeCyie6MmZkVS/Ue/pI0B/gNuC8iPqkSsxzYDyyJiO8z438CmyKiN339IXALMB14CugFOoAFEXHiovfGzMwK1XoBsR3p4+kaMT8Cp4B1kp4l6VgeBmaQdDBI6gIeAH4AtkTEO5LWATcBT5B0RzVJOlxlUzcwAPw83hxmZpa7+XUVFUmtwGskXcg31eIiol/SSmAncAYYAfqB+yPiYBq2EgjgF+Cl0W8FfgVuqzPxa6uMt0qa1dbWdl2d85TS0NAQLTFcdBpm1mBqbUNS0WlctEqlMn6nImka8BZJF7AqIkZqxE4HtgLHSLqOv4EHgQ8krYmIA8BqkiLyaPz32NsAMK/O3I9VGe+OiIFz585N9U6lexiC1mm/06LBopMxs0lWGboKGKFS6SP5WzhVza+5piKpDXiPZMF9TUQcrzWbpMeBLcDsiKhkxr8ATkXEI5L2AbcC2X/Fp2Wed0VEtaLxvzB6eC8iFhedi5lNvmZ6z1ftVCTNAD4CribpUPrqmG8GSRcytpsZ5t8zzXYANwM3AkPp2DbgCuAkXg8xM5uyqn1OZRawh+SQ11pgWNLc9Ks9E7c57UJG7UnnfFvSEkld6YL97STrLAC705grI+JQRBwiOaX4cuCzbIdjZmZTS7VOZTnJgjrAwTHbngd60uedZBbNI+KopLvS7XuBS4CjwGMRsSMTsxN4XdIgSXeyiKTQvDnB/TEzswLV/TmVXH9o0u28DDwEzAS+BZ6OiO8ankwJNdPxVTMbXzO95wspKlZbM/2Cmdn4muk976JiZma5qXbtLzMzswvmomJmZrlxUTEzs9y4qJiZWW5cVMzMLDcuKmZmlhsXFTMzy42LipmZ5cZFpUQk3SHpgKRBSX2SXkjvZ2NmTUbSKkkfSzouKST1FJ1THlxUSkLSMmAX8BWwDFgPPAlsKjIvM5s07cAR4BmSC+s2BV+mpSQkvQssjIjlmbH1wIvAnIjoLyw5M5tUkn4CtkdET8GpTJg7lfJYQXKvmaxPgUtJbkVgZlZ6Lirl0QmcGDM22hLPa3AuZmYXxUWl3GLMo5lZqbmolMcJkm4lqzOzzcys9FxUymMfcPeYsXuAAeBA49MxM7tw1e5Rb43XC3wtqRfYCiwCNgKv+swvs+aT3la9K33ZBsyVtBSoRMSRwhKbIJ9SXCKS7gQ2A4uBP4BtwIaIGC40MTPLnaTVwN7zbDoeEQsamkyOXFTMzCw3XlMxM7PcuKiYmVlu/gGDaj2dvma8mgAAAABJRU5ErkJggg=='></td></tr>
+    </table>
+</body>
+</html>
+
+<h2>Constraints</h2>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2></h2>
+        <table style="border: 1px solid #999; border-collapse: collapse;">
+        <tr><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">name</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">alias</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: right;">size</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">min</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">max</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">mean</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">lower</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">upper</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">equals</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">ref</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">ref0</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">units</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">visual</th></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">nastran_solver.ks_buckling</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: right;">1</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">5.44e-08</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"><span style="color:rgb(213, 94, 0)">(5.44e-08)</span></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">5.44e-08</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">0</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">1</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">0</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"><img width=300 src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOgAAAAlCAYAAABI36USAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjcuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/bCgiHAAAACXBIWXMAABcSAAAXEgFnn9JSAAAJWklEQVR4nO2de3DU1RXHP9/dzW42IRIMqGlGUUDqKFBbYCo+EGutOmpLFZXqVEVx1FGrdaQV7fDoVK3idGyro53BVx8+2tIyase3BQR0Ktoq+MZqsBUhgQiSyD6yp3/cu+w2DUmIidml9zPzm717f+fee+7sPXvP73fP73dlZgQCxUj6PjANaAHONrMtA6zS/y2RgVYg0H9I2uXfV9Iw4BTgSOAB4NK+1ivQc4KBDiCSpki6xacPknSvT78s6ReSnpf0Q583T9K9kh6X9ISkPXz+tZKWSlomaWxR+duA+3qh1kRgiTnX6nHg8M/e00BviQ20AoFOGQLcDrwNPJs3XOBDMztP0oXAhZKeBL5oZkdL2ge4A/i2L3+rma0trlTSLOCkDm09bGY/K/peC2z16S3Ann3XrcCuEgx0YCm+AaCi9DYzewtA0j+A/X3+S/7zb8DFwAfA4ZKW+Px2/9nS0TgBzGwBsKAbnVqAUT5dC2zuRj7QjwQXd2BpAfb16fFF+YMkHShJwDjgfZ//Zf85AVgLvAksNbMpZjYFOMGfz3XWmKRZkpZ0OK7qILYKmOLTxwMretWzQJ8QZtCBZTVQKekZ4J2i/BbgSpzR/tnMNjhbZV9JT3iZ081sq6R3JC3FGeVTwA07a6wnM6iZNUl6RNIKr8fZvetaoC9QWGYpPSStMrMJHfLmAavM7NGB0SowEAQXNxAoYcIMGgiUMOEatITxN4kS/dxMysK/dMkSDLS0SQB/6Oc2Tge293MbgV7SIxdX91w9vluhQN+zoSXO9Q/cNOnQ1CE9LRKzHBUiIYikjU8ToqodMu1GNhGhOp3jU4B4hOTfX2TVw99i8eAEE3B3dy8AmoG/AHOBh4D1wGzgRqAeOBOYjwt4GArcBcwCXgBe9uVu8+pc5mW/AhwW2vjfNg6+z7620x+TMIOWDfc8GH+zsrLz9c1iarNuMsx9TH22hZGxYbweGeSCDaydaHY9X0ql4axZtGaN9i0plg9OkAVexC3RLPZVzQd+CYwAzsINxmZ/7nncYLvDf18AzANuxg3KRp9/G/A08IQ/b8BC4BJfxwzcUhO4QX0/8E/gciDjdTnV63YVsKxIt7t8+gJgW9G5cutHl4S7uGVCZSW5qmpZd0d1FVZdhSWiJKtq2VwZoTqfVxWnIllFOlFJWv/924/GDZpRFCKaBgNp3ECrL5IdiQteaAAqfF61P14ChhfJDvd5+fP4Mg2+jpFFsvW+rbRvG6/LKK/b6CLZOmCTP+rKvB9dEmbQ3QzLEM9sZt9oFS3RGjZnW9gn08x+0RqaMps4IF7P65k2FI8wPhkjuWeSGcAG3D/7ZJwLdg9wDfBjXDzuXF/9SJyrdgUw1uffAlyHm6XW+fJ5DsO5h/t52euBq3Hu4GpgJjAVeBc3Y12OG9SzgZ/iZqYXcAN7qpd/ytf5A99G3hU9Djczlls//kQXBAPdzdjeyFcr6lgbrXFubWwIH6U3MiL1ARMqD2ClorQrilI5WkcPYYJcQP5iX3wZbuA+BpxIwRWcj3PlVuAGNbiBWY1z/aZTcAcXAI/49Ck4d7AR+JWXvYyCO7gQ+DnwI2ASzh1sxg3qx3Cuat4dXIyLrlqEC0XcVqTbEuC3vr5y60eXBBd3N6OijrXtbQyxDHGAXIqkZamMDeG9bAsNO+RE5cY23ouIBgru3FDgCNyAmkHBTTwJd632CW7GARgEnIa7JjuPgpt4FPCcP47KN+dl5vkyg3z+WF/nXRSespFv+wavy1CfPxznUt6KM6Q8031eufejU8IMupsRG8L66CA2pTcyKlbLv7NbaIjvzVuK0p53d9u3I4Pc+lb+9XGK65MxZgMP4m6i3Ij798+7iWtxj5zdgRugc3Ezzmk417LRH3OBv+Lih2/26szyZY6h4A6u9rKLgJNxs1oG5/adirtWy7uDy3Bu4v24wTwfN3NO9fJ4XRf7Y24Z9qNLgoGWCdu3EwHr9i5uPAtAJpfgw7b3GVfxBV7KpsgBIsGGzDomptKQMVoBMu1swz17+kfgIgruYP566QzcQ9zgBuAtOBdvHgV3cDXOEG7CPeCdX7u7FViJuxbMu4ONwFKcUXzd1wlu9nmRwoDG63I/zq2cRsGtXQzkY5JP9p/l2o8uCQZaJsyYnj6oJ3IxgwhE4xGS6Rxb4hHGpnK0GeTiImmQBYiLJEAiRh3upsY03OtNmnGDbyrwOm4QzcJdk1XjbqRMx7l6jRQGdTVwPjCHwvLBHJ93gpdZhnMHD/N1XOdlW30bV+Huck717Q73ctO8jvlZcSaF6818emiZ9iP/jG+nhFjcEkZSJT2NJIrHKjhqzHDq62p4bs06Gjds6mEzp5tZiCQqUYKBljA9isU9fvxoxo+eyd61Z1FT5dbVcjn4qGUF6zbeze+eeYjWVHsXNYRY3BImGGiZonOPm8KohosZtsdUEvGdG/GmrW/TvGUhy19baMvXtHyOKgb6gGCgZYSkGJd+80wahs5k2OApRHdhleyTtiaat/6G196/0xYtf6f7AoFSIBhoGaFxI+rYb68RRNT7H21rW9qWvPJqH6oV6EeCgQYCJUyIJAoESphgoCWCpP0lNRW9DnNYJzKzJa3qkDdJkkka1FF+J+3US3pa0kpJ5/i8pKRH/Rvqn5IUXlZdIgQDLS12vOPWzJqKT0iqAcZ0UuZ7dLPY3YFrcEHck4FLJCVxAeVrzOxo4PfAd3ulfaDPCQZaWhwh6TlJN/g10GKuwIWy7UDSkcCrFELHkHSCr2OlpO900sZE4Fkzy+JeUn0I7p28Vf58LdDUSbnAABAMtHRYjwuwngzshdtjBQBJg4GxZrayQ5krKLyWI7+b2RzgWNzuZBdLinYoEzPbEdOb33vlXWCMpDXAOfQgRjTw+RAMtEQws5SZtfqonkXAoUWnr6TIEAEkHQ28YmafFGUPBQ4EngSe9d+HSXrSX9ceDGSKjLYWt/fKubgdzcbgntCY08fdC/SSECxfIkiqKTK2ycAbRadHAZO813ugpGuANuBY7+aOA+7GBWS/ARxnZhlJFWaWAb5R1M4q4Bi/4dJ43JsBJlLYJOljnOEGSoCwDloiSDoR+AnO8N7DPT1xu5ld1EGus20hlgAnm9k2SccD1+L2amkyszM6yNbj3j6QBO40s1/7vUYfwD3JEQPON7O3+6GbgV0kGGggUMKEa9BAoIT5D0HGpkixVnZvAAAAAElFTkSuQmCC'></td></tr>
+       <tr style="background-color: #F3F3F3;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">nastran_solver.ks_stress</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: right;">1</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">-1</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">-1</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">-1</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">0</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">399</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">None</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"><img width=300 src='data:image/png;base64,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'></td></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">interp.t_cp</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: right;">2</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">|0.448|</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">|1.05|</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">|0.751|</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">0</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">2.84</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">7.7</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">1</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"></td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;"><img width=300 src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZUAAAAjCAYAAABcv5fnAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjcuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/bCgiHAAAACXBIWXMAABcSAAAXEgFnn9JSAAAEe0lEQVR4nO3db2hVdRzH8fdnjmU6YQaZkyyjMTTBNCMqTUToLxFBJQU9KfBBENajIAhZkljEILI/TwQtikqSiEwSKiEQijSQ1AgRklqaWQTONi/bvj04Z3Qa3rurO7vn7PZ5wbj3/s53v30P7O677/mde44iAjMzszy0nG9QUoekVyQdlnRW0klJOyUtHG9CSddL2i3ptKQzkvZLWlsjfqOkkLR9AvthZmYlcN6iAnQC1wAbgBuAe4F24EtJs6tNJmkm8DkwCKwBlgK7gPclrcjEtUt6Q9JfwHPAWeCyie6MmZkVS/Ue/pI0B/gNuC8iPqkSsxzYDyyJiO8z438CmyKiN339IXALMB14CugFOoAFEXHiovfGzMwK1XoBsR3p4+kaMT8Cp4B1kp4l6VgeBmaQdDBI6gIeAH4AtkTEO5LWATcBT5B0RzVJOlxlUzcwAPw83hxmZpa7+XUVFUmtwGskXcg31eIiol/SSmAncAYYAfqB+yPiYBq2EgjgF+Cl0W8FfgVuqzPxa6uMt0qa1dbWdl2d85TS0NAQLTFcdBpm1mBqbUNS0WlctEqlMn6nImka8BZJF7AqIkZqxE4HtgLHSLqOv4EHgQ8krYmIA8BqkiLyaPz32NsAMK/O3I9VGe+OiIFz585N9U6lexiC1mm/06LBopMxs0lWGboKGKFS6SP5WzhVza+5piKpDXiPZMF9TUQcrzWbpMeBLcDsiKhkxr8ATkXEI5L2AbcC2X/Fp2Wed0VEtaLxvzB6eC8iFhedi5lNvmZ6z1ftVCTNAD4CribpUPrqmG8GSRcytpsZ5t8zzXYANwM3AkPp2DbgCuAkXg8xM5uyqn1OZRawh+SQ11pgWNLc9Ks9E7c57UJG7UnnfFvSEkld6YL97STrLAC705grI+JQRBwiOaX4cuCzbIdjZmZTS7VOZTnJgjrAwTHbngd60uedZBbNI+KopLvS7XuBS4CjwGMRsSMTsxN4XdIgSXeyiKTQvDnB/TEzswLV/TmVXH9o0u28DDwEzAS+BZ6OiO8ankwJNdPxVTMbXzO95wspKlZbM/2Cmdn4muk976JiZma5qXbtLzMzswvmomJmZrlxUTEzs9y4qJiZWW5cVMzMLDcuKmZmlhsXFTMzy42LipmZ5cZFpUQk3SHpgKRBSX2SXkjvZ2NmTUbSKkkfSzouKST1FJ1THlxUSkLSMmAX8BWwDFgPPAlsKjIvM5s07cAR4BmSC+s2BV+mpSQkvQssjIjlmbH1wIvAnIjoLyw5M5tUkn4CtkdET8GpTJg7lfJYQXKvmaxPgUtJbkVgZlZ6Lirl0QmcGDM22hLPa3AuZmYXxUWl3GLMo5lZqbmolMcJkm4lqzOzzcys9FxUymMfcPeYsXuAAeBA49MxM7tw1e5Rb43XC3wtqRfYCiwCNgKv+swvs+aT3la9K33ZBsyVtBSoRMSRwhKbIJ9SXCKS7gQ2A4uBP4BtwIaIGC40MTPLnaTVwN7zbDoeEQsamkyOXFTMzCw3XlMxM7PcuKiYmVlu/gGDaj2dvma8mgAAAABJRU5ErkJggg=='></td></tr>
+    </table>
+</body>
+</html>
+
+<h2>Optimizer settings</h2>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2></h2>
+        <table style="border: 1px solid #999; border-collapse: collapse;">
+        <tr><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">Setting</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">Val</th><th style="border: 1px solid #999; border-collapse: collapse; padding: 5px; background-color: #E9E9E9; text-align: left;">Description</th></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">debug_print</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">[&#x27;desvars&#x27;, &#x27;nl_cons&#x27;, &#x27;objs&#x27;]</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">List of what type of Driver variables to print at each iteration.</td></tr>
+       <tr style="background-color: #F3F3F3;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">invalid_desvar_behavior</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">warn</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Behavior of driver if the initial value of a design variable exceeds its bounds. The default value may beset using the `OPENMDAO_INVALID_DESVAR_BEHAVIOR` environment variable to one of the valid options.</td></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">optimizer</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">COBYLA</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Name of optimizer to use</td></tr>
+       <tr style="background-color: #F3F3F3;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">tol</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">1e-06</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Tolerance for termination. For detailed control, use solver-specific options.</td></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">maxiter</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">200</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Maximum number of iterations.</td></tr>
+       <tr style="background-color: #F3F3F3;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">disp</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">True</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Set to False to prevent printing of Scipy convergence messages</td></tr>
+       <tr style="background-color: ghostwhite;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">singular_jac_behavior</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">warn</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Defines behavior of a zero row/col check after first call tocompute_totals:error - raise an error.warn - raise a warning.ignore - don&#x27;t perform check.</td></tr>
+       <tr style="background-color: #F3F3F3;"><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">singular_jac_tol</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">1e-16</td><td style="border: 1px solid #999; border-collapse: collapse; padding: 5px; text-align: left;">Tolerance for zero row/column check.</td></tr>
+    </table>
+</body>
+</html>
+
+</body>
+
+</html>
