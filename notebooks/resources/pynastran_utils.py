@@ -25,6 +25,7 @@ from pyNastran.utils.nastran_utils import run_nastran
 import re
 from typing import Tuple, Dict, Any, Union
 import tol_colors as tc
+import subprocess
 
 
 # Register Tol's color-blind friendly colormaps
@@ -60,14 +61,28 @@ def run_analysis(directory_path: str, bdf_object: BDF, filename: str, run_flag: 
     bdf_filename = filename + '.bdf'
     bdf_filepath = os.path.join(directory_path, bdf_filename)
     bdf_object.write_bdf(bdf_filepath, is_double=True)  # write bdf file with double precision
-    # Create keywords list for parallel execution
+    # Create default keywords list
+    keywords_list = ["scr=yes", "bat=no", "old=no", "news=no", "notify=no"]
+    # Add smp keyword for parallel execution
     if parallel:
-        keywords_list = ['scr=yes', 'bat=no', 'old=no', 'news=no', 'notify=no', f"smp={no_cores:d}"]
+        keywords_list.append(f"smp={no_cores:d}")
+    # Call Nastran process depending on the operating system
+    if os.name == "posix":
+        # If windows subsystem for linux, set up the nastran call through the call function of the subprocess module
+        pwd = os.getcwd()  # save current working directory
+        bdf_directory = os.path.dirname(bdf_filepath)  # get directory of the bdf file
+        os.chdir(bdf_directory)  # change working directory to the bdf directory
+        nastran_path = "/mnt/c/Program Files/MSC.Software/MSC_Nastran/2021.4/bin/nastran.exe"  # path to nastran executable
+        bdf_filepath = bdf_filepath.replace("/mnt/c", "C:").replace("/", "\\")  # convert bdf path to windows format
+        keywords_list.remove("bat=no")  # remove bat=no keyword for windows subsystem for linux
+        call_args = [nastran_path, bdf_filepath] + keywords_list  # create call arguments
+        if run_flag:
+            subprocess.call(call_args)  # call nastran process
+        os.chdir(pwd)  # change back to original working directory
     else:
-        keywords_list = None
-    # Run Nastran
-    nastran_path = 'C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastran.exe'
-    run_nastran(bdf_filename=bdf_filepath, nastran_cmd=nastran_path, run_in_bdf_dir=True, run=run_flag, keywords=keywords_list)
+        # If not windows subsystem for linux, call nastran with the appropriate pynastran helper function
+        nastran_path = "C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastran.exe"
+        run_nastran(bdf_filename=bdf_filepath, nastran_cmd=nastran_path, run_in_bdf_dir=True, run=run_flag, keywords=keywords_list)
     # Read and print wall time of simulation
     log_filepath = os.path.join(directory_path, filename + '.log')
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')  # compiled regular expression pattern
@@ -365,14 +380,15 @@ def plot_buckling_mode(op2_object: OP2, subcase_id: Union[int, tuple], mode_numb
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
                                     length_unit=length_unit)
     # Add colorbar
-    label_dict = {'tx': "Nondimensional $u_x$",
-                  'ty': "Nondimensional $u_y$",
-                  'tz': "Nondimensional $u_z$",
-                  'rx': "Nondimensional $\\theta_x$",
-                  'ry': "Nondimensional $\\theta_y$",
-                  'rz': "Nondimensional $\\theta_z$",
-                  'magnitude': "Nondimensional $\|u\|$"}
-    cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component])
+    label_dict = {
+        'tx': "Nondimensional $u_x$",
+        'ty': "Nondimensional $u_y$",
+        'tz': "Nondimensional $u_z$",
+        'rx': "Nondimensional $\\theta_x$",
+        'ry': "Nondimensional $\\theta_y$",
+        'rz': "Nondimensional $\\theta_z$",
+        'magnitude': "Nondimensional $\|u\|$"}
+    cbar = fig.colorbar(mappable=m, ax=ax, label=label_dict[displacement_component])
     # Set whitespace to 0
     fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
     # Return axes object
@@ -426,14 +442,15 @@ def plot_static_deformation(op2_object: OP2, subcase_id: Union[int, tuple] = 1, 
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
                                     clim=clim, length_unit=length_unit)
     # Add colorbar
-    label_dict = {'tx': f"$u_x$, {length_unit}",
-                  'ty': f"$u_y$, {length_unit}",
-                  'tz': f"$u_z$, {length_unit}",
-                  'rx': "$\\theta_x,\,\mathrm{rad}$",
-                  'ry': "$\\theta_y,\,\mathrm{rad}$",
-                  'rz': "$\\theta_z,\,\mathrm{rad}$",
-                  'magnitude': f"\|u\|, {length_unit}"}
-    cbar = fig.colorbar(mappable=m, label=label_dict[displacement_component])
+    label_dict = {
+        'tx': f"$u_x$, {length_unit}",
+        'ty': f"$u_y$, {length_unit}",
+        'tz': f"$u_z$, {length_unit}",
+        'rx': "$\\theta_x,\,\mathrm{rad}$",
+        'ry': "$\\theta_y,\,\mathrm{rad}$",
+        'rz': "$\\theta_z,\,\mathrm{rad}$",
+        'magnitude': f"\|u\|, {length_unit}"}
+    cbar = fig.colorbar(mappable=m, ax=ax, label=label_dict[displacement_component])
     # Set whitespace to 0
     fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
     # Return axes object
