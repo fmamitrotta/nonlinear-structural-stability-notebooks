@@ -88,7 +88,7 @@ class NastranSolver(om.ExplicitComponent):
 
         Options
         -------
-        bdf_object : BDF
+        bdf : BDF
             The BDF object representing the model.
         sigma_y : float
             Yield strength of the material.
@@ -99,7 +99,7 @@ class NastranSolver(om.ExplicitComponent):
         run_flag : bool
             Flag to indicate if the analysis should be run.
         """
-        self.options.declare('bdf_object', types=BDF, desc='BDF object representing the Nastran model.')
+        self.options.declare('bdf', types=BDF, desc='BDF object representing the Nastran model.')
         self.options.declare('sigma_y', types=float, desc='Yield strength of the material.')
         self.options.declare('analysis_directory_path', types=str, desc='Directory path for storing analysis files.')
         self.options.declare('input_name', types=str, desc='Name for the analysis input file.')
@@ -116,9 +116,9 @@ class NastranSolver(om.ExplicitComponent):
         self.add_output('ks_stress', desc='Kreisselmeier-Steinhauser aggregated stress value.')
         self.add_discrete_output('op2', val=None, desc='OP2 object containing the analysis results.')
         # Define outputs based on analysis type
-        if self.options['bdf_object'].sol == 105:
+        if self.options['bdf'].sol == 105:
             self.add_output('ks_buckling', desc='KS aggregated buckling load factor.')
-        elif self.options['bdf_object'].sol == 106:
+        elif self.options['bdf'].sol == 106:
             self.add_output('ks_stability', desc='KS aggregated stability metric.')
             self.add_output('applied_load', desc='Magnitude of the applied load in the final state of the analysis.')
         else:
@@ -147,43 +147,43 @@ class NastranSolver(om.ExplicitComponent):
             Dictionary containing the discrete output values.
         """
         # Extract options for convenience
-        bdf_object = self.options['bdf_object']
+        bdf = self.options['bdf']
         sigma_y = self.options['sigma_y']
         analysis_directory_path = self.options['analysis_directory_path']
         input_name = self.options['input_name']
         run_flag = self.options['run_flag']
         # Assign thicknesses to PSHELL cards
         t_array = inputs['t_val']
-        for i, pid in enumerate(bdf_object.properties):
-            bdf_object.properties[pid].t = t_array[0, i]
-            bdf_object.properties[pid].z1 = -t_array[0, i]/2
-            bdf_object.properties[pid].z2 = t_array[0, i]/2
+        for i, pid in enumerate(bdf.properties):
+            bdf.properties[pid].t = t_array[0, i]
+            bdf.properties[pid].z1 = -t_array[0, i]/2
+            bdf.properties[pid].z2 = t_array[0, i]/2
         # Calculate mass
-        outputs['mass'] = mass_properties(bdf_object)[0]
+        outputs['mass'] = mass_properties(bdf)[0]
         # Run analysis
-        pynastran_utils.run_analysis(directory_path=analysis_directory_path, bdf_object=bdf_object, filename=input_name, run_flag=run_flag)
+        pynastran_utils.run_analysis(directory_path=analysis_directory_path, bdf=bdf, filename=input_name, run_flag=run_flag)
         # Read op2 file and assign to discrete output
         op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
-        op2_object = read_op2(op2_filepath, load_geometry=True, debug=None)
-        discrete_outputs['op2'] = op2_object
+        op2 = read_op2(op2_filepath, load_geometry=True, debug=None)
+        discrete_outputs['op2'] = op2
         # Extract results based on analysis type
-        if bdf_object.sol == 105:
+        if bdf.sol == 105:
             # Read von mises stresses and aggregate with KS function
-            stresses = op2_object.op2_results.stress.cquad4_stress[FIRST_SUBCASE_ID].data[0, :, 7]  # von Mises stress is in the 8th row of the stress array
+            stresses = op2.op2_results.stress.cquad4_stress[FIRST_SUBCASE_ID].data[0, :, 7]  # von Mises stress is in the 8th row of the stress array
             outputs['ks_stress'] = compute_ks_function(stresses, upper=sigma_y)  # von Mises stress must be less than yield stress for the material not to yield
             # Read buckling load factors and aggregate with KS function
-            outputs['ks_buckling'] = compute_ks_function(np.array(op2_object.eigenvectors[SECOND_SUBCASE_ID].eigrs),
+            outputs['ks_buckling'] = compute_ks_function(np.array(op2.eigenvectors[SECOND_SUBCASE_ID].eigrs),
                                                         lower_flag=True, upper=1.)  # buckling load factor must be greater than 1 for the structure not to buckle
-        elif bdf_object.sol == 106:
+        elif bdf.sol == 106:
             # Find von mises stresses and aggregate with KS function
-            stresses = op2_object.nonlinear_cquad4_stress[FIRST_SUBCASE_ID].data[-1, :, 5]
+            stresses = op2.nonlinear_cquad4_stress[FIRST_SUBCASE_ID].data[-1, :, 5]
             outputs['ks_stress'] = compute_ks_function(stresses, upper=sigma_y)  # von Mises stress must be less than yield stress for the material not to yield
             # Read eigenvalues of tangent stiffness matrix and aggregate with KS function
             f06_filepath = os.path.splitext(op2_filepath)[0] + '.f06'  # path to .f06 file
             eigenvalues = pynastran_utils.read_kllrh_lowest_eigenvalues_from_f06(f06_filepath)  # read eigenvalues from f06 files
             outputs['ks_stability'] = compute_ks_function(eigenvalues[~np.isnan(eigenvalues)].flatten()*1e3, lower_flag=True)  # nan values are discarded and eigenvalues are converted from N/mm to N/m
             # Calculate final applied load magnitude
-            _, applied_loads, _ = pynastran_utils.read_load_displacement_history_from_op2(op2_object=op2_object)
+            _, applied_loads, _ = pynastran_utils.read_load_displacement_history_from_op2(op2=op2)
             outputs['applied_load'] = np.linalg.norm(applied_loads[FIRST_SUBCASE_ID][-1, :])  # calculate magnitude of applied load at last converged increment of the analysis
         else:
             raise ValueError("Invalid solution sequence number. Must be 105 or 106.")
@@ -209,7 +209,7 @@ class NastranGroup(om.Group):
         """
         Initialize options for the Nastran analysis group. This includes specifying the BDF object, material properties, and other analysis configurations.
         """
-        self.options.declare('bdf_object', types=BDF, desc='BDF object representing the Nastran model.')
+        self.options.declare('bdf', types=BDF, desc='BDF object representing the Nastran model.')
         self.options.declare('sigma_y', types=float, desc='Yield strength of the material in MPa.')
         self.options.declare('analysis_directory_path', types=str, desc='Directory path for storing analysis files.')
         self.options.declare('input_name', types=str, desc='Name for the analysis input file.')
@@ -219,12 +219,12 @@ class NastranGroup(om.Group):
         """
         Setup the Nastran analysis group by adding the NastranSolver subsystem and configuring its options based on the group's settings.
         """
-        self.add_subsystem('nastran_solver',
-                           NastranSolver(bdf_object=self.options['bdf_object'],
-                                         sigma_y=self.options['sigma_y'],
-                                         analysis_directory_path=self.options['analysis_directory_path'],
-                                         input_name=self.options['input_name'],
-                                         run_flag=self.options['run_flag']))
+        self.add_subsystem('nastran_solver', NastranSolver(
+            bdf=self.options['bdf'],
+            sigma_y=self.options['sigma_y'],
+            analysis_directory_path=self.options['analysis_directory_path'],
+            input_name=self.options['input_name'],
+            run_flag=self.options['run_flag']))
         
 
 def plot_optimization_history(recorder_filepath:str):
@@ -241,31 +241,43 @@ def plot_optimization_history(recorder_filepath:str):
     dict
         A dictionary containing the optimization history for each variable and objective.
     """
+    
     # Initialize the CaseReader object
     cr = om.CaseReader(recorder_filepath)
+    
     # Extract driver cases without recursing into system or solver cases
     driver_cases = cr.get_cases('driver', recurse=False)
+    
     # Prepare data structures for plotting
     output_keys = list(driver_cases[0].outputs.keys())
     no_outputs = len(output_keys)
     histories = {key: np.array([case[key] for case in driver_cases]) for key in output_keys}  # retrieve histories of the functions
+    
     # Setup plot labels
     y_labels = ["$t$, mm"]
     if no_outputs == 4:
-        y_labels = y_labels + ["$KS_{BLF}$", "$KS_{\sigma}$, MPa", "$m$, ton"]
+        y_labels = y_labels + ["$KS_{BLF}$", "$KS_{\sigma}$, MPa", "$m$, ton"]  # add labels for linear buckling optimization problem
     else:
-        y_labels = y_labels + ["$P/P_\mathrm{design}$", "$KS_{\lambda}$, N/m", "$KS_{\sigma}$, MPa","$m$, ton"]
-        histories['nastran_solver.applied_load'] = histories['nastran_solver.applied_load']/histories['nastran_solver.applied_load'][0]
+        y_labels = y_labels + ["$P/P_\mathrm{design}$", "$KS_{\lambda}$, N/m", "$KS_{\sigma}$, MPa","$m$, ton"]  # add labels for nonlinear structural stability optimization problem
+        histories['nastran_solver.applied_load'] = histories['nastran_solver.applied_load']/histories['nastran_solver.applied_load'][0]  # normalize applied load by initial value
+            
     # Create figure and axes for subplots
     fig, axes = plt.subplots(no_outputs, 1, sharex=True)
     fig.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=0.5)
-    # Plot each history
+    
+    # Plot each history and show plot
     iterations_array = np.arange(len(next(iter(histories.values()))))
     for i, key in enumerate(histories):
         axes[i].plot(iterations_array, histories[key])
         axes[i].set(ylabel=y_labels[i])
         axes[i].grid()
     axes[-1].set(xlabel="Iteration")
-    # Show plot and return histories
     plt.show()
-    return histories
+    
+    # Print final values of the optimization variables and objectives
+    print("Final values:")
+    for key in histories:
+        print(f"- {key}: {histories[key][-1]}")
+    
+    # Return the figure and histories
+    return fig, histories
