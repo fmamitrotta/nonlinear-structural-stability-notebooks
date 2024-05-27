@@ -71,13 +71,13 @@ def plot_2d_load_displacements_stability(axes: Axes, displacements: ndarray, loa
     
     # Plot with a solid line if segment is stable
     if actual_neg_eigenvalues == 0:
-        axes.plot(displacements[plot_indices_list[0]],
-                  loads[plot_indices_list[0]], marker + '-', color=color)
+        axes.plot(
+            displacements[plot_indices_list[0]], loads[plot_indices_list[0]], marker + '-', color=color)
     
     # Plot with a dashed red line if segment is unstable
     else:
-        axes.plot(displacements[plot_indices_list[0]],
-                  loads[plot_indices_list[0]], marker + '--', color=UNSTABLE_COLOR)
+        axes.plot(
+            displacements[plot_indices_list[0]], loads[plot_indices_list[0]], marker + '--', color=UNSTABLE_COLOR)
     
     # Plot the remaining segments
     lowest_eigenvalue_row = eigenvalues[0]  # get array of lowest eigenvalues across all equilibrium points
@@ -99,13 +99,13 @@ def plot_2d_load_displacements_stability(axes: Axes, displacements: ndarray, loa
             
         # Plot with a solid line if segment is stable
         if actual_neg_eigenvalues == 0:
-            axes.plot(displacements[plot_indices_list[count + 1]],
-                      loads[plot_indices_list[count + 1]], marker + '-', color=color)
+            axes.plot(
+                displacements[plot_indices_list[count + 1]], loads[plot_indices_list[count + 1]], marker + '-', color=color)
             
         # Plot with a dashed red line if segment is unstable
         else:
-            axes.plot(displacements[plot_indices_list[count + 1]],
-                      loads[plot_indices_list[count + 1]], marker + '--', color=UNSTABLE_COLOR)
+            axes.plot(
+                displacements[plot_indices_list[count + 1]], loads[plot_indices_list[count + 1]], marker + '--', color=UNSTABLE_COLOR)
 
 
 def plot_3d_load_displacements_stability(axes: Axes3D, displacements1: ndarray, displacements2: ndarray, loads: ndarray, eigenvalues: ndarray,
@@ -131,43 +131,62 @@ def plot_3d_load_displacements_stability(axes: Axes3D, displacements1: ndarray, 
         string with the color that will be used for the stable segments of the load-displacement curve
     """
     
-    # Divide the equilibrium points into segments with a different number of negative eigenvalues
-    num_neg_eigval_changes = np.where(np.diff((eigenvalues < 0).sum(axis=0)))[0] + 1  # find the indices where the number of negative eigenvalues changes
-    index_segments = [list(range(i, j)) for i, j in zip([0] + list(num_neg_eigval_changes), list(num_neg_eigval_changes) + [eigenvalues.shape[1]])]  # create a list of indices for each segment with a different number of negative eigenvalues
-    plot_index_segments = [indices + [indices[-1] + 1] for indices in index_segments[:-1]]  # add the first point of the next segment to the last point of each segment for plotting purposes, so that the overall path appears continuous
-    plot_index_segments.append(index_segments[-1])  # add the last segment
-    num_neg_eigvals = [np.sum(eigenvalues[:, segment[0]] < 0, axis=0) for segment in index_segments]  # count the number of negative eigenvalues for each segment
+    # Group the equilibrium points into segments with a constant number of negative eigenvalues
+    change_negative_eigenvalues_indices = np.where(np.diff((eigenvalues < 0).sum(axis=0)))[0] + 1  # find the indices where the number of negative eigenvalues changes
+    segments_indices_list = [list(range(i, j)) for i, j in zip(
+        [0] + list(change_negative_eigenvalues_indices), list(change_negative_eigenvalues_indices) + [eigenvalues.shape[1]])]  # create a list of arrays including the indices of each segment
+    
+    # Count the number of negative eigenvalues for each segment
+    no_neg_eigvals = [np.sum(eigenvalues[:, segment[0]] < 0, axis=0) for segment in segments_indices_list]
+    
+    # Create a list of arrays with the plotting indices for each segment
+    plot_indices_list = [indices + [indices[-1] + 1] for indices in segments_indices_list[:-1]]  # the first point of the next segment is added to each segment to make the path appear continuous
+    plot_indices_list.append(segments_indices_list[-1])  # add the last segment to the plotting list
     
     # Plot the first segment
-    actual_neg_eigenvalues = num_neg_eigvals[0]  # get the number of negative eigenvalues at the first equilibrium point
-    if actual_neg_eigenvalues == 0:  # plot with a solid line if segment is stable
-        axes.plot3D(displacements1[plot_index_segments[0]],
-                    displacements2[plot_index_segments[0]],
-                    loads[plot_index_segments[0]], marker + '-', color=color)
-    else:  # plot with a dashed red line if segment is unstable
-        axes.plot3D(displacements1[plot_index_segments[0]],
-                    displacements2[plot_index_segments[0]],
-                    loads[plot_index_segments[0]], marker + '--', color=UNSTABLE_COLOR)
+    actual_neg_eigenvalues = no_neg_eigvals[0]  # get the number of negative eigenvalues at the first equilibrium point
+    
+    # Plot with a solid line if segment is stable
+    if actual_neg_eigenvalues == 0:
+        axes.plot3D(displacements1[plot_indices_list[0]],
+                    displacements2[plot_indices_list[0]],
+                    loads[plot_indices_list[0]], marker + '-', color=color)
+    
+    # Plot with a dashed red line if segment is unstable
+    else:
+        axes.plot3D(displacements1[plot_indices_list[0]],
+                    displacements2[plot_indices_list[0]],
+                    loads[plot_indices_list[0]], marker + '--', color=UNSTABLE_COLOR)
     
     # Plot the remaining segments
-    lowest_eigenvalue_row = eigenvalues[0]  # get the lowest eigenvalue at each equilibrium point
-    for count, current_segment_indices in enumerate(index_segments[1:]):  # loop through the remaining segments
-        last_segment_indices = index_segments[count]
-        delta_num_neg_eigvals = num_neg_eigvals[count + 1] - num_neg_eigvals[count]  # get the change in the number of negative eigenvalues
-        lowest_new_eigenvalue = lowest_eigenvalue_row[current_segment_indices[0]]  # get the lowest eigenvalue at the first equilibrium point of the segment
-        predicted_eigenvalue = lowest_eigenvalue_row[last_segment_indices[-1]] + np.diff(lowest_eigenvalue_row[last_segment_indices[-1] - 1:last_segment_indices[-1] + 1])  # predict the lowest eigenvalue at the first equilibrium point of the next segment using the last two points of the previous segment
-        eigenvalue_abs_diffs = np.abs(np.diff(lowest_eigenvalue_row[last_segment_indices + current_segment_indices]))  # calculate the absolute differences in the lowest eigenvalue during the previous and the current segment
-        tolerance = np.mean(eigenvalue_abs_diffs) + np.std(eigenvalue_abs_diffs)*7  # set the tolerance as average change plus seven times the standard deviation
-        if np.abs(lowest_new_eigenvalue - predicted_eigenvalue) <= tolerance:  # if the lowest eigenvalue at the first equilibrium point of the segment is close to the predicted value update the actual number of negative eigenvalues
+    lowest_eigenvalue_row = eigenvalues[0]  # get array of lowest eigenvalues across all equilibrium points
+    for count, current_segment in enumerate(segments_indices_list[1:]):  # loop through the remaining segments
+        last_segment = segments_indices_list[count]  # store array of indices of the last segment
+        
+        # Predict the the lowest eigenvalue at the first equilibrium point of the current segment based on the last two points of the last segment
+        lowest_new_eigenvalue = lowest_eigenvalue_row[current_segment[0]]  # get the lowest eigenvalue at the first equilibrium point of the segment
+        last_segment_end_index = last_segment[-1]  # get the index of the last equilibrium point of the last segment
+        predicted_eigenvalue = lowest_eigenvalue_row[last_segment_end_index] +\
+            np.diff(lowest_eigenvalue_row[last_segment_end_index - 1:last_segment_end_index + 1])  # predict the lowest eigenvalue at the first equilibrium point of the current segment by linearly extrapolating the last two points
+        tolerance = np.std(np.concatenate(
+            (np.abs(np.diff(lowest_eigenvalue_row[last_segment])), np.abs(np.diff(lowest_eigenvalue_row[current_segment])))))*3  # set the tolerance as three times the standard deviation of the absolute value of the change in the lowest eigenvalue during last and current segment
+        
+        # If the new lowest eigenvalue is close to the predicted value update the actual number of negative eigenvalues
+        if np.abs(lowest_new_eigenvalue - predicted_eigenvalue) <= tolerance:
+            delta_num_neg_eigvals = no_neg_eigvals[count + 1] - no_neg_eigvals[count]  # get the change in the number of negative eigenvalues
             actual_neg_eigenvalues += delta_num_neg_eigvals
-        if actual_neg_eigenvalues == 0:  # plot with a solid line if segment is stable
-            axes.plot3D(displacements1[plot_index_segments[count + 1]],
-                        displacements2[plot_index_segments[count + 1]],
-                        loads[plot_index_segments[count + 1]], marker + '-', color=color)
-        else:  # plot with a dashed red line if segment is unstable
-            axes.plot3D(displacements1[plot_index_segments[count + 1]],
-                        displacements2[plot_index_segments[count + 1]],
-                        loads[plot_index_segments[count + 1]], marker + '--', color=UNSTABLE_COLOR)
+            
+        # Plot with a solid line if segment is stable
+        if actual_neg_eigenvalues == 0:
+            axes.plot3D(displacements1[plot_indices_list[count + 1]],
+                        displacements2[plot_indices_list[count + 1]],
+                        loads[plot_indices_list[count + 1]], marker + '-', color=color)
+            
+        # Plot with a dashed red line if segment is unstable
+        else:
+            axes.plot3D(displacements1[plot_indices_list[count + 1]],
+                        displacements2[plot_indices_list[count + 1]],
+                        loads[plot_indices_list[count + 1]], marker + '--', color=UNSTABLE_COLOR)
             
 
 def plot_eigenvalue_diagram(axes: Axes, loads: ndarray, eigenvalues: ndarray):
