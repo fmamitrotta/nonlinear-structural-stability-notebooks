@@ -1,0 +1,169 @@
+MSC Nastran V2021.4 (Intel Windows 10 Enterprise 6.2 9200) Control File: 
+----------------------------------------------------------------- 
+$ sysfield=SCR*(RAW=YES,BUFFIO=YES,wnum=16,wsize=16mb) $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[2])
+$ sysfield=DBALL(RAW=YES,BUFFIO=YES,wnum=16,wsize=16mb) $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[3])
+Nastran BUFFSIZE=32769 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[6])
+JID='c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/20_two-variables_optimization_of_the_crm-like_box_beam/sol_105_initial_structure_48300_elements.bdf'
+OUT='./sol_105_initial_structure_48300_elements'
+MEM=19599MB      $ 
+MACH='Intel'
+OPER='Windows 10 Enterprise'
+OSV='6.2 9200'
+MODEL='Intel(R) Core(TM) i7-8700 CPU  (IT076000)'
+NPROC='12'
+CONFIG=6
+NPROC=12
+symbol=DELDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/del' $(program default)
+symbol=DEMODIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/demo' $(program default)
+symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[12])
+symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
+symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
+symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
+SDIR='c:/temp/scratch/sol_105_initial_structure_48300_elements.T24912_22'
+DBS='c:/temp/scratch/sol_105_initial_structure_48300_elements.T24912_22'
+SCR='yes'
+SMEM=100
+BPOOL=15gb
+DMPMEM=estimate
+NEWDEL='c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/sss'
+DEL='MSCDEF'
+SPOTWELD=''
+DML=MSCDEF
+SDL=MSCDEF
+AUTH='27500@ls-msc.bristol.ac.uk'
+AUTHQUE=20
+MSGCAT='c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/analysis.msg'
+MSGDEST='f06'
+----------------------------------------------------------------- 
+MSC_ISHELLPATH=C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\actran\win64\Actran_2022.0.2\bin;C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\nast; 
+MSC_JIDPATH= 
+PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Scripts;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files\Tecplot\Tecplot 360 EX 2018 R1\bin;C:\Program Files\Microsoft MPI\Bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\dotnet;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Program Files\PuTTY;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;C:\Users\qa21944\AppData\Local\Programs\Git\cmd;C:\Users\qa21944\Anaconda3\Scripts;C:\Users\qa21944\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\qa21944\AppData\Local\Programs\MiKTeX\miktex\bin\x64;.;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
+SCA_SERVICE_CATALOG=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res\SCAServiceCatalog.xml 
+SCA_RESOURCE_DIR=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res 
+Cmd Line:    C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\win64i8\nastran.exe c:\Users\qa21944\Github\phd-jupyter-notebooks\notebooks\analyses\20_Two-variables_Optimization_of_the_CRM-like_Box_Beam\sol_105_initial_structure_48300_elements.bdf scr=yes bat=no old=no news=no notify=no 
+Current Dir: c:\Users\qa21944\Github\phd-jupyter-notebooks\notebooks\analyses\20_Two-variables_Optimization_of_the_CRM-like_Box_Beam 
+Time Cmd:    c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msctime 
+Executable:  c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\analysis.exe 
+Arch= Kywd:  [Not specified]  
+MSC_MSG:     stderr  
+FPE:         yes  
+----------------------------------------------------------------- 
+Current resource limits:
+ Physical memory:                    65332 MB
+ Physical memory available:          22073 MB
+ Paging file size:                   91278 MB
+ Paging file size available:         15515 MB
+ Virtual memory:                 134217727 MB
+ Virtual memory available:       134213510 MB
+----------------------------------------------------------------- 
+System configuration:
+ Hostname:         IT076000.users.bris.ac.uk
+ Architecture:     win64i8
+ Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
+ Model:            Intel(R) Core(TM) i7-8700 CPU 
+ Clock freq.:      3740 MHz
+ Number of CPUs:   12
+ Executable:       standard
+ Raw model ID:     6
+ Config number:    6
+ Physical memory:  65332 MB
+ Virtual memory:   91278 MB
+ Numeric format:   64-bit little-endian IEEE.
+ Bytes per word:   8
+ Disk block size:  512 bytes (64 words)
+ Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
+                   <ccs_cmd> (Windows CCS nodes)
+----------------------------------------------------------------- 
+MSC Nastran started  Thu May  9 18:49:27 GST 2024 
+ 18:49:29  Beginning Analysis
+SCA Kernel 25.4.832451 successfully initialized
+BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
+BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
+BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_intel_thread.dll" has been loaded.
+BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
+BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
+
+ 18:49:34  MSC Authorization Information - System Attributes (1004, 0)
+ 18:49:34  -----------------------------------------------------------
+  Date:          Thu May  9 18:49:34 2024
+  MSC Id:        6c2b59f132f0 (ethernet) (Intel)
+  Hostname:      IT076000 (user qa21944, display IT076000)
+  License files: 27500@ls-msc.bristol.ac.uk
+  CEID:          11220189-885444G3
+  User:          qa21944
+  Display:       IT076000
+  LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
+
+  * * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * * *
+  * *                                 * *
+  * *   MSC Customer Entitlement ID   * *
+  * *        11220189-885444G3        * *
+  * *                                 * *
+  * * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * * *
+
+ 18:49:34  MSC Authorization Information - Checkout Successful (1016, 0)
+ 18:49:34  -------------------------------------------------------------
+ 18:49:34  Acquired 1 license for MSC Nastran from license server on host ls-msc.bristol.ac.uk
+
+
+Beginning bulk data processing using the IFPStar component.
+For more information on IFPStar, please see KB article KB8019200
+on our support pages, at http://simcompanion.mscsoftware.com.
+
+ 18:49:35  191534 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/20_two-variables_optimization_of_the_crm-like_box_beam/sol_105_initial_structure_48300_elements.bdf"
+
+Processing of bulk data entries is complete.
+
+ 18:49:37  Finite element model generation started.
+ 18:49:38  Finite element model generated 284208 degrees of freedom.
+ 18:49:38  Finite element model generation successfully completed.
+ 18:49:38  Application of Loads and Boundary Conditions to the finite element model started.
+ 18:49:38  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 18:49:38  Application of Loads and Boundary Conditions to the finite element model started.
+ 18:49:38  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 18:49:43  Solution of the system equations for linear statics started.
+ 18:49:43  Solution of the system equations for linear statics successfully completed.
+ 18:49:44  Solution of the system equations for normal modes started.
+ 18:50:25  Solution of the system equations for normal modes successfully completed.
+ ================================================== 
+ Warning/Fatal Message Summary           Occurrence
+     SYSTEM WARNING MESSAGE     1148.0          1 
+ ================================================== 
+ 18:50:26  19 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/20_two-variables_optimization_of_the_crm-like_box_beam/sol_105_initial_structure_48300_elements.bdf"
+ 18:50:26  NSEXIT: EXIT(0)
+ 18:50:26  Analysis complete  0
+Real:       58.736 seconds ( 0:00:58.736)
+User:       50.140 seconds ( 0:00:50.140)
+Sys:         2.062 seconds ( 0:00:02.062)
+ ==================================================
+ OS:                           6.2
+ OEM ID:                       9
+ Model:                        Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz  
+ Number of processors:         12
+ Page size:                    4096
+ Processor type:               8664
+ Minimum application address:  10000
+ Maximum application address:  fffeffff
+ Active processor mask:        4095
+ Nsocket:                      1
+ Ncore:                        6  ( 1 X 6 )
+ HyperThreading:               On
+ Ram:                          65332 Mb
+ ==================================================
+ Time Summary                 CPU       Wall   ( Time in Seconds )
+ Input File                   1.6          2 
+ Solver                       4.6          5 
+ Eigenvalue                  39.9         41 
+ Miscellaneous                5.1          4 
+ -------------------------------------------
+ Total:                      51.1         52 
+ ==================================================
+ Consider using SOLVE=AUTO if you have not.
+ Consider using SMP = 12 ( The number of cores per socket )
+ =====================================================
+ Detailed performance information can be found in the 
+ "MSC Nastran High Performance Computing User's Guide"
+ =====================================================
+MSC Nastran finished Thu May  9 18:50:27 GST 2024 

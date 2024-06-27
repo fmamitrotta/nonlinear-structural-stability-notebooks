@@ -1,0 +1,200 @@
+MSC Nastran V2023.4 (Intel Linux 3.10.0-1160.95.1.el7.x86_64) Control File:
+-----------------------------------------------------------------
+Nastran BUFFSIZE=65537 $(/mnt/storage/software/apps/nastran_2023.4/conf/nast20234rc[4])
+$ $(/mnt/storage/software/apps/nastran_2023.4/conf/nast20234rc[6])
+$ $(/mnt/storage/software/apps/nastran_2023.4/conf/nast20234rc[14])
+$ End $(/mnt/storage/software/apps/nastran_2023.4/conf/nast20234rc[16])
+Nastran PARALLEL=4 $([3])
+JID=20_Two-variables_Optimization_of_the_CRM-like_Box_Beam/sol_106_nonlinear_optimization_48300_elements.bdf
+OUT=./sol_106_nonlinear_optimization_48300_elements
+PWDDIR=/user/work/qa21944
+MEM=460800MB      $ 
+PMEM=0+
+MACH='Intel'
+OPER='Linux'
+OSV='3.10.0-1160.95.1.el7.x86_64'
+MODEL='Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz  (highmem14)'
+CONFIG=186640
+NPROC=28
+symbol=DELDIR='/mnt/storage/software/apps/nastran_2023.4/msc20234/nast/del' $(program default)
+symbol=DEMODIR='/mnt/storage/software/apps/nastran_2023.4/msc20234/nast/demo' $(program default)
+symbol=SSSALTERDIR='/mnt/storage/software/apps/nastran_2023.4/msc20234/nast/sssalter' $(program default)
+symbol=TPLDIR='/mnt/storage/software/apps/nastran_2023.4/msc20234/nast/tpl' $(program default)
+SDIR=/user/work/qa21944/SCRATCH/sol_106_nonlinear_optimization_48300_elements.T31394_48
+DBS=/user/work/qa21944/SCRATCH/sol_106_nonlinear_optimization_48300_elements.T31394_48
+SCR=yes
+SMEM=100
+BPOOL=115200.0MB
+DMPMEM=estimate
+NEWDEL='/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/SSS'
+DEL='MSCDEF'
+SPOTWELD=''
+UDR=''
+DML=MSCDEF
+SDL=MSCDEF
+AUTH=27500@ls-msc.bristol.ac.uk
+AUTHQUE=20
+MSGCAT='/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/analysis.msg'
+MSGDEST='f06'
+NEWS=/mnt/storage/software/apps/nastran_2023.4/msc20234/nast/news.txt
+-----------------------------------------------------------------
+MSC_ISHELLPATH=/mnt/storage/software/apps/nastran_2023.4/msc20234/actran/linux64/Actran_2023.2/bin:/mnt/storage/software/apps/nastran_2023.4/msc20234/nast:
+MSC_JIDPATH=
+PATH=/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8:/opt/intel/oneapi/compiler/2022.1.0/linux/bin/intel64:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/intel/libfabric/bin:/mnt/storage/software/apps/nastran_2023.4/SDK/Tools:/mnt/storage/software/apps/nastran_2023.4/bin:/mnt/storage/apps/bc4/slurm/23.11.0/bin:/mnt/storage/apps/bc4/slurm/23.11.0/sbin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin:/user/home/qa21944/.local/bin:/user/home/qa21944/bin
+LD_LIBRARY_PATH=/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/lib:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/nvidia:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/lib:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/intel/lib64/release:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/intel/lib64/:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/intel/libfabric/lib:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/intel/libfabric/lib:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/lib:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/nCode/bin:/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/nvidia:/mnt/storage/apps/bc4/slurm/23.11.0/lib
+SCA_SERVICE_CATALOG=/mnt/storage/software/apps/nastran_2023.4/msc20234/res/SCAServiceCatalog.xml
+SCA_RESOURCE_DIR=/mnt/storage/software/apps/nastran_2023.4/msc20234/res
+Cmd Line:    /mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/nastran jid=20_Two-variables_Optimization_of_the_CRM-like_Box_Beam/sol_106_nonlinear_optimization_48300_elements.bdf memorymax=450gb smp=4 scratch=yes bat=no sdir=/user/work/qa21944/SCRATCH mode=i8
+Current Dir: /user/work/qa21944
+Time Cmd:    time 
+Executable:  /mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/analysis
+Arch= Kywd:  [Not specified]
+MSC_MSG:     stderr
+-----------------------------------------------------------------
+Current resource limits:
+ CPU time:                       unlimited
+ Virtual address space:          unlimited
+ Working set size:               503316480 KB (hard limit: 503316480 KB)
+ Data segment size:              unlimited
+ Stack size:                     unlimited
+ Number of open files:              100000 (hard limit: 100000)
+ File size:                      unlimited
+ Core dump file size:                    0 MB
+-----------------------------------------------------------------
+System configuration:
+ Hostname:         highmem14
+ Architecture:     linux64i8
+ Platform:         Intel Linux 3.10.0-1160.95.1.el7.x86_64
+ Model:            Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz 
+ CPU:              GenuineIntel 
+ Clock freq.:      2400 MHz
+ Number of CPUs:   28
+ Executable:       standard
+ Raw model ID:     8664
+ Config number:    186640
+ Physical memory:  515309 MB
+ Numeric format:   64-bit little-endian IEEE.
+ Bytes per word:   8
+ Disk block size:  512 bytes (64 words)
+ Remote shell cmd: /mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/MSCRmtCmd (Windows, UNIX)
+                   /usr/bin/ssh (UNIX)
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+MSC Nastran started Wed May  8 11:06:48 BST 2024
+ 11:06:51  Beginning Analysis
+MM_CORE:initialize umpire 483183820840(PMEM in OC, nolimit)
+MM_CORE:constructing an OCWrapper 0x1cbd6210
+SCA Kernel 29.0.931179 successfully initialized
+BLAS/LAPACK shared object "/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/libmkl_core.so" has been loaded.
+BLAS/LAPACK shared object "/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/libmkl_intel_thread.so" has been loaded.
+BLAS/LAPACK shared object "/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/libmkl_intel_ilp64.so" has been loaded.
+BLAS/LAPACK shared object "/mnt/storage/software/apps/nastran_2023.4/msc20234/linux64i8/libMSCblas.so" has been loaded.
+ ================================================== 
+ MKL Information: 
+ Major version:           2022
+ Minor version:           0
+ Update version:          1
+ Processor optimization:  Intel(R) Advanced Vector Extensions 2 (Intel(R) AVX2) enabled processors
+ ================================================== 
+
+ 11:06:53  MSC Authorization Information - System Attributes (1004, 0)
+ 11:06:53  -----------------------------------------------------------
+  Date:          Wed May  8 11:06:53 2024
+  MSC Id:        80000002fe80 (ethernet) (Linux)
+  Hostname:      highmem14.bc4.acrc.priv (user qa21944, display /dev/tty)
+  License files: 27500@ls-msc.bristol.ac.uk
+  CEID:          11220189-885444G3
+  User:          qa21944
+  Display:       /dev/tty
+  LAPI Version:  LAPI 11.0.1 (CL 920189) (FLEXlm 11.16.3.0)
+
+  * * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * * *
+  * *                                 * *
+  * *   MSC Customer Entitlement ID   * *
+  * *        11220189-885444G3        * *
+  * *                                 * *
+  * * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * * *
+
+ 11:06:53  MSC Authorization Information - Checkout Successful (1016, 0)
+ 11:06:53  -------------------------------------------------------------
+ 11:06:53  Acquired 1 license for MSC Nastran from license server on host ls-msc.bristol.ac.uk
+
+ 11:06:53  Reading INCLUDE file "./kllrh_eigenvalues_nobuckle.dmap"
+ 11:06:53  67 records read from INCLUDE file "./kllrh_eigenvalues_nobuckle.dmap"
+
+ 11:06:54  MSC Authorization Information - Checkout Successful (1016, 0)
+ 11:06:54  -------------------------------------------------------------
+ 11:06:54  Acquired 1 license for MSC Nastran Nonlinear from license server on host ls-msc.bristol.ac.uk
+
+
+ 11:06:54  MSC Authorization Information - Checkout Successful (1016, 0)
+ 11:06:54  -------------------------------------------------------------
+ 11:06:54  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ls-msc.bristol.ac.uk
+
+
+Beginning bulk data processing using the IFPStar component.
+For more information on IFPStar, please see KB article KB8019200
+on our support pages, at http://simcompanion.hexagon.com.
+
+ 11:06:57  Reading INCLUDE file "./kllrh_eigenvalues_nobuckle.dmap"
+ 11:06:57  67 records read from INCLUDE file "./kllrh_eigenvalues_nobuckle.dmap"
+ 11:06:58  191549 records read from JID file "20_Two-variables_Optimization_of_the_CRM-like_Box_Beam/sol_106_nonlinear_optimization_48300_elements.bdf"
+ 11:06:58  A total of 191616 records were read from 2 files.
+
+Processing of bulk data entries is complete.
+
+ 11:06:59  Finite element model generation started.
+ 11:07:00  Finite element model generated 284208 degrees of freedom.
+ 11:07:00  Finite element model generation successfully completed.
+ 11:07:00  Application of Loads and Boundary Conditions to the finite element model started.
+ 11:07:00  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+
+ 11:07:02  MSC Authorization Information - Checkout Successful (1016, 0)
+ 11:07:02  -------------------------------------------------------------
+ 11:07:02  Acquired 4 licenses for MSC Nastran Parallel from license server on host ls-msc.bristol.ac.uk
+
+ ================================================== 
+ Warning/Fatal Message Summary           Occurrence
+       USER WARNING MESSAGE      316.2          1 
+       USER WARNING MESSAGE     4698.0          4 
+     SYSTEM WARNING MESSAGE     1148.0          1 
+ ================================================== 
+ 20:41:08  20 records read from JID file "20_Two-variables_Optimization_of_the_CRM-like_Box_Beam/sol_106_nonlinear_optimization_48300_elements.bdf"
+ 20:41:08  A total of 87 records were read from 2 files.
+ 20:41:08  NSEXIT: EXIT(0)
+ 20:41:08  Analysis complete  0
+TBA free any memory allocation, rhs or nmap or so forth.
+MumpsSolver::Cleanup
+75301.16user 5876.33system 9:34:20elapsed 235%CPU (0avgtext+0avgdata 171801588maxresident)k
+0inputs+0outputs (0major+13409248minor)pagefaults 0swaps
+ ==================================================
+ OS:              CentOS Linux release 7.9.2009 (Core)
+ Model:           Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz
+ Nsocket:         2
+ Ncore:           28  ( 2 X 14 )
+ HyperThreading:  Off
+ Cache:           35840 KB
+ Special:         avx2 
+ GPU:             YES, use /usr/bin/nvidia-smi to determine type
+ Ram:             515309 Mb	Free: 483873 Mb
+ load average ( 15 minute ):  2.200000
+ ==================================================
+ Time Summary                 CPU       Wall   ( Time in Seconds )
+ Input File                   1.1          3 
+ Stiffness Generation      8192.6       5277 
+ Solver                   41490.5       7633 
+ Eigenvalue               62189.8      10486 
+ Miscellaneous            15296.0      11055 
+ -------------------------------------------
+ Total:                  127170.0      34454 
+ ==================================================
+ Consider using SOLVE=AUTO if you have not.
+ Consider using SMP = 14 ( The number of cores per socket )
+ =====================================================
+ Detailed performance information can be found in the 
+ "MSC Nastran High Performance Computing User's Guide"
+ =====================================================
+-----------------------------------------------------------------
+MSC Nastran finished Wed May  8 20:41:08 BST 2024
