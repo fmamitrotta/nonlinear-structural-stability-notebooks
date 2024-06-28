@@ -37,7 +37,7 @@ def run_analysis(directory_path: str, bdf: BDF, filename: str, run_flag: bool = 
     bdf: BDF
         pyNastran object representing the bdf input file
     filename: str
-        name of the input file
+        name of the input file without extension
     run_flag: bool
         flag to enable or disable the actual execution of Nastran
     parallel: bool
@@ -135,8 +135,8 @@ def read_load_displacement_history_from_op2(op2: OP2, node_ids: list[int] = [1])
     displacements = {id: {} for id in node_ids}
     loads = {}
     # Iterate through the subcases found in the op2 file
-    valid_subcase_ids = [subcase_id for subcase_id in op2.load_vectors if
-                         hasattr(op2.load_vectors[subcase_id], 'lftsfqs')]
+    valid_subcase_ids = [
+        subcase_id for subcase_id in op2.load_vectors if hasattr(op2.load_vectors[subcase_id], 'lftsfqs')]
     for subcase_id in valid_subcase_ids:
         # Save load steps of current subcase
         load_steps[subcase_id] = op2.load_vectors[subcase_id].lftsfqs
