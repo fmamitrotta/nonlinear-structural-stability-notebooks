@@ -17,14 +17,46 @@ from pyNastran.bdf.bdf import BDF  # pyNastran BDF class
 from pyNastran.bdf.mesh_utils.mass_properties import mass_properties  # pyNastran function to calculate mass properties
 from resources import pynastran_utils  # custom module to deal with pyNastran objects
 import os  # import os module to interact with the operating system
-from pyNastran.op2.op2 import read_op2  # import function to read op2 file
+from pyNastran.op2.op2 import OP2, read_op2  # import OP2 object and function to read op2 file
 import matplotlib.pyplot as plt  # import matplotlib library for plotting
 
 
 # Constants for Nastran analysis subcase ids
 FIRST_SUBCASE_ID = 1  # id of the first subcase, used in both SOL 105 and SOL 106 analyses
 SECOND_SUBCASE_ID = 2  # id of the second subcase, specifically for SOL 105 analyses
- 
+
+
+def find_linear_stresses(op2:OP2) -> ndarray:
+    """
+    Extracts linear stresses from the OP2 object.
+
+    Parameters
+    ----------
+    op2 : OP2
+        OP2 object containing the analysis results.
+
+    Returns
+    -------
+    ndarray
+        Array of linear stresses for each element in the model.
+    """
+    stress_list = []
+    
+    if op2.op2_results.stress.cbar_stress:
+        sa_max_array = op2.op2_results.stress.cbar_stress[FIRST_SUBCASE_ID].data[0, :, 5]  # maximum combined bending and axial stress at end A
+        sa_min_array = op2.op2_results.stress.cbar_stress[FIRST_SUBCASE_ID].data[0, :, 6]  # minimum combined bending and axial stress at end A
+        sb_max_array = op2.op2_results.stress.cbar_stress[FIRST_SUBCASE_ID].data[0, :, 12]  # maximum combined bending and axial stress at end A
+        sb_min_array = op2.op2_results.stress.cbar_stress[FIRST_SUBCASE_ID].data[0, :, 13]  # minimum combined bending and axial stress at end A
+        von_mises_stress_a = np.sqrt(sa_max_array**2 + sa_min_array**2 - sa_max_array*sa_min_array)  # von Mises stress at end A
+        von_mises_stress_b = np.sqrt(sb_max_array**2 + sb_min_array**2 - sb_max_array*sb_min_array)  # von Mises stress at end B
+        stress_list.append(np.concatenate((von_mises_stress_a, von_mises_stress_b)))  # append von Mises stresses for CBAR elements
+    
+    if op2.op2_results.stress.cquad4_stress:
+        stress_list.append(op2.op2_results.stress.cquad4_stress[FIRST_SUBCASE_ID].data[0, :, 7])  # von Mises stress is in the 8th row of the stress array
+    
+    stress_array = np.concatenate(stress_list)  # concatenate stress arrays for all element types
+    return stress_array
+
 
 def compute_ks_function(g:ndarray, rho:float=100., upper:float=0., lower_flag:bool=False):
     """
@@ -152,12 +184,16 @@ class NastranSolver(om.ExplicitComponent):
         analysis_directory_path = self.options['analysis_directory_path']
         input_name = self.options['input_name']
         run_flag = self.options['run_flag']
-        # Assign thicknesses to PSHELL cards
+        # Assign thickness values to the property cards
         t_array = inputs['t_val']
         for i, pid in enumerate(bdf.properties):
-            bdf.properties[pid].t = t_array[0, i]
-            bdf.properties[pid].z1 = -t_array[0, i]/2
-            bdf.properties[pid].z2 = t_array[0, i]/2
+            if bdf.properties[pid].type == 'PSHELL':
+                bdf.properties[pid].t = t_array[0, i]
+                bdf.properties[pid].z1 = -t_array[0, i]/2
+                bdf.properties[pid].z2 = t_array[0, i]/2
+            elif bdf.properties[pid].type == 'PBARL':
+                bdf.properties[pid].dim[2] = t_array[0, i]
+                bdf.properties[pid].dim[3] = t_array[0, i]
         # Calculate mass
         outputs['mass'] = mass_properties(bdf)[0]
         # Run analysis
@@ -169,7 +205,7 @@ class NastranSolver(om.ExplicitComponent):
         # Extract results based on analysis type
         if bdf.sol == 105:
             # Read von mises stresses and aggregate with KS function
-            stresses = op2.op2_results.stress.cquad4_stress[FIRST_SUBCASE_ID].data[0, :, 7]  # von Mises stress is in the 8th row of the stress array
+            stresses = find_linear_stresses(op2)
             outputs['ks_stress'] = compute_ks_function(stresses, upper=sigma_y)  # von Mises stress must be less than yield stress for the material not to yield
             # Read buckling load factors and aggregate with KS function
             outputs['ks_buckling'] = compute_ks_function(np.array(op2.eigenvectors[SECOND_SUBCASE_ID].eigrs),
@@ -275,7 +311,7 @@ def plot_optimization_history(recorder_filepath:str):
     plt.show()
     
     # Print final values of the optimization variables and objectives
-    print("Final values:")
+    print("Design variables, constraints and objective at last iteration:")
     for key in histories:
         print(f"- {key}: {histories[key][-1]}")
     
