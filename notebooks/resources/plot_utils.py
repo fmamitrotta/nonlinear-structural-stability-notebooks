@@ -270,12 +270,13 @@ def plot_displacements(op2: OP2, displacement_data: ndarray, axes: Axes3D = None
     displacement_data[:, :3] = displacement_data[:, :3] * displacement_unit_scale_factor  # apply unit conversion to displacements
     deformed_coordinates_array = undeformed_coordinates_array + displacement_data[:, :3] * displacement_amplification_factor  # apply amplification factor to displacements and calculate deformed coordinates
     
-    # Find nodes' indices for each CQUAD4 element
-    cquad4_elements_nodes_indices = np.array([
-        [node_id_to_index[node_id] for node_id in element.node_ids] for element in op2.elements.values() if element.type == 'CQUAD4'])
+    # Find nodes' indices for each shell element (only CQUAD4 and CTRIA3 elements are considered)
+    shell_elements_nodes_indices = np.array([
+        [node_id_to_index[node_id] for node_id in element.node_ids] for element in op2.elements.values() if
+        element.type in ['CTRIA3', 'CQUAD4', 'CTRIAR', 'CQUADR']])
     
     # Find vertices' coordinates for Poly3DCollection
-    vertices = deformed_coordinates_array[cquad4_elements_nodes_indices]
+    vertices = deformed_coordinates_array[shell_elements_nodes_indices]
     
     # Create Poly3DCollection
     pc = Poly3DCollection(vertices, linewidths=.05, edgecolor='k')
@@ -292,7 +293,7 @@ def plot_displacements(op2: OP2, displacement_data: ndarray, axes: Axes3D = None
             nodal_displacement_array = np.rad2deg(nodal_displacement_array)
         
     # Calculate average displacement component for each element
-    fringe_data = np.mean(nodal_displacement_array[cquad4_elements_nodes_indices], axis=1)
+    fringe_data = np.mean(nodal_displacement_array[shell_elements_nodes_indices], axis=1)
     
     # Create colormap for the scalar values of the displacement component
     scalar_to_rgba_map = ScalarMappable(cmap=colormap)
