@@ -34,7 +34,7 @@ COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']  # list with default 
 UNSTABLE_COLOR = COLORS[1]  # set red color for unstable segments
 
 
-def plot_2d_load_displacements_stability(axes: Axes, displacements: ndarray, loads: ndarray, eigenvalues: ndarray, marker: str, color: str):
+def plot_2d_load_displacements_stability(axes: Axes, displacements: ndarray, loads: ndarray, eigenvalues: ndarray, marker: str, color: str) -> int:
     """
     Plot a load-displacement diagram highlighting the stability of the equilibrium points.
 
@@ -52,12 +52,17 @@ def plot_2d_load_displacements_stability(axes: Axes, displacements: ndarray, loa
         string with the marker style for the plot
     color: str
         string with the color that will be used for the stable segments of the load-displacement curve
+    
+    Returns
+    -------
+    actual_neg_eigenvalues: int
+        integer with the number of actual negative eigenvalues at the last equilibrium point
     """
     
     # Group the equilibrium points into segments with a constant number of negative eigenvalues
-    change_negative_eigenvalues_indices = np.where(np.diff((eigenvalues < 0).sum(axis=0)))[0] + 1  # find the indices where the number of negative eigenvalues changes
+    change_no_negative_eigenvalues_indices = np.where(np.diff((eigenvalues < 0).sum(axis=0)))[0] + 1  # find the indices where the number of negative eigenvalues changes
     segments_indices_list = [list(range(i, j)) for i, j in zip(
-        [0] + list(change_negative_eigenvalues_indices), list(change_negative_eigenvalues_indices) + [eigenvalues.shape[1]])]  # create a list of arrays including the indices of each segment
+        [0] + list(change_no_negative_eigenvalues_indices), list(change_no_negative_eigenvalues_indices) + [eigenvalues.shape[1]])]  # create a list of arrays including the indices of each segment
     
     # Count the number of negative eigenvalues for each segment
     no_neg_eigvals = [np.sum(eigenvalues[:, segment[0]] < 0, axis=0) for segment in segments_indices_list]
@@ -106,6 +111,9 @@ def plot_2d_load_displacements_stability(axes: Axes, displacements: ndarray, loa
         else:
             axes.plot(
                 displacements[plot_indices_list[count + 1]], loads[plot_indices_list[count + 1]], marker + '--', color=UNSTABLE_COLOR)
+        
+    # Return current number of actual negative eigenvalues
+    return actual_neg_eigenvalues
 
 
 def plot_3d_load_displacements_stability(axes: Axes3D, displacements1: ndarray, displacements2: ndarray, loads: ndarray, eigenvalues: ndarray,
@@ -132,9 +140,9 @@ def plot_3d_load_displacements_stability(axes: Axes3D, displacements1: ndarray, 
     """
     
     # Group the equilibrium points into segments with a constant number of negative eigenvalues
-    change_negative_eigenvalues_indices = np.where(np.diff((eigenvalues < 0).sum(axis=0)))[0] + 1  # find the indices where the number of negative eigenvalues changes
+    change_no_negative_eigenvalues_indices = np.where(np.diff((eigenvalues < 0).sum(axis=0)))[0] + 1  # find the indices where the number of negative eigenvalues changes
     segments_indices_list = [list(range(i, j)) for i, j in zip(
-        [0] + list(change_negative_eigenvalues_indices), list(change_negative_eigenvalues_indices) + [eigenvalues.shape[1]])]  # create a list of arrays including the indices of each segment
+        [0] + list(change_no_negative_eigenvalues_indices), list(change_no_negative_eigenvalues_indices) + [eigenvalues.shape[1]])]  # create a list of arrays including the indices of each segment
     
     # Count the number of negative eigenvalues for each segment
     no_neg_eigvals = [np.sum(eigenvalues[:, segment[0]] < 0, axis=0) for segment in segments_indices_list]
@@ -208,10 +216,10 @@ def plot_eigenvalue_diagram(axes: Axes, loads: ndarray, eigenvalues: ndarray):
     axes.grid(True)  # add grid to the plot
     
 
-def plot_displacements(op2: OP2, displacement_data: ndarray, displacement_component: str = "magnitude",
-                       displacement_unit_scale_factor: float = 1., coordinate_unit_scale_factor:float =1.,
-                       displacement_amplification_factor: float = 1., colormap: str = "rainbow_PuRd", clim: Union[list, ndarray] = None,
-                       length_unit: str = "mm") -> Tuple[Figure, Axes3D, ScalarMappable]:
+def plot_displacements(op2: OP2, displacement_data: ndarray, axes: Axes3D = None, displacement_component: str = 'magnitude',
+                       displacement_unit_scale_factor: float = 1., coordinate_unit_scale_factor:float = 1.,
+                       displacement_amplification_factor: float = 1., colormap: str = 'rainbow_PuRd', clim: Union[list, ndarray] = None,
+                       length_unit: str = 'mm', angle_unit: str = 'rad') -> Tuple[Figure, Axes3D, ScalarMappable]:
     """
     Plot the deformed shape coloured by displacement magnitude based on input OP2 object and displacement data.
 
@@ -221,6 +229,8 @@ def plot_displacements(op2: OP2, displacement_data: ndarray, displacement_compon
         pyNastran object created reading an op2 file with the load_geometry option set to True
     displacement_data: ndarray
         array with displacement data to plot
+    axes: Axes3D
+        object of the axes where the deformed shape will be plotted
     displacement_component: str
         name of the displacement component used for the colorbar
     displacement_unit_scale_factor: float
@@ -235,78 +245,109 @@ def plot_displacements(op2: OP2, displacement_data: ndarray, displacement_compon
         colorbar values limits
     length_unit: str
         measurement unit of coordinates and displacements, used in the label of the axes
+    angle_unit: str
+        measurement unit of angles, used in the label of the colorbar when the displacement component is a rotation
 
     Returns
     -------
     fig: Figure
-        object of the plotted figure
+        object of the plot's figure
     ax: Axes3D
         object of the plot's axes
-    m: ScalarMappable
-        mappable object for the colorbar
+    scalar_to_rgba_map: ScalarMappable
+        object of the color mapping for the scalar corresponding to the displacement component
     """
-    # Extract mapping from node ids to indexes and undeformed coordinates
+    
+    # Find mapping from node ids to node indexes and extract coordinates of undeformed nodes
     node_id_to_index = {}
     undeformed_coordinates_array = np.empty((len(op2.nodes), 3))
     for node_index, (node_id, node) in enumerate(op2.nodes.items()):
         node_id_to_index[node_id] = node_index
         undeformed_coordinates_array[node_index] = node.xyz
+        
     # Apply scalings and find deformed coordinates
     undeformed_coordinates_array *= coordinate_unit_scale_factor  # apply unit conversion to undeformed coordinates
     displacement_data[:, :3] = displacement_data[:, :3] * displacement_unit_scale_factor  # apply unit conversion to displacements
     deformed_coordinates_array = undeformed_coordinates_array + displacement_data[:, :3] * displacement_amplification_factor  # apply amplification factor to displacements and calculate deformed coordinates
-    # Find node indexes for each element
-    element_node_indexes = np.array([[node_id_to_index[node_id] for node_id in element.node_ids] for element in op2.elements.values()])
-    # Find vertices coordinates for Poly3DCollection
-    vertices = deformed_coordinates_array[element_node_indexes]
+    
+    # Find nodes' indices for each shell element (only CQUAD4 and CTRIA3 elements are considered)
+    shell_elements_nodes_indices = np.array([
+        [node_id_to_index[node_id] for node_id in element.node_ids] for element in op2.elements.values() if
+        element.type in ['CTRIA3', 'CQUAD4', 'CTRIAR', 'CQUADR']])
+    
+    # Find vertices' coordinates for Poly3DCollection
+    vertices = deformed_coordinates_array[shell_elements_nodes_indices]
+    
     # Create Poly3DCollection
     pc = Poly3DCollection(vertices, linewidths=.05, edgecolor='k')
-    # Handle displacement component and calculate nodal displacement array of interest
+    
+    # Handle displacement component and extract the corresponding array of nodal displacements
     if displacement_component == 'magnitude':
         nodal_displacement_array = np.linalg.norm(displacement_data[:, :3], axis=1)  # calculate displacement magnitude
     else:
         component_dict = {'tx': 0, 'ty': 1, 'tz': 2, 'rx': 3, 'ry': 4, 'rz': 5}
         nodal_displacement_array = displacement_data[:, component_dict[displacement_component]]  # select displacement component
-    # Calculate average displacement for each element
-    fringe_data = np.mean(nodal_displacement_array[element_node_indexes], axis=1)
-    # Create colormap for the displacement magnitude
-    m = ScalarMappable(cmap=colormap)
-    m.set_array(fringe_data)
-    # Set colormap min and max values and displacement values to colors
+        
+        # Convert rotation displacements to degrees if necessary
+        if displacement_component in ['rx', 'ry', 'rz'] and angle_unit == 'deg':
+            nodal_displacement_array = np.rad2deg(nodal_displacement_array)
+        
+    # Calculate average displacement component for each element
+    fringe_data = np.mean(nodal_displacement_array[shell_elements_nodes_indices], axis=1)
+    
+    # Create colormap for the scalar values of the displacement component
+    scalar_to_rgba_map = ScalarMappable(cmap=colormap)
+    scalar_to_rgba_map.set_array(fringe_data)
+    
+    # If no color limits are provided, set them to the minimum and maximum values of the nodal displacement component
     if clim is None:
-        m.set_clim(vmin=np.amin(nodal_displacement_array), vmax=np.amax(nodal_displacement_array))
+        vmin, vmax = np.amin(nodal_displacement_array), np.amax(nodal_displacement_array)
+    # If color limits are provided, set them to the provided values
     else:
-        m.set_clim(vmin=clim[0], vmax=clim[1])
-    rgba_array = m.to_rgba(fringe_data)
-    # Color the elements' face by the average displacement of interest
+        vmin, vmax = clim
+    scalar_to_rgba_map.set_clim(vmin=vmin, vmax=vmax)
+        
+    # Map scalar values to RGBA values and set face color of Poly3DCollection
+    rgba_array = scalar_to_rgba_map.to_rgba(fringe_data)
     pc.set_facecolor([(rgb[0], rgb[1], rgb[2]) for rgb in rgba_array])
-    # Initialize figure and 3D axes
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
+    
+    # If axes object is not provided, create a new figure and axes
+    if axes is None:
+        fig = plt.figure()
+        axes = fig.add_subplot(111, projection='3d')
+    # If axes object is provided, get figure object from provided axes object
+    else:
+        fig = axes.get_figure()
+    
     # Add polygons to the plot
-    ax.add_collection3d(pc)
+    axes.add_collection3d(pc)
+    
     # Set axes label
-    ax.set_xlabel(f"$x,\,\mathrm{{{length_unit}}}$")
-    ax.set_ylabel(f"$y,\,\mathrm{{{length_unit}}}$")
-    ax.set_zlabel(f"$z,\,\mathrm{{{length_unit}}}$")
+    axes.set_xlabel(f"$x,\,\mathrm{{{length_unit}}}$")
+    axes.set_ylabel(f"$y,\,\mathrm{{{length_unit}}}$")
+    axes.set_zlabel(f"$z,\,\mathrm{{{length_unit}}}$")
+    
     # Set axes limits
     x_coords = vertices[..., 0].ravel()
     y_coords = vertices[..., 1].ravel()
     z_coords = vertices[..., 2].ravel()
-    ax.set_xlim(x_coords.min(), x_coords.max())
-    ax.set_ylim(y_coords.min(), y_coords.max())
-    ax.set_zlim(z_coords.min(), z_coords.max())
+    axes.set_xlim(x_coords.min(), x_coords.max())
+    axes.set_ylim(y_coords.min(), y_coords.max())
+    axes.set_zlim(z_coords.min(), z_coords.max())
+    
     # Set aspect ratio of the axes
-    ax.set_box_aspect([ub - lb for lb, ub in (getattr(ax, f"get_{a}lim")() for a in 'xyz')])
+    axes.set_aspect('equal', 'box')#set_box_aspect([ub - lb for lb, ub in (getattr(axes, f"get_{a}lim")() for a in 'xyz')])
+    
     # Return axes object
-    return fig, ax, m
+    return fig, axes, scalar_to_rgba_map
 
 
-def plot_buckling_mode(op2: OP2, subcase_id: Union[int, tuple], mode_number: int = 1, displacement_component: str = 'magnitude',
-                       unit_scale_factor: float = 1., displacement_amplification_factor: float = 200., colormap: str = 'rainbow_PuRd',
-                       clim: Union[list, ndarray] = None, length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
+def plot_eigenvector(op2: OP2, subcase_id: Union[int, tuple], axes: Axes3D = None, eigenvector_number: int = 1,
+                     displacement_component: str = 'magnitude', unit_scale_factor: float = 1.,
+                     displacement_amplification_factor: float = 200., colormap: str = 'rainbow_PuRd',
+                     clim: Union[list, ndarray] = None, length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
     """
-    Plot the buckling shape using the eigenvectors of the input OP2 object.
+    Plot one of the eigenvectors included in the input OP2 object.
 
     Parameters
     ----------
@@ -314,8 +355,10 @@ def plot_buckling_mode(op2: OP2, subcase_id: Union[int, tuple], mode_number: int
         pyNastran object created reading an op2 file with the load_geometry option set to True
     subcase_id: int, tuple
         key of the eigenvectors' dictionary in the OP2 object corresponding to the selected subcase
-    mode_number: int
-        number of the buckling mode to be plotted
+    axes: Axes3D
+        object of the axes where the eigenvector will be plotted
+    eigenvector_number: int
+        number of the eigenvector to be plotted
     displacement_component: str
         name of the displacement component used for the colorbar
     unit_scale_factor: float
@@ -338,16 +381,19 @@ def plot_buckling_mode(op2: OP2, subcase_id: Union[int, tuple], mode_number: int
     cbar: Colorbar
         colorbar object
     """
+    
     # Choose eigenvectors as displacement data
-    displacement_data = op2.eigenvectors[subcase_id].data[mode_number - 1, :, :]
+    displacement_data = op2.eigenvectors[subcase_id].data[eigenvector_number - 1, :, :]  # convert to 0-based index
+    
     # Call plotting function
-    fig, ax, m = plot_displacements(op2=op2, displacement_data=displacement_data.copy(),
+    fig, ax, m = plot_displacements(op2=op2, displacement_data=displacement_data.copy(), axes=axes,
                                     displacement_component=displacement_component, displacement_unit_scale_factor=1.,
                                     coordinate_unit_scale_factor=unit_scale_factor,
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
                                     clim=clim, length_unit=length_unit)
-    # Add colorbar
-    label_dict = {
+    
+    # Define dictionary for colorbar label
+    cbar_label_dict = {
         'tx': "Nondimensional $u_x$",
         'ty': "Nondimensional $u_y$",
         'tz': "Nondimensional $u_z$",
@@ -355,19 +401,24 @@ def plot_buckling_mode(op2: OP2, subcase_id: Union[int, tuple], mode_number: int
         'ry': "Nondimensional $\\theta_y$",
         'rz': "Nondimensional $\\theta_z$",
         'magnitude': "Nondimensional $\|u\|$"}
-    cbar = fig.colorbar(mappable=m, ax=ax, label=label_dict[displacement_component])
-    # Set whitespace to 0
-    fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+    
+    # Add colorbar
+    cbar = fig.colorbar(mappable=m, ax=ax, label=cbar_label_dict[displacement_component])
+    
+    # If axes object is not provided, set whitespace to 0
+    if axes is None:
+        fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+    
     # Return axes object
     return fig, ax, cbar
 
 
-def plot_static_deformation(op2: OP2, subcase_id: Union[int, tuple] = 1, load_step: int = 0,
-                            displacement_component: str = "magnitude", unit_scale_factor: float = 1.,
-                            displacement_amplification_factor:float = 1., colormap: str = "rainbow_PuRd",
-                            clim: Union[list, ndarray] = None, length_unit: str = "mm") -> Tuple[Figure, Axes3D, Colorbar]:
+def plot_deformation(op2: OP2, subcase_id: Union[int, tuple] = 1, axes: Axes3D = None, load_step: int = 0,
+                     displacement_component: str = 'magnitude', unit_scale_factor: float = 1.,
+                     displacement_amplification_factor:float = 1., colormap: str = 'rainbow_PuRd',
+                     clim: Union[list, ndarray] = None, length_unit: str = 'mm', angle_unit: str = 'rad') -> Tuple[Figure, Axes3D, Colorbar]:
     """
-    Plot the buckling shape using the eigenvectors of the input OP2 object.
+    Plot the static deformation of the input OP2 object.
 
     Parameters
     ----------
@@ -375,6 +426,8 @@ def plot_static_deformation(op2: OP2, subcase_id: Union[int, tuple] = 1, load_st
         pyNastran object created reading an op2 file with the load_geometry option set to True
     subcase_id: int, tuple
         key of the displacements' dictionary in the OP2 object corresponding to the selected subcase
+    axes: Axes3D
+        object of the axes where the static deformation will be plotted
     load_step: int
         integer representing the load step of a nonlinear or a time-dependent analysis, default is 0 so that last step
         is chosen
@@ -390,6 +443,8 @@ def plot_static_deformation(op2: OP2, subcase_id: Union[int, tuple] = 1, load_st
         colorbar values limits
     length_unit: str
         measurement unit of coordinates and displacements, used in the label of axes and colormap
+    angle_unit: str
+        measurement unit of angles, used in the label of the colorbar when the displacement component is a rotation
     
     Returns
     -------
@@ -400,26 +455,34 @@ def plot_static_deformation(op2: OP2, subcase_id: Union[int, tuple] = 1, load_st
     cbar: Colorbar
         colorbar object
     """
+    
     # Choose static displacements as displacement data
-    displacement_data = op2.displacements[subcase_id].data[load_step - 1, :, :]
+    displacement_data = op2.displacements[subcase_id].data[load_step - 1, :, :]  # convert to 0-based index
+    
     # Call plotting function
-    fig, ax, m = plot_displacements(op2=op2, displacement_data=displacement_data.copy(),
+    fig, ax, m = plot_displacements(op2=op2, displacement_data=displacement_data.copy(), axes=axes,
                                     displacement_component=displacement_component, displacement_unit_scale_factor=unit_scale_factor,
                                     coordinate_unit_scale_factor=unit_scale_factor,
                                     displacement_amplification_factor=displacement_amplification_factor, colormap=colormap,
-                                    clim=clim, length_unit=length_unit)
-    # Add colorbar
-    label_dict = {
+                                    clim=clim, length_unit=length_unit, angle_unit=angle_unit)
+    
+    # Define dictionary for colorbar label
+    cbar_label_dict = {
         'tx': f"$u_x$, {length_unit}",
         'ty': f"$u_y$, {length_unit}",
         'tz': f"$u_z$, {length_unit}",
-        'rx': "$\\theta_x,\,\mathrm{rad}$",
-        'ry': "$\\theta_y,\,\mathrm{rad}$",
-        'rz': "$\\theta_z,\,\mathrm{rad}$",
+        'rx': f"$\\theta_x,\,\mathrm{{{angle_unit}}}$",
+        'ry': f"$\\theta_y,\,\mathrm{{{angle_unit}}}$",
+        'rz': f"$\\theta_z,\,\mathrm{{{angle_unit}}}$",
         'magnitude': f"\|u\|, {length_unit}"}
-    cbar = fig.colorbar(mappable=m, ax=ax, label=label_dict[displacement_component])
-    # Set whitespace to 0
-    fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+    
+    # Add colorbar
+    cbar = fig.colorbar(mappable=m, ax=ax, label=cbar_label_dict[displacement_component])
+    
+    # If axes object is not provided, set whitespace to 0
+    if axes is None:
+        fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+    
     # Return axes object
     return fig, ax, cbar
 
@@ -457,7 +520,7 @@ def plot_max_displacement_node(axes: Axes3D, op2: OP2, subcase_id: int = 2, unit
     max_displacement_node_xyz = op2.nodes[max_displacement_node_id].xyz*unit_scale_factor + op2.eigenvectors[
         subcase_id].data[0, max_displacement_index, 0:3]*displacement_amplification_factor  # add displacement to node position and convert to m
     axes.plot(max_displacement_node_xyz[0], max_displacement_node_xyz[1], max_displacement_node_xyz[2], 'x',
-            label=f"Node {max_displacement_node_id:d} (max displacement)", zorder=4)
+              label=f"Node {max_displacement_node_id:d} (max displacement)", zorder=4)
     
     # Return node id
     return max_displacement_node_id

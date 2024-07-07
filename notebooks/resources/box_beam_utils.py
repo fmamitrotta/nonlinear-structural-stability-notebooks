@@ -215,15 +215,18 @@ def tag_points(mesh: PolyData):
     cells = mesh.faces.reshape(-1, 5)[:, 1:]  # assume quad cells
     point_indices = cells.flatten()  # flatten the cells array to get a list of point indices, repeated per cell occurrence
     cell_tags_repeated = np.repeat(mesh.cell_data['tag'], 4)  # array of the same shape as point_indices, where each cell tag is repeated for each of its points
+    
     # Step 2: Map cell tags to point tags using an indirect sorting approach
     sort_order = np.argsort(point_indices)  # get the sort order to rearrange the point indices
     sorted_point_indices = point_indices[sort_order]  # sort the point indices
     sorted_tags = cell_tags_repeated[sort_order]  # sort the cell tags in the same order
     _, boundaries_indices = np.unique(sorted_point_indices, return_index=True)  # find the boundaries between different points in the sorted point indices
+    
     # Step 3: Split the sorted tags array at these boundaries to get lists of tags for each point
     tags_split = np.split(sorted_tags, boundaries_indices[1:])  # split the sorted tags array at the boundaries to get lists of tags for each point
     point_tags_list = np.array([', '.join(tags) for tags in tags_split])  # convert each list of tags into a comma-separated string
     mesh.point_data['tags'] = point_tags_list  # apply the tags to the point_data of the mesh
+    
     
 def mesh_spars_segment(no_z_nodes, no_y_nodes, y_start, y_end, height, width):
     """
@@ -609,7 +612,8 @@ def mesh_box_beam_reinforced_with_ribs_and_stiffeners(height: float, width: floa
 
 
 def mesh_reinforced_box_beam_with_curved_skins(height: float, width: float, arc_height: float, ribs_y_coordinates: ndarray,
-                                               stiffeners_x_coordinates: ndarray, stiffeners_height: float, element_length: float) -> PolyData:
+                                               stiffeners_x_coordinates: ndarray, stiffeners_height: float, element_length: float,
+                                               explicit_stiffeners: bool = True) -> PolyData:
     """
     Creates a mesh for a box beam reinforced with ribs and stiffeners and employing curved skins. The beam is discretized into quadrilateral
     shell elements. It uses PyVista for mesh generation, handling curved surfaces with special consideration.
@@ -630,6 +634,8 @@ def mesh_reinforced_box_beam_with_curved_skins(height: float, width: float, arc_
         The height of the stiffeners.
     element_length : float
         The target length of the elements used in mesh discretization.
+    explicit_stiffeners : bool
+        A flag to indicate whether stiffeners should be explicitly modeled as shell elements or not.
 
     Returns
     -------
@@ -679,8 +685,9 @@ def mesh_reinforced_box_beam_with_curved_skins(height: float, width: float, arc_
             # Mesh segment with rib and top and bottom skins
             meshes += mesh_rib_skins_segment(x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates, no_y_nodes, no_z_nodes_spar)
             
-            # Mesh the stiffeners segment
-            meshes += mesh_stiffeners_segment(stiffeners_x_coordinates[j], y_start, y_end, z_coordinates[-1], no_y_nodes, no_z_nodes_stiffener, stiffeners_height)
+            # Mesh the stiffeners segment if explicit stiffeners are enabled
+            if explicit_stiffeners:
+                meshes += mesh_stiffeners_segment(stiffeners_x_coordinates[j], y_start, y_end, z_coordinates[-1], no_y_nodes, no_z_nodes_stiffener, stiffeners_height)
 
         # Determine the coordinates for the final top and bottom skin segments
         x_coordinates, y_coordinates_start, y_coordinates_end, z_coordinates = find_coordinates_along_arc(
@@ -704,7 +711,7 @@ def mesh_reinforced_box_beam_with_curved_skins(height: float, width: float, arc_
         # Mesh rib segment
         meshes.append(mesh_along_z_axis(x_coordinates, y_coordinates_start, z_coordinates, -z_coordinates, no_z_nodes_spar, "rib"))
     
-    # Merge all the mesh segments together
+    # Merge all the mesh segments together and return final PolyData object
     cleaned_box_beam_mesh = merge_meshes(meshes, element_length)
     return cleaned_box_beam_mesh
 
@@ -760,8 +767,8 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
     # Add CQUAD4 cards (shell elements) based on input connectivity matrix
     for count, nodes_indices in enumerate(nodes_connectivity_matrix):
         bdf.add_cquad4(eid=count + 1, pid=property_id,
-                             nids=[nodes_id_array[nodes_indices[0]], nodes_id_array[nodes_indices[1]],
-                                   nodes_id_array[nodes_indices[2]], nodes_id_array[nodes_indices[3]]])
+                       nids=[nodes_id_array[nodes_indices[0]], nodes_id_array[nodes_indices[1]],
+                             nodes_id_array[nodes_indices[2]], nodes_id_array[nodes_indices[3]]])
         
     # Add SPC1 card (single-point constraint) defining fixed boundary conditions at the root nodes
     tolerance = np.linalg.norm(bdf.nodes[2].xyz - bdf.nodes[1].xyz)/100
@@ -791,9 +798,9 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
     return bdf
 
 
-def define_property_patches(bdf: BDF, ribs_y_locations: ndarray, stiffeners_x_locations: ndarray):
+def define_property_segments(bdf: BDF, ribs_y_locations: ndarray):
     """
-    Defines the property cards of the design patches of the box beam model based on the input locations of the ribs.
+    Defines the property cards of the design segments of the box beam model based on the input locations of the ribs.
 
     Parameters
     ----------
@@ -801,55 +808,216 @@ def define_property_patches(bdf: BDF, ribs_y_locations: ndarray, stiffeners_x_lo
         pyNastran object representing the bdf input of the box beam model
     ribs_y_locations: ndarray
         y-coordinates of the ribs
-    stiffeners_x_locations: ndarray
-        x-coordinates of the stiffeners
     """
-    # Find element ids and centroid coordinates
-    element_ids = np.array(list(bdf.element_ids))
-    centroids_xyz = np.empty((len(bdf.elements), 3))
-    for count, (eid, elem) in enumerate(bdf.elements.items()):
-        centroids_xyz[count] = elem.Centroid()
-        
-    # Define tolerance to find elements inside each patch based on the distance between the first two nodes of the first element
-    tolerance = np.linalg.norm(bdf.elements[1].nodes_ref[1].xyz - bdf.elements[1].nodes_ref[0].xyz)/100
+
+    def update_element_property(elements, element_ids, new_pid):
+        """
+        Update the property ID of the specified elements.
+
+        Parameters
+        ----------
+        elements: dict
+            Dictionary of elements from the BDF object.
+        element_ids: list
+            List of element IDs to update.
+        new_pid: int
+            New property ID to assign to the elements.
+        """
+        for eid in element_ids:
+            elem = elements[eid]
+            elem.uncross_reference()
+            elem.pid = new_pid
+            elem.cross_reference(bdf)
+
+    def get_elements_in_range(element_ids, element_centroids, min_y, max_y, tolerance):
+        """
+        Get elements whose centroids fall within the specified y-coordinate range.
+
+        Parameters
+        ----------
+        element_ids: list
+            List of element IDs.
+        element_centroids: ndarray
+            Array of element centroids.
+        min_y: float
+            Minimum y-coordinate.
+        max_y: float
+            Maximum y-coordinate.
+        tolerance: float
+            Tolerance for the y-coordinate.
+
+        Returns
+        -------
+        list
+            List of element IDs within the specified range.
+        """
+        return element_ids[np.where((element_centroids[:, 1] - min_y > tolerance) & (element_centroids[:, 1] - max_y < -tolerance))[0]]
+
+    def get_elements_at_location(element_ids, element_centroids, y_location, tolerance):
+        """
+        Get elements whose centroids are within a specified tolerance of the y-coordinate.
+
+        Parameters
+        ----------
+        element_ids: list
+            List of element IDs.
+        element_centroids: ndarray
+            Array of element centroids.
+        y_location: float
+            Y-coordinate to check.
+        tolerance: float
+            Tolerance for the y-coordinate.
+
+        Returns
+        -------
+        list
+            List of element IDs within the specified tolerance.
+        """
+        return element_ids[np.where(np.abs(element_centroids[:, 1] - y_location) < tolerance)[0]]
     
-    # Find default thickness
-    rib_pid = 1  # initialize PSHELL id
-    t = bdf.properties[rib_pid].t  # find default thickness
-    
-    # Add PSHELL card for each optimization patch and group element ids of external and internal structure
-    material_id = 1  # default material id
-    internal_elements_ids = element_ids[np.where(np.abs(centroids_xyz[:, 1] - ribs_y_locations[0]) < tolerance)[0]]  # initialize both internal and external elements ids with the first rib
-    external_elements_ids = element_ids[np.where(np.abs(centroids_xyz[:, 1] - ribs_y_locations[0]) < tolerance)[0]]
-    
-    for i in range(1, len(ribs_y_locations)):  # iterate over the ribs except the first
-        # Stiffened box path
-        stiffened_box_pid = rib_pid + 1  # increment PSHELL id
-        bdf.add_pshell(pid=stiffened_box_pid, mid1=material_id, t=t, mid2=material_id, mid3=material_id)  # add PSHELL card
-        bdf.properties[stiffened_box_pid].cross_reference(bdf)  # cross-reference PSHELL card
-        stiffened_box_element_indices = np.where((centroids_xyz[:, 1] > ribs_y_locations[i - 1]) &
-                                                (centroids_xyz[:, 1] < ribs_y_locations[i]))[0]  # find indices of the elements belonging to current stiffened box patch
-        stiffened_box_element_ids = element_ids[stiffened_box_element_indices]  # find corresponding element ids
-        stiffened_box_element_centroids_xyz = centroids_xyz[stiffened_box_element_indices]  # find corresponding element centroids
-        stiffeners_boolean = np.any(np.isclose(stiffened_box_element_centroids_xyz[:, 0], stiffeners_x_locations[:, None],
-                                               atol=tolerance), axis=0)  # find boolean array of which elements belong to stiffeners
-        internal_elements_ids = np.concatenate((internal_elements_ids, stiffened_box_element_ids[stiffeners_boolean]))  # add element ids of stiffeners to internal elements ids
-        external_elements_ids = np.concatenate((external_elements_ids, stiffened_box_element_ids[~stiffeners_boolean]))  # add remaining element ids to external elements ids
-        for eid in stiffened_box_element_ids:  # iterate over element ids of current stiffened box patch
-            elem = bdf.elements[eid]  # get element object
-            elem.uncross_reference()  # uncross-reference element object
-            elem.pid = stiffened_box_pid  # update PSHELL id
-            elem.cross_reference(bdf)  # recross-reference element object
+    def add_pshell_segment(start_rib, end_rib):
+        """
+        Add a PSHELL segment for the elements between specified ribs.
+
+        Parameters
+        ----------
+        start_rib: float
+            Y-coordinate of the starting rib.
+        end_rib: float
+            Y-coordinate of the ending rib.
+        """
+        nonlocal property_id, material_id, t, cquad4_ids, cquad4_centroids, tolerance
+        property_id += 1
+        bdf.add_pshell(pid=property_id, mid1=material_id, t=t, mid2=material_id, mid3=material_id)
+        bdf.properties[property_id].cross_reference(bdf)
+        skin_elements_ids = get_elements_in_range(cquad4_ids, cquad4_centroids, start_rib, end_rib, tolerance)
+        update_element_property(elements, skin_elements_ids, property_id)
             
-        # Rib patch
-        rib_pid = stiffened_box_pid + 1  # increment PSHELL id
-        bdf.add_pshell(pid=rib_pid, mid1=material_id, t=t, mid2=material_id, mid3=material_id)  # add PSHELL card
-        bdf.properties[rib_pid].cross_reference(bdf)  # cross-reference PSHELL card
-        rib_element_ids = element_ids[np.where(np.abs(centroids_xyz[:, 1] - ribs_y_locations[i]) < tolerance)[0]]  # find element ids of current rib
-        internal_elements_ids = np.concatenate((internal_elements_ids, rib_element_ids))  # add element ids of rib to internal elements ids
-        for eid in rib_element_ids:  # iterate over element ids of current rib
-            elem = bdf.elements[eid]  # get element object
-            elem.uncross_reference()  # uncross-reference element object
-            elem.pid = rib_pid  # update PSHELL id
-            elem.cross_reference(bdf)  # recross-reference element object  # find which elements belong to stiffeners
-    external_elements_ids = np.concatenate((external_elements_ids, rib_element_ids))  # add element ids of last rib to external elements ids
+    def add_pshell_rib(rib_y):
+        """
+        Add a PSHELL segment for the elements at the specified y-coordinate.
+
+        Parameters
+        ----------
+        rib_y: float
+            Y-coordinate of the rib.
+        """
+        nonlocal property_id, material_id, t, cquad4_ids, cquad4_centroids, tolerance
+        property_id += 1
+        bdf.add_pshell(pid=property_id, mid1=material_id, t=t, mid2=material_id, mid3=material_id)
+        bdf.properties[property_id].cross_reference(bdf)
+        rib_elements_ids = get_elements_at_location(cquad4_ids, cquad4_centroids, rib_y, tolerance)
+        update_element_property(elements, rib_elements_ids, property_id)
+
+    def add_pbarl_segment(start_rib, end_rib):
+        """
+        Add a PBARL segment for stiffener elements between specified ribs.
+
+        Parameters
+        ----------
+        start_rib: float
+            Y-coordinate of the starting rib.
+        end_rib: float
+            Y-coordinate of the ending rib.
+        """
+        nonlocal property_id, material_id, h_s, t, cbar_ids, cbar_centroids, tolerance
+        property_id += 1
+        bdf.add_pbarl(pid=property_id, mid=material_id, Type="T", dim=[h_s, h_s, t, t])
+        bdf.properties[property_id].cross_reference(bdf)
+        stiffener_elements_ids = get_elements_in_range(cbar_ids, cbar_centroids, start_rib, end_rib, tolerance)
+        update_element_property(elements, stiffener_elements_ids, property_id)
+
+    # Extract elements from the BDF object
+    elements = bdf.elements
+
+    # Define tolerance for finding elements within patches
+    tolerance = np.linalg.norm(elements[1].nodes_ref[1].xyz - elements[1].nodes_ref[0].xyz) / 100
+
+    # Initialize property and material IDs, and get the default thickness
+    property_id = 1
+    material_id = 1
+    t = bdf.properties[property_id].t
+
+    # Organize elements by type and calculate their centroids
+    element_type_dict = bdf.get_elements_properties_nodes_by_element_type()
+    for etype, elist in element_type_dict.items():
+        element_type_dict[etype].append(np.array([elements[eid].Centroid() for eid in elist[0]]))
+
+    if 'CBAR' in element_type_dict:
+        # CBAR elements are present, handle them
+
+        # Increment property ID and get default stiffener height
+        property_id += 1
+        h_s = bdf.properties[property_id].dim[0]
+
+        # Extract CBAR and CQUAD4 element data
+        cbar_ids = element_type_dict['CBAR'][0]
+        cbar_centroids = element_type_dict['CBAR'][-1]
+        cquad4_ids = element_type_dict['CQUAD4'][0]
+        cquad4_centroids = element_type_dict['CQUAD4'][-1]
+
+        # Add PSHELL card for skin elements between the first two ribs
+        add_pshell_segment(ribs_y_locations[0], ribs_y_locations[1])
+        
+        # Add PSHELL card for the elements of the second rib
+        add_pshell_rib(ribs_y_locations[1])
+
+        # Loop through the remaining ribs
+        for i in range(2, len(ribs_y_locations)):
+            # Add PBARL segment between previous and current rib
+            add_pbarl_segment(ribs_y_locations[i-1], ribs_y_locations[i])
+            # Add PSHELL segment between previous and current rib
+            add_pshell_segment(ribs_y_locations[i-1], ribs_y_locations[i])
+            # Update elements at the current rib location
+            add_pshell_rib(ribs_y_locations[i])
+
+    else:
+        # Only CQUAD4 elements are present
+
+        cquad4_ids = element_type_dict['CQUAD4'][0]
+        cquad4_centroids = element_type_dict['CQUAD4'][-1]
+
+        for i in range(1, len(ribs_y_locations)):
+            # Add PSHELL segment between previous and current rib
+            add_pshell_segment(ribs_y_locations[i-1], ribs_y_locations[i])
+            # Update elements at the current rib location
+            add_pshell_rib(ribs_y_locations[i])
+
+            
+
+def add_cbar_stiffeners(bdf: BDF, mesh: PolyData, x_s_array: ndarray, h_s: float, t_s: float):
+    """
+    Adds CBAR elements to the bdf object to model the stiffeners along the box beam.
+
+    Parameters
+    ----------
+    bdf: BDF
+        pyNastran object representing the bdf input of the box beam model
+    mesh: PolyData
+        PyVista object representing the mesh of the box beam
+    x_s_array: ndarray
+        x-coordinates of the stiffeners
+    h_s: float
+        height of the stiffeners
+    t_s: float
+        thickness of the stiffeners
+    """
+    # Add PBARL card (properties of beam elements) for stiffeners
+    material_id = 1  # default material id
+    stiffener_pid = 2  # initialize PBARL id (use 2 as 1 is already used for the PSHELL card)
+    bdf.add_pbarl(pid=stiffener_pid, mid=material_id, Type="T", dim=[h_s, h_s, t_s, t_s])  # add PBARL card
+    
+    elements = bdf.elements
+    eid = len(elements)  # initialize element id
+    nodes_xyz_array = mesh.points  # get xyz coordinates of all nodes
+    tolerance = np.linalg.norm(nodes_xyz_array[1, :] - nodes_xyz_array[0, :])/100  # define tolerance to find elements inside each patch based on the distance between the first two nodes of the first element
+    orientation_vectors = [[0., 0., 1.], [0., 0., -1.]]  # define orientation vectors for the stiffeners on the top and bottom skin
+    for i, skin in enumerate(["top skin", "bottom skin"]):  # loop through top and bottom skin tags
+        skin_points_indices = np.flatnonzero(np.char.find(mesh.point_data['tags'], skin)!=-1)  # find indices of skin points by looking for the corresponding tag
+        for x_s in x_s_array:  # loop through stiffener x-coordinates
+            stiffener_points_indices = np.flatnonzero(np.isclose(nodes_xyz_array[skin_points_indices, 0], x_s, atol=tolerance))  # find indices of stiffener points by looking for the x-coordinate
+            for ga_index, gb_index in zip(stiffener_points_indices[:-1], stiffener_points_indices[1:]):  # iterate over stiffener points indices
+                eid += 1
+                bdf.add_cbar(eid=eid, pid=stiffener_pid, nids=[skin_points_indices[ga_index] + 1, skin_points_indices[gb_index] + 1],
+                             x=orientation_vectors[i], g0=None)  # add CBAR element
+                elements[eid].cross_reference(bdf)  # cross-reference CBAR element
