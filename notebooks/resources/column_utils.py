@@ -88,20 +88,20 @@ def create_base_bdf(young_modulus: float, poisson_ratio: float, density: float, 
     return bdf_input
 
 
-def plot_buckling_mode(op2_object: OP2):
+def plot_buckling_mode(op2: OP2):
     """
     Plot first buckling mode of the column.
 
     Parameters
     ----------
-    op2_object: OP2
+    op2: OP2
         object representing Nastran output created reading an op2 file with the load_geometry option set to True
     """
     # Create new figure
     fig, ax = plt.subplots()
     # Calculate coordinates of nodes in the buckling shape
-    nodes_xy_coordinates = np.vstack([op2_object.nodes[index].xyz[0:2] for index in op2_object.nodes.keys()]) + \
-                           np.squeeze([*op2_object.eigenvectors.values()][0].data[0, :, 0:2])
+    nodes_xy_coordinates = np.vstack([op2.nodes[index].xyz[0:2] for index in op2.nodes.keys()]) + \
+                           np.squeeze([*op2.eigenvectors.values()][0].data[0, :, 0:2])
     # Plot nodes
     ax.plot(nodes_xy_coordinates[:, 0], nodes_xy_coordinates[:, 1], '.-')
     # Set axes labels and grid

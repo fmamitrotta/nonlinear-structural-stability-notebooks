@@ -5,7 +5,7 @@ $ sysfield=DBALL(RAW=YES,BUFFIO=YES,wnum=16,wsize=16mb) $(c:/program files/msc.s
 Nastran BUFFSIZE=32769 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[6])
 JID='c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_tangent_stiffness_matrix.bdf'
 OUT='./euler_column_tangent_stiffness_matrix'
-MEM=16282MB      $ 
+MEM=35932MB      $ 
 MACH='Intel'
 OPER='Windows 10 Enterprise'
 OSV='6.2 9200'
@@ -15,29 +15,29 @@ CONFIG=6
 NPROC=12
 symbol=DELDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/del' $(program default)
 symbol=DEMODIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/demo' $(program default)
-symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[10])
+symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[12])
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/euler_column_tangent_stiffness_matrix.T4480_47'
-DBS='c:/temp/scratch/euler_column_tangent_stiffness_matrix.T4480_47'
+SDIR='c:/temp/scratch/euler_column_tangent_stiffness_matrix.T1588_50'
+DBS='c:/temp/scratch/euler_column_tangent_stiffness_matrix.T1588_50'
 SCR='yes'
 SMEM=100
-BPOOL=4070.5MB
+BPOOL=31gb
 DMPMEM=estimate
 NEWDEL='c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/sss'
 DEL='MSCDEF'
 SPOTWELD=''
 DML=MSCDEF
 SDL=MSCDEF
-AUTH='27500@ze-ls0.fen.bris.ac.uk'
+AUTH='27500@ls-msc.bristol.ac.uk'
 AUTHQUE=20
 MSGCAT='c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/analysis.msg'
 MSGDEST='f06'
 ----------------------------------------------------------------- 
 MSC_ISHELLPATH=C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\actran\win64\Actran_2022.0.2\bin;C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\nast; 
 MSC_JIDPATH= 
-PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Scripts;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\dotnet;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;C:\Users\qa21944\AppData\Local\Programs\Git\cmd;C:\Users\qa21944\Anaconda3\Scripts;C:\Users\qa21944\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\qa21944\AppData\Local\Programs\MiKTeX\miktex\bin\x64;.;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
+PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Scripts;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files\Tecplot\Tecplot 360 EX 2023 R2\bin;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\dotnet;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Program Files\PuTTY;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;C:\Users\qa21944\AppData\Local\Programs\Git\cmd;C:\Users\qa21944\Anaconda3\Scripts;C:\Users\qa21944\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\qa21944\AppData\Local\Programs\MiKTeX\miktex\bin\x64;.;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
 SCA_SERVICE_CATALOG=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res\SCAServiceCatalog.xml 
 SCA_RESOURCE_DIR=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res 
 Cmd Line:    C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\win64i8\nastran.exe c:\Users\qa21944\Github\phd-jupyter-notebooks\notebooks\analyses\01_Buckling_Analysis_of_Euler_Column\euler_column_tangent_stiffness_matrix.bdf scr=yes bat=no old=no news=no notify=no 
@@ -49,10 +49,10 @@ MSC_MSG:     stderr
 FPE:         yes  
 ----------------------------------------------------------------- 
 Current resource limits:
- Physical memory:                    32564 MB
- Physical memory available:          19432 MB
- Paging file size:                   69428 MB
- Paging file size available:         41989 MB
+ Physical memory:                    65332 MB
+ Physical memory available:          33604 MB
+ Paging file size:                   75060 MB
+ Paging file size available:         41693 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
@@ -61,21 +61,21 @@ System configuration:
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3727 MHz
+ Clock freq.:      3733 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
- Physical memory:  32564 MB
- Virtual memory:   69428 MB
+ Physical memory:  65332 MB
+ Virtual memory:   75060 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Fri Dec 22 08:33:48 GST 2023 
- 08:33:48  Beginning Analysis
+MSC Nastran started  Wed Jul 10 20:12:51 GST 2024 
+ 20:12:51  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,13 +83,13 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 08:33:49  MSC Authorization Information - System Attributes (1004, 0)
- 08:33:49  -----------------------------------------------------------
-  Date:          Fri Dec 22 08:33:48 2023
+ 20:12:52  MSC Authorization Information - System Attributes (1004, 0)
+ 20:12:52  -----------------------------------------------------------
+  Date:          Wed Jul 10 20:12:52 2024
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
   Hostname:      IT076000 (user qa21944, display IT080625)
-  License files: 27500@ze-ls0.fen.bris.ac.uk
-  CEID:          52D366F0-6BC354CF
+  License files: 27500@ls-msc.bristol.ac.uk
+  CEID:          11220189-887AFC9B
   User:          qa21944
   Display:       IT080625
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
@@ -98,57 +98,57 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6BC354CF        * *
+  * *        11220189-887AFC9B        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 08:33:49  MSC Authorization Information - Checkout Successful (1016, 0)
- 08:33:49  -------------------------------------------------------------
- 08:33:49  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 20:12:52  MSC Authorization Information - Checkout Successful (1016, 0)
+ 20:12:52  -------------------------------------------------------------
+ 20:12:52  Acquired 1 license for MSC Nastran from license server on host ls-msc.bristol.ac.uk
 
- 08:33:49  Reading INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
- 08:33:49  67 records read from INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
+ 20:12:52  Reading INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
+ 20:12:52  67 records read from INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
 
- 08:33:49  MSC Authorization Information - Checkout Successful (1016, 0)
- 08:33:49  -------------------------------------------------------------
- 08:33:49  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 20:12:52  MSC Authorization Information - Checkout Successful (1016, 0)
+ 20:12:52  -------------------------------------------------------------
+ 20:12:52  Acquired 1 license for MSC Nastran Nonlinear from license server on host ls-msc.bristol.ac.uk
 
 
- 08:33:49  MSC Authorization Information - Checkout Successful (1016, 0)
- 08:33:49  -------------------------------------------------------------
- 08:33:49  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
+ 20:12:52  MSC Authorization Information - Checkout Successful (1016, 0)
+ 20:12:52  -------------------------------------------------------------
+ 20:12:52  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ls-msc.bristol.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 08:33:49  Reading INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
- 08:33:49  67 records read from INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
- 08:33:49  884 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_tangent_stiffness_matrix.bdf"
- 08:33:49  A total of 951 records were read from 2 files.
+ 20:12:52  Reading INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
+ 20:12:52  67 records read from INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
+ 20:12:52  1735 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_tangent_stiffness_matrix.bdf"
+ 20:12:52  A total of 1802 records were read from 2 files.
 
 Processing of bulk data entries is complete.
 
- 08:33:49  Finite element model generation started.
- 08:33:49  Finite element model generated 2526 degrees of freedom.
- 08:33:49  Finite element model generation successfully completed.
- 08:33:49  Application of Loads and Boundary Conditions to the finite element model started.
- 08:33:49  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 20:12:52  Finite element model generation started.
+ 20:12:52  Finite element model generated 2526 degrees of freedom.
+ 20:12:52  Finite element model generation successfully completed.
+ 20:12:52  Application of Loads and Boundary Conditions to the finite element model started.
+ 20:12:52  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
        USER WARNING MESSAGE      316.2          1 
        USER WARNING MESSAGE     4698.0          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 08:34:23  19 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_tangent_stiffness_matrix.bdf"
- 08:34:23  A total of 86 records were read from 2 files.
- 08:34:23  NSEXIT: EXIT(0)
- 08:34:23  Analysis complete  0
-Real:       35.347 seconds ( 0:00:35.347)
-User:       33.031 seconds ( 0:00:33.031)
-Sys:         2.171 seconds ( 0:00:02.171)
+ 20:13:04  19 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/01_buckling_analysis_of_euler_column/euler_column_tangent_stiffness_matrix.bdf"
+ 20:13:04  A total of 86 records were read from 2 files.
+ 20:13:04  NSEXIT: EXIT(0)
+ 20:13:04  Analysis complete  0
+Real:       12.518 seconds ( 0:00:12.518)
+User:       10.546 seconds ( 0:00:10.546)
+Sys:         1.812 seconds ( 0:00:01.812)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -162,18 +162,17 @@ Sys:         2.171 seconds ( 0:00:02.171)
  Nsocket:                      1
  Ncore:                        6  ( 1 X 6 )
  HyperThreading:               On
- Ram:                          32564 Mb
+ Ram:                          65332 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation         1.7          1 
- Eigenvalue                   9.1          2 
- Miscellaneous               23.5         31 
+ Stiffness Generation         1.5          4 
+ Miscellaneous               10.1          7 
  -------------------------------------------
- Total:                      34.3         34 
+ Total:                      11.6         11 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  =====================================================
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Fri Dec 22 08:34:24 GST 2023 
+MSC Nastran finished Wed Jul 10 20:13:04 GST 2024 
