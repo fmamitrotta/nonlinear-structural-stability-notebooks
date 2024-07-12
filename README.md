@@ -2,7 +2,7 @@
 
 This repository contains the jupyter notebooks that I developed for my PhD research on aeroelastic optimization with nonlinear structural stability constraints.
 
-If you use any of the code or of the other resources in this repository, please one of the following papers:
+If you use any of the code or of the other resources in this repository, please cite one of the following papers:
 
 F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. H. Cabral. _"Proof-of-concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations"_, 2023, RAeS 8th Aircraft Structural Design Conference
 
