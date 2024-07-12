@@ -21,8 +21,9 @@ from typing import Tuple, Dict, Any, Union
 import subprocess
 
 
-# Set resources folder path
-RESOURCES_PATH = os.path.dirname(os.path.abspath(__file__))
+# Constant variables
+NASTRAN_PATH = "C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastran.exe"  # path to nastran executable - change to your path
+RESOURCES_PATH = os.path.dirname(os.path.abspath(__file__))  # set resources folder path
 
 
 def run_analysis(directory_path: str, bdf: BDF, filename: str, run_flag: bool = True,
@@ -62,17 +63,17 @@ def run_analysis(directory_path: str, bdf: BDF, filename: str, run_flag: bool = 
         pwd = os.getcwd()  # save current working directory
         bdf_directory = os.path.dirname(bdf_filepath)  # get directory of the bdf file
         os.chdir(bdf_directory)  # change working directory to the bdf directory
-        nastran_path = "/mnt/c/Program Files/MSC.Software/MSC_Nastran/2021.4/bin/nastran.exe"  # path to nastran executable
+        wsl_path = NASTRAN_PATH[0].lower() + NASTRAN_PATH[1:].replace(":", "")  # replace drive letter and colon
+        wsl_path = "/mnt/" + wsl_path.replace("\\", "/")  # replace backslashes with forward slashes
         bdf_filepath = bdf_filepath.replace("/mnt/c", "C:").replace("/", "\\")  # convert bdf path to windows format
         keywords_list.remove("bat=no")  # remove bat=no keyword for windows subsystem for linux
-        call_args = [nastran_path, bdf_filepath] + keywords_list  # create call arguments
+        call_args = [wsl_path, bdf_filepath] + keywords_list  # create call arguments
         if run_flag:
             subprocess.call(call_args)  # call nastran process
         os.chdir(pwd)  # change back to original working directory
     else:
         # If not windows subsystem for linux, call nastran with the appropriate pynastran helper function
-        nastran_path = "C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastran.exe"
-        run_nastran(bdf_filename=bdf_filepath, nastran_cmd=nastran_path, run_in_bdf_dir=True, run=run_flag, keywords=keywords_list)
+        run_nastran(bdf_filename=bdf_filepath, nastran_cmd=NASTRAN_PATH, run_in_bdf_dir=True, run=run_flag, keywords=keywords_list)
     # Read and print wall time of simulation
     log_filepath = os.path.join(directory_path, filename + '.log')
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')  # compiled regular expression pattern
