@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/sol_106_desiter5_equilibrium_path_verification.T14020_42'
-DBS='c:/temp/scratch/sol_106_desiter5_equilibrium_path_verification.T14020_42'
+SDIR='c:/temp/scratch/sol_106_desiter5_equilibrium_path_verification.T1972_18'
+DBS='c:/temp/scratch/sol_106_desiter5_equilibrium_path_verification.T1972_18'
 SCR='yes'
 SMEM=100
 BPOOL=31gb
@@ -30,14 +30,14 @@ DEL='MSCDEF'
 SPOTWELD=''
 DML=MSCDEF
 SDL=MSCDEF
-AUTH='27500@ze-ls0.fen.bris.ac.uk'
+AUTH='27500@ls-msc.bristol.ac.uk'
 AUTHQUE=20
 MSGCAT='c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/analysis.msg'
 MSGDEST='f06'
 ----------------------------------------------------------------- 
 MSC_ISHELLPATH=C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\actran\win64\Actran_2022.0.2\bin;C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\nast; 
 MSC_JIDPATH= 
-PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Scripts;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files\Tecplot\Tecplot 360 EX 2018 R1\bin;C:\Program Files\Microsoft MPI\Bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\dotnet;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Program Files\PuTTY;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;C:\Users\qa21944\AppData\Local\Programs\Git\cmd;C:\Users\qa21944\Anaconda3\Scripts;C:\Users\qa21944\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\qa21944\AppData\Local\Programs\MiKTeX\miktex\bin\x64;.;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
+PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Scripts;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\bin;C:\Program Files\Tecplot\Tecplot 360 EX 2023 R2\bin;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\dotnet;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Program Files\PuTTY;C:\WebDriver\bin;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts\Library\bin;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts\Scripts;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files\Tecplot\Tecplot 360 EX 2023 R2\bin;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\sy;C:\WebDriver\bin;C:\texlive\2024\bin\windows;C:\Users\qa21944\AppData\Local\Programs\Microsoft VS Code\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
 SCA_SERVICE_CATALOG=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res\SCAServiceCatalog.xml 
 SCA_RESOURCE_DIR=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res 
 Cmd Line:    C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\win64i8\nastran.exe c:\Users\qa21944\Github\phd-jupyter-notebooks\notebooks\analyses\18_Development_and_Nonlinear_Structural_Stability_Analysis_of_a_CRM-like_Box_Beam_Model\sol_106_desiter5_equilibrium_path_verification.bdf scr=yes bat=no old=no news=no notify=no 
@@ -50,9 +50,9 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    65332 MB
- Physical memory available:          38910 MB
- Paging file size:                   87420 MB
- Paging file size available:         25187 MB
+ Physical memory available:          50385 MB
+ Paging file size:                   75060 MB
+ Paging file size available:         54049 MB
  Virtual memory:                 134217727 MB
  Virtual memory available:       134213510 MB
 ----------------------------------------------------------------- 
@@ -67,15 +67,15 @@ System configuration:
  Raw model ID:     6
  Config number:    6
  Physical memory:  65332 MB
- Virtual memory:   87420 MB
+ Virtual memory:   75060 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Wed May  1 04:46:42 GST 2024 
- 04:46:43  Beginning Analysis
+MSC Nastran started  Sat Jul 20 12:19:18 GST 2024 
+ 12:19:20  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,13 +83,13 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 04:46:44  MSC Authorization Information - System Attributes (1004, 0)
- 04:46:44  -----------------------------------------------------------
-  Date:          Wed May  1 04:46:44 2024
+ 12:19:22  MSC Authorization Information - System Attributes (1004, 0)
+ 12:19:22  -----------------------------------------------------------
+  Date:          Sat Jul 20 12:19:22 2024
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
   Hostname:      IT076000 (user qa21944, display )
-  License files: 27500@ze-ls0.fen.bris.ac.uk
-  CEID:          52D366F0-6B548F13
+  License files: 27500@ls-msc.bristol.ac.uk
+  CEID:          11220189-887AFC9B
   User:          qa21944
   Display:
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
@@ -98,59 +98,59 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6B548F13        * *
+  * *        11220189-887AFC9B        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 04:46:44  MSC Authorization Information - Checkout Successful (1016, 0)
- 04:46:44  -------------------------------------------------------------
- 04:46:44  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 12:19:22  MSC Authorization Information - Checkout Successful (1016, 0)
+ 12:19:22  -------------------------------------------------------------
+ 12:19:22  Acquired 1 license for MSC Nastran from license server on host ls-msc.bristol.ac.uk
 
- 04:46:44  Reading INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
- 04:46:44  67 records read from INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
+ 12:19:22  Reading INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
+ 12:19:22  67 records read from INCLUDE file "../../resources/kllrh_eigenvalues_nobuckle.dmap"
 
- 04:46:45  MSC Authorization Information - Checkout Successful (1016, 0)
- 04:46:45  -------------------------------------------------------------
- 04:46:45  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 12:19:22  MSC Authorization Information - Checkout Successful (1016, 0)
+ 12:19:22  -------------------------------------------------------------
+ 12:19:22  Acquired 1 license for MSC Nastran Nonlinear from license server on host ls-msc.bristol.ac.uk
 
 
- 04:46:45  MSC Authorization Information - Checkout Successful (1016, 0)
- 04:46:45  -------------------------------------------------------------
- 04:46:45  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
+ 12:19:22  MSC Authorization Information - Checkout Successful (1016, 0)
+ 12:19:22  -------------------------------------------------------------
+ 12:19:22  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ls-msc.bristol.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 04:46:45  Reading INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
- 04:46:45  67 records read from INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
- 04:46:45  59049 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/18_development_and_nonlinear_structural_stability_analysis_of_a_crm-like_box_beam_model/sol_106_desiter5_equilibrium_path_verification.bdf"
- 04:46:45  A total of 59116 records were read from 2 files.
+ 12:19:22  Reading INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
+ 12:19:22  67 records read from INCLUDE file "..\..\resources\kllrh_eigenvalues_nobuckle.dmap"
+ 12:19:23  59049 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/18_development_and_nonlinear_structural_stability_analysis_of_a_crm-like_box_beam_model/sol_106_desiter5_equilibrium_path_verification.bdf"
+ 12:19:23  A total of 59116 records were read from 2 files.
 
 Processing of bulk data entries is complete.
 
- 04:46:46  Finite element model generation started.
- 04:46:46  Finite element model generated 86964 degrees of freedom.
- 04:46:46  Finite element model generation successfully completed.
- 04:46:46  Application of Loads and Boundary Conditions to the finite element model started.
- 04:46:46  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 12:19:23  Finite element model generation started.
+ 12:19:23  Finite element model generated 86964 degrees of freedom.
+ 12:19:23  Finite element model generation successfully completed.
+ 12:19:23  Application of Loads and Boundary Conditions to the finite element model started.
+ 12:19:23  Application of Loads and Boundary Conditions to the finite element model successfully completed.
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
        USER WARNING MESSAGE      316.2          1 
        USER WARNING MESSAGE      316.2          1 
-       USER WARNING MESSAGE     4698.0        174 
+       USER WARNING MESSAGE     4698.0        196 
          USER FATAL MESSAGE     6190.0          1 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 05:36:02  22 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/18_development_and_nonlinear_structural_stability_analysis_of_a_crm-like_box_beam_model/sol_106_desiter5_equilibrium_path_verification.bdf"
- 05:36:02  A total of 89 records were read from 2 files.
- 05:36:02  NSEXIT: EXIT(0)
- 05:36:02  Analysis complete  0
-Real:     2959.761 seconds ( 0:49:19.761)
-User:     2945.296 seconds ( 0:49:05.296)
-Sys:        12.953 seconds ( 0:00:12.953)
+ 13:39:05  22 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/18_development_and_nonlinear_structural_stability_analysis_of_a_crm-like_box_beam_model/sol_106_desiter5_equilibrium_path_verification.bdf"
+ 13:39:05  A total of 89 records were read from 2 files.
+ 13:39:05  NSEXIT: EXIT(0)
+ 13:39:05  Analysis complete  0
+Real:     4786.991 seconds ( 1:19:46.991)
+User:     4764.625 seconds ( 1:19:24.625)
+Sys:        18.484 seconds ( 0:00:18.484)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -167,12 +167,12 @@ Sys:        12.953 seconds ( 0:00:12.953)
  Ram:                          65332 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation       210.9        183 
- Solver                     647.1        664 
- Eigenvalue                1195.8       1195 
- Miscellaneous              902.9        916 
+ Stiffness Generation       316.9        336 
+ Solver                     962.9        945 
+ Eigenvalue                2137.1       2121 
+ Miscellaneous             1364.5       1381 
  -------------------------------------------
- Total:                    2956.7       2958 
+ Total:                    4781.5       4783 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  Consider using SMP = 12 ( The number of cores per socket )
@@ -180,4 +180,4 @@ Sys:        12.953 seconds ( 0:00:12.953)
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Wed May  1 05:36:03 GST 2024 
+MSC Nastran finished Sat Jul 20 13:39:07 GST 2024 
