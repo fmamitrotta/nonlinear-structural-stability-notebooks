@@ -19,6 +19,7 @@ from resources import pynastran_utils  # custom module to deal with pyNastran ob
 import os  # import os module to interact with the operating system
 from pyNastran.op2.op2 import OP2, read_op2  # import OP2 object and function to read op2 file
 import matplotlib.pyplot as plt  # import matplotlib library for plotting
+from matplotlib.ticker import MaxNLocator  # import MaxNLocator class for axis ticks formatting
 
 
 # Constants for Nastran analysis subcase ids
@@ -122,20 +123,24 @@ class NastranSolver(om.ExplicitComponent):
         -------
         bdf : BDF
             The BDF object representing the model.
-        sigma_y : float
-            Yield strength of the material.
         analysis_directory_path : str
             Path to the directory where the analysis files are stored.
         input_name : str
             Name of the input file for the analysis.
         run_flag : bool
             Flag to indicate if the analysis should be run.
+        yield_strength : float
+            Yield strength of the material.
+        eigenvalue_scaling_factor : float
+            Scaling factor applied to the eigenvalues of the tangent stiffness matrix before calculating the KS function.
         """
         self.options.declare('bdf', types=BDF, desc='BDF object representing the Nastran model.')
-        self.options.declare('sigma_y', types=float, desc='Yield strength of the material.')
         self.options.declare('analysis_directory_path', types=str, desc='Directory path for storing analysis files.')
         self.options.declare('input_name', types=str, desc='Name for the analysis input file.')
         self.options.declare('run_flag', types=bool, default=True, desc='Flag to control whether the analysis should be executed.')
+        self.options.declare('yield_strength', types=float, desc='Yield strength of the material.')
+        self.options.declare('eigenvalue_scaling_factor', types=float, default=1., desc='Scaling factor applied to the eigenvalues of the tangent stiffness matrix before calculating the KS function.')
+        
 
     def setup(self):
         """
@@ -148,13 +153,13 @@ class NastranSolver(om.ExplicitComponent):
         self.add_output('ks_stress', desc='Kreisselmeier-Steinhauser aggregated stress value.')
         self.add_discrete_output('op2', val=None, desc='OP2 object containing the analysis results.')
         # Define outputs based on analysis type
-        if self.options['bdf'].sol == 105:
+        if self.options['bdf'].sol == 105 or self.options['bdf'].sol == 144:
             self.add_output('ks_buckling', desc='KS aggregated buckling load factor.')
         elif self.options['bdf'].sol == 106:
             self.add_output('ks_stability', desc='KS aggregated stability metric.')
-            self.add_output('applied_load', desc='Magnitude of the applied load in the final state of the analysis.')
+            self.add_output('load_factor', desc='Ratio of applied load to prescribed load in the final state of the analysis.')
         else:
-            raise ValueError("Unsupported solution sequence. Must be SOL 105 for buckling or SOL 106 for nonlinear static analysis.")
+            raise ValueError("Unsupported solution sequence. Must be SOL 105 or SOL 144 for buckling or SOL 106 for nonlinear static analysis.")
 
     def setup_partials(self):
         """
@@ -180,17 +185,23 @@ class NastranSolver(om.ExplicitComponent):
         """
         # Extract options for convenience
         bdf = self.options['bdf']
-        sigma_y = self.options['sigma_y']
         analysis_directory_path = self.options['analysis_directory_path']
         input_name = self.options['input_name']
         run_flag = self.options['run_flag']
-        # Assign thickness values to the property cards
+        yield_strength = self.options['yield_strength']
+        eigenvalue_scaling_factor = self.options['eigenvalue_scaling_factor']
+        
+        # Get thickness values from inputs and loop over properties
         t_array = inputs['t_val']
         for i, pid in enumerate(bdf.properties):
+            
+            # Asssign thickness to PSHELL properties
             if bdf.properties[pid].type == 'PSHELL':
                 bdf.properties[pid].t = t_array[0, i]
-                bdf.properties[pid].z1 = -t_array[0, i]/2
-                bdf.properties[pid].z2 = t_array[0, i]/2
+                bdf.properties[pid].z1 = None
+                bdf.properties[pid].z2 = None
+                
+            # Assign thickness to PBARL properties
             elif bdf.properties[pid].type == 'PBARL':
                 bdf.properties[pid].dim[2] = t_array[0, i]
                 bdf.properties[pid].dim[3] = t_array[0, i]
@@ -202,27 +213,51 @@ class NastranSolver(om.ExplicitComponent):
         op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
         op2 = read_op2(op2_filepath, load_geometry=True, debug=None)
         discrete_outputs['op2'] = op2
+        
         # Extract results based on analysis type
         if bdf.sol == 105:
             # Read von mises stresses and aggregate with KS function
             stresses = find_linear_stresses(op2)
-            outputs['ks_stress'] = compute_ks_function(stresses, upper=sigma_y)  # von Mises stress must be less than yield stress for the material not to yield
+            outputs['ks_stress'] = compute_ks_function(stresses, upper=yield_strength)  # von Mises stress must be less than yield stress for the material not to yield
             # Read buckling load factors and aggregate with KS function
-            outputs['ks_buckling'] = compute_ks_function(np.array(op2.eigenvectors[SECOND_SUBCASE_ID].eigrs),
-                                                        lower_flag=True, upper=1.)  # buckling load factor must be greater than 1 for the structure not to buckle
+            outputs['ks_buckling'] = compute_ks_function(
+                np.array(op2.eigenvectors[SECOND_SUBCASE_ID].eigrs), lower_flag=True, upper=1.)  # buckling load factor must be greater than 1 for the structure not to buckle
+        
         elif bdf.sol == 106:
             # Find von mises stresses and aggregate with KS function
-            stresses = op2.nonlinear_cquad4_stress[FIRST_SUBCASE_ID].data[-1, :, 5]
-            outputs['ks_stress'] = compute_ks_function(stresses, upper=sigma_y)  # von Mises stress must be less than yield stress for the material not to yield
+            subcase_id = next(iter(op2.nonlinear_cquad4_stress))  # get id of first subcase
+            stresses = op2.nonlinear_cquad4_stress[subcase_id].data[-1, :, 5]
+            outputs['ks_stress'] = compute_ks_function(stresses, upper=yield_strength)  # von Mises stress must be less than yield stress for the material not to yield
             # Read eigenvalues of tangent stiffness matrix and aggregate with KS function
             f06_filepath = os.path.splitext(op2_filepath)[0] + '.f06'  # path to .f06 file
             eigenvalues = pynastran_utils.read_kllrh_lowest_eigenvalues_from_f06(f06_filepath)  # read eigenvalues from f06 files
-            outputs['ks_stability'] = compute_ks_function(eigenvalues[~np.isnan(eigenvalues)].flatten()*1e3, lower_flag=True)  # nan values are discarded and eigenvalues are converted from N/mm to N/m
+            outputs['ks_stability'] = compute_ks_function(
+                eigenvalues[~np.isnan(eigenvalues)].flatten()*eigenvalue_scaling_factor, lower_flag=True)  # nan values are discarded and eigenvalues are converted from N/mm to N/m
             # Calculate final applied load magnitude
-            _, applied_loads, _ = pynastran_utils.read_load_displacement_history_from_op2(op2=op2)
-            outputs['applied_load'] = np.linalg.norm(applied_loads[FIRST_SUBCASE_ID][-1, :])  # calculate magnitude of applied load at last converged increment of the analysis
+            load_factors, _, _ = pynastran_utils.read_load_displacement_history_from_op2(op2=op2)
+            outputs['load_factor'] = load_factors[subcase_id][-1]  # calculate magnitude of applied load at last converged increment of the analysis
+        
+        elif bdf.sol == 144:
+            # Run SOL 105 analysis with aerodynamic loads obtained from SOL 144 analysis
+            sol_105_bdf = bdf.__deepcopy__({})  # create a deep copy of the original BDF object
+            pch_filepath = input_name + '.pch'
+            sol_105_bdf.add_include_file(pch_filepath)
+            force_set_id = 1  # by default the pch file is generated with force set id 1
+            input_name = "sol_105_" + input_name
+            sol_105_op2 = pynastran_utils.run_sol_105(
+                bdf=sol_105_bdf, static_load_set_id=force_set_id, analysis_directory_path=analysis_directory_path, input_name=input_name,
+                run_flag=run_flag)
+            # Assign OP2 object to discrete output
+            discrete_outputs['op2'] = sol_105_op2
+            # Read von mises stresses and aggregate with KS function
+            stresses = find_linear_stresses(op2)
+            outputs['ks_stress'] = compute_ks_function(stresses, upper=yield_strength)  # von Mises stress must be less than yield stress for the material not to yield
+            # Read buckling load factors and aggregate with KS function
+            outputs['ks_buckling'] = compute_ks_function(
+                np.array(sol_105_op2.eigenvectors[SECOND_SUBCASE_ID].eigrs), lower_flag=True, upper=1.)  # buckling load factor must be greater than 1 for the structure not to buckle
+        
         else:
-            raise ValueError("Invalid solution sequence number. Must be 105 or 106.")
+            raise ValueError("Invalid solution sequence number. Must be 105, 106 or SOL 144.")
 
 
 class NastranGroup(om.Group):
@@ -246,10 +281,11 @@ class NastranGroup(om.Group):
         Initialize options for the Nastran analysis group. This includes specifying the BDF object, material properties, and other analysis configurations.
         """
         self.options.declare('bdf', types=BDF, desc='BDF object representing the Nastran model.')
-        self.options.declare('sigma_y', types=float, desc='Yield strength of the material in MPa.')
         self.options.declare('analysis_directory_path', types=str, desc='Directory path for storing analysis files.')
         self.options.declare('input_name', types=str, desc='Name for the analysis input file.')
         self.options.declare('run_flag', types=bool, default=True, desc='Flag to control whether the analysis should be executed.')
+        self.options.declare('yield_strength', types=float, desc='Yield strength of the material in MPa.')
+        self.options.declare('eigenvalue_scaling_factor', types=float, default=1., desc='Scaling factor applied to the eigenvalues of the tangent stiffness matrix before calculating the KS function.')
 
     def setup(self):
         """
@@ -257,10 +293,11 @@ class NastranGroup(om.Group):
         """
         self.add_subsystem('nastran_solver', NastranSolver(
             bdf=self.options['bdf'],
-            sigma_y=self.options['sigma_y'],
             analysis_directory_path=self.options['analysis_directory_path'],
             input_name=self.options['input_name'],
-            run_flag=self.options['run_flag']))
+            run_flag=self.options['run_flag'],
+            yield_strength=self.options['yield_strength'],
+            eigenvalue_scaling_factor=self.options['eigenvalue_scaling_factor']))
         
 
 def plot_optimization_history(recorder_filepath:str):
@@ -295,18 +332,21 @@ def plot_optimization_history(recorder_filepath:str):
         y_labels = y_labels + ["$KS_{BLF}$", "$KS_{\sigma}$, MPa", "$m$, ton"]  # add labels for linear buckling optimization problem
     else:
         y_labels = y_labels + ["$P/P_\mathrm{design}$", "$KS_{\lambda}$, N/m", "$KS_{\sigma}$, MPa","$m$, ton"]  # add labels for nonlinear structural stability optimization problem
-        histories['nastran_solver.applied_load'] = histories['nastran_solver.applied_load']/histories['nastran_solver.applied_load'][0]  # normalize applied load by initial value
+        histories['nastran_solver.load_factor'] = histories['nastran_solver.load_factor']/histories['nastran_solver.load_factor'][0]  # normalize applied load by initial value
             
     # Create figure and axes for subplots
     fig, axes = plt.subplots(no_outputs, 1, sharex=True)
     fig.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=0.5)
     
-    # Plot each history and show plot
+    # Plot each history
     iterations_array = np.arange(len(next(iter(histories.values()))))
     for i, key in enumerate(histories):
-        axes[i].plot(iterations_array, histories[key])
-        axes[i].set(ylabel=y_labels[i])
-        axes[i].grid()
+        axes[i].plot(iterations_array, histories[key])  # plot the history of the function
+        axes[i].set(ylabel=y_labels[i])  # set the y-axis label
+        axes[i].grid()  # add grid to the plot
+        axes[i].xaxis.set_major_locator(MaxNLocator(integer=True))  # ensure x-axis ticks are integers
+        
+    # Set x-axis label for the last subplot and display the plot
     axes[-1].set(xlabel="Iteration")
     plt.show()
     
