@@ -99,14 +99,21 @@ def plot_buckling_mode(op2: OP2):
     """
     # Create new figure
     fig, ax = plt.subplots()
+    
     # Calculate coordinates of nodes in the buckling shape
     nodes_xy_coordinates = np.vstack([op2.nodes[index].xyz[0:2] for index in op2.nodes.keys()]) + \
                            np.squeeze([*op2.eigenvectors.values()][0].data[0, :, 0:2])
+                           
     # Plot nodes
-    ax.plot(nodes_xy_coordinates[:, 0], nodes_xy_coordinates[:, 1], '.-')
+    ax.plot(nodes_xy_coordinates[:, 0], nodes_xy_coordinates[:, 1], '-')
+    
     # Set axes labels and grid
     plt.xlabel('$x$, mm')
     plt.ylabel('Nondimensional $u_y$')
     plt.grid()
+    
     # Show plot
     plt.show()
+    
+    # Return figure
+    return fig
