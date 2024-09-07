@@ -345,7 +345,7 @@ def plot_displacements(op2: OP2, displacement_data: ndarray, axes: Axes3D = None
 def plot_eigenvector(op2: OP2, subcase_id: Union[int, tuple], axes: Axes3D = None, eigenvector_number: int = 1,
                      displacement_component: str = 'magnitude', unit_scale_factor: float = 1.,
                      displacement_amplification_factor: float = 1., colormap: str = 'rainbow_PuRd',
-                     clim: Union[list, ndarray] = None, length_unit: str = 'mm') -> Tuple[Figure, Axes3D, Colorbar]:
+                     clim: Union[list, ndarray] = None, length_unit: str = 'm') -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot one of the eigenvectors included in the input OP2 object.
 
