@@ -35,8 +35,11 @@ def discretize_length(length: float, target_element_length: float) -> int:
     int
         The number of nodes required to discretize the length.
     """
-    # Calculate the minimum number of elements needed and ensure it's even, then calculate nodes
-    return int(np.ceil(length / target_element_length / 2)) * 2 + 1
+    # Calculate the number of even elements required to discretize the length
+    no_elements = int(np.ceil(length / target_element_length / 2)) * 2  # rounding up is used because target element length acts as the maximum allowable length
+    # Calculate the corresponding number of nodesS
+    no_nodes = no_elements + 1
+    return  no_nodes
 
 
 def mesh_between_profiles(start_profile_xyz_array: ndarray, end_profile_xyz_array: ndarray, no_nodes: int, tag: str) -> PolyData:
@@ -737,7 +740,7 @@ def create_base_bdf_input(young_modulus: float, poisson_ratio: float, density: f
         nx3 array with the xyz coordinates of the nodes
     nodes_connectivity_matrix: ndarray
         nx4 array with the connectivity information of the nodes, where each row indicates the indices of the
-         nodes_xyz_array corresponding to the nodes composing the element
+        nodes_xyz_array corresponding to the nodes composing the element
     parallel: bool
         flag to enable or disable the parallel execution of Nastran
     no_cores: int

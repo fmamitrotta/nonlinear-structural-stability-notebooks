@@ -2,13 +2,15 @@
 
 This repository contains the jupyter notebooks that I developed for my PhD research on aeroelastic optimization with nonlinear structural stability constraints.
 
-If you use any of the code or of the other resources in this repository, please one of the following papers:
+If you use any of the code or of the other resources in this repository, please cite one of the following papers:
 
 F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. H. Cabral. _"Proof-of-concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations"_, 2023, RAeS 8th Aircraft Structural Design Conference
 
 F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. H. Cabral. _"Development of a Nonlinear Structural Stability Constraint for Aeroelastic Optimization"_, 2024, AIAA SciTech Forum
 
 F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. H. Cabral. _"Influence of Load Introduction Method on Wingbox Optimization with Nonlinear Structural Stability Constraints"_, 2024, International Forum on Aeroelasticity and Structural Dynamics
+
+F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. H. Cabral. _"Influence of Skin Curvature on Wingbox Optimization with Nonlinear Structural Stability Constraints"_, 2024, 34th Congress of the International Council of the Aeronautical Sciences
 
 
 ## List of notebooks
@@ -35,16 +37,18 @@ F. M. A. Mitrotta, A. Pirrera, T. Macquart, J. E. Cooper, A. P. do Prado and P. 
 19. [One-variable Optimization of the CRM-like Box Beam](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/19_One-variable_Optimization_of_the_CRM-like_Box_Beam.ipynb)
 20. [Two-variables Optimization of the CRM-like Box Beam](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/20_Two-variables_Optimization_of_the_CRM-like_Box_Beam.ipynb)
 21. [Optimization of the CRM-like Box Beam with Distributed Load](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/21_Optimization_of_the_CRM-like_Box_Beam_with_Distributed_Load.ipynb)
+22. [Optimization of the CRM-like Box Beam with Curved Skin](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/22_Optimization_of_the_CRM-like_Box_Beam_with_Curved_Skin.ipynb)
 
 ### Papers
 - [Proof of concept of a Nonlinear Structural Stability Constraint for Aeroelastic Optimizations](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Proof_of_concept_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimizations.ipynb)
 - [Development of a Nonlinear Structural Stability Constraint for Aeroelastic Optimization](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Development_of_a_Nonlinear_Structural_Stability_Constraint_for_Aeroelastic_Optimization.ipynb)
 - [Influence of Load Introduction Method on Wingbox Optimization with Nonlinear Structural Stability Constraints](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Influence_of_Load_Introduction_Method_on_Wingbox_Optimization_with_Nonlinear_Structural_Stability_Constraints.ipynb)
+- [Influence of Skin Curvature on Wingbox Optimization with Nonlinear Structural Stability Constraints](https://nbviewer.org/github/fmamitrotta/nonlinear-structural-stability-notebooks/blob/main/notebooks/Influence_of_Skin_Curvature_on_Wingbox_Optimization_with_Nonlinear_Structural_Stability_Constraints.ipynb)
 
 ## Copyright and License
 
 (c) 2022-2024 Francesco Mario Antonio Mitrotta. All code is under [BSD-3 clause](https://spdx.org/licenses/BSD-3-Clause.html) and all other content is under Creative Commons Attribution [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). 
 
-I'm happy if this content can help you with a smooth understanding of nonlinear structural stability and if you want to re-use it in any way!
+I'm happy if this content can help you getting a smoother understanding of nonlinear structural stability than I had and if you want to re-use it in any way!
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://spdx.org/licenses/BSD-3-Clause.html) [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)

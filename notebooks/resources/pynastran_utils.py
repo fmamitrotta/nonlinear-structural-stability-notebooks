@@ -236,6 +236,38 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     return eigenvalue_array.T
 
 
+def read_kllrh_lowest_eigenvalues_from_op2(op2: OP2) -> ndarray:
+    """
+    Return the array of the lowest N eigenvalues of the matrix KLLRH (tangent stiffness matrix) for each converged increment
+    of the nonlinear analysis represented by the input OP2 object.
+
+    Parameters
+    ----------
+        op2: OP2
+            pyNastran object including the results of a nonlinear analysis (SOL 106) with the calculation of the eigenvalues of the tangent stiffness matrix
+
+    Returns
+    -------
+        eigenvalue_array: ndarray
+            array with the eigenvalues of the KLLRH matrices for each converged increment, dimensions (number of eigenvalues, number of increments)
+    """
+    # Find the key of the first eigenvectors object in the OP2 object
+    eigenvectors_key = next(iter(op2.eigenvectors))
+    # Find max number of eigenvalues calculated for each converged increment
+    max_no_eigenvalues = op2.eigenvectors[eigenvectors_key].lsdvmns.max().astype(int)
+    # Find the start and end indices of each converged increment
+    sequence_starts = np.where(op2.eigenvectors[eigenvectors_key].lsdvmns == 1)[0]
+    sequence_ends = np.roll(sequence_starts, -1)
+    # Pad the last end index with the length of the eigenvectors list
+    sequence_ends[-1] = len(op2.eigenvectors[eigenvectors_key].lsdvmns)
+    # Create a max_no_eigenvalues x number of converged increments array with the eigenvalues of the KLLRH matrix
+    eigenvalues = np.column_stack([
+        np.pad(op2.eigenvectors[eigenvectors_key].eigrs[start:end], (0, max_no_eigenvalues - (end - start)), mode='constant', constant_values=np.nan)  # store the eigenvalues from start to end index and pad the rest of the column with nan
+        for start, end in zip(sequence_starts, sequence_ends)])  # iterate through the start and end indices of the converged increments
+    # Return array
+    return eigenvalues
+
+
 def add_uniform_force(bdf: BDF, nodes_ids: Union[list, ndarray], set_id: int, direction_vector: Union[list, ndarray], force_magnitude: float = 1):
     """
     Apply a uniformly distributed force over the indicated nodes.
@@ -320,7 +352,7 @@ def set_up_newton_method(bdf: BDF, nlparm_id: int = 1, ninc: int = None, kstep: 
         bdf.add_param('LGDISP', [1])
     # Define parameters for the nonlinear iteration strategy with full Newton method (update tangent stiffness matrix after every converged iteration)
     bdf.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=kstep, max_iter=max_iter, conv=conv,
-                          int_out='YES', eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect)
+                   int_out='YES', eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect)
     # Add NLPARM id to case control deck of the indicated subcase
     if 'NLPARM' not in bdf.case_control_deck.subcases[subcase_id].params:
         bdf.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)  # add new NLPARM command if not present
