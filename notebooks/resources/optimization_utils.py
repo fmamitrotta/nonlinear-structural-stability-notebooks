@@ -131,7 +131,7 @@ class NastranSolver(om.ExplicitComponent):
             Flag to indicate if the analysis should be run.
         yield_strength : float
             Yield strength of the material.
-        eigenvalue_scaling_factor : float
+        eigenvalue_scale_factor : float
             Scaling factor applied to the eigenvalues of the tangent stiffness matrix before calculating the KS function.
         """
         self.options.declare('bdf', types=BDF, desc='BDF object representing the Nastran model.')
@@ -139,7 +139,7 @@ class NastranSolver(om.ExplicitComponent):
         self.options.declare('input_name', types=str, desc='Name for the analysis input file.')
         self.options.declare('run_flag', types=bool, default=True, desc='Flag to control whether the analysis should be executed.')
         self.options.declare('yield_strength', types=float, desc='Yield strength of the material.')
-        self.options.declare('eigenvalue_scaling_factor', types=float, default=1., desc='Scaling factor applied to the eigenvalues of the tangent stiffness matrix before calculating the KS function.')
+        self.options.declare('eigenvalue_scale_factor', types=float, default=1., desc='Scaling factor applied to the eigenvalues of the tangent stiffness matrix before calculating the KS function.')
         
 
     def setup(self):
@@ -189,7 +189,7 @@ class NastranSolver(om.ExplicitComponent):
         input_name = self.options['input_name']
         run_flag = self.options['run_flag']
         yield_strength = self.options['yield_strength']
-        eigenvalue_scaling_factor = self.options['eigenvalue_scaling_factor']
+        eigenvalue_scale_factor = self.options['eigenvalue_scale_factor']
         
         # Get thickness values from inputs and loop over properties
         t_array = inputs['t_val']
@@ -234,7 +234,7 @@ class NastranSolver(om.ExplicitComponent):
             f06_filepath = os.path.splitext(op2_filepath)[0] + '.f06'  # path to .f06 file
             eigenvalues = pynastran_utils.read_kllrh_lowest_eigenvalues_from_f06(f06_filepath)  # read eigenvalues from f06 files
             outputs['ks_stability'] = compute_ks_function(
-                eigenvalues[~np.isnan(eigenvalues)].flatten()*eigenvalue_scaling_factor, lower_flag=True)  # nan values are discarded and eigenvalues are converted from N/mm to N/m
+                eigenvalues[~np.isnan(eigenvalues)].flatten()*eigenvalue_scale_factor, lower_flag=True)  # nan values are discarded and eigenvalues are converted from N/mm to N/m
             
             # Read final applied load factor
             load_factors, _, _ = pynastran_utils.read_load_displacement_history_from_op2(op2=op2)  # read load factors from op2 file
@@ -291,7 +291,7 @@ class NastranGroup(om.Group):
         self.options.declare('input_name', types=str, desc='Name for the analysis input file.')
         self.options.declare('run_flag', types=bool, default=True, desc='Flag to control whether the analysis should be executed.')
         self.options.declare('yield_strength', types=float, desc='Yield strength of the material in MPa.')
-        self.options.declare('eigenvalue_scaling_factor', types=float, default=1., desc='Scaling factor applied to the eigenvalues of the tangent stiffness matrix before calculating the KS function.')
+        self.options.declare('eigenvalue_scale_factor', types=float, default=1., desc='Scaling factor applied to the eigenvalues of the tangent stiffness matrix before calculating the KS function.')
 
     def setup(self):
         """
@@ -303,7 +303,7 @@ class NastranGroup(om.Group):
             input_name=self.options['input_name'],
             run_flag=self.options['run_flag'],
             yield_strength=self.options['yield_strength'],
-            eigenvalue_scaling_factor=self.options['eigenvalue_scaling_factor']))
+            eigenvalue_scale_factor=self.options['eigenvalue_scale_factor']))
         
 
 def plot_optimization_history(recorder_filepath:str):
