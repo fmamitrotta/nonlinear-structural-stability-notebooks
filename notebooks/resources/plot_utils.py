@@ -197,23 +197,49 @@ def plot_3d_load_displacements_stability(axes: Axes3D, displacements1: ndarray, 
                         loads[plot_indices_list[count + 1]], marker + '--', color=UNSTABLE_COLOR)
             
 
-def plot_eigenvalue_diagram(axes: Axes, loads: ndarray, eigenvalues: ndarray):
+def plot_eigenvalue_diagram(loads: ndarray, eigenvalues: ndarray, axes: Axes = None, cum_loads: bool = False) -> Tuple[Figure, Axes]:
     """
     Plot the eigenvalues of the tangent stiffness matrix as a function of the load.
 
     Parameters
     ----------
-    axes: Axes
-        object of the axes where the eigenvalue diagram will be plotted
     loads: ndarray
         numpy array of the loads that will be plotted on the x-axis
     eigenvalues: ndarray
         numpy array with the eigenvalues of the tangent stiffness matrix for each equilibrium point
+    axes: Axes
+        object of the axes where the eigenvalue diagram will be plotted
+    cum_loads: bool
+        flag to plot cumulative loads on the x-axis
+        
+    Returns
+    -------
+    fig: Figure
+        figure object
+    ax: Axes
+        axes object
     """
     
-    last_plot_index = eigenvalues.shape[1]  # analyses that reach the maximum number of iterations do not print the eigenvalues of the last converged iteration
-    axes.plot(loads[:last_plot_index], eigenvalues.T, 'o')  # convert eigenvalues from N/mm to N/m
+    # If axes object is not provided, create a new figure and axes
+    if axes is None:
+        fig, axes = plt.subplots()
+    # If axes object is provided, get figure object from provided axes object
+    else:
+        fig = axes.get_figure()
+    
+    # Find the number of converged increments where the eigenvalues are available
+    last_plot_index = eigenvalues.shape[1]  # analyses that reach the maximum number of increments do not print the eigenvalues of the last converged increment
+    
+    # Convert loads to cumulative loads if necessary
+    if cum_loads:
+        loads = np.cumsum(np.abs(np.diff(np.insert(loads, 0, 0.))))  # cumulative sum of load increments
+    
+    # Plot the eigenvalues
+    axes.plot(loads[:last_plot_index], eigenvalues.T, 'o')
     axes.grid(True)  # add grid to the plot
+    
+    # Return figure and axes objects
+    return fig, axes
     
 
 def plot_displacements(op2: OP2, displacement_data: ndarray, axes: Axes3D = None, displacement_component: str = 'magnitude',
@@ -251,11 +277,11 @@ def plot_displacements(op2: OP2, displacement_data: ndarray, axes: Axes3D = None
     Returns
     -------
     fig: Figure
-        object of the plot's figure
+        figure object
     ax: Axes3D
-        object of the plot's axes
+        axes object
     scalar_to_rgba_map: ScalarMappable
-        object of the color mapping for the scalar corresponding to the displacement component
+        color mapping object for the scalar corresponding to the displacement component
     """
     
     # Find mapping from node ids to node indexes and extract coordinates of undeformed nodes
@@ -487,7 +513,8 @@ def plot_deformation(op2: OP2, subcase_id: Union[int, tuple] = 1, axes: Axes3D =
     return fig, ax, cbar
 
 
-def plot_max_displacement_node(axes: Axes3D, op2: OP2, subcase_id: int = 2, unit_scale_factor: float = 1., displacement_amplification_factor: float = 1.):
+def plot_max_displacement_node(axes: Axes3D, op2: OP2, subcase_id: int = 2, unit_scale_factor: float = 1.,
+                               displacement_amplification_factor: float = 1.):
     """
     Plot the node where the maximum displacement occurs in a critical buckling mode.
     
@@ -520,7 +547,7 @@ def plot_max_displacement_node(axes: Axes3D, op2: OP2, subcase_id: int = 2, unit
     max_displacement_node_xyz = op2.nodes[max_displacement_node_id].xyz*unit_scale_factor + op2.eigenvectors[
         subcase_id].data[0, max_displacement_index, 0:3]*displacement_amplification_factor  # add displacement to node position and convert to m
     axes.plot(max_displacement_node_xyz[0], max_displacement_node_xyz[1], max_displacement_node_xyz[2], 'x',
-              label=f"Node {max_displacement_node_id:d} (max displacement)", zorder=4)
+              label=f"node {max_displacement_node_id:d} (max displacement)", zorder=4)
     
     # Return node id
     return max_displacement_node_id

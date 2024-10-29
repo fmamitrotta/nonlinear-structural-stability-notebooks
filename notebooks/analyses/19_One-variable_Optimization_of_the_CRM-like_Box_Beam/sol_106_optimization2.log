@@ -5,7 +5,7 @@ $ sysfield=DBALL(RAW=YES,BUFFIO=YES,wnum=16,wsize=16mb) $(c:/program files/msc.s
 Nastran BUFFSIZE=32769 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[6])
 JID='c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/19_one-variable_optimization_of_the_crm-like_box_beam/sol_106_optimization2.bdf'
 OUT='./sol_106_optimization2'
-MEM=35932MB      $ 
+MEM=39199MB      $ 
 MACH='Intel'
 OPER='Windows 10 Enterprise'
 OSV='6.2 9200'
@@ -19,8 +19,8 @@ symbol=LM_NO_SNMP=1 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast
 symbol=MKL_INTERFACE_LAYER=ILP64 $(c:/program files/msc.software/msc_nastran/2021.4/conf/nast20214.rcf[1])
 symbol=SSSALTERDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/sssalter' $(program default)
 symbol=TPLDIR='c:/program files/msc.software/msc_nastran/2021.4/msc20214/nast/tpl' $(program default)
-SDIR='c:/temp/scratch/sol_106_optimization2.T22680_15'
-DBS='c:/temp/scratch/sol_106_optimization2.T22680_15'
+SDIR='c:/temp/scratch/sol_106_optimization2.T1420_14'
+DBS='c:/temp/scratch/sol_106_optimization2.T1420_14'
 SCR='yes'
 SMEM=100
 BPOOL=31gb
@@ -30,14 +30,14 @@ DEL='MSCDEF'
 SPOTWELD=''
 DML=MSCDEF
 SDL=MSCDEF
-AUTH='27500@ze-ls0.fen.bris.ac.uk'
+AUTH='27500@ls-msc.bristol.ac.uk'
 AUTHQUE=20
 MSGCAT='c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/analysis.msg'
 MSGDEST='f06'
 ----------------------------------------------------------------- 
 MSC_ISHELLPATH=C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\actran\win64\Actran_2022.0.2\bin;C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\nast; 
 MSC_JIDPATH= 
-PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Scripts;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files\Tecplot\Tecplot 360 EX 2018 R1\bin;C:\Program Files\Microsoft MPI\Bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\dotnet;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Program Files\PuTTY;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;C:\Users\qa21944\AppData\Local\Programs\Git\cmd;C:\Users\qa21944\Anaconda3\Scripts;C:\Users\qa21944\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\qa21944\AppData\Local\Programs\MiKTeX\miktex\bin\x64;.;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
+PATH=c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nCode\bin;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\nvidia;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\lib;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8;c:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Library\bin;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\Scripts;C:\Users\qa21944\Anaconda3\envs\phd-notebooks\bin;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Tecplot\Tecplot 360 EX 2023 R2\bin;C:\Program Files\Microsoft MPI\Bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\dotnet;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Program Files\PuTTY;C:\WebDriver\bin;C:\Program Files\gs\gs10.03.1\bin;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts\Library\mingw-w64\bin;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts\Library\usr\bin;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts\Library\bin;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts\Scripts;C:\Users\qa21944\Anaconda3\envs\export-linkedin-posts\bin;C:\Users\qa21944\Anaconda3\condabin;C:\Program Files\Tecplot\Tecplot 360 EX 2023 R2\bin;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64_win\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32_win\compiler;C:\Program Files\MSC.Software\Patran_x64\20214\bin;C:\WINDOWS\sy;C:\WebDriver\bin;C:\texlive\2024\bin\windows;C:\Users\qa21944\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\qa21944\AppData\Local\Microsoft\WindowsApps;C:\Program Files\gs\gs10.03.1\bin;.;c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\msmpi 
 SCA_SERVICE_CATALOG=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res\SCAServiceCatalog.xml 
 SCA_RESOURCE_DIR=c:\program files\msc.software\msc_nastran\2021.4\msc20214\res 
 Cmd Line:    C:\Program Files\MSC.Software\MSC_Nastran\2021.4\msc20214\win64i8\nastran.exe c:\Users\qa21944\Github\phd-jupyter-notebooks\notebooks\analyses\19_One-variable_Optimization_of_the_CRM-like_Box_Beam\sol_106_optimization2.bdf scr=yes bat=no old=no news=no notify=no 
@@ -50,32 +50,32 @@ FPE:         yes
 ----------------------------------------------------------------- 
 Current resource limits:
  Physical memory:                    65332 MB
- Physical memory available:          26259 MB
- Paging file size:                   87666 MB
- Paging file size available:         26761 MB
+ Physical memory available:          37362 MB
+ Paging file size:                   85999 MB
+ Paging file size available:         32405 MB
  Virtual memory:                 134217727 MB
- Virtual memory available:       134213510 MB
+ Virtual memory available:       134213507 MB
 ----------------------------------------------------------------- 
 System configuration:
  Hostname:         IT076000.users.bris.ac.uk
  Architecture:     win64i8
  Platform:         Intel Windows 10 Enterprise 6.2 9200 (Windows Compute Cluster)
  Model:            Intel(R) Core(TM) i7-8700 CPU 
- Clock freq.:      3727 MHz
+ Clock freq.:      3733 MHz
  Number of CPUs:   12
  Executable:       standard
  Raw model ID:     6
  Config number:    6
  Physical memory:  65332 MB
- Virtual memory:   87666 MB
+ Virtual memory:   85999 MB
  Numeric format:   64-bit little-endian IEEE.
  Bytes per word:   8
  Disk block size:  512 bytes (64 words)
  Remote shell cmd: "c:/program files/msc.software/msc_nastran/2021.4/msc20214/win64i8/mscrmtcmd.exe" (Windows non-CCS nodes, UNIX)
                    <ccs_cmd> (Windows CCS nodes)
 ----------------------------------------------------------------- 
-MSC Nastran started  Tue Apr 30 15:02:16 GST 2024 
- 15:02:18  Beginning Analysis
+MSC Nastran started  Tue Oct 22 20:38:14 GST 2024 
+ 20:38:15  Beginning Analysis
 SCA Kernel 25.4.832451 successfully initialized
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\libimalloc.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_core.dll" has been loaded.
@@ -83,63 +83,63 @@ BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win6
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\mkl_rt.dll" has been loaded.
 BLAS/LAPACK .dll "c:\program files\msc.software\msc_nastran\2021.4\msc20214\win64i8\MSCblas.dll" has been loaded.
 
- 15:02:21  MSC Authorization Information - System Attributes (1004, 0)
- 15:02:21  -----------------------------------------------------------
-  Date:          Tue Apr 30 15:02:21 2024
+ 20:38:16  MSC Authorization Information - System Attributes (1004, 0)
+ 20:38:16  -----------------------------------------------------------
+  Date:          Tue Oct 22 20:38:16 2024
   MSC Id:        6c2b59f132f0 (ethernet) (Intel)
-  Hostname:      IT076000 (user qa21944, display IT076000)
-  License files: 27500@ze-ls0.fen.bris.ac.uk
-  CEID:          52D366F0-6B4E9DE8
+  Hostname:      IT076000 (user qa21944, display )
+  License files: 27500@ls-msc.bristol.ac.uk
+  CEID:          11220189-98A1422G
   User:          qa21944
-  Display:       IT076000
+  Display:
   LAPI Version:  LAPI 10.7.4 (CL 829651) (FLEXlm 11.16.3.0)
 
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
   * *                                 * *
   * *   MSC Customer Entitlement ID   * *
-  * *        52D366F0-6B4E9DE8        * *
+  * *        11220189-98A1422G        * *
   * *                                 * *
   * * * * * * * * * * * * * * * * * * * *
   * * * * * * * * * * * * * * * * * * * *
 
- 15:02:21  MSC Authorization Information - Checkout Successful (1016, 0)
- 15:02:21  -------------------------------------------------------------
- 15:02:21  Acquired 1 license for MSC Nastran from license server on host ze-ls0.fen.bris.ac.uk
+ 20:38:16  MSC Authorization Information - Checkout Successful (1016, 0)
+ 20:38:16  -------------------------------------------------------------
+ 20:38:16  Acquired 1 license for MSC Nastran from license server on host ls-msc.bristol.ac.uk
 
- 15:02:21  Reading INCLUDE file "../../resources/kllrh_eigenvalues_stop.dmap"
- 15:02:21  73 records read from INCLUDE file "../../resources/kllrh_eigenvalues_stop.dmap"
+ 20:38:16  Reading INCLUDE file "../../resources/kllrh_eigenvalues_stop.dmap"
+ 20:38:16  73 records read from INCLUDE file "../../resources/kllrh_eigenvalues_stop.dmap"
 
- 15:02:21  MSC Authorization Information - Checkout Successful (1016, 0)
- 15:02:21  -------------------------------------------------------------
- 15:02:21  Acquired 1 license for MSC Nastran Nonlinear from license server on host ze-ls0.fen.bris.ac.uk
+ 20:38:16  MSC Authorization Information - Checkout Successful (1016, 0)
+ 20:38:16  -------------------------------------------------------------
+ 20:38:16  Acquired 1 license for MSC Nastran Nonlinear from license server on host ls-msc.bristol.ac.uk
 
 
- 15:02:21  MSC Authorization Information - Checkout Successful (1016, 0)
- 15:02:21  -------------------------------------------------------------
- 15:02:21  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ze-ls0.fen.bris.ac.uk
+ 20:38:16  MSC Authorization Information - Checkout Successful (1016, 0)
+ 20:38:16  -------------------------------------------------------------
+ 20:38:16  Acquired 1 license for MSC Nastran DMAP Compile from license server on host ls-msc.bristol.ac.uk
 
 
 Beginning bulk data processing using the IFPStar component.
 For more information on IFPStar, please see KB article KB8019200
 on our support pages, at http://simcompanion.mscsoftware.com.
 
- 15:02:21  Reading INCLUDE file "..\..\resources\kllrh_eigenvalues_stop.dmap"
- 15:02:21  73 records read from INCLUDE file "..\..\resources\kllrh_eigenvalues_stop.dmap"
- 15:02:21  59036 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/19_one-variable_optimization_of_the_crm-like_box_beam/sol_106_optimization2.bdf"
- 15:02:21  A total of 59109 records were read from 2 files.
+ 20:38:16  Reading INCLUDE file "..\..\resources\kllrh_eigenvalues_stop.dmap"
+ 20:38:16  73 records read from INCLUDE file "..\..\resources\kllrh_eigenvalues_stop.dmap"
+ 20:38:17  59036 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/19_one-variable_optimization_of_the_crm-like_box_beam/sol_106_optimization2.bdf"
+ 20:38:17  A total of 59109 records were read from 2 files.
 
 Processing of bulk data entries is complete.
 
- 15:02:22  Finite element model generation started.
- 15:02:22  Finite element model generated 86964 degrees of freedom.
- 15:02:22  Finite element model generation successfully completed.
- 15:02:22  Application of Loads and Boundary Conditions to the finite element model started.
- 15:02:22  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 20:38:17  Finite element model generation started.
+ 20:38:17  Finite element model generated 86964 degrees of freedom.
+ 20:38:17  Finite element model generation successfully completed.
+ 20:38:17  Application of Loads and Boundary Conditions to the finite element model started.
+ 20:38:17  Application of Loads and Boundary Conditions to the finite element model successfully completed.
 
- 15:02:23  MSC Authorization Information - Checkout Successful (1016, 0)
- 15:02:23  -------------------------------------------------------------
- 15:02:23  Acquired 4 licenses for MSC Nastran Parallel from license server on host ze-ls0.fen.bris.ac.uk
+ 20:38:18  MSC Authorization Information - Checkout Successful (1016, 0)
+ 20:38:18  -------------------------------------------------------------
+ 20:38:18  Acquired 4 licenses for MSC Nastran Parallel from license server on host ls-msc.bristol.ac.uk
 
  ================================================== 
  Warning/Fatal Message Summary           Occurrence
@@ -147,13 +147,13 @@ Processing of bulk data entries is complete.
        USER WARNING MESSAGE     4698.0          3 
      SYSTEM WARNING MESSAGE     1148.0          1 
  ================================================== 
- 15:03:57  21 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/19_one-variable_optimization_of_the_crm-like_box_beam/sol_106_optimization2.bdf"
- 15:03:57  A total of 94 records were read from 2 files.
- 15:03:57  NSEXIT: EXIT(0)
- 15:03:57  Analysis complete  0
-Real:      100.165 seconds ( 0:01:40.165)
-User:      252.125 seconds ( 0:04:12.125)
-Sys:        34.140 seconds ( 0:00:34.140)
+ 20:39:36  21 records read from JID file "c:/users/qa21944/github/phd-jupyter-notebooks/notebooks/analyses/19_one-variable_optimization_of_the_crm-like_box_beam/sol_106_optimization2.bdf"
+ 20:39:36  A total of 94 records were read from 2 files.
+ 20:39:36  NSEXIT: EXIT(0)
+ 20:39:36  Analysis complete  0
+Real:       82.012 seconds ( 0:01:22.012)
+User:      200.031 seconds ( 0:03:20.031)
+Sys:        28.234 seconds ( 0:00:28.234)
  ==================================================
  OS:                           6.2
  OEM ID:                       9
@@ -170,12 +170,12 @@ Sys:        34.140 seconds ( 0:00:34.140)
  Ram:                          65332 Mb
  ==================================================
  Time Summary                 CPU       Wall   ( Time in Seconds )
- Stiffness Generation         7.9         11 
- Solver                      20.8         17 
- Eigenvalue                  68.6         41 
- Miscellaneous               32.1         26 
+ Stiffness Generation         6.4          5 
+ Solver                      15.5         12 
+ Eigenvalue                  55.8         32 
+ Miscellaneous               30.5         31 
  -------------------------------------------
- Total:                     129.5         95 
+ Total:                     108.2         80 
  ==================================================
  Consider using SOLVE=AUTO if you have not.
  Consider using SMP = 12 ( The number of cores per socket )
@@ -183,4 +183,4 @@ Sys:        34.140 seconds ( 0:00:34.140)
  Detailed performance information can be found in the 
  "MSC Nastran High Performance Computing User's Guide"
  =====================================================
-MSC Nastran finished Tue Apr 30 15:03:57 GST 2024 
+MSC Nastran finished Tue Oct 22 20:39:37 GST 2024 

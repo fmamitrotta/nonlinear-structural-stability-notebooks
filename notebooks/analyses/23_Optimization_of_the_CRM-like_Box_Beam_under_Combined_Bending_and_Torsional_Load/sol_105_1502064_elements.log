@@ -1,0 +1,187 @@
+MSC Nastran V2023.4 (Intel Linux 4.18.0-513.18.1.el8_9.x86_64) Control File:
+-----------------------------------------------------------------
+Nastran BUFFSIZE=65537 $(/software/local/apps/nastran-2023.4/conf/nast20234rc[4])
+$ $(/software/local/apps/nastran-2023.4/conf/nast20234rc[6])
+$ $(/software/local/apps/nastran-2023.4/conf/nast20234rc[14])
+$ End $(/software/local/apps/nastran-2023.4/conf/nast20234rc[16])
+JID=./23_Optimization_of_the_CRM-like_Box_Beam_under_Combined_Bending_and_Torsional_Load/sol_105_1502064_elements.bdf
+OUT=./23_Optimization_of_the_CRM-like_Box_Beam_under_Combined_Bending_and_Torsional_Load/sol_105_1502064_elements
+PWDDIR=/user/work/qa21944
+MEM=360686MB      $ 
+PMEM=0+
+MACH='Intel'
+OPER='Linux'
+OSV='4.18.0-513.18.1.el8_9.x86_64'
+MODEL='Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz  (highmem11)'
+CONFIG=186640
+NPROC=28
+symbol=DELDIR='/software/local/apps/nastran-2023.4/msc20234/nast/del' $(program default)
+symbol=DEMODIR='/software/local/apps/nastran-2023.4/msc20234/nast/demo' $(program default)
+symbol=SSSALTERDIR='/software/local/apps/nastran-2023.4/msc20234/nast/sssalter' $(program default)
+symbol=TPLDIR='/software/local/apps/nastran-2023.4/msc20234/nast/tpl' $(program default)
+SDIR=./SCRATCH/sol_105_1502064_elements.T3758894_13
+DBS=./SCRATCH/sol_105_1502064_elements.T3758894_13
+SCR=yes
+SMEM=100
+BPOOL=90171.5MB
+DMPMEM=estimate
+NEWDEL='/software/local/apps/nastran-2023.4/msc20234/linux64i8/SSS'
+DEL='MSCDEF'
+SPOTWELD=''
+UDR=''
+DML=MSCDEF
+SDL=MSCDEF
+AUTH=27500@ls-msc.bristol.ac.uk
+AUTHQUE=20
+MSGCAT='/software/local/apps/nastran-2023.4/msc20234/linux64i8/analysis.msg'
+MSGDEST='f06'
+NEWS=/software/local/apps/nastran-2023.4/msc20234/nast/news.txt
+-----------------------------------------------------------------
+MSC_ISHELLPATH=/software/local/apps/nastran-2023.4/msc20234/actran/linux64/Actran_2023.2/bin:/software/local/apps/nastran-2023.4/msc20234/nast:
+MSC_JIDPATH=
+PATH=/software/local/apps/nastran-2023.4/msc20234/linux64i8:/software/local/apps/nastran-2023.4/msc20234/linux64i8:/opt/intel/oneapi/compiler/2022.1.0/linux/bin/intel64:/software/local/apps/nastran-2023.4/msc20234/linux64i8/intel/libfabric/bin:/software/local/apps/nastran-2023.4/bin:/system/steel-stack/slurm/23.11.6/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin:/user/home/qa21944/.local/bin:/user/home/qa21944/bin
+LD_LIBRARY_PATH=/software/local/apps/nastran-2023.4/msc20234/linux64i8/lib:/software/local/apps/nastran-2023.4/msc20234/linux64i8:/software/local/apps/nastran-2023.4/msc20234/linux64i8/nvidia:/software/local/apps/nastran-2023.4/msc20234/linux64i8/lib:/software/local/apps/nastran-2023.4/msc20234/linux64i8:/software/local/apps/nastran-2023.4/msc20234/linux64i8/intel/lib64/release:/software/local/apps/nastran-2023.4/msc20234/linux64i8/intel/lib64/:/software/local/apps/nastran-2023.4/msc20234/linux64i8/intel/libfabric/lib:/software/local/apps/nastran-2023.4/msc20234/linux64i8/intel/libfabric/lib:/software/local/apps/nastran-2023.4/msc20234/linux64i8:/software/local/apps/nastran-2023.4/msc20234/linux64i8/lib:/software/local/apps/nastran-2023.4/msc20234/linux64i8/nCode/bin:/software/local/apps/nastran-2023.4/msc20234/linux64i8/nvidia
+SCA_SERVICE_CATALOG=/software/local/apps/nastran-2023.4/msc20234/res/SCAServiceCatalog.xml
+SCA_RESOURCE_DIR=/software/local/apps/nastran-2023.4/msc20234/res
+Cmd Line:    /software/local/apps/nastran-2023.4/msc20234/linux64i8/nastran jid=./23_Optimization_of_the_CRM-like_Box_Beam_under_Combined_Bending_and_Torsional_Load/sol_105_1502064_elements.bdf out=./23_Optimization_of_the_CRM-like_Box_Beam_under_Combined_Bending_and_Torsional_Load/sol_105_1502064_elements memorymax=0.7*physical sdir=./SCRATCH mode=i8
+Current Dir: /user/work/qa21944
+Time Cmd:    time 
+Executable:  /software/local/apps/nastran-2023.4/msc20234/linux64i8/analysis
+Arch= Kywd:  [Not specified]
+MSC_MSG:     stderr
+-----------------------------------------------------------------
+Current resource limits:
+ CPU time:                       unlimited
+ Virtual address space:          unlimited
+ Working set size:               419430400 KB (hard limit: 419430400 KB)
+ Data segment size:              unlimited
+ Stack size:                          8192 KB
+ Number of open files:               51200 (hard limit: 51200)
+ File size:                      unlimited
+ Core dump file size:                    0 MB
+-----------------------------------------------------------------
+System configuration:
+ Hostname:         highmem11
+ Architecture:     linux64i8
+ Platform:         Intel Linux 4.18.0-513.18.1.el8_9.x86_64
+ Model:            Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz 
+ CPU:              GenuineIntel 
+ Clock freq.:      2400 MHz
+ Number of CPUs:   28
+ Executable:       standard
+ Raw model ID:     8664
+ Config number:    186640
+ Physical memory:  515266 MB
+ Numeric format:   64-bit little-endian IEEE.
+ Bytes per word:   8
+ Disk block size:  512 bytes (64 words)
+ Remote shell cmd: /software/local/apps/nastran-2023.4/msc20234/linux64i8/MSCRmtCmd (Windows, UNIX)
+                   /usr/bin/ssh (UNIX)
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+MSC Nastran started Sun Sep  1 22:54:17 BST 2024
+ 22:54:18  Beginning Analysis
+MM_CORE:initialize umpire 378206683176(PMEM in OC, nolimit)
+MM_CORE:constructing an OCWrapper 0x1ce71740
+SCA Kernel 29.0.931179 successfully initialized
+BLAS/LAPACK shared object "/software/local/apps/nastran-2023.4/msc20234/linux64i8/libmkl_core.so" has been loaded.
+BLAS/LAPACK shared object "/software/local/apps/nastran-2023.4/msc20234/linux64i8/libmkl_intel_thread.so" has been loaded.
+BLAS/LAPACK shared object "/software/local/apps/nastran-2023.4/msc20234/linux64i8/libmkl_intel_ilp64.so" has been loaded.
+BLAS/LAPACK shared object "/software/local/apps/nastran-2023.4/msc20234/linux64i8/libMSCblas.so" has been loaded.
+ ================================================== 
+ MKL Information: 
+ Major version:           2022
+ Minor version:           0
+ Update version:          1
+ Processor optimization:  Intel(R) Advanced Vector Extensions 2 (Intel(R) AVX2) enabled processors
+ ================================================== 
+
+ 22:54:18  MSC Authorization Information - System Attributes (1004, 0)
+ 22:54:18  -----------------------------------------------------------
+  Date:          Sun Sep  1 22:54:18 2024
+  MSC Id:        42f2e9c84cb9 (ethernet) (Linux)
+  Hostname:      highmem11.bc4.acrc.priv (user qa21944, display /dev/tty)
+  License files: 27500@ls-msc.bristol.ac.uk
+  CEID:          11220189-889AA5FE
+  User:          qa21944
+  Display:       /dev/tty
+  LAPI Version:  LAPI 11.0.1 (CL 920189) (FLEXlm 11.16.3.0)
+
+  * * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * * *
+  * *                                 * *
+  * *   MSC Customer Entitlement ID   * *
+  * *        11220189-889AA5FE        * *
+  * *                                 * *
+  * * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * * *
+
+ 22:54:18  MSC Authorization Information - Checkout Successful (1016, 0)
+ 22:54:18  -------------------------------------------------------------
+ 22:54:18  Acquired 1 license for MSC Nastran from license server on host ls-msc.bristol.ac.uk
+
+
+Beginning bulk data processing using the IFPStar component.
+For more information on IFPStar, please see KB article KB8019200
+on our support pages, at http://simcompanion.hexagon.com.
+
+ 22:54:36  7979134 records read from JID file "./23_Optimization_of_the_CRM-like_Box_Beam_under_Combined_Bending_and_Torsional_Load/sol_105_1502064_elements.bdf"
+
+Processing of bulk data entries is complete.
+
+ 22:55:10  Finite element model generation started.
+ 22:55:42  Finite element model generated 8982654 degrees of freedom.
+ 22:55:42  Finite element model generation successfully completed.
+ 22:55:42  Application of Loads and Boundary Conditions to the finite element model started.
+
+ 22:55:43  MSC Authorization Information - Checkout Successful (1016, 0)
+ 22:55:43  -------------------------------------------------------------
+ 22:55:43  Acquired 4 licenses for MSC Nastran Parallel from license server on host ls-msc.bristol.ac.uk
+
+ 22:55:43  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 22:55:43  Application of Loads and Boundary Conditions to the finite element model started.
+ 22:55:44  Application of Loads and Boundary Conditions to the finite element model successfully completed.
+ 23:01:20  Solution of the system equations for linear statics started.
+ 23:01:38  Solution of the system equations for linear statics successfully completed.
+ 23:02:03  Solution of the system equations for normal modes started.
+ 23:29:38  Solution of the system equations for normal modes successfully completed.
+ ================================================== 
+ Warning/Fatal Message Summary           Occurrence
+     SYSTEM WARNING MESSAGE     1148.0          1 
+ ================================================== 
+ 23:29:40  19 records read from JID file "./23_Optimization_of_the_CRM-like_Box_Beam_under_Combined_Bending_and_Torsional_Load/sol_105_1502064_elements.bdf"
+ 23:29:40  NSEXIT: EXIT(0)
+ 23:29:40  Analysis complete  0
+TBA free any memory allocation, rhs or nmap or so forth.
+MumpsSolver::Cleanup
+6061.25user 227.87system 35:22.44elapsed 296%CPU (0avgtext+0avgdata 151116988maxresident)k
+0inputs+0outputs (0major+768154minor)pagefaults 0swaps
+ ==================================================
+ OS:              Rocky Linux release 8.9 (Green Obsidian)
+ Model:           Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz
+ Nsocket:         2
+ Ncore:           28  ( 2 X 14 )
+ HyperThreading:  Off
+ Cache:           35840 KB
+ Special:         avx2 
+ GPU:             YES, use /usr/bin/nvidia-smi to determine type
+ Ram:             515266 Mb	Free: 478741 Mb
+ load average ( 15 minute ):  2.770000
+ ==================================================
+ Time Summary                 CPU       Wall   ( Time in Seconds )
+ Input File                  34.4         35 
+ Stiffness Generation        50.8         51 
+ Solver                    2480.7        329 
+ Eigenvalue               10846.0       1655 
+ Miscellaneous               53.1         51 
+ -------------------------------------------
+ Total:                   13465.0       2121 
+ ==================================================
+ Consider using SOLVE=AUTO if you have not.
+ Consider using SMP = 14 ( The number of cores per socket )
+ =====================================================
+ Detailed performance information can be found in the 
+ "MSC Nastran High Performance Computing User's Guide"
+ =====================================================
+-----------------------------------------------------------------
+MSC Nastran finished Sun Sep  1 23:29:40 BST 2024
