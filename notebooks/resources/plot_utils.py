@@ -513,7 +513,8 @@ def plot_deformation(op2: OP2, subcase_id: Union[int, tuple] = 1, axes: Axes3D =
     return fig, ax, cbar
 
 
-def plot_max_displacement_node(axes: Axes3D, op2: OP2, subcase_id: int = 2, unit_scale_factor: float = 1., displacement_amplification_factor: float = 1.):
+def plot_max_displacement_node(axes: Axes3D, op2: OP2, subcase_id: int = 2, unit_scale_factor: float = 1.,
+                               displacement_amplification_factor: float = 1.):
     """
     Plot the node where the maximum displacement occurs in a critical buckling mode.
     
@@ -546,7 +547,7 @@ def plot_max_displacement_node(axes: Axes3D, op2: OP2, subcase_id: int = 2, unit
     max_displacement_node_xyz = op2.nodes[max_displacement_node_id].xyz*unit_scale_factor + op2.eigenvectors[
         subcase_id].data[0, max_displacement_index, 0:3]*displacement_amplification_factor  # add displacement to node position and convert to m
     axes.plot(max_displacement_node_xyz[0], max_displacement_node_xyz[1], max_displacement_node_xyz[2], 'x',
-              label=f"Node {max_displacement_node_id:d} (max displacement)", zorder=4)
+              label=f"node {max_displacement_node_id:d} (max displacement)", zorder=4)
     
     # Return node id
     return max_displacement_node_id
