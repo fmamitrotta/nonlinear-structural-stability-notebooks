@@ -212,26 +212,43 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     -------
         eigenvalue_array: ndarray
             array with the eigenvalues of the KLLRH matrices for each converged increment, dimensions (number of eigenvalues, number of increments)
+
+    Raises
+    ------
+        ValueError
+            If no line containing 'NLOOP' is found in the file
+        FileNotFoundError
+            If the specified file does not exist
     """
     # Initialize the list of the lowest eigenvalues
     eigenvalue_list = []
+    # Flag to check if NLOOP was found
+    nloop_found = False
     # Compile a regular expression pattern to read eigenvalue in f06 file
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')
+    
     # Open file iterate line by line
     with open(f06_filepath) as f06_file:
         for line in f06_file:
             # When NLOOP is found append an empty list inside the eigenvalues list
             if 'NLOOP =' in line:
+                nloop_found = True
                 eigenvalue_list.append([])
             # When KLLRH EIGENVALUE is found append the eigenvalue to the last list of the eigenvalues list
             if 'KLLRH EIGENVALUE' in line:
                 raw_results = re.findall(regexp, line)
                 eigenvalue_list[-1].append(float(raw_results[1]))
+    
+    # Check if NLOOP was found
+    if not nloop_found:
+        raise ValueError("No 'NLOOP' line found in the f06 file. Please check if the input bdf file contains the expected DMAP.")
+    
     # Convert list of lists to array padded with nan (we put nan for the iterations where we miss one or more eigenvalues)
     lengths = np.array([len(item) for item in eigenvalue_list])
     mask = lengths[:, None] > np.arange(lengths.max())
     eigenvalue_array = np.full(mask.shape, np.nan)
     eigenvalue_array[mask] = np.concatenate(eigenvalue_list)
+    
     # Return array of eigenvalues in the form: number of eigenvalues x number of iterations
     return eigenvalue_array.T
 
