@@ -231,10 +231,13 @@ class NastranSolver(om.ExplicitComponent):
             outputs['ks_stress'] = compute_ks_function(stresses, upper=yield_strength)  # von Mises stress must be less than yield stress for the material not to yield
             
             # Read eigenvalues of tangent stiffness matrix and aggregate with KS function
-            f06_filepath = os.path.splitext(op2_filepath)[0] + '.f06'  # path to .f06 file
-            eigenvalues = pynastran_utils.read_kllrh_lowest_eigenvalues_from_f06(f06_filepath)  # read eigenvalues from f06 files
+            try:  # try to read eigenvalues from f06 file
+                f06_filepath = os.path.splitext(op2_filepath)[0] + '.f06'  # path to .f06 file
+                eigenvalues = pynastran_utils.read_kllrh_lowest_eigenvalues_from_f06(f06_filepath)
+            except ValueError:  # if eigenvalues are not in f06 file, read them from op2 file
+                eigenvalues = pynastran_utils.read_kllrh_lowest_eigenvalues_from_op2(op2)
             outputs['ks_stability'] = compute_ks_function(
-                eigenvalues[~np.isnan(eigenvalues)].flatten()*eigenvalue_scale_factor, lower_flag=True)  # nan values are discarded and eigenvalues are converted from N/mm to N/m
+                eigenvalues[~np.isnan(eigenvalues)].flatten()*eigenvalue_scale_factor, lower_flag=True)  # nan values are discarded and eigenvalues are scaled before aggregation
             
             # Read final applied load factor
             load_factors, _, _ = pynastran_utils.read_load_displacement_history_from_op2(op2=op2)  # read load factors from op2 file
