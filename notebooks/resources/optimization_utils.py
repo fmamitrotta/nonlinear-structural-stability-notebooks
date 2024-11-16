@@ -244,17 +244,29 @@ class NastranSolver(om.ExplicitComponent):
             outputs['load_factor'] = load_factors[subcase_id][-1]  # find load factor at the last converged increment
         
         elif bdf.sol == 144:
-            # Run SOL 105 analysis with aerodynamic loads obtained from SOL 144 analysis
-            sol_105_bdf = bdf.__deepcopy__({})  # create a deep copy of the original BDF object
-            pch_filepath = input_name + '.pch'  # path to the pch file
-            sol_105_bdf.add_include_file(pch_filepath)  # include the pch file in the BDF object
-            force_set_id = 1  # by default the pch file is generated with force set id 1
-            input_name = "sol_105_" + input_name  # change the input name to avoid overwriting the original input file
-            sol_105_op2 = pynastran_utils.run_sol_105(
-                bdf=sol_105_bdf, static_load_set_id=force_set_id, analysis_directory_path=analysis_directory_path, input_name=input_name,
-                run_flag=run_flag)  # run SOL 105 analysis
+            # Create a deep copy of the original BDF object
+            sol_105_bdf = bdf.__deepcopy__({})
             
-            # Assign OP2 object to discrete output
+            # Include the pch file with the forces obtained from the SOL 144
+            # analysis
+            pch_filepath = input_name + '.pch'
+            sol_105_bdf.add_include_file(pch_filepath)
+            
+            # By default, the pch file generates FORCE cards with set ids 1 and
+            # 2. The force set of interest is that with id 1, and we use id 3
+            # for the method set id
+            force_set_id = 1
+            method_set_id = 3
+            
+            # Change the input name to avoid overwriting the original input file
+            input_name = "sol_105_" + input_name
+            
+            # Run SOL 105 analysis and assign OP2 object to discrete output
+            sol_105_op2 = pynastran_utils.run_sol_105(
+                bdf=sol_105_bdf, input_name=input_name,
+                analysis_directory_path=analysis_directory_path, 
+                static_load_set_id=force_set_id, method_set_id=method_set_id,
+                run_flag=run_flag)
             discrete_outputs['op2'] = sol_105_op2
             
             # Read von mises stresses and aggregate with KS function

@@ -85,9 +85,10 @@ def run_analysis(directory_path: str, bdf: BDF, filename: str, run_flag: bool = 
                 break
 
 
-def create_static_load_subcase(bdf: BDF, subcase_id: int, load_set_id: int, nlparm_id: int = None):
+def create_static_load_subcase(
+    bdf: BDF, subcase_id: int, load_set_id: int, nlparm_id: int = None):
     """
-    Define a subcase in the input BDF object for the application of a static load.
+    Define a subcase for the application of an external static load.
 
     Parameters
     ----------
@@ -98,15 +99,52 @@ def create_static_load_subcase(bdf: BDF, subcase_id: int, load_set_id: int, nlpa
     load_set_id: int
         id of the load set assigned to the subcase
     nlparm_id: int
-        id of the NLPARM card assigned to the subcase
+        id of the nonlinear analysis settings assigned to the subcase
     """
-    # Create subcase
+    # Create subcase with input id
     bdf.create_subcases(subcase_id)
-    # Add load set id to case control statement of created subcase
-    bdf.case_control_deck.subcases[subcase_id].add_integer_type('LOAD', load_set_id)
-    # If provided, add NLPARM id to case control statement of created subcase
+    
+    # Add load set id to case control statement of subcase
+    bdf.case_control_deck.subcases[subcase_id].add_integer_type(
+        'LOAD', load_set_id)
+    
+    # If provided, add NLPARM id to case control statement of subcase
     if nlparm_id:
-        bdf.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)
+        bdf.case_control_deck.subcases[subcase_id].add_integer_type(
+            'NLPARM', nlparm_id)
+        
+
+def create_real_eigenvalue_extraction_subcase(
+    bdf: BDF, subcase_id: int, method_set_id: int, no_eigenvalues: int = 1):
+    """
+    Define a subcase for the application of an external static load.
+
+    Parameters
+    ----------
+    bdf : BDF
+        pyNastran object representing Nastran input file
+    subcase_id: int
+        id of the subcase
+    method_set_id: int
+        id of the real eigenvalue extraction parameters assigned to the
+        subcase
+    no_eigenvalues: int
+        number of real eigenvalues to be calculated
+    """
+    # Create subcase with input id
+    bdf.create_subcases(subcase_id)
+    
+    # Add method set id to case control statement of subcase
+    bdf.case_control_deck.subcases[subcase_id].add_integer_type(
+        'METHOD', method_set_id)
+    
+    # If provided set id isn't already in the bdf, add EIGRL card
+    if method_set_id not in bdf.methods:
+        bdf.add_eigrl(sid=method_set_id, v1=0., nd=no_eigenvalues)
+    else:
+        # Else, update parameters of the existing EIGRL card
+        bdf.methods[method_set_id].v1 = 0.  # only positive eigenvalues
+        bdf.methods[method_set_id].nd = no_eigenvalues
 
 
 def read_load_displacement_history_from_op2(op2: OP2, node_ids: list[int] = [1]) -> \
@@ -427,7 +465,9 @@ def set_up_arc_length_method(bdf: BDF, nlparm_id: int = 1, ninc: int = None, kst
     bdf.add_nlpci(nlpci_id=nlparm_id, Type=constraint_type, minalr=minalr, maxalr=maxalr, desiter=desiter, mxinc=maxinc)
 
 
-def set_up_sol_105(bdf: BDF, static_load_set_id: int, no_eigenvalues:int = 1):
+def set_up_sol_105(
+    bdf: BDF, static_load_set_id: int = None, method_set_id: int = None,
+    no_eigenvalues:int = 1):
     """
     Set up a SOL 105 analysis. The function defines subcase 1 to apply the load set associated to the input load set id and subcase 2
     to calculate the buckling eigenvalues using the EIGRL card.
@@ -435,45 +475,56 @@ def set_up_sol_105(bdf: BDF, static_load_set_id: int, no_eigenvalues:int = 1):
     Parameters
     ----------
     bdf: BDF
-        pyNastran object representing the bdf input of the box beam model
+        pyNastran object representing the Nastran bdf input
     static_load_set_id: int
         set id of the static load applied in the first subcase
+    method_set_id: int
+        set id of the real eigenvalue extraction parameters used in the
+        second subcase
     no_eigenvalues: int
-        number of calculated buckling loads
+        number of real eigenvalues to be calculated
     """
     # Set SOL 105 as solution sequence (linear buckling analysis)
     bdf.sol = 105
-    # Create first subcase for the application of the static load
-    load_application_subcase_id = 1
-    create_static_load_subcase(bdf=bdf, subcase_id=load_application_subcase_id,
-                               load_set_id=static_load_set_id)
-    # Add EIGRL card to define the parameters for the eigenvalue calculation
-    eigrl_set_id = static_load_set_id + 1
-    if eigrl_set_id in bdf.methods:
-        eigrl_set_id += 1
-    bdf.add_eigrl(sid=eigrl_set_id, v1=0., nd=no_eigenvalues)  # calculate the first nd positive eigenvalues
-    # Create second subcase for the calculation of the buckling eigenvalues
-    eigenvalue_calculation_subcase_id = 2
-    bdf.create_subcases(eigenvalue_calculation_subcase_id)
-    bdf.case_control_deck.subcases[eigenvalue_calculation_subcase_id].add_integer_type('METHOD', eigrl_set_id)  # add EIGRL id to case control deck of second subcase
+    
+    # If set id of the static load is provided, create first subcase for the
+    # application of the static load
+    if static_load_set_id is not None:
+        load_application_subcase_id = 1
+        create_static_load_subcase(
+            bdf=bdf, subcase_id=load_application_subcase_id,
+            load_set_id=static_load_set_id)
+    
+    # If set id of eigenvalue extraction parameters is provided, create second
+    # subcase for the calculation of the buckling eigenvalues
+    if method_set_id is not None:
+        eigenvalue_calculation_subcase_id = 2
+        create_real_eigenvalue_extraction_subcase(
+            bdf=bdf, subcase_id=eigenvalue_calculation_subcase_id,
+            method_set_id=method_set_id, no_eigenvalues=no_eigenvalues)
 
 
-def run_sol_105(bdf: BDF, static_load_set_id: int, analysis_directory_path: str, input_name: str, no_eigenvalues:int = 1,
-                run_flag: bool = True) -> OP2:
+def run_sol_105(bdf: BDF, input_name: str, analysis_directory_path: str,
+                static_load_set_id: int = None, method_set_id: int = None,
+                no_eigenvalues:int = 1, run_flag: bool = True) -> OP2:
     """
-    Set up and run a SOL 105 analysis and return the resulting OP2 object. This function calls set_up_sol_105 to define the
-    subcases and cards for the analysis and run_analysis to execute the analysis.
+    Set up and run a SOL 105 analysis and return the resulting OP2
+    object. This function calls set_up_sol_105 to define the subcases
+    for the analysis and run_analysis to execute the analysis.
 
     Parameters
     ----------
     bdf: BDF
-        pyNastran object representing the bdf input of the box beam model
-    static_load_set_id: int
-        set id of the static load applied in the first subcase
-    analysis_directory_path: str
-        string with the path to the directory where the analysis is run
+        pyNastran object representing the Nastran bdf input
     input_name: str
         string with the name that will be given to the input file
+    analysis_directory_path: str
+        string with the path to the directory where the analysis is run
+    static_load_set_id: int
+        set id of the static load applied in the first subcase
+    method_set_id: int
+        set id of the real eigenvalue extraction parameters used in the
+        second subcase
     no_eigenvalues: int
         number of calculated buckling loads
     run_flag: bool
@@ -485,13 +536,19 @@ def run_sol_105(bdf: BDF, static_load_set_id: int, analysis_directory_path: str,
         object representing the op2 file produced by SOL 105
     """
     # Set up SOL 105 to run linear buckling analysis
-    set_up_sol_105(bdf=bdf, static_load_set_id=static_load_set_id, no_eigenvalues=no_eigenvalues)
+    set_up_sol_105(
+        bdf=bdf, static_load_set_id=static_load_set_id,
+        method_set_id=method_set_id, no_eigenvalues=no_eigenvalues)
+    
     # Run analysis
-    run_analysis(directory_path=analysis_directory_path, bdf=bdf, filename=input_name, run_flag=run_flag)
-    # Read op2 file
+    run_analysis(
+        directory_path=analysis_directory_path, bdf=bdf, filename=input_name,
+        run_flag=run_flag)
+    
+    # Read op2 file and return OP2 object
     op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
-    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
-    # Return OP2 object
+    op2_output = read_op2(
+        op2_filename=op2_filepath, load_geometry=True, debug=None)
     return op2_output
 
 
