@@ -22,12 +22,13 @@ import subprocess
 
 
 # Constant variables
-NASTRAN_PATH = "C:\\Program Files\\MSC.Software\\MSC_Nastran\\2021.4\\bin\\nastran.exe"  # path to nastran executable - change to your path
+NASTRAN_PATH = r"C:\Program Files\MSC.Software\MSC_Nastran\2021.4\bin\nastran.exe"  # path to nastran executable - change to your path
 RESOURCES_PATH = os.path.dirname(os.path.abspath(__file__))  # set resources folder path
 
 
-def run_analysis(directory_path: str, bdf: BDF, filename: str, run_flag: bool = True,
-                 parallel:bool = False, no_cores:int = 6):
+def run_analysis(
+    directory_path: str, bdf: BDF, filename: str, run_flag: bool = True,
+    parallel:bool = False, no_cores:int = 6):
     """
     Write .bdf input file from BDF object and execute Nastran analysis.
 
