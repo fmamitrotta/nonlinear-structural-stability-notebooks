@@ -27,8 +27,8 @@ RESOURCES_PATH = os.path.dirname(os.path.abspath(__file__))  # set resources fol
 
 
 def run_analysis(
-    directory_path: str, bdf: BDF, filename: str, run_flag: bool = True,
-    parallel:bool = False, no_cores:int = 6):
+    directory_path: str, filename: str, bdf: BDF, parallel: bool = False,
+    no_cores: int = 6, run_flag: bool = True):
     """
     Write .bdf input file from BDF object and execute Nastran analysis.
 
@@ -36,28 +36,32 @@ def run_analysis(
     ----------
     directory_path : str
         string with path to the directory where input file is run
-    bdf: BDF
-        pyNastran object representing the bdf input file
     filename: str
         name of the input file without extension
-    run_flag: bool
-        flag to enable or disable the actual execution of Nastran
+    bdf: BDF
+        pyNastran object representing Nastran bdf input
     parallel: bool
         flag to enable or disable the parallel execution of Nastran
     no_cores: int
         number of cores used for the parallel execution of Nastran
+    run_flag: bool
+        flag to enable or disable the actual execution of Nastran
     """
     # Create analysis directory if it does not exist
     os.makedirs(directory_path, exist_ok=True)
+    
     # Write bdf file
     bdf_filename = filename + '.bdf'
     bdf_filepath = os.path.join(directory_path, bdf_filename)
-    bdf.write_bdf(bdf_filepath, is_double=True)  # write bdf file with double precision
+    bdf.write_bdf(bdf_filepath, is_double=True)  # use double precision
+    
     # Create default keywords list
     keywords_list = ["scr=yes", "bat=no", "old=no", "news=no", "notify=no"]
+    
     # Add smp keyword for parallel execution
     if parallel:
         keywords_list.append(f"smp={no_cores:d}")
+    
     # Call Nastran process depending on the operating system
     if os.name == "posix":
         # If windows subsystem for linux, set up the nastran call through the call function of the subprocess module
@@ -74,7 +78,10 @@ def run_analysis(
         os.chdir(pwd)  # change back to original working directory
     else:
         # If not windows subsystem for linux, call nastran with the appropriate pynastran helper function
-        run_nastran(bdf_filename=bdf_filepath, nastran_cmd=NASTRAN_PATH, run_in_bdf_dir=True, run=run_flag, keywords=keywords_list)
+        run_nastran(
+            bdf_filename=bdf_filepath, nastran_cmd=NASTRAN_PATH,
+            run_in_bdf_dir=True, run=run_flag, keywords=keywords_list)
+        
     # Read and print wall time of simulation
     log_filepath = os.path.join(directory_path, filename + '.log')
     regexp = re.compile('-? *[0-9]+.?[0-9]*(?:[Ee] *[-+]? *[0-9]+)?')  # compiled regular expression pattern
@@ -625,29 +632,35 @@ def eig_to_cycles(eig: float) -> float:
     return cycles
 
 
-def set_up_sol_106_with_kllrh_eigenvalues(bdf: BDF, analysis_directory_path: str, method_set_id: int,
-                                          no_eigenvalues: int = 1, lower_eig: float = -1.e32, upper_eig: float = 1.e32,
-                                          dmap_option: str = None) -> OP2:
+def set_up_sol_106_with_kllrh_eigenvalues(
+    bdf: BDF, method_set_id: int, analysis_directory_path: str,
+    no_eigenvalues: int = 1, dmap_option: str = None,
+    lower_eig: float = -1.e32, upper_eig: float = 1.e32) -> OP2:
     """
-    Set up a SOL 106 analysis with the calculation of the eigenvalues of the tangent stiffness matrix.
+    Set up a SOL 106 analysis with the calculation of the eigenvalues of
+    the tangent stiffness matrix.
 
     Parameters
     ----------
     bdf: BDF
-        pyNastran object representing the bdf input of the box beam model
+        pyNastran object representing the bdf input
+    method_set_id: int
+        identification number of the EIGRL card that is defined for the
+        eigenvalue calculation
     analysis_directory_path: str
         string with the path to the directory where the analysis is run
-    method_set_id: int
-        identification number of the EIGRL card that is defined for the eigenvalue calculation
     no_eigenvalues: int
-        number of eigenvalues of the tangent stiffness matrix that will be calculated
+        number of eigenvalues of the tangent stiffness matrix that will
+        be calculated
+    dmap_option: str
+        string indicating the additional task to be performed by the
+        DMAP. "eigenvectors" will calculate eigenvectors, "stop" will
+        stop the analysis after the first negative eigenvalue. If None,
+        the default DMAP will be used.
     lower_eig: float
         lower bound of the eigenvalues to be calculated
     upper_eig: float
         upper bound of the eigenvalues to be calculated
-    dmap_option: str
-        string indicating the additional task to be performed by the DMAP. "eigenvectors" will calculate eigenvectors,
-        "stop" will stop the analysis after the first negative eigenvalue. If None, the default DMAp will be used.
 
     Returns
     -------
@@ -656,24 +669,34 @@ def set_up_sol_106_with_kllrh_eigenvalues(bdf: BDF, analysis_directory_path: str
     """
     # Set SOL 106 as solution sequence (nonlinear analysis)
     bdf.sol = 106
-    # Define cards to calculate smallest magnitude eigenvalues of tangent stiffness matrix
-    bdf.add_param('BUCKLE', [2])
-    bdf.add_eigrl(sid=method_set_id, nd=no_eigenvalues)  # calculate lowest eigenvalues in magnitude
-    bdf.case_control_deck.subcases[0].add_integer_type('METHOD', method_set_id)  # add EIGRL id to case control
-    # Include DMAP to calculate eigenvalues of tangent stiffness matrix
-    relative_path_to_resources = os.path.relpath(RESOURCES_PATH, analysis_directory_path)  # relative path to resources folder
+    
+    # Define cards to calculate smallest magnitude eigenvalues of tangent
+    # stiffness matrix
+    bdf.add_param('BUCKLE', [2])  # add PARAM BUCKLE
+    bdf.add_eigrl(sid=method_set_id, nd=no_eigenvalues)  # add EIGRL card
+    bdf.case_control_deck.subcases[0].add_integer_type(
+        'METHOD', method_set_id)  # add EIGRL id to case control
+    
+    # Select DMAP file to calculate eigenvalues of tangent stiffness matrix
     if dmap_option is None:
-        bdf.executive_control_lines[1:1] = [
-            "include '" + os.path.join(relative_path_to_resources, "kllrh_eigenvalues_nobuckle.dmap") + "'"]  # include DMAP to calculate eigenvalues and print them in the f06 file
+        dmap_filename = "kllrh_eigenvalues_nobuckle.dmap"
     elif dmap_option == "eigenvectors":
-        bdf.executive_control_lines[1:1] = [
-            "include '" + os.path.join(relative_path_to_resources, "kllrh_eigenvectors.dmap") + "'"]  # include DMAP to calculate eigenvalues and eigenvectors and print them in the f06 file
+        dmap_filename = "kllrh_eigenvectors.dmap"
     elif dmap_option == "stop":
-        bdf.executive_control_lines[1:1] = [
-            "include '" + os.path.join(relative_path_to_resources, "kllrh_eigenvalues_stop.dmap") + "'"]  # include DMAP to calculate eigenvalues and stop the analysis after the first negative eigenvalue
+        dmap_filename = "kllrh_eigenvalues_stop.dmap"
     else:
-        raise ValueError("Invalid DMAP option. Choose 'eigenvectors' or 'stop'.")
-    # Define parameters to calculate lowest eigenvalues of tangent stiffness matrix
+        raise ValueError(
+            "Invalid DMAP option. Choose 'eigenvectors' or 'stop'.")
+    
+    # Include DMAP file in the bdf input
+    relative_path_to_resources = os.path.relpath(
+        RESOURCES_PATH, analysis_directory_path)
+    bdf.executive_control_lines.insert(
+        -1, "include '" + os.path.join(
+            relative_path_to_resources, dmap_filename) + "'")
+    
+    # Define parameters to calculate lowest eigenvalues of tangent stiffness
+    # matrix
     if no_eigenvalues > 1:
         bdf.add_param('BMODES', [no_eigenvalues])  # add PARAM BMODES if more than one eigenvalue is calculated
     if lower_eig > -1.e32:
@@ -682,31 +705,38 @@ def set_up_sol_106_with_kllrh_eigenvalues(bdf: BDF, analysis_directory_path: str
         bdf.add_param('UPPEREIG', [eig_to_cycles(upper_eig)])  # add PARAM UPPEREIG if upper bound is defined
 
 
-def run_sol_106_with_kllrh_eigenvalues(bdf: BDF, method_set_id: int, analysis_directory_path: str, input_name: str,
-                                       no_eigenvalues: int = 1, lower_eig: float = -1.e32, upper_eig: float = 1.e32,
-                                       dmap_option: str = None, run_flag: bool = True) -> OP2:
+def run_sol_106_with_kllrh_eigenvalues(
+    bdf: BDF, method_set_id: int, analysis_directory_path: str,
+    input_name: str, no_eigenvalues: int = 1, dmap_option: str = None,
+    lower_eig: float = -1.e32, upper_eig: float = 1.e32,
+    run_flag: bool = True) -> OP2:
     """
-    Set up and run a SOL 106 analysis with the calculation of the eigenvalues of the tangent stiffness matrix.
+    Set up and run a SOL 106 analysis with the calculation of the
+    eigenvalues of the tangent stiffness matrix.
 
     Parameters
     ----------
     bdf: BDF
-        pyNastran object representing the bdf input of the box beam model
+        pyNastran object representing the bdf input
     method_set_id: int
-        identification number of the EIGRL card that is defined for the eigenvalue calculation
+        identification number of the EIGRL card that is defined for the
+        eigenvalue calculation
     analysis_directory_path: str
         string with the path to the directory where the analysis is run
     input_name: str
         string with the name that will be given to the input file
     no_eigenvalues: int
-        number of eigenvalues of the tangent stiffness matrix that will be calculated
+        number of eigenvalues of the tangent stiffness matrix that will
+        be calculated
+    dmap_option: str
+        string indicating the additional task to be performed by the
+        DMAP. "eigenvectors" will calculate eigenvectors, "stop" will
+        stop the analysis after the first negative eigenvalue. If None,
+        the default DMAP will be used.
     lower_eig: float
         lower bound of the eigenvalues to be calculated
     upper_eig: float
         upper bound of the eigenvalues to be calculated
-    dmap_option: str
-        string indicating the additional task to be performed by the DMAP. "eigenvectors" will calculate eigenvectors,
-        "stop" will stop the analysis after the first negative eigenvalue. If None, the default DMAp will be used.
     run_flag: bool
         boolean indicating whether Nastran analysis is actually run
 
@@ -716,13 +746,91 @@ def run_sol_106_with_kllrh_eigenvalues(bdf: BDF, method_set_id: int, analysis_di
         object representing the op2 file produced by SOL 106
     """
     # Set up SOL 106 analyis with the calculation of the eigenvalues of the tangent stiffness matrix
-    set_up_sol_106_with_kllrh_eigenvalues(bdf=bdf, analysis_directory_path=analysis_directory_path,
-                                          method_set_id=method_set_id, no_eigenvalues=no_eigenvalues, lower_eig=lower_eig,
-                                          upper_eig=upper_eig, dmap_option=dmap_option)
+    set_up_sol_106_with_kllrh_eigenvalues(
+        bdf=bdf, method_set_id=method_set_id,
+        analysis_directory_path=analysis_directory_path,
+        no_eigenvalues=no_eigenvalues, dmap_option=dmap_option,
+        lower_eig=lower_eig, upper_eig=upper_eig)
+    
     # Run analysis
-    run_analysis(directory_path=analysis_directory_path, bdf=bdf, filename=input_name, run_flag=run_flag)
+    run_analysis(
+        directory_path=analysis_directory_path, bdf=bdf, filename=input_name,
+        run_flag=run_flag)
+    
     # Read op2 file
     op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
-    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
+    op2_output = read_op2(
+        op2_filename=op2_filepath, load_geometry=True, debug=None)
+    
     # Return OP2 object
     return op2_output
+
+
+def read_monitor_point_from_f06(
+    f06_path: str, monitor_point_name: str) -> Dict[str, np.ndarray]:
+    """
+    Read the data of a monitor point from a Nastran .f06 file.
+    
+    Parameters
+    ----------
+    f06_path: str
+        path to the .f06 file
+    monitor_point_name: str
+        name of the monitor point to be read
+    
+    Returns
+    -------
+    data_dict: dict
+        dictionary with axis labels as keys and numpy arrays with the
+        data as values
+    """
+    # Open the file and read all lines into a list for easy access by index
+    with open(f06_path, 'r') as file:
+        lines = file.readlines()
+    
+    # Initialize control variables
+    start_table = False  # flag to indicate the start of the desired table
+    data_dict = {}       # dictionary to store parsed table data
+    
+    # Step 1: Locate the monitor point section by searching for the specified
+    # monitor point name
+    for i, line in enumerate(lines):
+        if f"MONITOR POINT NAME = {monitor_point_name}" in line:
+            # Once the monitor point is found, start searching for the table
+            # header
+            for j in range(i, len(lines)):
+                # Look for the table header line, which marks the start of the
+                # data table
+                if "AXIS      RIGID AIR       ELASTIC REST." in lines[j]:
+                    start_table = True
+                    # Set table start two lines below the header
+                    table_start = j + 2
+                    break
+        # Exit the outer loop if the table start has been found
+        if start_table:
+            break
+    
+    # If the monitor point or table is not found, raise an error
+    if not start_table:
+        raise ValueError(
+            f"Monitor point {monitor_point_name} not found in the file.")
+    
+    # Step 2: Read the table data line by line, starting from the identified
+    # table start line
+    for k in range(table_start, len(lines)):
+        # Check for an empty line or "PAGE" to mark the end of the table
+        # section
+        if lines[k].strip() == "" or "PAGE" in lines[k]:
+            break
+        else:
+            # Split the line into parts: first part is the axis label, rest are
+            # numerical values
+            line_data = lines[k].split()
+            axis = line_data[0]  # extract axis label (first item in line)
+            # Convert remaining items to floats and store in a numpy array
+            data = np.array([float(val) for val in line_data[1:]])
+            # Store the axis and data array in the dictionary
+            data_dict[axis] = data
+    
+    # Return the dictionary with axis labels as keys and data arrays as values
+    return data_dict
