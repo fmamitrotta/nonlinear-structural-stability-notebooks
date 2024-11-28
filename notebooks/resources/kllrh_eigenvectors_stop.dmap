@@ -36,11 +36,12 @@ compile nlstatic  $ request compilation of nlstatic solution sequence
 $
 $ Insert parameters definition at the start of the solution sequence
 alter 2  $
-type parm,,rs,y,lowereig=-1.e32  $ lower bound for eigenvalue extraction
+type parm,,rs,y,lowereig=-1.e32 $ lower bound for eigenvalue extraction
 type parm,,rs,y,uppereig=1.e32  $ upper bound for eigenvalue extraction
-type parm,,rs,n,loadfmc  $ parameter for load factor
-type parm,,i,y,bmodes=1  $ number of eigenvalues to be extracted
-type parm,,i,n,nosort2=1  $ parameter for sorting of displacements
+type parm,,rs,n,loadfmc         $ parameter for load factor
+type parm,,i,y,bmodes=1         $ number of eigenvalues to be extracted
+type parm,,i,n,nosort2=1        $ parameter for sorting of displacements
+type parm,,i,y,bloop=0          $ counter of eigenvalues
 $
 $ Insert DMAP statements just before decomposition of KLLRH
 alter 'ENDIF.*BUCKLE.-1 AND CONV.-1'  $
