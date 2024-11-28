@@ -20,6 +20,9 @@ import os  # import os module to interact with the operating system
 from pyNastran.op2.op2 import OP2, read_op2  # import OP2 object and function to read op2 file
 import matplotlib.pyplot as plt  # import matplotlib library for plotting
 from matplotlib.ticker import MaxNLocator  # import MaxNLocator class for axis ticks formatting
+from matplotlib.figure import Figure  # class for figure objects
+from matplotlib.axes import Axes  # class for axes objects
+import warnings  # import warnings module to handle warnings
 
 
 # Constants for Nastran analysis subcase ids
@@ -321,19 +324,43 @@ class NastranGroup(om.Group):
             eigenvalue_scale_factor=self.options['eigenvalue_scale_factor']))
         
 
-def plot_optimization_history(recorder_filepath:str):
+def plot_optimization_history(
+    recorder_filepath: str,
+    variable_names: list[str],
+    y_labels: list[str] | None = None
+) -> tuple[Figure, Axes, dict[str, ndarray]]:
     """
-    Plots the history of optimization variables and objectives from an OpenMDAO recorder file.
+    Plots the history of optimization variables and objectives from an
+    OpenMDAO recorder file.
 
     Parameters
     ----------
     recorder_filepath : str
-        Path to the OpenMDAO recorder file containing optimization history.
+        Path to the OpenMDAO recorder file containing optimization
+        history.
+    variable_names : list
+        List of variable names to plot.
+    y_labels : list, optional
+        List of y-axis labels for the plots. If provided, must have the
+        same length as variable_names. Labels corresponding to invalid
+        variable names will be ignored. If not provided, variable names
+        will be used as labels.
 
     Returns
     -------
-    dict
-        A dictionary containing the optimization history for each variable and objective.
+    tuple
+        Contains:
+        - Figure: matplotlib figure object
+        - Axes: matplotlib axes object
+        - dict: Dictionary containing the histories of the input
+        variables
+
+    Raises
+    ------
+    ValueError
+        If none of the provided variable names exists in the
+        optimization history or if y_labels is provided but has
+        different length than variable_names
     """
     
     # Initialize the CaseReader object
@@ -342,38 +369,80 @@ def plot_optimization_history(recorder_filepath:str):
     # Extract driver cases without recursing into system or solver cases
     driver_cases = cr.get_cases('driver', recurse=False)
     
-    # Prepare data structures for plotting
+    # Get available output keys
     output_keys = list(driver_cases[0].outputs.keys())
-    no_outputs = len(output_keys)
-    histories = {key: np.array([case[key] for case in driver_cases]) for key in output_keys}  # retrieve histories of the functions
     
-    # Setup plot labels
-    y_labels = ["$t$, mm"]
-    if no_outputs == 4:
-        y_labels = y_labels + ["$KS_{BLF}$", "$KS_{\sigma}$, MPa", "$m$, ton"]  # add labels for linear buckling optimization problem
-    else:
-        y_labels = y_labels + ["$KS_{\lambda}$, N/m", "$KS_{\sigma}$, MPa", "$P/P_\mathrm{design}$", "$m$, ton"]  # add labels for nonlinear structural stability optimization problem
+    # Validate variable names
+    valid_names = []
+    invalid_names = []
+    valid_labels = []  # Store labels for valid variables
+    
+    # Validate y_labels length if provided
+    if y_labels is not None and len(y_labels) != len(variable_names):
+        raise ValueError(
+            f"Length of y_labels ({len(y_labels)}) must match length of "
+            f"variable_names ({len(variable_names)})"
+        )
+    
+    # Process variable names and corresponding labels
+    for i, name in enumerate(variable_names):
+        if name in output_keys:
+            valid_names.append(name)
+            # If y_labels is provided, use corresponding label, otherwise use
+            # variable name
+            if y_labels is not None:
+                valid_labels.append(y_labels[i])
+            else:
+                valid_labels.append(name)
+        else:
+            invalid_names.append(name)
             
+    # Warn about invalid names if any
+    if invalid_names:
+        warnings.warn(
+            f"The following variable names were not found in the optimization "
+            f"history and will be skipped: {invalid_names}"
+        )
+    
+    # Raise error if no valid names
+    if not valid_names:
+        raise ValueError(
+            f"None of the provided variable names {variable_names} was found "
+            f"in the optimization history. Available variables are: "
+            f"{output_keys}"
+        )
+    
+    # Prepare data structures for plotting using only valid names
+    histories = {
+        key: np.array([case[key] for case in driver_cases]) 
+        for key in valid_names
+    }
+    
     # Create figure and axes for subplots
-    fig, axes = plt.subplots(no_outputs, 1, sharex=True)
-    fig.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=0.5)
+    no_outputs = len(valid_names)
+    fig, axes = plt.subplots(
+        no_outputs, 1, sharex=True, figsize=(6.4, 4.8/4*no_outputs))
+    fig.subplots_adjust(
+        left=None, bottom=None, right=None, top=None, wspace=None, hspace=0.5)
     
-    # Plot each history
+    # Handle case of single subplot (axes is not array)
+    if no_outputs == 1:
+        axes = [axes]
+    
+    # Plot each history with corresponding label
     iterations_array = np.arange(len(next(iter(histories.values()))))
-    for i, key in enumerate(histories):
-        axes[i].plot(iterations_array, histories[key])  # plot the history of the function
-        axes[i].set(ylabel=y_labels[i])  # set the y-axis label
-        axes[i].grid()  # add grid to the plot
-        axes[i].xaxis.set_major_locator(MaxNLocator(integer=True))  # ensure x-axis ticks are integers
+    for i, (key, label) in enumerate(zip(valid_names, valid_labels)):
+        axes[i].plot(iterations_array, histories[key])
+        axes[i].set(ylabel=label)
+        axes[i].grid()
+        axes[i].xaxis.set_major_locator(MaxNLocator(integer=True))
         
-    # Set x-axis label for the last subplot and display the plot
+    # Set x-axis label for the last subplot
     axes[-1].set(xlabel="Iteration")
-    plt.show()
     
-    # Print final values of the optimization variables and objectives
+    # Print final values of the optimization variables
     print("Design variables, constraints and objective at last iteration:")
     for key in histories:
         print(f"- {key}: {histories[key][-1]}")
     
-    # Return the figure and histories
-    return fig, histories
+    return fig, axes, histories
