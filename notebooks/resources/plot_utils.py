@@ -29,7 +29,8 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import matplotlib.pyplot as plt  # plotting library
+import matplotlib.pyplot as plt  # package for plotting
+import matplotlib as mpl  # package for setting parameters
 import tol_colors as tc  # package for colorblind-friendly colors
 from matplotlib.axes import Axes  # class for axes objects
 from mpl_toolkits.mplot3d.axes3d import Axes3D  # class for 3D axes objects
@@ -46,8 +47,8 @@ from matplotlib.colorbar import Colorbar  # class for colorbar objects
 # Set default color cycle to TOL bright and register Tol's color-blind friendly
 # colormaps
 plt.rc('axes', prop_cycle=plt.cycler('color', list(tc.tol_cset('bright'))))
-plt.cm.register_cmap('sunset', tc.tol_cmap('sunset'))
-plt.cm.register_cmap('rainbow_PuRd', tc.tol_cmap('rainbow_PuRd'))
+mpl.colormaps.register(tc.tol_cmap('sunset'), name='sunset')
+mpl.colormaps.register(tc.tol_cmap('rainbow_PuRd'), name='rainbow_PuRd')
 
 # Define default list of colors and red color for unstable segments
 COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
