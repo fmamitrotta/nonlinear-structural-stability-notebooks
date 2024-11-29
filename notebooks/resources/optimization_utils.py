@@ -441,8 +441,8 @@ def plot_optimization_history(
     axes[-1].set(xlabel="Iteration")
     
     # Print final values of the optimization variables
-    print("Design variables, constraints and objective at last iteration:")
-    for key in histories:
-        print(f"- {key}: {histories[key][-1]}")
+    print("Requested variables at last iteration:")
+    for key, value in histories.items():
+        print(f"- {key}: {value[-1]}")
     
     return fig, axes, histories
