@@ -84,7 +84,9 @@ class NastranModel:
             op2_filename=op2_filepath, load_geometry=True, debug=None)
         
         # Return structural displacements
-        displacements = self.op2.displacements[FIRST_SUBCASE_ID].data[-1, :, :]
+        first_subcase_key = next(iter(self.op2.displacements))
+        displacements =\
+            self.op2.displacements[first_subcase_key].data[-1, :, :]
         return displacements.flatten()
 
 
@@ -265,20 +267,28 @@ class NastranFunctions(om.ExplicitComponent):
         
         # Calculate output functions for SOL 106
         elif self.solver.bdf.sol == 106:
-            # Read eigenvalues of tangent stiffness matrix and aggregate with
-            # KS function
-            f06_filepath = os.path.join(
+            # Try to read eigenvalues from f06 file
+            try:
+                f06_filepath = os.path.join(
                 self.solver.analysis_directory_path,
-                self.solver.input_name + '.f06')  # path to .f06 file
-            eigenvalues =\
+                self.solver.input_name + '.f06')
+                eigenvalues =\
                 pynastran_utils.read_kllrh_lowest_eigenvalues_from_f06(
-                    f06_filepath)  # read eigenvalues from f06 files
+                    f06_filepath)
+            # If eigenvalues are not in f06 file, read them from op2 file
+            except ValueError:
+                eigenvalues =\
+                    pynastran_utils.read_kllrh_lowest_eigenvalues_from_op2(
+                        self.solver.op2)
+            # Aggregate eigenvalues with KS function
             outputs['ks_stability'] = compute_ks_function(eigenvalues[
                 ~np.isnan(eigenvalues)].flatten(), lower_flag=True)  # nan values are discarded
             
             # Read nonlinear von Mises stresses and aggregate with KS function
+            first_subcase_key = next(iter(
+                self.solver.op2.nonlinear_cquad4_stress))
             stresses = self.solver.op2.nonlinear_cquad4_stress[
-                FIRST_SUBCASE_ID].data[-1, :, 5]  # von Mises stress is in the 6th column of the stress array
+                first_subcase_key].data[-1, :, 5]  # von Mises stress is in the 6th column of the stress array
             outputs['ks_stress'] = compute_ks_function(
                 stresses, upper=inputs['yield_strength'])  # von Mises stress must be less than yield stress for the material not to yield
             
@@ -286,7 +296,7 @@ class NastranFunctions(om.ExplicitComponent):
             load_steps, _, _ =\
                 pynastran_utils.read_load_displacement_history_from_op2(
                     op2=self.solver.op2)
-            outputs['load_factor'] = load_steps[FIRST_SUBCASE_ID][-1]
+            outputs['load_factor'] = load_steps[first_subcase_key][-1]
             
         # Calculate output functions for SOL 144
         elif self.solver.bdf.sol == 144:
