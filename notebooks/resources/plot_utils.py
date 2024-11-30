@@ -107,9 +107,9 @@ def estimate_actual_negative_eigenvalues(
     # Calculate the tolerance for the predicted eigenvalue as three times the
     # standard deviation of the absolute value of the change in the lowest
     # eigenvalue during the last and current segment
-    tolerance = 3*np.std(np.concatenate(
-        (np.abs(np.diff(lowest_eigenvalue_row[last_segment])),
-         np.abs(np.diff(lowest_eigenvalue_row[current_segment])))))
+    tolerance = 3*np.std(np.concatenate((
+        np.abs(np.diff(lowest_eigenvalue_row[last_segment])),
+        np.abs(np.diff(lowest_eigenvalue_row[current_segment])))))
         
     # If the difference between the lowest new eigenvalue and the predicted
     # eigenvalue is less than or equal to the tolerance, update the actual
@@ -757,12 +757,13 @@ def plot_max_displacement_node(
                 displacement_amplification_factor
     
     # Plot node where maximum displacement occurs
-    axes.plot(max_displacement_node_xyz[0],
-              max_displacement_node_xyz[1],
-              max_displacement_node_xyz[2],
-              'x',
-              label=f"node {max_displacement_node_id:d} (max displacement)",
-              zorder=4)
+    axes.plot(
+        max_displacement_node_xyz[0],
+        max_displacement_node_xyz[1],
+        max_displacement_node_xyz[2],
+        'x',
+        label=f"node {max_displacement_node_id:d} (max displacement)",
+        zorder=4)
     
     # Return node id
     return max_displacement_node_id
