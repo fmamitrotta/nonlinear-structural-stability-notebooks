@@ -5,7 +5,10 @@ Baseline geometry definition
 @File    :   wingGeometry.py
 @Date    :   2023/03/28
 @Author  :   Alasdair Christison Gray
+@Modified :   2024/12/12
+@ModifiedBy : Francesco Mario Antonio Mitrotta
 @Description : This file contains all data required to define the geometry of the OML and wingbox for the MACH tutorial wing. Any code that works with the geometry of the wing should import this file and use the data contained within.
+@Modifications : Added utility functions to calculate the mean aerodynamic chord of a trapezoidal wing, to generate a layout object for the TSW wingbox model, and to create a base bdf input file. Also added cross-sectional and material properties for the wingbox model.
 """
 
 # ======================================================================
@@ -24,8 +27,27 @@ from pylayout.pyLayout import Layout
 from pyNastran.bdf.bdf import BDF
 
 # ======================================================================
-# Extension modules
+# Helper functions
 # ======================================================================
+def trapezoidal_wing_mean_aerodynamic_chord(
+    root_chord: float, taper_ratio: float) -> float:
+    """
+    Calculate the mean aerodynamic chord of a trapezoidal wing.
+
+    Parameters
+    ----------
+    root_chord: float
+        Root chord of the wing
+    taper_ratio: float
+        Taper ratio of the wing
+
+    Returns
+    -------
+    mean_aerodynamic_chord: float
+        Mean aerodynamic chord of the wing
+    """
+    return 2/3 * root_chord * (1 + taper_ratio + taper_ratio**2) /\
+        (1 + taper_ratio)
 
 # ======================================================================
 # Direction definition
@@ -69,33 +91,29 @@ planformArea = semiSpan * (rootChord + tipChord) * 0.5  # planform area of the h
 aspectRatio = 2 * (semiSpan**2) / planformArea
 taperRatio = tipChord / rootChord
 
-meanAerodynamicChord = 2/3*rootChord*(1 + taperRatio + taperRatio**2)/\
-    (1 + taperRatio)
+meanAerodynamicChord = trapezoidal_wing_mean_aerodynamic_chord(
+    root_chord=rootChord, taper_ratio=taperRatio)
 
 # --- No do the same for the tails ---
 hTailRootChord = 3.25
 hTailTipChord = 1.22
 hTailSemiSpan = 6.5
 hTailPlanformArea = hTailSemiSpan * (hTailRootChord + hTailTipChord) * 0.5
-hTailMeanAerodynamicChord = hTailPlanformArea * (
-    (2.0 / 3.0) * (hTailRootChord + hTailTipChord - hTailRootChord *\
-        hTailTipChord / (hTailRootChord + hTailTipChord))
-)
 hTailaspectRatio = 2 * (hTailSemiSpan**2) / hTailPlanformArea
 hTailSweep = 30.0
 hTailTaperRatio = hTailTipChord / hTailRootChord
+hTailMeanAerodynamicChord = trapezoidal_wing_mean_aerodynamic_chord(
+    root_chord=hTailRootChord, taper_ratio=hTailTaperRatio)
 
 vTailRootChord = 15.3 * 0.3048
 vTailTipChord = 12.12 * 0.3048
 vTailSemiSpan = 15.72 * 0.3048
 vTailPlanformArea = vTailSemiSpan * (vTailRootChord + vTailTipChord) * 0.5
-vTailMeanAerodynamicChord = vTailPlanformArea * (
-    (2.0 / 3.0) * (vTailRootChord + vTailTipChord - vTailRootChord *\
-        vTailTipChord / (vTailRootChord + vTailTipChord))
-)
 vTailaspectRatio = 2 * (vTailSemiSpan**2) / vTailPlanformArea
 vTailSweep = 37.0
 vTailTaperRatio = vTailTipChord / vTailRootChord
+vTailMeanAerodynamicChord = trapezoidal_wing_mean_aerodynamic_chord(
+    root_chord=vTailRootChord, taper_ratio=vTailTaperRatio)
 
 # --- Nacelle ---
 nacelleLength = 5.865
@@ -168,13 +186,13 @@ TESparCoords[0, verticalIndex] = LECoords[0, verticalIndex] + rootTESparFrac * (
 )
 
 # ======================================================================
-# Cross-section Definition
+# Cross-sectional properties definition
 # ======================================================================
 panelThickness = .0065  # [m]
 stiffenerThickness = .006  # [m]
 
 # ======================================================================
-# Material Definition
+# Material properties definition
 # ======================================================================
 density = 2780.  # [kg/m^3]
 youngModulus = 73.1e9  # [Pa]
@@ -184,27 +202,19 @@ yieldStrength = 420e6  # [Pa]
 # ======================================================================
 # BDF input generation functions
 # ======================================================================
-def create_base_bdf(
-    target_length: float, element_order: int = 2,
-    parallel:bool = False, no_cores:int = 4) -> Tuple[BDF, Layout]:
+def create_layout(target_length: float, element_order: int = 2) -> Layout:
     """
-    Generate a base bdf input file for the TSW wingbox model.
-
+    Generate a layout object for the TSW wingbox model.
+    
     Parameters
     ----------
     target_length: float
         Target element length for the mesh
     element_order: int
         Order of the elements used in the mesh
-    parallel: bool
-        flag to enable parallel execution of Nastran
-    no_cores: int
-        Number of cores to use for parallel execution
-
+    
     Returns
     -------
-    bdf: BDF
-        BDF object containing the generated input file
     layout: Layout
         Layout object containing the generated wingbox layout
     """
@@ -330,11 +340,41 @@ def create_base_bdf(
         maxStringerHeight=stiffenerHeight,
     )
     
+    # Return the layout object
+    return layout
+
+def create_base_bdf(
+    target_length: float, element_order: int = 2,
+    parallel:bool = False, no_cores:int = 4) -> Tuple[BDF, Layout]:
+    """
+    Generate a base bdf input file for the TSW wingbox model.
+
+    Parameters
+    ----------
+    target_length: float
+        Target element length for the mesh
+    element_order: int
+        Order of the elements used in the mesh
+    parallel: bool
+        flag to enable parallel execution of Nastran
+    no_cores: int
+        Number of cores to use for parallel execution
+
+    Returns
+    -------
+    bdf: BDF
+        BDF object containing the generated input file
+    layout: Layout
+        Layout object containing the generated wingbox layout
+    """
+    # Create pyLayout object
+    layout = create_layout(target_length, element_order)
+    
     # Write bdf file
     directory_path = os.path.dirname(os.path.abspath(__file__))
     bdf_filepath = os.path.join(directory_path, "stw_wingbox.bdf")
     layout.finalize(bdf_filepath)
-    
+        
     # Create an instance of the BDF class without debug or info messages
     bdf = BDF(debug=None)
     
