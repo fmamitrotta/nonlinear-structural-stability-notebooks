@@ -18,7 +18,6 @@ from pyNastran.op2.op2 import OP2, read_op2
 from pyNastran.utils.nastran_utils import run_nastran
 import re
 from typing import Tuple, Dict, Any, Union
-import subprocess
 
 
 # Constant variables
@@ -28,7 +27,7 @@ RESOURCES_PATH = os.path.dirname(os.path.abspath(__file__))  # set resources fol
 
 def run_analysis(
     directory_path: str, filename: str, bdf: BDF, parallel: bool = False,
-    no_cores: int = 6, run_flag: bool = True):
+    no_cores: int = 4, run_flag: bool = True):
     """
     Write .bdf input file from BDF object and execute Nastran analysis.
 
