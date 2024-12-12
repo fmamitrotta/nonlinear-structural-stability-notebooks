@@ -62,25 +62,10 @@ def run_analysis(
     if parallel:
         keywords_list.append(f"smp={no_cores:d}")
     
-    # Call Nastran process depending on the operating system
-    if os.name == "posix":
-        # If windows subsystem for linux, set up the nastran call through the call function of the subprocess module
-        pwd = os.getcwd()  # save current working directory
-        bdf_directory = os.path.dirname(bdf_filepath)  # get directory of the bdf file
-        os.chdir(bdf_directory)  # change working directory to the bdf directory
-        wsl_path = NASTRAN_PATH[0].lower() + NASTRAN_PATH[1:].replace(":", "")  # replace drive letter and colon
-        wsl_path = "/mnt/" + wsl_path.replace("\\", "/")  # replace backslashes with forward slashes
-        bdf_filepath = bdf_filepath.replace("/mnt/c", "C:").replace("/", "\\")  # convert bdf path to windows format
-        keywords_list.remove("bat=no")  # remove bat=no keyword for windows subsystem for linux
-        call_args = [wsl_path, bdf_filepath] + keywords_list  # create call arguments
-        if run_flag:
-            subprocess.call(call_args)  # call nastran process
-        os.chdir(pwd)  # change back to original working directory
-    else:
-        # If not windows subsystem for linux, call nastran with the appropriate pynastran helper function
-        run_nastran(
-            bdf_filename=bdf_filepath, nastran_cmd=NASTRAN_PATH,
-            run_in_bdf_dir=True, run=run_flag, keywords=keywords_list)
+    # Call Nastran process
+    run_nastran(
+        bdf_filename=bdf_filepath, nastran_cmd=NASTRAN_PATH,
+        run_in_bdf_dir=True, run=run_flag, keywords=keywords_list)
         
     # Read and print wall time of simulation
     log_filepath = os.path.join(directory_path, filename + '.log')
@@ -155,15 +140,54 @@ def create_real_eigenvalue_extraction_subcase(
         bdf.methods[method_set_id].nd = no_eigenvalues
 
 
-def read_load_displacement_history_from_op2(op2: OP2, node_ids: list[int] = [1]) -> \
-        Tuple[Dict[Any, Any], Dict[Any, Any], Dict[Any, Any]]:
+def read_displacement_from_op2(
+    op2: OP2, node_ids: list[int] = [1]) -> Dict[Any, Dict[int, ndarray]]:
     """
-    Read history of total applied load and displacements at the indicated nodes from a OP2 object obtained from a nonlinear analysis.
+    Read displacements at the indicated nodes from a linear analysis OP2
+    object.
 
     Parameters
     ----------
     op2 : OP2
-        pyNastran object including the results of a nonlinear analysis (SOL 106)
+        pyNastran object including the results read from an op2 file
+    node_ids: list[int]
+        list of ids of the nodes where the displacements are read
+
+    Returns
+    -------
+    displacements: dict
+        dictionary of dictionaries with node ids as primary keys,
+        subcase ids as secondary keys and numpy arrays of displacements 
+        and rotations at the indicated node as values
+    """
+    # Initialize dictionary where the displacements will be saved
+    displacements = {id: {} for id in node_ids}
+    
+    # Loop through the subcases
+    for subcase_id in op2.displacements:
+        # Loop through the node ids
+        for id in node_ids:
+            # Save displacements of current subcase and current node id
+            node_index = np.where(
+                op2.displacements[subcase_id].node_gridtype[:, 0] == id)[0][0]
+            displacements[id][subcase_id] = op2.displacements[
+                subcase_id].data[:, node_index, :]
+    
+    # Return output data
+    return displacements
+
+
+def read_load_displacement_history_from_op2(
+    op2: OP2, node_ids: list[int] = [1]) -> \
+        Tuple[Dict[Any, ndarray], Dict[Any, ndarray], Dict[Any, ndarray]]:
+    """
+    Read history of total applied loads and of displacements at the
+    indicated nodes from a nonlinear analysis OP2 object.
+
+    Parameters
+    ----------
+    op2 : OP2
+        pyNastran object including the results of a nonlinear analysis
     node_ids: list[int]
         list of ids of the nodes where the displacements are read
 
@@ -172,27 +196,38 @@ def read_load_displacement_history_from_op2(op2: OP2, node_ids: list[int] = [1])
     load_steps: dict
         dictionary with a vector of the load steps for each subcase
     displacements: dict
-        dictionary of dictionaries with node ids as primary keys, subcase ids as secondaru keys and numpy
-        arrays of the xyz displacements at the indicated node as values
+        dictionary of dictionaries with node ids as primary keys,
+        subcase ids as secondary keys and numpy arrays of displacements 
+        and rotations at the indicated node as values
     loads: dict
-        dictionary with subcase ids as keys and arrays of the applied loads as values
+        dictionary with subcase ids as keys and arrays of the applied
+        loads as values
     """
     # Initialize dictionaries where the quantities of interest will be saved
     load_steps = {}
     displacements = {id: {} for id in node_ids}
     loads = {}
+    
     # Iterate through the subcases found in the op2 file
     valid_subcase_ids = [
-        subcase_id for subcase_id in op2.load_vectors if hasattr(op2.load_vectors[subcase_id], 'lftsfqs')]
+        subcase_id for subcase_id in op2.load_vectors if hasattr(
+            op2.load_vectors[subcase_id], 'lftsfqs')]
     for subcase_id in valid_subcase_ids:
         # Save load steps of current subcase
         load_steps[subcase_id] = op2.load_vectors[subcase_id].lftsfqs
+        
         # Save loads summation of current subcase
-        loads[subcase_id] = np.sum(op2.load_vectors[subcase_id].data[:, :, 0:3], axis=1)
-        # Save displacements of indicated node ids and current subcase
+        loads[subcase_id] = np.sum(
+            op2.load_vectors[subcase_id].data[:, :, 0:3], axis=1)
+        
+        # Loop through the node ids
         for id in node_ids:
-            node_index = np.where(op2.displacements[subcase_id].node_gridtype[:, 0] == id)[0][0]
-            displacements[id][subcase_id] = op2.displacements[subcase_id].data[:, node_index, :]
+            # Save displacements of current subcase and current node id
+            node_index = np.where(
+                op2.displacements[subcase_id].node_gridtype[:, 0] == id)[0][0]
+            displacements[id][subcase_id] = op2.displacements[
+                subcase_id].data[:, node_index, :]
+    
     # Return output data
     return load_steps, loads, displacements
 
