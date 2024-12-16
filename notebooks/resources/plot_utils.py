@@ -29,7 +29,8 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import matplotlib.pyplot as plt  # plotting library
+import matplotlib.pyplot as plt  # package for plotting
+import matplotlib as mpl  # package for setting parameters
 import tol_colors as tc  # package for colorblind-friendly colors
 from matplotlib.axes import Axes  # class for axes objects
 from mpl_toolkits.mplot3d.axes3d import Axes3D  # class for 3D axes objects
@@ -46,8 +47,8 @@ from matplotlib.colorbar import Colorbar  # class for colorbar objects
 # Set default color cycle to TOL bright and register Tol's color-blind friendly
 # colormaps
 plt.rc('axes', prop_cycle=plt.cycler('color', list(tc.tol_cset('bright'))))
-plt.cm.register_cmap('sunset', tc.tol_cmap('sunset'))
-plt.cm.register_cmap('rainbow_PuRd', tc.tol_cmap('rainbow_PuRd'))
+mpl.colormaps.register(tc.tol_cmap('sunset'), name='sunset')
+mpl.colormaps.register(tc.tol_cmap('rainbow_PuRd'), name='rainbow_PuRd')
 
 # Define default list of colors and red color for unstable segments
 COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
@@ -106,9 +107,9 @@ def estimate_actual_negative_eigenvalues(
     # Calculate the tolerance for the predicted eigenvalue as three times the
     # standard deviation of the absolute value of the change in the lowest
     # eigenvalue during the last and current segment
-    tolerance = 3*np.std(np.concatenate(
-        (np.abs(np.diff(lowest_eigenvalue_row[last_segment])),
-         np.abs(np.diff(lowest_eigenvalue_row[current_segment])))))
+    tolerance = 3*np.std(np.concatenate((
+        np.abs(np.diff(lowest_eigenvalue_row[last_segment])),
+        np.abs(np.diff(lowest_eigenvalue_row[current_segment])))))
         
     # If the difference between the lowest new eigenvalue and the predicted
     # eigenvalue is less than or equal to the tolerance, update the actual
@@ -371,14 +372,13 @@ def plot_eigenvalue_diagram(
 
 def plot_displacements(
     op2: OP2, displacement_data: ndarray, displacement_nodes_ids: ndarray,
-    elements_ids: ndarray = None, axes: Axes3D = None,
-    displacement_component: str = 'magnitude',
-    displacement_unit_scale_factor: float = 1.,
     coordinate_unit_scale_factor: float = 1.,
+    displacement_unit_scale_factor: float = 1.,
     displacement_amplification_factor: float = 1.,
-    colormap: str = 'rainbow_PuRd', clim: Union[list, ndarray] = None,
-    length_unit: str = 'mm', angle_unit: str = 'rad') ->\
-        Tuple[Figure, Axes3D, ScalarMappable]:
+    elements_ids: ndarray = None, displacement_component: str = 'magnitude',
+    angle_unit: str = 'rad', colormap: str = 'rainbow_PuRd',
+    clim: Union[list, ndarray] = None, axes: Axes3D = None,
+    length_unit: str = 'mm') -> Tuple[Figure, Axes3D, ScalarMappable]:
     """
     Plot the deformed shape coloured by displacement magnitude based on
     input OP2 object and displacement data.
@@ -392,28 +392,28 @@ def plot_displacements(
     displacement_nodes_ids: ndarray
         array with the ids of the nodes where the displacements are
         defined
-    elements_ids: ndarray
-        array with the ids of the elements to plot
-    axes: Axes3D
-        object of the axes where the deformed shape will be plotted
-    displacement_component: str
-        name of the displacement component used for the colorbar
-    displacement_unit_scale_factor: float
-        unit scale factor for displacements
     coordinate_unit_scale_factor: float
         unit scale factor for nodes coordinates
+    displacement_unit_scale_factor: float
+        unit scale factor for displacements
     displacement_amplification_factor: float
         amplification factor for displacements
+    elements_ids: ndarray
+        array with the ids of the elements to plot
+    displacement_component: str
+        name of the displacement component used for the colorbar
+    angle_unit: str
+        measurement unit of angles, used in the label of the colorbar
+        when the displacement component is a rotation
     colormap: str
         name of the colormap used for the displacement colorbar
     clim: Union[list, ndarray]:
         colorbar values limits
+    axes: Axes3D
+        object of the axes where the deformed shape will be plotted
     length_unit: str
         measurement unit of coordinates and displacements, used in the
         label of the axes
-    angle_unit: str
-        measurement unit of angles, used in the label of the colorbar
-        when the displacement component is a rotation
 
     Returns
     -------
@@ -425,7 +425,7 @@ def plot_displacements(
         color mapping object for the scalar corresponding to the
         displacement component
     """
-     
+    
     # Extract the coordinates of the undeformed nodes and apply unit conversion
     undeformed_coordinates_array = np.vstack([
         op2.nodes[node_id].xyz for node_id in op2.nodes]) *\
@@ -457,7 +457,8 @@ def plot_displacements(
     vertices = deformed_coordinates_array[shell_elements_node_index_array]
     
     # Create 3D polygons
-    polygons = Poly3DCollection(vertices, linewidths=.05, edgecolor='k')
+    polygons = Poly3DCollection(
+        vertices, linewidths=.05, edgecolor='k', zorder=1.)
     
     # If displacement component is magnitude, calculate displacement magnitude
     if displacement_component == 'magnitude':
@@ -503,7 +504,7 @@ def plot_displacements(
     # If axes object is not provided, create a new figure and axes
     if axes is None:
         fig = plt.figure()
-        axes = fig.add_subplot(111, projection='3d')
+        axes = fig.add_subplot(111, projection='3d', computed_zorder=False)
     # If axes object is provided, get figure object from provided axes object
     else:
         fig = axes.get_figure()
@@ -532,12 +533,13 @@ def plot_displacements(
 
 
 def plot_eigenvector(
-    op2: OP2, subcase_id: Union[int, tuple], elements_ids: ndarray = None,
-    axes: Axes3D = None, eigenvector_number: int = 1,
-    displacement_component: str = 'magnitude', unit_scale_factor: float = 1.,
+    op2: OP2, subcase_id: Union[int, tuple], eigenvector_number: int = 1,
+    unit_scale_factor: float = 1.,
     displacement_amplification_factor: float = 1.,
+    elements_ids: ndarray = None,  displacement_component: str = 'magnitude', 
     colormap: str = 'rainbow_PuRd', clim: Union[list, ndarray] = None,
-    length_unit: str = 'm') -> Tuple[Figure, Axes3D, Colorbar]:
+    axes: Axes3D = None,  length_unit: str = 'm', shrink_colorbar: float = 1.,
+    colorbar_pad: float = .05) -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot one of the eigenvectors included in the input OP2 object.
 
@@ -548,25 +550,29 @@ def plot_eigenvector(
     subcase_id: int, tuple
         key of the eigenvectors' dictionary in the OP2 object
         corresponding to the selected subcase
-    elements_ids: ndarray
-        array with the ids of the elements to plot
-    axes: Axes3D
-        object of the axes where the eigenvector will be plotted
     eigenvector_number: int
         number of the eigenvector to be plotted
-    displacement_component: str
-        name of the displacement component used for the colorbar
     unit_scale_factor: float
         scale factor for unit conversion
     displacement_amplification_factor: float
         scale factor applied to the displacements
+    elements_ids: ndarray
+        array with the ids of the elements to plot
+    displacement_component: str
+        name of the displacement component used for the colorbar
     colormap: str
         name of the colormap used for the displacement colorbar
     clim: Union[list, ndarray]
         colorbar values limits
+    axes: Axes3D
+        object of the axes where the eigenvector will be plotted
     length_unit: str
         measurement unit of coordinates and displacements, used in the
         label of axes and colormap
+    shrink_colorbar: float
+        shrink factor for the colorbar
+    colorbar_pad: float
+        padding between the colorbar and the axes
 
     Returns
     -------
@@ -608,7 +614,8 @@ def plot_eigenvector(
     
     # Add colorbar
     cbar = fig.colorbar(
-        mappable=m, ax=ax, label=cbar_label_dict[displacement_component])
+        mappable=m, ax=ax, label=cbar_label_dict[displacement_component],
+        shrink=shrink_colorbar, pad=colorbar_pad)
     
     # If axes object is not provided, set whitespace to 0
     if axes is None:
@@ -739,7 +746,6 @@ def plot_max_displacement_node(
     max_displacement_node_id: int
         integer with the node id where the maximum displacement occurs
     """
-
     # Find index of maximum displacement magnitude
     max_displacement_index = np.argmax(np.linalg.norm(
         op2.eigenvectors[subcase_id].data[eigenvector_number - 1, :, 0:3],
@@ -756,12 +762,13 @@ def plot_max_displacement_node(
                 displacement_amplification_factor
     
     # Plot node where maximum displacement occurs
-    axes.plot(max_displacement_node_xyz[0],
-              max_displacement_node_xyz[1],
-              max_displacement_node_xyz[2],
-              'x',
-              label=f"node {max_displacement_node_id:d} (max displacement)",
-              zorder=4)
+    axes.scatter(
+        max_displacement_node_xyz[0],
+        max_displacement_node_xyz[1],
+        max_displacement_node_xyz[2],
+        marker='x',
+        label=f"Node {max_displacement_node_id:d} (max displacement)",
+        zorder=3.)
     
     # Return node id
     return max_displacement_node_id
