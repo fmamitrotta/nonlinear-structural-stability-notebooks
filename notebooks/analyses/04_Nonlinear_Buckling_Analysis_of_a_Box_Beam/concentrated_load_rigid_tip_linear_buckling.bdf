@@ -13,8 +13,6 @@ OLOAD(PLOT) = ALL
 SPC = 1
 SUBCASE 1
     LOAD = 11
-SUBCASE 2
-    METHOD = 12
 BEGIN BULK
 $PARAMS
 PARAM*              POST               1
@@ -13503,9 +13501,6 @@ RBE2        3345    3389  123456       1       2     155     232     309
 $LOADS
 FORCE*                11            3389                1.0000000000e+00
 *       0.0000000000e+000.0000000000e+001.0000000000e+00
-$DYNAMIC
-EIGRL*                12              0.                               1
-*
 $SPCs
 SPC1           1  123456     153     154     231     308     385     386
              387     540     617     694     771     848     925    1002
