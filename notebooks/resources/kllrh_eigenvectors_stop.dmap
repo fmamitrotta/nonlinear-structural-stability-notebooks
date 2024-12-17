@@ -1,8 +1,8 @@
 $ This file is part of the GitHub repository 
 $ nonlinear-structural-stability-notebooks, created by Francesco M. A. 
 $ Mitrotta.
-$ The contribution of Mike Coleman from MSC Software to the development 
-$ of this DMAP program is greatly acknowledged.
+$ The contribution of Mike Coleman from Hexagon to the development 
+$ of this DMAP program is warmly acknowledged.
 $ Copyright (C) 2024 Francesco Mario Antonio Mitrotta
 $ 
 $ Redistribution and use in source and binary forms, with or without 
@@ -30,6 +30,13 @@ $ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 $ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
 $ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 $ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+$
+$ This DMAP program is designed to extract the smallest-magnitude
+$ eigenvalues and the corresponding eigenvectors of the tangent
+$ stiffness matrix (KLLRH) at each converged increment of a nonlinear
+$ static analysis. The eigenvalues and the eigenvectors are stored in
+$ the output op2 file. The DMAP stops the analysis if a negative
+$ eigenvalue is found.
 $
 ECHOOFF  $ do not print following commands to output file
 compile nlstatic  $ request compilation of nlstatic solution sequence

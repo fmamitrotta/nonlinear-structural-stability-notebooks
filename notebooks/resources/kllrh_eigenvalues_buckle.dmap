@@ -3,7 +3,7 @@ $ nonlinear-structural-stability-notebooks, created by Francesco M. A.
 $ Mitrotta.
 $ The contribution of Mike Coleman from Hexagon to the development 
 $ of this DMAP program is warmly acknowledged.
-$ Copyright (C) 2023 Francesco Mario Antonio Mitrotta
+$ Copyright (C) 2022 Francesco Mario Antonio Mitrotta
 $ 
 $ Redistribution and use in source and binary forms, with or without 
 $ modification, are permitted provided that the following conditions are
@@ -34,14 +34,12 @@ $
 $ This DMAP program is designed to extract the smallest-magnitude
 $ eigenvalues of the tangent stiffness matrix (KLLRH) at each converged
 $ increment of a nonlinear static analysis. The eigenvalues are stored
-$ in the output f06 file. The DMAP stops the analysis if a negative
-$ eigenvalue is found.
+$ in the output f06 file.
 $
 ECHOOFF $
 compile nlstatic $
 alter 2 $
-type parm,,rs,y,lowereig=-1.e32 $
-type parm,,rs,y,uppereig=1.e32 $
+type parm,,rs,y,lowereig=-1.e32,uppereig=1.e32 $
 type parm,,i,y,bmodes=1 $
 type parm,,i,y,bloop=0 $
 alter 'ENDIF.*BUCKLE.-1 AND CONV.-1'  $
@@ -52,28 +50,17 @@ READ KLLRH,IM,,,,,,,,,,,,/
      LAMA0,PH0,M0X,OEIGS0,LAMMAT0,/                                           
      'MODES'/S,N,NEIGV////-1/'LAN'/lowereig/uppereig//bmodes/0////                                
      FALSE/1.e7     $    
+$ ofp lama0// $
 message //'' $
 if (cbuckle<1) nloop=nloop-1 $
 message //'NLOOP ='/nloop $
 if (cbuckle<1) nloop=nloop+1 $
 bloop=0 $
-do while (bloop<neigv) $
+do while (bloop<bmodes) $
 bloop=bloop+1 $
 PARAML lammat0//'dmi'/bloop/bloop/s,n,leigvmc        $
 message //'kllrh eigenvalue '/ bloop /' = '/leigvmc $
-if (leigvmc<0.) then $
-loopflag=FALSE $
-endif $
 enddo $
-if (loopflag=FALSE) then $
-message //'Negative eigenvalue found. Stopping analysis.' $
-endif $
 ofp oeigs0// $
-endif $
-alter 'paraml *casesx2.*cmethod'  $
-if (cbuckle=2) then $
-cbuckle=-1 $
-lbuckle=false $
-JUMP LENDDO $
 endif $
 ECHOON $

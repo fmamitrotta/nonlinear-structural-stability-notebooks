@@ -1,9 +1,9 @@
 $ This file is part of the GitHub repository 
 $ nonlinear-structural-stability-notebooks, created by Francesco M. A. 
 $ Mitrotta.
-$ The contribution of Mike Coleman from MSC Software to the development 
-$ of this DMAP program is greatly acknowledged.
-$ Copyright (C) 2022 Francesco Mario Antonio Mitrotta
+$ The contribution of Mike Coleman from Hexagon to the development 
+$ of this DMAP program is warmly acknowledged.
+$ Copyright (C) 2024 Francesco Mario Antonio Mitrotta
 $ 
 $ Redistribution and use in source and binary forms, with or without 
 $ modification, are permitted provided that the following conditions are
@@ -31,6 +31,12 @@ $ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 $ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 $ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 $
+$ This DMAP program is designed to extract the smallest-magnitude
+$ eigenvalues of the symmetric part of the tangent stiffness matrix
+$ (KLLRH) at each converged increment of a nonlinear static analysis.
+$ The eigenvalues are stored in the output f06 file. The DMAP skips
+$ Nastran's nonlinear buckling analysis.
+$
 ECHOOFF $
 compile nlstatic $
 alter 2 $
@@ -41,8 +47,11 @@ type parm,,i,y,bloop=0 $
 alter 'ENDIF.*BUCKLE.-1 AND CONV.-1'  $
 if (conv>0 and (newp=-1 or cbuckle>0)) then $
 PARAML KLLRH//'TRAILER'/1/S,N,NC//         $
+TRNSP KLLRH/KLLRHT  $
+ADD5 KLLRH,KLLRHT,,,/KLLRHS/0.5/0.5  $
+MODTRL KLLRHS////6 $
 MATGEN ,/IM/1/NC $
-READ KLLRH,IM,,,,,,,,,,,,/                                                     
+READ KLLRHS,IM,,,,,,,,,,,,/                                                     
      LAMA0,PH0,M0X,OEIGS0,LAMMAT0,/                                           
      'MODES'/S,N,NEIGV////-1/'LAN'/lowereig/uppereig//bmodes/0////                                
      FALSE/1.e7     $    

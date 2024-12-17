@@ -1,8 +1,8 @@
 $ This file is part of the GitHub repository 
 $ nonlinear-structural-stability-notebooks, created by Francesco M. A. 
 $ Mitrotta.
-$ The contribution of Mike Coleman from MSC Software to the development 
-$ of this DMAP program is greatly acknowledged.
+$ The contribution of Mike Coleman from Hexagon to the development 
+$ of this DMAP program is warmly acknowledged.
 $ Copyright (C) 2022 Francesco Mario Antonio Mitrotta
 $ 
 $ Redistribution and use in source and binary forms, with or without 
@@ -31,10 +31,17 @@ $ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 $ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 $ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 $
+$ This DMAP program is designed to extract the smallest-magnitude
+$ eigenvalues of the tangent stiffness matrix (KLLRH) at each converged
+$ increment of a nonlinear static analysis. The eigenvalues are stored
+$ in the output f06 file. The DMAP skips Nastran's nonlinear buckling
+$ analysis.
+$
 ECHOOFF $
 compile nlstatic $
 alter 2 $
-type parm,,rs,y,lowereig=-1.e32,uppereig=1.e32 $
+type parm,,rs,y,lowereig=-1.e32 $
+type parm,,rs,y,uppereig=1.e32 $
 type parm,,i,y,bmodes=1 $
 type parm,,i,y,bloop=0 $
 alter 'ENDIF.*BUCKLE.-1 AND CONV.-1'  $
@@ -45,17 +52,22 @@ READ KLLRH,IM,,,,,,,,,,,,/
      LAMA0,PH0,M0X,OEIGS0,LAMMAT0,/                                           
      'MODES'/S,N,NEIGV////-1/'LAN'/lowereig/uppereig//bmodes/0////                                
      FALSE/1.e7     $    
-$ ofp lama0// $
 message //'' $
 if (cbuckle<1) nloop=nloop-1 $
 message //'NLOOP ='/nloop $
 if (cbuckle<1) nloop=nloop+1 $
 bloop=0 $
-do while (bloop<bmodes) $
+do while (bloop<neigv) $
 bloop=bloop+1 $
 PARAML lammat0//'dmi'/bloop/bloop/s,n,leigvmc        $
 message //'kllrh eigenvalue '/ bloop /' = '/leigvmc $
 enddo $
 ofp oeigs0// $
+endif $
+alter 'paraml *casesx2.*cmethod'  $
+if (cbuckle=2) then $
+cbuckle=-1 $
+lbuckle=false $
+JUMP LENDDO $
 endif $
 ECHOON $
