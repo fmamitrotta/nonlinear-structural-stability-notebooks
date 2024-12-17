@@ -703,7 +703,7 @@ def plot_deformation(
         'rx': f"$\\theta_x,\,\mathrm{{{angle_unit}}}$",
         'ry': f"$\\theta_y,\,\mathrm{{{angle_unit}}}$",
         'rz': f"$\\theta_z,\,\mathrm{{{angle_unit}}}$",
-        'magnitude': f"\|u\|, {length_unit}"}
+        'magnitude': f"$\|u\|$, {length_unit}"}
     
     # Add colorbar
     cbar = fig.colorbar(
