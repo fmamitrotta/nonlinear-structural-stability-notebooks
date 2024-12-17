@@ -729,8 +729,8 @@ def set_up_sol_105(
 
 def run_sol_105(
     bdf: BDF,
-    input_name: str,
     analysis_directory_path: str,
+    input_name: str,
     static_load_set_id: int = None,
     method_set_id: int = None,
     no_eigenvalues: int = 1,
@@ -745,10 +745,10 @@ def run_sol_105(
     ----------
     bdf: BDF
         pyNastran object representing the Nastran bdf input
-    input_name: str
-        string with the name that will be given to the input file
     analysis_directory_path: str
         string with the path to the directory where the analysis is run
+    input_name: str
+        string with the name that will be given to the input file
     static_load_set_id: int
         set id of the static load applied in the first subcase
     method_set_id: int
