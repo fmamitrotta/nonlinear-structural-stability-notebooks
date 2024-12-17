@@ -5,7 +5,7 @@ $pyNastran: nnodes=3389
 $pyNastran: nelements=3344
 $EXECUTIVE CONTROL DECK
 SOL 106
-include '..\..\resources\kllrh_eigenvalues_nobuckle.dmap'
+include '..\..\resources\kllrh_eigenvalues.dmap'
 CEND
 $CASE CONTROL DECK
 DISPLACEMENT(PLOT) = ALL
