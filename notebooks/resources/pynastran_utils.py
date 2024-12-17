@@ -1,13 +1,32 @@
 """
-This file is part of the GitHub repository nonlinear-structural-stability-notebooks, created by Francesco M. A. Mitrotta.
+This file is part of the GitHub repository
+nonlinear-structural-stability-notebooks, created by
+Francesco M. A. Mitrotta.
 Copyright (C) 2022 Francesco Mario Antonio Mitrotta
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
 
-1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+1. Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import numpy as np
@@ -21,7 +40,8 @@ from typing import Tuple, Dict, Any, Union
 
 
 # Constant variables
-NASTRAN_PATH = r"C:\Program Files\MSC.Software\MSC_Nastran\2021.4\bin\nastran.exe"  # path to nastran executable - change to your path
+NASTRAN_PATH =\
+    r"C:\Program Files\MSC.Software\MSC_Nastran\2021.4\bin\nastran.exe"  # path to nastran executable - change to your path
 RESOURCES_PATH = os.path.dirname(os.path.abspath(__file__))  # set resources folder path
 
 
@@ -73,7 +93,8 @@ def run_analysis(
         for line in log_file:
             if 'Total' in line:
                 wall_time = float(re.findall(regexp, line)[1])
-                print(f"Nastran job {bdf_filename} completed\nWall time: {wall_time:.1f} s")
+                print(f"Nastran job {bdf_filename} completed\n"
+                      f"Wall time: {wall_time:.1f} s")
                 break
 
 
@@ -231,24 +252,28 @@ def read_load_displacement_history_from_op2(
     return load_steps, loads, displacements
 
 
-def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2: OP2) -> Tuple[ndarray, ndarray]:
+def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2: OP2) ->\
+    Tuple[ndarray, ndarray]:
     """
-    Return nonlinear buckling load vector and critical buckling factors by reading the .f06 and .op2 files of a
-    SOL 106 analyis with the nonlinear buckling method.
+    Return nonlinear buckling load vector and critical buckling factors
+    by reading the .f06 and .op2 files of a SOL 106 analyis with the
+    nonlinear buckling method.
 
     Parameters
     ----------
     f06_filepath: str
         string with path to .f06 file
     op2: OP2
-        pyNastran object including the results of a nonlinear analysis (SOL 106) with nonlinear buckling method
+        pyNastran object including the results of a nonlinear analysis
+        (SOL 106) with nonlinear buckling method
 
     Returns
     -------
     nonlinear_buckling_load_vectors: ndarray
-        array of the nonlinear buckling load vectors, calculated as P + Delta P * alpha, dimensions (number of subcases, number of nodes, 6)
+        array of the nonlinear buckling load vectors, calculated as
+        P + Delta P * alpha, size (number of subcases, number of nodes, 6)
     alphas: ndarray
-        array of critical buckling factors, dimensions (number of subcases)
+        array of critical buckling factors, size (number of subcases)
     """
     # Read critical buckling factor ALPHA for each subcase
     alphas = []  # empty list of critical buckling factors
@@ -257,31 +282,41 @@ def read_nonlinear_buckling_load_from_f06(f06_filepath: str, op2: OP2) -> Tuple[
         for line in f06_file:
             if 'ALPHA' in line:
                 alphas.append(float(re.findall(regexp, line)[0]))
+                
     # Find valid subcases in the OP2 object (subcases with list of load steps)
     valid_subcase_ids = [subcase_id for subcase_id in op2.load_vectors if
                          hasattr(op2.load_vectors[subcase_id], 'lftsfqs')]
+    
     # Return None if no valid subcases are found
     if valid_subcase_ids == []:
         nonlinear_buckling_load_vectors = None
     else:
         # Initialize list of nonlinear buckling load vectors
-        nonlinear_buckling_load_vectors = np.empty(tuple([len(alphas)]) + np.shape(op2.load_vectors[valid_subcase_ids[0]].data[-1, :, :]))
+        nonlinear_buckling_load_vectors = np.empty(tuple([len(alphas)]) +\
+            np.shape(op2.load_vectors[valid_subcase_ids[0]].data[-1, :, :]))
+        
         # Iterate through the valid subcases
         for i, subcase_id in enumerate(valid_subcase_ids):
             # Find the final load vector of current subcase
             final_load_vector = op2.load_vectors[subcase_id].data[-1, :, :]
+            
             # Find last increment vector of current subcase
-            last_increment_vector = final_load_vector - op2.load_vectors[subcase_id].data[-2, :, :]
+            last_increment_vector = final_load_vector - op2.load_vectors[
+                subcase_id].data[-2, :, :]
+            
             # Calculate nonlinear buckling load as P+DeltaP*ALPHA
-            nonlinear_buckling_load_vectors[i] = final_load_vector + last_increment_vector * alphas[i]
+            nonlinear_buckling_load_vectors[i] = final_load_vector +\
+                last_increment_vector * alphas[i]
+    
     # Return lists of nonlinear buckling loads and critical buckling factors
     return nonlinear_buckling_load_vectors, np.array(alphas)
 
 
 def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     """
-    Return a list with the lowest eigenvalues of the matrix KLLRH (tangent stiffness matrix) for each load increment
-    reading a f06 file resulting from a nonlinear analysis run with a proper DMAP.
+    Return a list with the lowest eigenvalues of the matrix KLLRH
+    (tangent stiffness matrix) for each load increment reading a f06
+    file resulting from a nonlinear analysis run with a proper DMAP.
 
     Parameters
     ----------
@@ -291,7 +326,9 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     Returns
     -------
         eigenvalue_array: ndarray
-            array with the eigenvalues of the KLLRH matrices for each converged increment, dimensions (number of eigenvalues, number of increments)
+            array with the eigenvalues of the KLLRH matrices for each
+            converged increment,
+            size (number of eigenvalues, number of increments)
 
     Raises
     ------
@@ -310,62 +347,84 @@ def read_kllrh_lowest_eigenvalues_from_f06(f06_filepath: str) -> ndarray:
     # Open file iterate line by line
     with open(f06_filepath) as f06_file:
         for line in f06_file:
-            # When NLOOP is found append an empty list inside the eigenvalues list
+            # When NLOOP is found append an empty list inside the eigenvalues
+            # list
             if 'NLOOP =' in line:
                 nloop_found = True
                 eigenvalue_list.append([])
-            # When KLLRH EIGENVALUE is found append the eigenvalue to the last list of the eigenvalues list
+            # When KLLRH EIGENVALUE is found append the eigenvalue to the last
+            # list of the eigenvalues list
             if 'KLLRH EIGENVALUE' in line:
                 raw_results = re.findall(regexp, line)
                 eigenvalue_list[-1].append(float(raw_results[1]))
     
     # Check if NLOOP was found
     if not nloop_found:
-        raise ValueError("No 'NLOOP' line found in the f06 file. Please check if the input bdf file contains the expected DMAP.")
+        raise ValueError(
+            "No 'NLOOP' line found in the f06 file. "
+            "Please check if the input bdf file contains the expected DMAP.")
     
-    # Convert list of lists to array padded with nan (we put nan for the iterations where we miss one or more eigenvalues)
+    # Convert list of lists to array padded with nan (we put nan for the
+    # iterations where we miss one or more eigenvalues)
     lengths = np.array([len(item) for item in eigenvalue_list])
     mask = lengths[:, None] > np.arange(lengths.max())
     eigenvalue_array = np.full(mask.shape, np.nan)
     eigenvalue_array[mask] = np.concatenate(eigenvalue_list)
     
-    # Return array of eigenvalues in the form: number of eigenvalues x number of iterations
+    # Return array of eigenvalues in the form: number of eigenvalues x number
+    # of iterations
     return eigenvalue_array.T
 
 
 def read_kllrh_lowest_eigenvalues_from_op2(op2: OP2) -> ndarray:
     """
-    Return the array of the lowest N eigenvalues of the matrix KLLRH (tangent stiffness matrix) for each converged increment
-    of the nonlinear analysis represented by the input OP2 object.
+    Return the array of the lowest N eigenvalues of the matrix KLLRH
+    (tangent stiffness matrix) for each converged increment of the
+    nonlinear analysis represented by the input OP2 object.
 
     Parameters
     ----------
         op2: OP2
-            pyNastran object including the results of a nonlinear analysis (SOL 106) with the calculation of the eigenvalues of the tangent stiffness matrix
+            pyNastran object including the results of a nonlinear
+            analysis (SOL 106) with the calculation of the eigenvalues
+            of the tangent stiffness matrix
 
     Returns
     -------
         eigenvalue_array: ndarray
-            array with the eigenvalues of the KLLRH matrices for each converged increment, dimensions (number of eigenvalues, number of increments)
+            array with the eigenvalues of the KLLRH matrices for each
+            converged increment,
+            size (number of eigenvalues, number of increments)
     """
     # Find the key of the first eigenvectors object in the OP2 object
     eigenvectors_key = next(iter(op2.eigenvectors))
+    
     # Find max number of eigenvalues calculated for each converged increment
-    max_no_eigenvalues = op2.eigenvectors[eigenvectors_key].lsdvmns.max().astype(int)
+    max_no_eigenvalues = op2.eigenvectors[
+        eigenvectors_key].lsdvmns.max().astype(int)
+    
     # Find the start and end indices of each converged increment
-    sequence_starts = np.where(op2.eigenvectors[eigenvectors_key].lsdvmns == 1)[0]
+    sequence_starts = np.where(
+        op2.eigenvectors[eigenvectors_key].lsdvmns == 1)[0]
     sequence_ends = np.roll(sequence_starts, -1)
+    
     # Pad the last end index with the length of the eigenvectors list
     sequence_ends[-1] = len(op2.eigenvectors[eigenvectors_key].lsdvmns)
-    # Create a max_no_eigenvalues x number of converged increments array with the eigenvalues of the KLLRH matrix
+    
+    # Create a max_no_eigenvalues x number of converged increments array with
+    # the eigenvalues of the KLLRH matrix
     eigenvalues = np.column_stack([
-        np.pad(op2.eigenvectors[eigenvectors_key].eigrs[start:end], (0, max_no_eigenvalues - (end - start)), mode='constant', constant_values=np.nan)  # store the eigenvalues from start to end index and pad the rest of the column with nan
+        np.pad(op2.eigenvectors[eigenvectors_key].eigrs[start:end],
+               (0, max_no_eigenvalues - (end - start)), mode='constant',
+               constant_values=np.nan)  # store the eigenvalues from start to end index and pad the rest of the column with nan
         for start, end in zip(sequence_starts, sequence_ends)])  # iterate through the start and end indices of the converged increments
     # Return array
     return eigenvalues
 
 
-def add_uniform_force(bdf: BDF, nodes_ids: Union[list, ndarray], set_id: int, direction_vector: Union[list, ndarray], force_magnitude: float = 1):
+def add_uniform_force(
+    bdf: BDF, nodes_ids: Union[list, ndarray], set_id: int,
+    direction_vector: Union[list, ndarray], force_magnitude: float = 1):
     """
     Apply a uniformly distributed force over the indicated nodes.
 
@@ -384,12 +443,16 @@ def add_uniform_force(bdf: BDF, nodes_ids: Union[list, ndarray], set_id: int, di
     """
     # Define force magnitude so that the total magnitude is equal to the input force magnitude
     nodal_force = force_magnitude / len(nodes_ids)
+    
     # Add a force card for each input node id
     for node_id in nodes_ids:
-        bdf.add_force(sid=set_id, node=node_id, mag=nodal_force, xyz=direction_vector)
+        bdf.add_force(
+            sid=set_id, node=node_id, mag=nodal_force, xyz=direction_vector)
 
 
-def add_uniform_pressure(bdf: BDF, elements_ids: Union[list, ndarray], set_id: int, force_magnitude: float = 1):
+def add_uniform_pressure(
+    bdf: BDF, elements_ids: Union[list, ndarray], set_id: int,
+    force_magnitude: float = 1):
     """
     Apply a uniformly distributed pressure over the indicated elements.
 
@@ -402,20 +465,26 @@ def add_uniform_pressure(bdf: BDF, elements_ids: Union[list, ndarray], set_id: i
     set_id: int
         set id of the force card
     force_magnitude: float
-        total magnitude of the applied force, to be distributed uniformly as a pressure over the elements
+        total magnitude of the applied force, to be distributed
+        uniformly as a pressure over the elements
     """
     # Find pressure value by dividing the force magnitude by the sum of the areas of the elements
-    pressure = force_magnitude / np.sum([bdf.elements[element_id].Area() for element_id in elements_ids])
+    pressure = force_magnitude / np.sum([
+        bdf.elements[element_id].Area() for element_id in elements_ids])
+    
     # Add PLOAD2 card to define the pressure over the elements
     bdf.add_pload2(sid=set_id, pressure=pressure, eids=elements_ids)
 
 
-def set_up_newton_method(bdf: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = -1, max_iter: int = 25, conv: str = 'PW',
-                         eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5,
-                         subcase_id: int = 0):
+def set_up_newton_method(
+    bdf: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = -1,
+    max_iter: int = 25, conv: str = 'PW', eps_u: float = 0.01,
+    eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5,
+    subcase_id: int = 0):
     """
-    Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM to set up
-    the load control method with full Newton iteration.
+    Assign SOL 106 as solution sequence, add parameter to consider large
+    displacement effects and add NLPARM to set up the load control
+    method with full Newton iteration.
 
     Parameters
     ----------
@@ -440,30 +509,42 @@ def set_up_newton_method(bdf: BDF, nlparm_id: int = 1, ninc: int = None, kstep: 
     max_bisect: int
         maximum number of bisections allowed for each load increment
     subcase_id: int
-        identification number of the subcase where the NLPARM card is applied
+        identification number of the subcase where the NLPARM card is
+        applied
     """
     # Assign SOL 106 as solution sequence
     bdf.sol = 106
+    
     # Add parameter for large displacement effects
     if 'LGDISP' not in bdf.params:
         bdf.add_param('LGDISP', [1])
-    # Define parameters for the nonlinear iteration strategy with full Newton method (update tangent stiffness matrix after every converged iteration)
-    bdf.add_nlparm(nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=kstep, max_iter=max_iter, conv=conv,
-                   int_out='YES', eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect)
+        
+    # Define parameters for the nonlinear iteration strategy with full Newton
+    # method (update tangent stiffness matrix after every converged iteration)
+    bdf.add_nlparm(
+        nlparm_id=nlparm_id, ninc=ninc, kmethod='ITER', kstep=kstep,
+        max_iter=max_iter, conv=conv, int_out='YES', eps_u=eps_u, eps_p=eps_p,
+        eps_w=eps_w, max_bisect=max_bisect)
+    
     # Add NLPARM id to case control deck of the indicated subcase
     if 'NLPARM' not in bdf.case_control_deck.subcases[subcase_id].params:
-        bdf.case_control_deck.subcases[subcase_id].add_integer_type('NLPARM', nlparm_id)  # add new NLPARM command if not present
+        bdf.case_control_deck.subcases[subcase_id].add_integer_type(
+            'NLPARM', nlparm_id)  # add new NLPARM command if not present
     else:
-        bdf.case_control_deck.subcases[subcase_id].params['NLPARM'][0] = nlparm_id  # overwrite existing NLPARM id if command is already present
+        bdf.case_control_deck.subcases[subcase_id].params['NLPARM'][0] =\
+            nlparm_id  # overwrite existing NLPARM id if command is already present
 
 
-def set_up_arc_length_method(bdf: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = -1, max_iter: int = 25,
-                             conv: str = 'PW', eps_u: float = 0.01, eps_p: float = 0.01, eps_w: float = 0.01,
-                             max_bisect: int = 5, subcase_id: int = 0, constraint_type: str = 'CRIS',
-                             minalr: float = 0.25, maxalr: float = 4., desiter: int = 12, maxinc: int = 20):
+def set_up_arc_length_method(
+    bdf: BDF, nlparm_id: int = 1, ninc: int = None, kstep: int = -1,
+    max_iter: int = 25, conv: str = 'PW', eps_u: float = 0.01,
+    eps_p: float = 0.01, eps_w: float = 0.01, max_bisect: int = 5,
+    subcase_id: int = 0, constraint_type: str = 'CRIS', minalr: float = 0.25,
+    maxalr: float = 4., desiter: int = 12, maxinc: int = 20):
     """
-    Assign SOL 106 as solution sequence, add parameter to consider large displacement effects and add NLPARM and NLPCI
-    to set up the arc-length method.
+    Assign SOL 106 as solution sequence, add parameter to consider large
+    displacement effects and add NLPARM and NLPCI to set up the
+    arc-length method.
 
     Parameters
     ----------
@@ -488,7 +569,8 @@ def set_up_arc_length_method(bdf: BDF, nlparm_id: int = 1, ninc: int = None, kst
     max_bisect: int
         maximum number of bisections allowed for each load increment
     subcase_id: int
-        identification number of the subcase where the NLPARM card is applied
+        identification number of the subcase where the NLPARM card is
+        applied
     constraint_type: str
         type of constraint used in the arc-length method
     minalr: float
@@ -498,21 +580,28 @@ def set_up_arc_length_method(bdf: BDF, nlparm_id: int = 1, ninc: int = None, kst
     desiter: int
         desired nuber of iteration for convergence
     maxinc: int
-        maximum number of controlled increment steps allowed within a subcase
+        maximum number of controlled increment steps allowed within a
+        subcase
     """
     # Set up basic nonlinear analysis
-    set_up_newton_method(bdf=bdf, nlparm_id=nlparm_id, ninc=ninc, kstep=kstep, max_iter=max_iter, conv=conv,
-                         eps_u=eps_u, eps_p=eps_p, eps_w=eps_w, max_bisect=max_bisect, subcase_id=subcase_id)
+    set_up_newton_method(
+        bdf=bdf, nlparm_id=nlparm_id, ninc=ninc, kstep=kstep,
+        max_iter=max_iter, conv=conv, eps_u=eps_u, eps_p=eps_p, eps_w=eps_w,
+        max_bisect=max_bisect, subcase_id=subcase_id)
+    
     # Define parameters for the arc-length method
-    bdf.add_nlpci(nlpci_id=nlparm_id, Type=constraint_type, minalr=minalr, maxalr=maxalr, desiter=desiter, mxinc=maxinc)
+    bdf.add_nlpci(
+        nlpci_id=nlparm_id, Type=constraint_type, minalr=minalr, maxalr=maxalr,
+        desiter=desiter, mxinc=maxinc)
 
 
 def set_up_sol_105(
     bdf: BDF, static_load_set_id: int = None, method_set_id: int = None,
     no_eigenvalues:int = 1):
     """
-    Set up a SOL 105 analysis. The function defines subcase 1 to apply the load set associated to the input load set id and subcase 2
-    to calculate the buckling eigenvalues using the EIGRL card.
+    Set up a SOL 105 analysis. The function defines subcase 1 to apply
+    the load set associated to the input load set id and subcase 2 to
+    calculate the buckling eigenvalues using the EIGRL card.
 
     Parameters
     ----------
@@ -546,9 +635,10 @@ def set_up_sol_105(
             method_set_id=method_set_id, no_eigenvalues=no_eigenvalues)
 
 
-def run_sol_105(bdf: BDF, input_name: str, analysis_directory_path: str,
-                static_load_set_id: int = None, method_set_id: int = None,
-                no_eigenvalues:int = 1, run_flag: bool = True) -> OP2:
+def run_sol_105(
+    bdf: BDF, input_name: str, analysis_directory_path: str,
+    static_load_set_id: int = None, method_set_id: int = None, 
+    no_eigenvalues:int = 1, run_flag: bool = True) -> OP2:
     """
     Set up and run a SOL 105 analysis and return the resulting OP2
     object. This function calls set_up_sol_105 to define the subcases
@@ -594,28 +684,35 @@ def run_sol_105(bdf: BDF, input_name: str, analysis_directory_path: str,
     return op2_output
 
 
-def run_nonlinear_buckling_method(bdf: BDF, method_set_id: int, analysis_directory_path: str, input_name: str,
-                                  calculate_tangent_stiffness_matrix_eigenvalues: bool = False,
-                                  no_eigenvalues: int = 1, run_flag: bool = True) -> OP2:
+def run_nonlinear_buckling_method(
+    bdf: BDF, method_set_id: int, analysis_directory_path: str,
+    input_name: str, no_eigenvalues: int = 1,
+    calculate_tangent_stiffness_matrix_eigenvalues: bool = False,
+    run_flag: bool = True) -> OP2:
     """
-    Returns the OP2 object representing the results of SOL 106 analysis employing the nonlinear buckling method. The
-    function requires the subcases with the associated load sets to be already defined. It applies the nonlinear
-    buckling method to all subcases using the PARAM,BUCKLE,2 command and the EIGRL card.
+    Returns the OP2 object representing the results of SOL 106 analysis
+    employing the nonlinear buckling method. The function requires the
+    subcases with the associated load sets to be already defined. It
+    applies the nonlinear buckling method to all subcases using the
+    PARAM,BUCKLE,2 command and the EIGRL card.
 
     Parameters
     ----------
     bdf: BDF
-        pyNastran object representing the bdf input of the box beam model
+        pyNastran object representing a bdf input file
     method_set_id: int
-        identification number of the EIGRL card that is defined for the eigenvalue calculation
+        identification number of the EIGRL card that is defined for the
+        eigenvalue calculation
     analysis_directory_path: str
         string with the path to the directory where the analysis is run
     input_name: str
         string with the name that will be given to the input file
     calculate_tangent_stiffness_matrix_eigenvalues: bool
-        boolean indicating whether lowest eigenvalues of tangent stiffness matrix will be calculated
+        boolean indicating whether lowest eigenvalues of tangent#
+        stiffness matrix will be calculated
     no_eigenvalues: int
-        number of eigenvalues of the tangent stiffness matrix that will be calculated
+        number of eigenvalues of the tangent stiffness matrix that will
+        be calculated
     run_flag: bool
         boolean indicating whether Nastran analysis is actually run
 
@@ -626,21 +723,32 @@ def run_nonlinear_buckling_method(bdf: BDF, method_set_id: int, analysis_directo
     """
     # Set SOL 106 as solution sequence (nonlinear analysis)
     bdf.sol = 106
+    
     # Define cards for nonlinear buckling method
     bdf.add_param('BUCKLE', [2])
     bdf.add_eigrl(sid=method_set_id, nd=no_eigenvalues)  # calculate lowest eigenvalues in magnitude
     bdf.case_control_deck.subcases[0].add_integer_type('METHOD', method_set_id)  # add EIGRL id to case control
+    
     # Include DMAP to calculate eigenvalues of tangent stiffness matrix
-    relative_path_to_resources = os.path.relpath(RESOURCES_PATH, analysis_directory_path)  # relative path to resources folder
+    relative_path_to_resources = os.path.relpath(
+        RESOURCES_PATH, analysis_directory_path)  # relative path to resources folder
     if calculate_tangent_stiffness_matrix_eigenvalues:
         bdf.executive_control_lines[1:1] = [
-            "include '" + os.path.join(relative_path_to_resources, "kllrh_eigenvalues.dmap") + "'"]
+            "include '" + os.path.join(
+                relative_path_to_resources, "kllrh_eigenvalues_buckle.dmap") +\
+                    "'"]
         bdf.add_param('BMODES', [no_eigenvalues])
+        
     # Run analysis
-    run_analysis(directory_path=analysis_directory_path, bdf=bdf, filename=input_name, run_flag=run_flag)
+    run_analysis(
+        directory_path=analysis_directory_path, bdf=bdf, filename=input_name,
+        run_flag=run_flag)
+    
     # Read op2 file
     op2_filepath = os.path.join(analysis_directory_path, input_name + '.op2')
-    op2_output = read_op2(op2_filename=op2_filepath, load_geometry=True, debug=None)
+    op2_output = read_op2(
+        op2_filename=op2_filepath, load_geometry=True, debug=None)
+    
     # Return OP2 object
     return op2_output
 
@@ -713,14 +821,19 @@ def set_up_sol_106_with_kllrh_eigenvalues(
     
     # Select DMAP file to calculate eigenvalues of tangent stiffness matrix
     if dmap_option is None:
-        dmap_filename = "kllrh_eigenvalues_nobuckle.dmap"
-    elif dmap_option == "eigenvectors":
-        dmap_filename = "kllrh_eigenvectors.dmap"
+        dmap_filename = "kllrh_eigenvalues.dmap"
     elif dmap_option == "stop":
         dmap_filename = "kllrh_eigenvalues_stop.dmap"
+    elif dmap_option == "sym":
+        dmap_filename = "kllrh_eigenvalues_sym.dmap"
+    elif dmap_option == "eigenvectors":
+        dmap_filename = "kllrh_eigenvectors.dmap"
+    elif dmap_option == "eigenvectors_stop":
+        dmap_filename = "kllrh_eigenvectors_stop.dmap"
     else:
         raise ValueError(
-            "Invalid DMAP option. Choose 'eigenvectors' or 'stop'.")
+            "Invalid DMAP option. Choose from 'stop', 'sym', 'eigenvectors' "
+            "or 'eigenvectors_stop'.")
     
     # Include DMAP file in the bdf input
     relative_path_to_resources = os.path.relpath(
