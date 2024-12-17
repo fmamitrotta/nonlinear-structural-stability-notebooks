@@ -14,7 +14,7 @@ SPC = 1
 SUBCASE 1
     LOAD = 11
 SUBCASE 2
-    METHOD = 12
+    METHOD = 22
 BEGIN BULK
 $PARAMS
 PARAM*              POST               1
@@ -18456,7 +18456,7 @@ $LOADS
 FORCE*                11            4515                1.0000000000e+00
 *       0.0000000000e+000.0000000000e+001.0000000000e+00
 $DYNAMIC
-EIGRL*                12              0.                               1
+EIGRL*                22              0.                               1
 *
 $SPCs
 SPC1           1  123456      21      22      33      44      55      56
