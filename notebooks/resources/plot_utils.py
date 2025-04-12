@@ -107,17 +107,20 @@ def estimate_actual_negative_eigenvalues(
         lowest_eigenvalue_row[last_segment_end_index - 1 : last_segment_end_index + 1]
     )
 
-    # Calculate the tolerance for the predicted eigenvalue as three times the
-    # standard deviation of the absolute value of the change in the lowest
-    # eigenvalue during the last and current segment
-    tolerance = 3 * np.std(
-        np.concatenate(
-            (
-                np.abs(np.diff(lowest_eigenvalue_row[last_segment])),
-                np.abs(np.diff(lowest_eigenvalue_row[current_segment])),
-            )
+    # We calculate the tolerance for the predicted eigenvalue as the mean value plus 3
+    # times the standard deviation of the absolute value of the change in the lowest
+    # eigenvalue during the last and current segment. This means that if the absolute
+    # value of the change in the lowest eigenvalue during the last and current segment
+    # has a normal distribution, we are assuming that the absolute value of the
+    # difference between the predicted and actual new lowest eigenvalue should be
+    # within 99.8% of the observations
+    diff_observations = np.concatenate(
+        (
+            np.abs(np.diff(lowest_eigenvalue_row[last_segment])),
+            np.abs(np.diff(lowest_eigenvalue_row[current_segment])),
         )
     )
+    tolerance = np.mean(diff_observations) + 3 * np.std(diff_observations)
 
     # If the difference between the lowest new eigenvalue and the predicted
     # eigenvalue is less than or equal to the tolerance, update the actual
@@ -734,6 +737,8 @@ def plot_deformation(
     clim: Union[list, ndarray] = None,
     length_unit: str = "m",
     angle_unit: str = "rad",
+    shrink_colorbar: float = 1.0,
+    colorbar_pad: float = 0.05,
 ) -> Tuple[Figure, Axes3D, Colorbar]:
     """
     Plot the static deformation of the input OP2 object.
@@ -767,6 +772,10 @@ def plot_deformation(
     angle_unit: str
         measurement unit of angles, used in the label of the colorbar
         when the displacement component is a rotation
+    shrink_colorbar: float
+        shrink factor for the colorbar
+    colorbar_pad: float
+        padding between the colorbar and the axes
 
     Returns
     -------
@@ -816,7 +825,11 @@ def plot_deformation(
 
     # Add colorbar
     cbar = fig.colorbar(
-        mappable=m, ax=ax, label=cbar_label_dict[displacement_component]
+        mappable=m,
+        ax=ax,
+        label=cbar_label_dict[displacement_component],
+        shrink=shrink_colorbar,
+        pad=colorbar_pad,
     )
 
     # If axes object is not provided, set whitespace to 0
@@ -886,6 +899,7 @@ def plot_max_displacement_node(
         max_displacement_node_xyz[0],
         max_displacement_node_xyz[1],
         max_displacement_node_xyz[2],
+        color="k",
         marker="x",
         label=f"Node {max_displacement_node_id:d} (max displacement)",
         zorder=3.0,
