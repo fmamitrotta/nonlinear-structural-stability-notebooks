@@ -42,6 +42,7 @@ from pyNastran.op2.op2 import (
     OP2,
     read_op2,
 )  # import OP2 object and function to read op2 file
+from typing import Optional  # import Optional type hint for optional arguments
 import matplotlib.pyplot as plt  # import matplotlib library for plotting
 from matplotlib.ticker import (
     MaxNLocator,
@@ -497,8 +498,44 @@ class NastranGroup(om.Group):
         )
 
 
+def read_optimization_history(recorder_filepath: str) -> dict[str, ndarray]:
+    """
+    Reads the complete optimization history from an OpenMDAO recorder file.
+
+    Parameters
+    ----------
+    recorder_filepath : str
+        Path to the OpenMDAO recorder file containing optimization
+        history.
+
+    Returns
+    -------
+    dict
+        Dictionary containing the histories of all variables in the
+        recorder file. Keys are variable names and values are numpy
+        arrays of the variable values across all iterations.
+    """
+    # Initialize the CaseReader object
+    cr = om.CaseReader(recorder_filepath)
+
+    # Extract driver cases without recursing into system or solver cases
+    driver_cases = cr.get_cases("driver", recurse=False)
+
+    # Get available output keys
+    output_keys = list(driver_cases[0].outputs.keys())
+    
+    # Extract histories for all variables
+    histories = {
+        key: np.array([case[key] for case in driver_cases]) for key in output_keys
+    }
+    
+    return histories
+
+
 def plot_optimization_history(
-    recorder_filepath: str, variable_names: list[str], y_labels: list[str] | None = None
+    recorder_filepath: str,
+    variable_names: Optional[list[str]] = None,
+    y_labels: Optional[list[str]] = None,
 ) -> tuple[Figure, Axes, dict[str, ndarray]]:
     """
     Plots the history of optimization variables and objectives from an
@@ -509,13 +546,15 @@ def plot_optimization_history(
     recorder_filepath : str
         Path to the OpenMDAO recorder file containing optimization
         history.
-    variable_names : list
-        List of variable names to plot.
+    variable_names : list, optional
+        List of variable names to plot. If not provided, all available
+        variables will be plotted. Default is None.
     y_labels : list, optional
-        List of y-axis labels for the plots. If provided, must have the
-        same length as variable_names. Labels corresponding to invalid
-        variable names will be ignored. If not provided, variable names
-        will be used as labels.
+        List of y-axis labels for the plots. If provided, it must have
+        the same length as variable_names or as the number of available
+        variables. Labels corresponding to invalid variable names will
+        be ignored. If not provided, variable names will be used as
+        labels.
 
     Returns
     -------
@@ -523,7 +562,7 @@ def plot_optimization_history(
         Contains:
         - Figure: matplotlib figure object
         - Axes: matplotlib axes object
-        - dict: Dictionary containing the histories of the input
+        - dict: Dictionary containing the histories of the selected
         variables
 
     Raises
@@ -534,59 +573,71 @@ def plot_optimization_history(
         different length than variable_names
     """
 
-    # Initialize the CaseReader object
-    cr = om.CaseReader(recorder_filepath)
-
-    # Extract driver cases without recursing into system or solver cases
-    driver_cases = cr.get_cases("driver", recurse=False)
-
-    # Get available output keys
-    output_keys = list(driver_cases[0].outputs.keys())
-
-    # Validate variable names
-    valid_names = []
-    invalid_names = []
-    valid_labels = []  # Store labels for valid variables
-
-    # Validate y_labels length if provided
-    if y_labels is not None and len(y_labels) != len(variable_names):
-        raise ValueError(
-            f"Length of y_labels ({len(y_labels)}) must match length of "
-            f"variable_names ({len(variable_names)})"
-        )
-
-    # Process variable names and corresponding labels
-    for i, name in enumerate(variable_names):
-        if name in output_keys:
-            valid_names.append(name)
-            # If y_labels is provided, use corresponding label, otherwise use
-            # variable name
-            if y_labels is not None:
-                valid_labels.append(y_labels[i])
-            else:
-                valid_labels.append(name)
+    # Read all optimization history data
+    all_histories = read_optimization_history(recorder_filepath)
+    output_keys = list(all_histories.keys())
+    
+    # If variable_names is not provided, use all available variables
+    if variable_names is None:
+        valid_names = output_keys
+        histories = all_histories
+        
+        # Use output keys as labels if y_labels is not provided
+        if y_labels is None:
+            valid_labels = output_keys
+        
+        # Validate length of y_labels if provided
         else:
-            invalid_names.append(name)
+            assert len(y_labels) == len(output_keys), (
+                f"Length of y_labels ({len(y_labels)}) must match length of "
+                f"the output keys in the Recorder object ({len(output_keys)})"
+            )
+            valid_labels = y_labels
 
-    # Warn about invalid names if any
-    if invalid_names:
-        warnings.warn(
-            f"The following variable names were not found in the optimization "
-            f"history and will be skipped: {invalid_names}"
-        )
+    # If variable_names is provided, validate names and filter data
+    else:
+        # Validate variable names
+        valid_names = []
+        invalid_names = []
+        valid_labels = []
 
-    # Raise error if no valid names
-    if not valid_names:
-        raise ValueError(
-            f"None of the provided variable names {variable_names} was found "
-            f"in the optimization history. Available variables are: "
-            f"{output_keys}"
-        )
+        # Validate y_labels length if provided
+        if y_labels is not None and len(y_labels) != len(variable_names):
+            raise ValueError(
+                f"Length of y_labels ({len(y_labels)}) must match length of "
+                f"variable_names ({len(variable_names)})"
+            )
 
-    # Prepare data structures for plotting using only valid names
-    histories = {
-        key: np.array([case[key] for case in driver_cases]) for key in valid_names
-    }
+        # Process variable names and corresponding labels
+        for i, name in enumerate(variable_names):
+            if name in output_keys:
+                valid_names.append(name)
+                # If y_labels is provided, use corresponding label, otherwise use
+                # variable name
+                if y_labels is not None:
+                    valid_labels.append(y_labels[i])
+                else:
+                    valid_labels.append(name)
+            else:
+                invalid_names.append(name)
+
+        # Warn about invalid names if any
+        if invalid_names:
+            warnings.warn(
+                f"The following variable names were not found in the optimization "
+                f"history and will be skipped: {invalid_names}"
+            )
+
+        # Raise error if no valid names
+        if not valid_names:
+            raise ValueError(
+                f"None of the provided variable names {variable_names} was found "
+                f"in the optimization history. Available variables are: "
+                f"{output_keys}"
+            )
+
+        # Filter histories to include only valid names
+        histories = {key: all_histories[key] for key in valid_names}
 
     # Create figure and axes for subplots
     no_outputs = len(valid_names)
