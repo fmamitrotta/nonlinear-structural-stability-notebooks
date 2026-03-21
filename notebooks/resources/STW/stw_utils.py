@@ -31,6 +31,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import numpy as np
 from itertools import compress
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 from mphys import Multipoint
 import openmdao.api as om
 from resources.NastranBuilder import NastranBuilder
@@ -80,6 +82,91 @@ def find_element_ids(layout, part_names):
     return part_element_ids
 
 
+def plot_elements_normals(bdf, elem_dict):
+    """
+    Plot the elements and their normal vectors for the specified parts in a STW layout.
+    
+    Parameters
+    ----------
+    bdf : BDF object
+        The BDF object containing the finite element model.
+    elem_dict : dict
+        A dictionary mapping part names to their element ids, as returned by the find_element_ids function.
+    """
+    # Iterate through the structural parts
+    for part in elem_dict.keys():
+        # Print the name of the part being plotted
+        print(part)
+        # Initialize arrays with coordinates and vector components
+        nodes = np.empty((len(elem_dict[part]), 4, 3))
+        centroids = np.empty((len(elem_dict[part]), 3))
+        normals = np.empty((len(elem_dict[part]), 3))
+        # Iterate through the elements of the bdf input
+        for count, eid in enumerate(elem_dict[part]):
+            nodes[count] = bdf.elements[
+                eid
+            ].get_node_positions()  # get the array with the coordinates of the nodes belonging to the element
+            _, centroid, normal = bdf.elements[
+                eid
+            ].AreaCentroidNormal()  # find the coordinates of the centroid and the components of the normal vector of the element
+            centroids[count] = (
+                centroid  # add coordinates of centroid to appropriate array
+            )
+            normals[count] = (
+                normal  # add components of normal vector to appropriate array
+            )
+        # Define limit for the axes range
+        bounds = np.array(
+            [
+                [np.amin(nodes[:, :, 0]), np.amax(nodes[:, :, 0])],
+                [np.amin(nodes[:, :, 1]), np.amax(nodes[:, :, 1])],
+                [np.amin(nodes[:, :, 2]), np.amax(nodes[:, :, 2])],
+            ]
+        )
+        # Define list to set the aspect ratio of the plot
+        aspect_ratio = [x[1] - x[0] for x in list(bounds)]
+        # Create figure and axes
+        fig = plt.figure(tight_layout=True)
+        ax = fig.add_subplot(111, projection="3d")
+        # Plot elements
+        pc = Poly3DCollection(nodes, linewidths=0.5, alpha=0.5)
+        pc.set_edgecolor("k")
+        ax.add_collection3d(pc)
+        # Plot normal vectors
+        ax.quiver(
+            centroids[:, 0],
+            centroids[:, 1],
+            centroids[:, 2],
+            normals[:, 0],
+            normals[:, 1],
+            normals[:, 2],
+            length=0.1,
+            color="blue",
+            arrow_length_ratio=0.5,
+        )
+        # Set axes label
+        ax.set_xlabel("$x$, m")
+        ax.set_ylabel("$y$, m")
+        ax.set_zlabel("$z$, m")
+        # Set aspect ratio
+        ax.set_box_aspect(aspect_ratio)
+        # Set axes limits
+        ax.set_xlim(bounds[0, :])
+        ax.set_ylim(bounds[1, :])
+        ax.set_zlim(bounds[2, :])
+        # Adjust number of ticks of x and z axes
+        ax.locator_params(axis="x", nbins=3)
+        ax.locator_params(axis="z", nbins=2)
+        # Adjust ticks label of y- and z-axis
+        ax.tick_params(axis="y", which="major", pad=25)
+        ax.tick_params(axis="z", which="major", pad=6)
+        # Adjust axis label y and z axes
+        ax.yaxis.labelpad = 70
+        ax.zaxis.labelpad = 10
+        # Show plot
+        plt.show()
+
+
 def find_intersection_nodes(layout, part_names):
     """
     Find the intersection nodes' ids of specified parts in a STW layout.
@@ -119,6 +206,64 @@ def find_intersection_nodes(layout, part_names):
     return intersection_nodes_ids
 
 
+def find_tip_nodes(layout, bdf):
+    """
+    Find the ids and coordinates of the nodes at the tip rib of a STW layout.
+    
+    Parameters
+    ----------
+    layout : layout object
+        The layout object created with pyLayout.
+    bdf : BDF object
+        The BDF object containing the finite element model.
+    
+    Returns
+    -------
+    tip_nodes_ids : array-like
+        The IDs of the tip nodes.
+    tip_nodes_xyz_array : (N, 3) ndarray
+        The coordinates of the tip nodes.
+    """
+    # Find the ids of the intersection nodes between the upper skin, rib and spar
+    intersection_nodes_ids = find_intersection_nodes(layout, ["U_SKIN", "RIB", "SPAR"])
+
+    # Create a (N,3) array of coordinates for the intersection nodes
+    intersection_nodes_xyz_array = np.vstack(
+        [bdf.nodes[node_id].xyz for node_id in intersection_nodes_ids]
+    )
+
+    # Mask to find the nodes on the tip rib
+    tip_nodes_mask = np.isclose(intersection_nodes_xyz_array[:, 1], layout.X[-1, 0, 1])
+
+    # Return the ids and coordinates of the tip nodes
+    return (
+        intersection_nodes_ids[tip_nodes_mask],
+        intersection_nodes_xyz_array[tip_nodes_mask],
+    )
+    
+
+def calculate_tip_deflection(node_1_disp, node_2_disp):
+    """
+    Calculate the tip deflection as the average z-displacement of two nodes.
+    
+    Parameters
+    ----------
+    node_1_disp : (N, 3) ndarray
+        The displacement of the first node.
+    node_2_disp : (N, 3) ndarray
+        The displacement of the second node.
+
+    Returns
+    -------
+    delta_z_tip : (N,) ndarray
+        The tip deflection.
+    """
+    node_1_disp = np.atleast_2d(node_1_disp)
+    node_2_disp = np.atleast_2d(node_2_disp)
+    delta_z_tip = (node_1_disp[:, 2] + node_2_disp[:, 2]) / 2
+    return delta_z_tip
+
+
 def apply_linearly_distributed_force(
     node_xyz_array, ratio, total_force, node_ids, bdf, set_id, direction_vector
 ):
@@ -130,7 +275,7 @@ def apply_linearly_distributed_force(
     node_xyz_array : (N, 3) ndarray
         Array of node coordinates.
     ratio : float
-        The ratio of the forces at the two ends.
+        The ratio F(x_first) / F(x_last). Use 1.0 for a uniform distribution.
     total_force : float
         The total force to be applied.
     node_ids : list of int
@@ -142,43 +287,35 @@ def apply_linearly_distributed_force(
     direction_vector : (3,) ndarray
         The direction vector for the force application.
     """
-    # Solve for coefficients a and b in F(x) = a + b*x
-    # Constraint 1: F(x_first) = ratio * F(x_last)
-    # Constraint 2: sum(F(x_i)) = total_force
+    # Parameterise as F(t) = F_last * (ratio + (1 - ratio) * t),
+    # where t = (x - x_first) / (x_last - x_first) ∈ [0, 1].
+    #
+    # By construction:
+    #   F(t=0) = F_last * ratio  →  F_first / F_last = ratio  ✓
+    #   F(t=1) = F_last          →  reference value at x_last
+    #
+    # Applying the total-force constraint Σ F(t_i) = total_force:
+    #   F_last * [N * ratio + (1 - ratio) * Σ t_i] = total_force
+    #   F_last = total_force / [N * ratio + (1 - ratio) * Σ t_i]
+    #
+    # When ratio = 1 the (1 - ratio) terms vanish and the denominator
+    # reduces to N, giving the correct uniform value total_force / N —
+    # no special-casing required.
 
-    # Apply constraint 1 and solve for a
-    # a + b·x_first = ratio × (a + b·x_last)
-    # a + b·x_first = ratio·a + ratio·b·x_last
-    # a - ratio·a = ratio·b·x_last - b·x_first
-    # a(1 - ratio) = b(ratio·x_last - x_first)
-    # a = b · (ratio·x_last - x_first) / (1 - ratio)
-
-    # Apply constraint 2 and solve for b
-    # Σ (a + b·x_i) = total_force
-    # n·a + b·Σx_i = total_force
-    # n·a + b·sum_x = total_force
-    # n · [b · (ratio·x_last - x_first) / (1 - ratio)] + b·sum_x = total_force
-    # b · [n · (ratio·x_last - x_first) / (1 - ratio) + sum_x] = total_force
-    # b = total_force / [n · (ratio·x_last - x_first) / (1 - ratio) + sum_x]
-
-    # Extract x coordinates and compute necessary sums
+    # Extract x coordinates
     # Note: this code assumes that the x-coordinates are unique and ordered,
     # which is indeed the case for how the mesh of the STW wingbox is generated
     # with pyLayout. If this is not the case, the code should be modified
     # to find the correct x_first and x_last values.
     x_coords = node_xyz_array[:, 0]
-    x_first = x_coords[0]
-    x_last = x_coords[-1]
-    num_nodes = len(x_coords)
-    sum_x = np.sum(x_coords)
+    x_first, x_last = x_coords[0], x_coords[-1]
 
-    # Calculate coefficients a and b
-    denominator = num_nodes * (ratio * x_last - x_first) / (1 - ratio) + sum_x
-    b = total_force / denominator
-    a = b * (ratio * x_last - x_first) / (1 - ratio)
+    # Normalised positions in [0, 1]
+    t = (x_coords - x_first) / (x_last - x_first)
 
-    # Calculate forces
-    forces = a + b * x_coords
+    # Solve for the force at x_last, then reconstruct the distribution
+    f_last = total_force / (len(t) * ratio + (1.0 - ratio) * np.sum(t))
+    forces = f_last * (ratio + (1.0 - ratio) * t)
 
     # Apply forces to nodes in the BDF
     for node_id, nodal_force in zip(node_ids, forces):
@@ -494,44 +631,3 @@ def define_load_reference_axis(layout, bdf, le_xzy_array, te_xyz_array):
     # Return spline nodes ids
     return spline_nodes_ids
 
-
-def find_element_ids(layout, part_names):
-    """
-    Find the element ids of specified parts in a STW layout.
-    
-    Parameters
-    ----------
-    layout : layout object
-        The layout object created with pyLayout.
-    part_names : list of str
-        The names of the parts to find element ids for.
-
-    Returns
-    -------
-    part_element_ids : dict
-        A dictionary mapping part names to their element ids.
-    """
-    # Find number of structural segments
-    num_segments = len(layout.elemTopo.lIndex)
-    
-    # Initialize list of element ids for each segment and element counter
-    elem_ids = [None] * num_segments
-    elem = 1
-    
-    # Loop over all segments and find the element ids
-    for i in range(num_segments):
-        local = layout.elemTopo.lIndex[i]  # array with local node indices
-        num_rows = local.shape[0] - 1  # number of element rows
-        num_cols = local.shape[1] - 1  # number of element columns
-        elem_ids[i] = np.arange(elem, elem + num_rows * num_cols)
-        elem += num_rows * num_cols  # increment element counter
-    
-    # Find the element ids of the specified parts
-    part_element_ids = {name: None for name in part_names}
-    descriptions = np.array(layout.faceDescript)
-    for i, name in enumerate(part_names):
-        mask = np.char.find(descriptions, name) >= 0
-        part_element_ids[name] = np.concatenate(list(compress(elem_ids, mask)))
-    
-    # Return the element ids of the specified parts
-    return part_element_ids
