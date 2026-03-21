@@ -14,6 +14,7 @@ Baseline geometry definition
 # ======================================================================
 # Standard Python modules
 import os
+
 # ======================================================================
 
 # ======================================================================
@@ -26,11 +27,13 @@ from typing import Tuple
 from pylayout.pyLayout import Layout
 from pyNastran.bdf.bdf import BDF
 
+
 # ======================================================================
 # Helper functions
 # ======================================================================
 def trapezoidal_wing_mean_aerodynamic_chord(
-    root_chord: float, taper_ratio: float) -> float:
+    root_chord: float, taper_ratio: float
+) -> float:
     """
     Calculate the mean aerodynamic chord of a trapezoidal wing.
 
@@ -46,8 +49,8 @@ def trapezoidal_wing_mean_aerodynamic_chord(
     mean_aerodynamic_chord: float
         Mean aerodynamic chord of the wing
     """
-    return 2/3 * root_chord * (1 + taper_ratio + taper_ratio**2) /\
-        (1 + taper_ratio)
+    return 2 / 3 * root_chord * (1 + taper_ratio + taper_ratio**2) / (1 + taper_ratio)
+
 
 # ======================================================================
 # Direction definition
@@ -61,11 +64,19 @@ verticalIndex = 2  # index of the vertical direction (0=x, 1=y, 2=z)
 # ======================================================================
 semiSpan = 14.0  # semi-span of the wing in metres
 
-sectionEta = np.array([0.0, 1.0])  # Normalised spanwise coordinates of the wing sections
+sectionEta = np.array(
+    [0.0, 1.0]
+)  # Normalised spanwise coordinates of the wing sections
 sectionChord = np.array([5.0, 1.5])  # Chord length of the wing sections in metres
-sectionChordwiseOffset = np.array([0.0, 7.5])  # Offset of each section in the chordwise direction in metres
-sectionVerticalOffset = np.array([0.0, 0.0])  # Offset of each section in the vertical direction in metres
-sectionTwist = np.array([0.0, 0.0])  # Twist of each section (around the spanwise axis) in degrees
+sectionChordwiseOffset = np.array(
+    [0.0, 7.5]
+)  # Offset of each section in the chordwise direction in metres
+sectionVerticalOffset = np.array(
+    [0.0, 0.0]
+)  # Offset of each section in the vertical direction in metres
+sectionTwist = np.array(
+    [0.0, 0.0]
+)  # Twist of each section (around the spanwise axis) in degrees
 sectionProfiles = ["rae2822.dat"] * 2  # Airfoil profile files for each section
 
 teHeight = 0.25 * 0.0254  # thickness of the trailing edge (1/4 inch) in metres
@@ -78,10 +89,12 @@ LECoords[:, verticalIndex] = sectionVerticalOffset
 TECoords = np.zeros((2, 3))  # Trailing edge coordinates of each section
 TECoords = np.zeros((2, 3))  # Trailing edge coordinates of each section
 TECoords[:, spanIndex] = semiSpan * sectionEta
-TECoords[:, chordIndex] = sectionChordwiseOffset + sectionChord *\
-    np.cos(np.deg2rad(sectionTwist))
-TECoords[:, verticalIndex] = sectionVerticalOffset - sectionChord *\
-    np.sin(np.deg2rad(sectionTwist))
+TECoords[:, chordIndex] = sectionChordwiseOffset + sectionChord * np.cos(
+    np.deg2rad(sectionTwist)
+)
+TECoords[:, verticalIndex] = sectionVerticalOffset - sectionChord * np.sin(
+    np.deg2rad(sectionTwist)
+)
 
 
 rootChord = sectionChord[0]
@@ -92,7 +105,8 @@ aspectRatio = 2 * (semiSpan**2) / planformArea
 taperRatio = tipChord / rootChord
 
 meanAerodynamicChord = trapezoidal_wing_mean_aerodynamic_chord(
-    root_chord=rootChord, taper_ratio=taperRatio)
+    root_chord=rootChord, taper_ratio=taperRatio
+)
 
 # --- No do the same for the tails ---
 hTailRootChord = 3.25
@@ -103,7 +117,8 @@ hTailaspectRatio = 2 * (hTailSemiSpan**2) / hTailPlanformArea
 hTailSweep = 30.0
 hTailTaperRatio = hTailTipChord / hTailRootChord
 hTailMeanAerodynamicChord = trapezoidal_wing_mean_aerodynamic_chord(
-    root_chord=hTailRootChord, taper_ratio=hTailTaperRatio)
+    root_chord=hTailRootChord, taper_ratio=hTailTaperRatio
+)
 
 vTailRootChord = 15.3 * 0.3048
 vTailTipChord = 12.12 * 0.3048
@@ -113,7 +128,8 @@ vTailaspectRatio = 2 * (vTailSemiSpan**2) / vTailPlanformArea
 vTailSweep = 37.0
 vTailTaperRatio = vTailTipChord / vTailRootChord
 vTailMeanAerodynamicChord = trapezoidal_wing_mean_aerodynamic_chord(
-    root_chord=vTailRootChord, taper_ratio=vTailTaperRatio)
+    root_chord=vTailRootChord, taper_ratio=vTailTaperRatio
+)
 
 # --- Nacelle ---
 nacelleLength = 5.865
@@ -136,10 +152,10 @@ numRibsOuter = 19  # Number of ribs outboard of the SOB
 numRibs = numRibsCentrebody + numRibsOuter  # Total number of ribs
 numSpars = 2  # Number of spars (front and rear only)
 
-stiffenerPitch = .15   # [m]
-stiffenerHeight = .05  # [m]
-rootLESparHeight = .5863  # [m]
-tipTESparHeight = .1249   # [m]
+stiffenerPitch = 0.15  # [m]
+stiffenerHeight = 0.05  # [m]
+rootLESparHeight = 0.5863  # [m]
+tipTESparHeight = 0.1249  # [m]
 
 LESparCoords = np.zeros((3, 3))  # Leading edge spar coordinates of each section
 TESparCoords = np.zeros((3, 3))  # Trailing edge spar coordinates of each section
@@ -188,16 +204,17 @@ TESparCoords[0, verticalIndex] = LECoords[0, verticalIndex] + rootTESparFrac * (
 # ======================================================================
 # Cross-sectional properties definition
 # ======================================================================
-panelThickness = .0065  # [m]
-stiffenerThickness = .006  # [m]
+panelThickness = 0.0065  # [m]
+stiffenerThickness = 0.006  # [m]
 
 # ======================================================================
 # Material properties definition
 # ======================================================================
-density = 2780.  # [kg/m^3]
+density = 2780.0  # [kg/m^3]
 youngModulus = 73.1e9  # [Pa]
-poissonRatio = .3
+poissonRatio = 0.3
 yieldStrength = 420e6  # [Pa]
+
 
 # ======================================================================
 # BDF input generation functions
@@ -205,14 +222,14 @@ yieldStrength = 420e6  # [Pa]
 def create_layout(target_length: float, element_order: int = 2) -> Layout:
     """
     Generate a layout object for the TSW wingbox model.
-    
+
     Parameters
     ----------
     target_length: float
         Target element length for the mesh
     element_order: int
         Order of the elements used in the mesh
-    
+
     Returns
     -------
     layout: Layout
@@ -237,18 +254,28 @@ def create_layout(target_length: float, element_order: int = 2) -> Layout:
     # Function to discretize a length into an even number of elements
     num_elements = lambda l: int(np.ceil(l / target_length / 2)) * 2
 
-    num_element_chord = num_elements(stiffenerPitch)  # elements between each spar/stringer pair
+    num_element_chord = num_elements(
+        stiffenerPitch
+    )  # elements between each spar/stringer pair
 
-    num_element_span_centrebody = num_elements(SOB/(numRibsCentrebody - 1))  # elements between each rib pair in the centrebody
-    num_element_span_outer = num_elements((semiSpan - SOB)/numRibsOuter)  # elements between each rib pair in the outer wing
+    num_element_span_centrebody = num_elements(
+        SOB / (numRibsCentrebody - 1)
+    )  # elements between each rib pair in the centrebody
+    num_element_span_outer = num_elements(
+        (semiSpan - SOB) / numRibsOuter
+    )  # elements between each rib pair in the outer wing
 
-    num_element_vertical = num_elements((rootLESparHeight + tipTESparHeight)/2)  # elements between skins
+    num_element_vertical = num_elements(
+        (rootLESparHeight + tipTESparHeight) / 2
+    )  # elements between skins
 
-    num_element_stringers = num_elements(stiffenerHeight)  # elmements within each stringer
+    num_element_stringers = num_elements(
+        stiffenerHeight
+    )  # elmements within each stringer
 
     colSpace = np.ones(ncols - 1, "intc")  # elements between columns
-    colSpace[:numRibsCentrebody - 1] = num_element_span_centrebody
-    colSpace[numRibsCentrebody - 1:] = num_element_span_outer
+    colSpace[: numRibsCentrebody - 1] = num_element_span_centrebody
+    colSpace[numRibsCentrebody - 1 :] = num_element_span_outer
     rowSpace = num_element_chord * np.ones(nrows + 1, "intc")  # elements between rows
 
     # ==================================================================
@@ -277,20 +304,26 @@ def create_layout(target_length: float, element_order: int = 2) -> Layout:
     # ==================================================================
     #       Set up array of grid coordinates for ribs, spars
     # ==================================================================
-    # Initialize grid coordinate matrix
+    # Initialize grid coordinate matrix X
+    # X is a 3D numpy array that stores the coordinates of the the 2D grid layout at
+    # z=0 for the wingbox structure, with shape (numRibs, numSpars + num_stringers, 3)
     X = np.zeros((ncols, nrows, 3))
 
     # Fill in LE and TE coordinates from root to side-of-body
     X[0:numRibsCentrebody, 0] = geo_utils.linearEdge(
-        LESparCoords[0], LESparCoords[1], numRibsCentrebody)
+        LESparCoords[0], LESparCoords[1], numRibsCentrebody
+    )
     X[0:numRibsCentrebody, -1] = geo_utils.linearEdge(
-        TESparCoords[0], TESparCoords[1], numRibsCentrebody)
+        TESparCoords[0], TESparCoords[1], numRibsCentrebody
+    )
 
     # Fill in LE and TE coordinates from side-of-body to tip
     X[numRibsCentrebody - 1 : ncols, 0] = geo_utils.linearEdge(
-        LESparCoords[1], LESparCoords[2], ncols - numRibsCentrebody + 1)
+        LESparCoords[1], LESparCoords[2], ncols - numRibsCentrebody + 1
+    )
     X[numRibsCentrebody - 1 : ncols, -1] = geo_utils.linearEdge(
-        TESparCoords[1], TESparCoords[2], ncols - numRibsCentrebody + 1)
+        TESparCoords[1], TESparCoords[2], ncols - numRibsCentrebody + 1
+    )
 
     # Finally fill in chord-wise with linear edges
     for i in range(ncols):
@@ -314,7 +347,8 @@ def create_layout(target_length: float, element_order: int = 2) -> Layout:
     # Get surface definition to use for projections
     surface_filename = "wing.igs"  # debug
     surface_filepath = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), surface_filename)
+        os.path.dirname(os.path.abspath(__file__)), surface_filename
+    )
     geo = pyGeo("iges", fileName=surface_filepath)
 
     # Initialize pyLayout
@@ -339,13 +373,17 @@ def create_layout(target_length: float, element_order: int = 2) -> Layout:
         minStringerHeight=stiffenerHeight,
         maxStringerHeight=stiffenerHeight,
     )
-    
+
     # Return the layout object
     return layout
 
+
 def create_base_bdf(
-    target_length: float, element_order: int = 2,
-    parallel:bool = False, no_cores:int = 4) -> Tuple[BDF, Layout]:
+    target_length: float,
+    element_order: int = 2,
+    parallel: bool = False,
+    no_cores: int = 4,
+) -> Tuple[BDF, Layout]:
     """
     Generate a base bdf input file for the TSW wingbox model.
 
@@ -369,48 +407,58 @@ def create_base_bdf(
     """
     # Create pyLayout object
     layout = create_layout(target_length, element_order)
-    
+
     # Write bdf file
     directory_path = os.path.dirname(os.path.abspath(__file__))
     bdf_filepath = os.path.join(directory_path, "stw_wingbox.bdf")
     layout.finalize(bdf_filepath)
-        
+
     # Create an instance of the BDF class without debug or info messages
     bdf = BDF(debug=None)
-    
+
     # Add MAT1 card (isotropic material)
     material_id = 1
-    bdf.add_mat1(
-        mid=material_id, E=youngModulus, G='', nu=poissonRatio, rho=density)
-    
+    bdf.add_mat1(mid=material_id, E=youngModulus, G="", nu=poissonRatio, rho=density)
+
     # Create a list of thickness values based on the face descriptions
     thicknesses = [
-        stiffenerThickness if 'STRING' in desc else panelThickness for desc
-        in layout.faceDescript]
+        stiffenerThickness if "STRING" in desc else panelThickness
+        for desc in layout.faceDescript
+    ]
 
     # Add PSHELL card with appropriate thickness value for panels and stringers
     for i, (desc, t) in enumerate(zip(layout.faceDescript, thicknesses)):
         bdf.add_pshell(
-            pid=i + 1, mid1=material_id, t=t, mid2=material_id,
-            mid3=material_id, comment=desc)
-    
+            pid=i + 1,
+            mid1=material_id,
+            t=t,
+            mid2=material_id,
+            mid3=material_id,
+            comment=desc,
+        )
+
     # Read bdf file into BDF object
     bdf.read_bdf(bdf_filepath)
-    
+
     # Add SCP1 card to case control deck
     bdf.create_subcases(0)
-    bdf.case_control_deck.subcases[0].add_integer_type('SPC', 1)
-    
+    bdf.case_control_deck.subcases[0].add_integer_type("SPC", 1)
+
     # Set defaults for output files
-    bdf.add_param('POST', [1])  # add PARAM card to store results in a op2 file
-    bdf.case_control_deck.subcases[0].add('ECHO', 'NONE', [], 'STRING-type')  # request no Bulk Data to be printed
+    bdf.add_param("POST", [1])  # add PARAM card to store results in a op2 file
+    bdf.case_control_deck.subcases[0].add(
+        "ECHO", "NONE", [], "STRING-type"
+    )  # request no Bulk Data to be printed
     bdf.case_control_deck.subcases[0].add_result_type(
-        'DISPLACEMENT', 'ALL', ['PLOT'])  # store displacement data of all nodes in the op2 file
-    bdf.case_control_deck.subcases[0].add_result_type('OLOAD', 'ALL', ['PLOT'])  # store form and type of applied load vector
-    
+        "DISPLACEMENT", "ALL", ["PLOT"]
+    )  # store displacement data of all nodes in the op2 file
+    bdf.case_control_deck.subcases[0].add_result_type(
+        "OLOAD", "ALL", ["PLOT"]
+    )  # store form and type of applied load vector
+
     # Set parallel execution of Nastran if requested
     if parallel:
         bdf.system_command_lines[0:0] = [f"NASTRAN PARALLEL={no_cores:d}"]
-        
+
     # Return the BDF object and Layout object
     return bdf, layout
