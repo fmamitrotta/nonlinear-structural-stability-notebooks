@@ -37,6 +37,7 @@ from pyNastran.op2.op2 import OP2, read_op2
 from pyNastran.utils.nastran_utils import run_nastran
 import re
 from typing import Tuple, Dict, Any, Union
+import subprocess
 
 
 # Constant variables
@@ -84,15 +85,32 @@ def run_analysis(
     # Add smp keyword for parallel execution
     if parallel:
         keywords_list.append(f"smp={no_cores:d}")
-
-    # Call Nastran process
-    run_nastran(
-        bdf_filename=bdf_filepath,
-        nastran_cmd=NASTRAN_PATH,
-        run_in_bdf_dir=True,
-        run=run_flag,
-        keywords=keywords_list,
-    )
+        
+    # Call Nastran process depending on the operating system
+    # This is a temporary fix to allow the execution of Nastran through the Windows Subsystem for Linux.
+    # I'm currently using this code to run my python scripts using a conda environment living in WSL, but still calling the Nastran executable installed in Windows.
+    # Need to find a proper way to do this.
+    if os.name == "posix":
+        # If windows subsystem for linux, set up the nastran call through the call function of the subprocess module
+        pwd = os.getcwd()  # save current working directory
+        bdf_directory = os.path.dirname(bdf_filepath)  # get directory of the bdf file
+        os.chdir(bdf_directory)  # change working directory to the bdf directory
+        wsl_path = NASTRAN_PATH[0].lower() + NASTRAN_PATH[1:].replace(":", "")  # replace drive letter and colon
+        wsl_path = "/mnt/" + wsl_path.replace("\\", "/")  # replace backslashes with forward slashes
+        bdf_filepath = bdf_filepath.replace("/mnt/c", "C:").replace("/", "\\")  # convert bdf path to windows format
+        keywords_list.remove("bat=no")  # remove bat=no keyword for windows subsystem for linux
+        call_args = [wsl_path, bdf_filepath] + keywords_list  # create call arguments
+        if run_flag:
+            subprocess.call(call_args)  # call nastran process
+        os.chdir(pwd)  # change back to original working directory
+    else:
+        run_nastran(
+            bdf_filename=bdf_filepath,
+            nastran_cmd=NASTRAN_PATH,
+            run_in_bdf_dir=True,
+            run=run_flag,
+            keywords=keywords_list,
+            )
 
     # Read and print wall time of simulation
     log_filepath = os.path.join(directory_path, filename + ".log")
@@ -175,8 +193,7 @@ def read_displacement_from_op2(
     op2: OP2, node_ids: list[int] = [1]
 ) -> Dict[Any, Dict[int, ndarray]]:
     """
-    Read displacements at the indicated nodes from a linear analysis OP2
-    object.
+    Read displacements at last time or load step of the indicated nodes from the input OP2 object.
 
     Parameters
     ----------
@@ -195,16 +212,17 @@ def read_displacement_from_op2(
     # Initialize dictionary where the displacements will be saved
     displacements = {id: {} for id in node_ids}
 
-    # Loop through the subcases
+    # Iterate over the subcases
     for subcase_id in op2.displacements:
-        # Loop through the node ids
+        # Iterate over the input node ids
         for id in node_ids:
-            # Save displacements of current subcase and current node id
+            # Find index of the node in the displacements array
             node_index = np.where(
                 op2.displacements[subcase_id].node_gridtype[:, 0] == id
             )[0][0]
+            # Save displacements of current subcase and current node id
             displacements[id][subcase_id] = op2.displacements[subcase_id].data[
-                :, node_index, :
+                -1, node_index, :
             ]
 
     # Return output data
@@ -424,34 +442,41 @@ def read_kllrh_lowest_eigenvalues_from_op2(op2: OP2) -> ndarray:
             converged increment,
             size (number of eigenvalues, number of increments)
     """
-    # Find the key of the first eigenvectors object in the OP2 object
-    eigenvectors_key = next(iter(op2.eigenvectors))
+    # Initialize the list of eigenvalue arrays
+    eigenvalue_list = []
 
-    # Find max number of eigenvalues calculated for each converged increment
-    max_no_eigenvalues = op2.eigenvectors[eigenvectors_key].lsdvmns.max().astype(int)
+    # Loop over the subcases
+    for key in op2.eigenvectors:
+        # Find max number of eigenvalues calculated for each converged increment
+        max_no_eigenvalues = op2.eigenvectors[key].lsdvmns.max().astype(int)
 
-    # Find the start and end indices of each converged increment
-    sequence_starts = np.where(op2.eigenvectors[eigenvectors_key].lsdvmns == 1)[0]
-    sequence_ends = np.roll(sequence_starts, -1)
+        # Find the start and end indices of each converged increment
+        sequence_starts = np.where(op2.eigenvectors[key].lsdvmns == 1)[0]
+        sequence_ends = np.roll(sequence_starts, -1)
 
-    # Pad the last end index with the length of the eigenvectors list
-    sequence_ends[-1] = len(op2.eigenvectors[eigenvectors_key].lsdvmns)
+        # Pad the last end index with the length of the eigenvectors list
+        sequence_ends[-1] = len(op2.eigenvectors[key].lsdvmns)
 
-    # Create a max_no_eigenvalues x number of converged increments array with
-    # the eigenvalues of the KLLRH matrix
-    eigenvalues = np.column_stack(
-        [
-            np.pad(
-                op2.eigenvectors[eigenvectors_key].eigrs[start:end],
-                (0, max_no_eigenvalues - (end - start)),
-                mode="constant",
-                constant_values=np.nan,
-            )  # store the eigenvalues from start to end index and pad the rest of the column with nan
-            for start, end in zip(sequence_starts, sequence_ends)
-        ]
-    )  # iterate through the start and end indices of the converged increments
+        # Create a max_no_eigenvalues x number of converged increments array with the eigenvalues of the KLLRH matrix
+        eigenvalue_list.append(
+            np.column_stack(
+                [
+                    np.pad(
+                        op2.eigenvectors[key].eigrs[start:end],
+                        (0, max_no_eigenvalues - (end - start)),
+                        mode="constant",
+                        constant_values=np.nan,
+                    )  # store the eigenvalues from start to end index and pad the rest of the column with nan
+                    for start, end in zip(sequence_starts, sequence_ends)
+                ]
+            )  # iterate through the start and end indices of the converged increments
+        )
+
+    # Concatenate the list of eigenvalue arrays from the different subcases
+    eigenvalue_array = np.concatenate(eigenvalue_list, axis=1)
+
     # Return array
-    return eigenvalues
+    return eigenvalue_array
 
 
 def add_uniform_force(
