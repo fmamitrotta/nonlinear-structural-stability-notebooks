@@ -264,6 +264,49 @@ def calculate_tip_deflection(node_1_disp, node_2_disp):
     return delta_z_tip
 
 
+def calculate_tip_twist(node_1_coords, node_2_coords, node_1_disp, node_2_disp):
+    """
+    Calculate the tip twist angle as the difference between the angles of the line connecting two nodes before and after deformation.
+    
+    Parameters
+    ----------
+    node_1_coords : (3,) array-like
+        The coordinates of the first node.
+    node_2_coords : (3,) array-like
+        The coordinates of the second node.
+    node_1_disp : (N, 3) ndarray
+        The displacement of the first node.
+    node_2_disp : (N, 3) ndarray
+        The displacement of the second node.
+    
+    Returns
+    -------
+    delta_theta_tip : (N,) ndarray
+        The tip twist angle in radians.
+    """
+    # Ensure that the displacements are 2D arrays with shape (N, 3) for consistent indexing
+    node_1_disp = np.atleast_2d(node_1_disp)
+    node_2_disp = np.atleast_2d(node_2_disp)
+    
+    # Calculate the angle of the line connecting the two nodes before and after deformation
+    # Δ𝜃 = tan−1( (𝑧2 + Δ𝑧2) − (𝑧1 + Δ𝑧1) / (𝑥1 + Δ𝑥1) − (𝑥2 + Δ𝑥2) ) − tan−1( (𝑧2 − 𝑧1) / (𝑥1 − 𝑥2) )
+    delta_theta_tip = np.arctan(
+        (
+            (node_2_coords[2] + node_2_disp[:, 2])
+            - (node_1_coords[2] + node_1_disp[:, 2])
+        )
+        / (
+            (node_1_coords[0] + node_1_disp[:, 0])
+            - (node_2_coords[0] + node_2_disp[:, 0])
+        )
+    ) - np.arctan(
+        (node_2_coords[2] - node_1_coords[2]) / (node_1_coords[0] - node_2_coords[0])
+    )
+    
+    # Return the tip twist angle in radians
+    return delta_theta_tip
+
+
 def apply_linearly_distributed_force(
     node_xyz_array, ratio, total_force, node_ids, bdf, set_id, direction_vector
 ):
