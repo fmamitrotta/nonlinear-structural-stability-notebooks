@@ -137,60 +137,39 @@ def read_cuf_data(filepath: str, max_disp_node_id: int = None) -> dict:
 
 def save_equilibrium_path_csv(
     filepath: str,
-    load: np.ndarray,
-    tip_displacement: np.ndarray,
-    u_z: np.ndarray,
-    u_y: np.ndarray,
-    local_node_id: int,
-    local_node_coords,
+    columns: dict,
+    local_nodes: dict = None,
 ) -> None:
     """
-    Save a Nastran SOL 106 equilibrium path to a CSV file.
+    Save equilibrium-path data to a CSV file.
 
-    The file has one metadata comment line followed by a header row with column
-    names, then one data row per arc-length step.
+    The file begins with optional metadata comment lines (one per local node),
+    followed by a header row and one data row per arc-length step.
 
     Parameters
     ----------
     filepath : str
         Output CSV file path.
-    load : ndarray, shape (N,)
-        Total applied load at each arc-length step [N].
-    tip_displacement : ndarray, shape (N,)
-        Wing-tip out-of-plane displacement at each step [m].
-    u_z : ndarray, shape (N,)
-        Out-of-plane (z) displacement at the local monitoring node [m].
-    u_y : ndarray, shape (N,)
-        In-plane (y) displacement at the local monitoring node [m].
-    local_node_id : int
-        Nastran ID of the local monitoring node.
-    local_node_coords : array-like, length 3
-        (x, y, z) coordinates of the local monitoring node [m].
+    columns : dict[str, ndarray]
+        Ordered mapping of column name to 1-D data array.  Each entry
+        becomes one CSV column, written in insertion order.
+    local_nodes : dict[int, array-like], optional
+        Mapping of node ID to (x, y, z) coordinates [m].  Each entry is
+        written as a metadata comment line at the top of the file.
     """
-    # Extract coordinates
-    x, y, z = local_node_coords
-    
-    # Define csv column names
-    col_names = [
-        "total_applied_load_N",
-        "tip_displacement_m",
-        f"u_z_node{local_node_id}_m",
-        f"u_y_node{local_node_id}_m",
-    ]
-    
-    # Stack data columns into a 2-D array for easier iteration
-    data = np.column_stack([load, tip_displacement, u_z, u_y])
-    
-    # Write to CSV file
     with open(filepath, "w") as f:
-        # Write metadata comment line with local node ID and coordinates
-        f.write(
-            f"# local node ID: {local_node_id}, "
-            f"coordinates [m]: x={x:.6f}, y={y:.6f}, z={z:.6f}\n"
-        )
-        f.write(",".join(col_names) + "\n")
-        
-        # Iterate rows of 2-D data array and write formatted values
+        # Write metadata comment lines for local nodes
+        if local_nodes is not None:
+            for node_id, coords in local_nodes.items():
+                x, y, z = coords
+                f.write(
+                    f"# local node ID: {node_id}, "
+                    f"coordinates [m]: x={x:.6f}, y={y:.6f}, z={z:.6f}\n"
+                )
+        # Write header row
+        f.write(",".join(columns.keys()) + "\n")
+        # Stack columns and write rows
+        data = np.column_stack(list(columns.values()))
         for row in data:
             f.write(",".join(f"{v:.6e}" for v in row) + "\n")
 
