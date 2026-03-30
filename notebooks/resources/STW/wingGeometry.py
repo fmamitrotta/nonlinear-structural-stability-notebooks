@@ -337,7 +337,7 @@ def create_layout(target_length: float, element_order: int = 2) -> Layout:
     sobBCDOF = "".join([str(dof + 1) for dof in sobBCDOF])
 
     ribBC = {
-        0: {"all": symBCDOF},
+        0: {"edge": symBCDOF},
         numRibsCentrebody - 1: {"edge": sobBCDOF},
     }
 
